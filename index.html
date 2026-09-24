@@ -7,26 +7,17 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>HUMO</title>
+<title>HUMO — خصومات الخميس</title>
 
-<link rel="preconnect"
-      href="https://fonts.googleapis.com">
-
-<link rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap"
       rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
 <style>
-
-/* =====================================================
-   GENERAL
-===================================================== */
 
 * {
   box-sizing: border-box;
@@ -52,9 +43,7 @@ button {
 }
 
 
-/* =====================================================
-   HEADER
-===================================================== */
+/* ================= HEADER ================= */
 
 header {
   height: 76px;
@@ -76,18 +65,11 @@ header {
   z-index: 1000;
 }
 
-
-/* HUMO logo — top right */
-
 .header-logo {
   width: 105px;
   height: 55px;
-
   object-fit: contain;
 }
-
-
-/* Left side */
 
 .header-left {
   display: flex;
@@ -102,44 +84,33 @@ header {
 
 .logout-btn {
   background: #fff;
-
   color: #111;
-
   border: 1px solid #111;
-
   padding: 9px 15px;
-
   font-size: 12px;
 }
 
 
-/* =====================================================
-   LOGIN
-===================================================== */
+/* ================= LOGIN ================= */
 
 #loginScreen {
-
   min-height: calc(100vh - 76px);
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
   padding: 25px;
 
   background: #fafafa;
-
   color: #111;
 }
 
 .login-box {
-
   width: 100%;
   max-width: 420px;
 
   background: #fff;
-
   border: 1px solid #e5e5e5;
 
   padding: 42px 30px;
@@ -148,7 +119,6 @@ header {
 }
 
 .login-logo {
-
   width: 155px;
   height: 80px;
 
@@ -160,46 +130,34 @@ header {
 }
 
 .login-title {
-
   font-size: 24px;
-
   font-weight: 800;
-
   margin-bottom: 10px;
 }
 
 .login-subtitle {
-
   font-size: 13px;
-
   color: #777;
-
   line-height: 1.9;
-
   margin-bottom: 28px;
 }
 
 .google-btn {
-
   width: 100%;
-
   height: 53px;
 
   background: #111;
-
   color: #fff;
 
   border: 1px solid #111;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
   gap: 12px;
 
   font-size: 14px;
-
   font-weight: 700;
 }
 
@@ -208,18 +166,15 @@ header {
 }
 
 .google-icon {
-
   width: 20px;
   height: 20px;
 
   background: #fff;
-
   color: #4285f4;
 
   border-radius: 50%;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
@@ -227,7 +182,6 @@ header {
 }
 
 .login-note {
-
   margin-top: 18px;
 
   font-size: 11px;
@@ -238,18 +192,14 @@ header {
 }
 
 
-/* =====================================================
-   STORE
-===================================================== */
+/* ================= STORE ================= */
 
 #store {
   display: none;
 }
 
 
-/* =====================================================
-   WHEEL SECTION
-===================================================== */
+/* ================= WHEEL SECTION ================= */
 
 .wheel-section {
 
@@ -268,11 +218,20 @@ header {
   padding: 48px 15px 70px;
 }
 
+
+/* هوية HUMO العربية */
+
 .wheel-title {
 
   font-size: 30px;
 
-  font-weight: 800;
+  font-weight: 700;
+
+  letter-spacing: 0;
+
+  line-height: 1.5;
+
+  color: #fff;
 
   margin-bottom: 7px;
 }
@@ -287,9 +246,7 @@ header {
 }
 
 
-/* =====================================================
-   WHEEL CONTAINER
-===================================================== */
+/* ================= WHEEL ================= */
 
 .wheel-wrap {
 
@@ -301,11 +258,6 @@ header {
 
   margin: 0 auto;
 }
-
-
-/* =====================================================
-   ROTATING WHEEL
-===================================================== */
 
 .wheel {
 
@@ -349,9 +301,7 @@ header {
 }
 
 
-/* =====================================================
-   SECTOR LINES
-===================================================== */
+/* ================= LINES ================= */
 
 .wheel-lines {
 
@@ -390,15 +340,7 @@ header {
 }
 
 
-/* =====================================================
-   LABEL LAYER
-===================================================== */
-
-/*
-  هذه الطبقة تدور مع العجلة.
-  لكن النص نفسه يعاكس الدوران،
-  لذلك يبقى مستقيمًا.
-*/
+/* ================= LABELS ================= */
 
 .wheel-labels {
 
@@ -419,23 +361,16 @@ header {
     transform 5.3s cubic-bezier(.12,.72,.12,1);
 }
 
-
-/* =====================================================
-   LABEL
-===================================================== */
-
 .wheel-label {
 
   position: absolute;
 
   width: 100px;
-
   height: 40px;
 
   display: flex;
 
   align-items: center;
-
   justify-content: center;
 
   text-align: center;
@@ -460,86 +395,42 @@ header {
 }
 
 
-/* =====================================================
-   EXACT POSITIONS
-===================================================== */
-
-/*
-  كل موضع هو منتصف قطاعه بالضبط.
-*/
-
-
-/* 5% */
+/* ================= LABEL POSITIONS ================= */
 
 .label-5 {
-
   left: 63.884%;
-
   top: 21.169%;
 }
 
-
-/* حظ أوفر */
-
 .label-luck {
-
   left: 81.198%;
-
   top: 42.879%;
 }
 
-
-/* 10% */
-
 .label-10 {
-
   left: 75.019%;
-
   top: 69.951%;
 }
 
-
-/* 15% */
-
 .label-15 {
-
   left: 50%;
-
   top: 82%;
 }
 
-
-/* 20% */
-
 .label-20 {
-
   left: 24.982%;
-
   top: 69.953%;
 }
 
-
-/* 25% */
-
 .label-25 {
-
   left: 18.802%;
-
   top: 42.881%;
 }
 
-
-/* 30% */
-
 .label-30 {
-
   left: 36.114%;
-
   top: 21.17%;
 }
-
-
-/* colors */
 
 .dark-label {
   color: #fff;
@@ -550,9 +441,7 @@ header {
 }
 
 
-/* =====================================================
-   CENTER LOGO
-===================================================== */
+/* ================= CENTER LOGO ================= */
 
 .wheel-logo {
 
@@ -581,9 +470,7 @@ header {
 }
 
 
-/* =====================================================
-   POINTER
-===================================================== */
+/* ================= POINTER ================= */
 
 .pointer {
 
@@ -609,9 +496,7 @@ header {
 }
 
 
-/* =====================================================
-   BUTTON
-===================================================== */
+/* ================= BUTTON ================= */
 
 .spin-btn {
 
@@ -642,9 +527,7 @@ header {
 }
 
 
-/* =====================================================
-   STATUS
-===================================================== */
+/* ================= STATUS ================= */
 
 .wheel-status {
 
@@ -658,9 +541,7 @@ header {
 }
 
 
-/* =====================================================
-   RESULT
-===================================================== */
+/* ================= RESULT ================= */
 
 .result-box {
 
@@ -722,9 +603,7 @@ header {
 }
 
 
-/* =====================================================
-   ADMIN
-===================================================== */
+/* ================= ADMIN ================= */
 
 #adminPanel {
 
@@ -790,9 +669,7 @@ th {
 }
 
 
-/* =====================================================
-   TOAST
-===================================================== */
+/* ================= TOAST ================= */
 
 .toast {
 
@@ -835,9 +712,7 @@ th {
 }
 
 
-/* =====================================================
-   MOBILE
-===================================================== */
+/* ================= MOBILE ================= */
 
 @media (max-width: 600px) {
 
@@ -870,6 +745,10 @@ th {
   .wheel-title {
 
     font-size: 27px;
+
+    font-weight: 700;
+
+    line-height: 1.5;
   }
 
   .wheel-subtitle {
@@ -896,6 +775,7 @@ th {
   .wheel-logo {
 
     width: 72px;
+
     height: 72px;
 
     padding: 10px;
@@ -918,21 +798,15 @@ th {
 <body>
 
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
+<!-- ================= HEADER ================= -->
 
 <header>
-
-
-  <!-- HUMO — أعلى اليمين -->
 
   <img
     class="header-logo"
     src="كيس%20ورقي%20للمتاجر%20بلون%20وردي%20نمط%20زهور.png"
     alt="HUMO"
   >
-
 
   <div class="header-left">
 
@@ -955,15 +829,11 @@ th {
 </header>
 
 
-
-<!-- =====================================================
-     LOGIN
-===================================================== -->
+<!-- ================= LOGIN ================= -->
 
 <section id="loginScreen">
 
   <div class="login-box">
-
 
     <img
       class="login-logo"
@@ -971,11 +841,9 @@ th {
       alt="HUMO"
     >
 
-
     <h1 class="login-title">
       أهلاً بك في HUMO
     </h1>
-
 
     <p class="login-subtitle">
 
@@ -986,7 +854,6 @@ th {
       سجّل الدخول للمتابعة.
 
     </p>
-
 
     <button
       class="google-btn"
@@ -1000,32 +867,28 @@ th {
 
     </button>
 
-
     <p class="login-note">
 
       تسجيل الدخول يتم باستخدام حساب Google الخاص بك.
 
     </p>
 
-
   </div>
 
 </section>
 
 
-
-<!-- =====================================================
-     STORE
-===================================================== -->
+<!-- ================= STORE ================= -->
 
 <main id="store">
-
 
 <section class="wheel-section">
 
 
+  <!-- الاسم الجديد -->
+
   <h1 class="wheel-title">
-    عجلة HUMO
+    خصومات الخميس
   </h1>
 
 
@@ -1034,34 +897,21 @@ th {
   </p>
 
 
-
-  <!-- ===================================================
-       WHEEL
-  ==================================================== -->
+  <!-- ================= WHEEL ================= -->
 
   <div class="wheel-wrap">
 
-
-    <!-- pointer -->
-
     <div class="pointer"></div>
 
-
-    <!-- rotating wheel -->
 
     <div
       class="wheel"
       id="wheel">
 
-
       <div class="wheel-lines"></div>
-
 
     </div>
 
-
-
-    <!-- rotating labels -->
 
     <div
       class="wheel-labels"
@@ -1141,8 +991,7 @@ th {
     </div>
 
 
-
-    <!-- fixed center logo -->
+    <!-- اللوغو ثابت في الوسط -->
 
     <img
       class="wheel-logo"
@@ -1150,14 +999,10 @@ th {
       alt="HUMO"
     >
 
-
   </div>
 
 
-
-  <!-- ===================================================
-       SPIN BUTTON
-  ==================================================== -->
+  <!-- ================= BUTTON ================= -->
 
   <button
     class="spin-btn"
@@ -1174,43 +1019,34 @@ th {
   </div>
 
 
-
-  <!-- ===================================================
-       RESULT
-  ==================================================== -->
+  <!-- ================= RESULT ================= -->
 
   <div
     class="result-box"
     id="resultBox">
 
-
     <div class="result-title">
       جائزتك
     </div>
-
 
     <div
       class="result-prize"
       id="resultPrize">
     </div>
 
-
     <div class="result-title">
       كود الخصم الخاص بك
     </div>
-
 
     <div
       class="coupon"
       id="couponCode">
     </div>
 
-
     <div
       class="next-date"
       id="nextDate">
     </div>
-
 
   </div>
 
@@ -1218,20 +1054,15 @@ th {
 </section>
 
 
-
-<!-- =====================================================
-     ADMIN
-===================================================== -->
+<!-- ================= ADMIN ================= -->
 
 <section id="adminPanel">
 
   <div class="admin-box">
 
-
     <div class="admin-title">
       المشاركون
     </div>
-
 
     <table>
 
@@ -1240,42 +1071,29 @@ th {
         <tr>
 
           <th>الاسم</th>
-
           <th>الهاتف</th>
-
           <th>البريد</th>
-
           <th>الجائزة</th>
-
           <th>الكود</th>
-
           <th>المشاركة</th>
-
           <th>القادمة</th>
 
         </tr>
 
       </thead>
 
-
       <tbody
         id="participantsBody">
       </tbody>
 
-
     </table>
-
 
   </div>
 
 </section>
 
-
 </main>
 
-
-
-<!-- TOAST -->
 
 <div
   class="toast"
@@ -1283,25 +1101,18 @@ th {
 </div>
 
 
-
 <script>
 
 
-/* =====================================================
-   SUPABASE
-===================================================== */
+/* ================= SUPABASE ================= */
 
 const SUPABASE_URL =
   "https://vknhrxxkmhrnfbmsllid.supabase.co";
 
-
 const SUPABASE_KEY =
   "sb_publishable_QliqBYSeykn4F2Ddrsn8hg_F_N8dR-n";
 
-
-const { createClient } =
-  supabase;
-
+const { createClient } = supabase;
 
 const db =
   createClient(
@@ -1310,156 +1121,99 @@ const db =
   );
 
 
-
-/* =====================================================
-   ADMIN
-===================================================== */
+/* ================= ADMIN ================= */
 
 const ADMIN_UID =
   "2d2313ef-8ae1-40a0-9a56-89abe56d3c37";
 
 
-
-/* =====================================================
-   ELEMENTS
-===================================================== */
+/* ================= ELEMENTS ================= */
 
 const loginScreen =
-  document.getElementById(
-    "loginScreen"
-  );
+  document.getElementById("loginScreen");
 
 const store =
-  document.getElementById(
-    "store"
-  );
+  document.getElementById("store");
 
 const googleBtn =
-  document.getElementById(
-    "googleBtn"
-  );
+  document.getElementById("googleBtn");
 
 const logoutBtn =
-  document.getElementById(
-    "logoutBtn"
-  );
+  document.getElementById("logoutBtn");
 
 const userName =
-  document.getElementById(
-    "userName"
-  );
+  document.getElementById("userName");
 
 const spinBtn =
-  document.getElementById(
-    "spinBtn"
-  );
+  document.getElementById("spinBtn");
 
 const wheel =
-  document.getElementById(
-    "wheel"
-  );
+  document.getElementById("wheel");
 
 const wheelLabels =
-  document.getElementById(
-    "wheelLabels"
-  );
+  document.getElementById("wheelLabels");
 
 const wheelStatus =
-  document.getElementById(
-    "wheelStatus"
-  );
+  document.getElementById("wheelStatus");
 
 const resultBox =
-  document.getElementById(
-    "resultBox"
-  );
+  document.getElementById("resultBox");
 
 const resultPrize =
-  document.getElementById(
-    "resultPrize"
-  );
+  document.getElementById("resultPrize");
 
 const couponCode =
-  document.getElementById(
-    "couponCode"
-  );
+  document.getElementById("couponCode");
 
 const nextDate =
-  document.getElementById(
-    "nextDate"
-  );
+  document.getElementById("nextDate");
 
 const adminPanel =
-  document.getElementById(
-    "adminPanel"
-  );
+  document.getElementById("adminPanel");
 
 const participantsBody =
-  document.getElementById(
-    "participantsBody"
-  );
+  document.getElementById("participantsBody");
 
 const toast =
-  document.getElementById(
-    "toast"
-  );
+  document.getElementById("toast");
 
-
-
-/* =====================================================
-   CURRENT ROTATION
-===================================================== */
 
 let currentRotation = 0;
 
 
-
-/* =====================================================
-   TOAST
-===================================================== */
+/* ================= TOAST ================= */
 
 function showToast(message) {
 
   toast.textContent =
     message;
 
-  toast.classList.add(
-    "show"
-  );
+  toast.classList.add("show");
 
   setTimeout(() => {
 
-    toast.classList.remove(
-      "show"
-    );
+    toast.classList.remove("show");
 
   }, 3500);
-
 }
 
 
-
-/* =====================================================
-   GOOGLE LOGIN
-===================================================== */
+/* ================= GOOGLE ================= */
 
 googleBtn.addEventListener(
   "click",
   async () => {
 
-    googleBtn.disabled =
-      true;
+    googleBtn.disabled = true;
 
     googleBtn.innerHTML =
       "جاري فتح Google...";
-
 
     try {
 
       const redirectUrl =
         window.location.origin +
         window.location.pathname;
-
 
       const { error } =
         await db.auth.signInWithOAuth({
@@ -1482,27 +1236,22 @@ googleBtn.addEventListener(
 
         });
 
-
       if (error) {
 
         throw error;
 
       }
 
-
     } catch (error) {
 
       console.error(error);
-
 
       showToast(
         "حدث خطأ أثناء تسجيل الدخول باستخدام Google"
       );
 
-
       googleBtn.disabled =
         false;
-
 
       googleBtn.innerHTML =
         '<span class="google-icon">G</span> متابعة باستخدام Google';
@@ -1513,10 +1262,7 @@ googleBtn.addEventListener(
 );
 
 
-
-/* =====================================================
-   LOGOUT
-===================================================== */
+/* ================= LOGOUT ================= */
 
 logoutBtn.addEventListener(
   "click",
@@ -1530,21 +1276,13 @@ logoutBtn.addEventListener(
 );
 
 
+/* ================= DATE ================= */
 
-/* =====================================================
-   FORMAT DATE
-===================================================== */
-
-function formatDate(
-  dateString
-) {
+function formatDate(dateString) {
 
   if (!dateString) {
-
     return "-";
-
   }
-
 
   return new Date(
     dateString
@@ -1555,39 +1293,26 @@ function formatDate(
       timeStyle: "short"
     }
   );
-
 }
 
 
+/* ================= REMAINING ================= */
 
-/* =====================================================
-   REMAINING TIME
-===================================================== */
-
-function formatRemaining(
-  date
-) {
+function formatRemaining(date) {
 
   const difference =
     date.getTime() -
     Date.now();
 
-
-  if (
-    difference <= 0
-  ) {
-
+  if (difference <= 0) {
     return "الآن";
-
   }
-
 
   const days =
     Math.floor(
       difference /
       86400000
     );
-
 
   const hours =
     Math.floor(
@@ -1598,10 +1323,7 @@ function formatRemaining(
       3600000
     );
 
-
-  if (
-    days > 0
-  ) {
+  if (days > 0) {
 
     return (
       days +
@@ -1617,23 +1339,13 @@ function formatRemaining(
 
   }
 
-
-  return (
-    hours +
-    " ساعة"
-  );
-
+  return hours + " ساعة";
 }
 
 
+/* ================= SHOW USER ================= */
 
-/* =====================================================
-   SHOW USER
-===================================================== */
-
-async function showUser(
-  session
-) {
+async function showUser(session) {
 
   if (
     !session ||
@@ -1647,9 +1359,7 @@ async function showUser(
       "none";
 
     return;
-
   }
-
 
   loginScreen.style.display =
     "none";
@@ -1657,14 +1367,11 @@ async function showUser(
   store.style.display =
     "block";
 
-
   logoutBtn.style.display =
     "block";
 
-
   const user =
     session.user;
-
 
   const name =
     user.user_metadata?.full_name ||
@@ -1672,13 +1379,10 @@ async function showUser(
     user.email?.split("@")[0] ||
     "زائر HUMO";
 
-
   userName.textContent =
     name;
 
-
   await loadLastSpin();
-
 
   if (
     user.id === ADMIN_UID
@@ -1690,14 +1394,10 @@ async function showUser(
     await loadParticipants();
 
   }
-
 }
 
 
-
-/* =====================================================
-   LAST SPIN
-===================================================== */
+/* ================= LAST SPIN ================= */
 
 async function loadLastSpin() {
 
@@ -1717,17 +1417,13 @@ async function loadLastSpin() {
       )
       .limit(1);
 
-
     if (error) {
 
-      console.error(
-        error
-      );
+      console.error(error);
 
       return;
 
     }
-
 
     if (
       !data ||
@@ -1744,16 +1440,13 @@ async function loadLastSpin() {
 
     }
 
-
     const last =
       data[0];
-
 
     const next =
       new Date(
         last.next_eligible_at
       );
-
 
     if (
       next > new Date()
@@ -1764,9 +1457,7 @@ async function loadLastSpin() {
 
       wheelStatus.textContent =
         "يمكنك المشاركة مرة أخرى بعد " +
-        formatRemaining(
-          next
-        );
+        formatRemaining(next);
 
     } else {
 
@@ -1778,22 +1469,15 @@ async function loadLastSpin() {
 
     }
 
-
   } catch (error) {
 
-    console.error(
-      error
-    );
+    console.error(error);
 
   }
-
 }
 
 
-
-/* =====================================================
-   SPIN WHEEL
-===================================================== */
+/* ================= SPIN ================= */
 
 spinBtn.addEventListener(
   "click",
@@ -1811,18 +1495,14 @@ async function spinWheel() {
 
   }
 
-
   spinBtn.disabled =
     true;
-
 
   wheelStatus.textContent =
     "جاري اختيار جائزتك...";
 
-
   resultBox.style.display =
     "none";
-
 
   try {
 
@@ -1832,7 +1512,6 @@ async function spinWheel() {
       }
     } =
       await db.auth.getSession();
-
 
     if (!session) {
 
@@ -1847,11 +1526,6 @@ async function spinWheel() {
 
     }
 
-
-    /*
-      النتيجة تأتي من Supabase
-    */
-
     const {
       data,
       error
@@ -1860,19 +1534,16 @@ async function spinWheel() {
         "spin_wheel"
       );
 
-
     if (error) {
 
       throw error;
 
     }
 
-
     const spin =
       Array.isArray(data)
         ? data[0]
         : data;
-
 
     if (!spin) {
 
@@ -1882,35 +1553,16 @@ async function spinWheel() {
 
     }
 
-
     const prize =
-      spin.prize ||
-      "";
-
+      spin.prize || "";
 
     const discount =
       Number(
-        spin.discount_percent ||
-        0
+        spin.discount_percent || 0
       );
 
-
     const coupon =
-      spin.coupon_code ||
-      "";
-
-
-    /*
-      ترتيب القطاعات البصرية:
-
-      0 = 5%
-      1 = حظ أوفر
-      2 = 10%
-      3 = 15%
-      4 = 20%
-      5 = 25%
-      6 = 30%
-    */
+      spin.coupon_code || "";
 
 
     let targetIndex =
@@ -1930,49 +1582,30 @@ async function spinWheel() {
       const map = {
 
         5: 0,
-
         10: 2,
-
         15: 3,
-
         20: 4,
-
         25: 5,
-
         30: 6
 
       };
 
-
       targetIndex =
-        map[discount] ??
-        0;
+        map[discount] ?? 0;
 
     }
 
 
-    /*
-      مركز القطاع الفائز
-    */
-
     const segment =
       360 / 7;
-
 
     const targetCenter =
       targetIndex *
       segment +
       segment / 2;
 
-
-    /*
-      نضيف دورات كاملة.
-      الهدف النهائي عند المؤشر العلوي.
-    */
-
     const extraTurns =
       7 * 360;
-
 
     const finalRotation =
       currentRotation +
@@ -1986,15 +1619,9 @@ async function spinWheel() {
         )
       );
 
-
     currentRotation =
       finalRotation;
 
-
-    /*
-      نخلي طبقة النصوص تدور
-      مع العجلة.
-    */
 
     wheelLabels.style.setProperty(
       "--current-rotation",
@@ -2014,19 +1641,13 @@ async function spinWheel() {
       "deg)";
 
 
-    /*
-      عرض النتيجة
-    */
-
     setTimeout(() => {
 
       resultPrize.textContent =
         prize;
 
-
       couponCode.textContent =
         coupon;
-
 
       nextDate.textContent =
         "يمكنك المشاركة مرة أخرى في: " +
@@ -2034,33 +1655,25 @@ async function spinWheel() {
           spin.next_eligible_at
         );
 
-
       resultBox.style.display =
         "block";
 
-
       wheelStatus.textContent =
         "مبروك 🎉";
-
 
     }, 5500);
 
 
   } catch (error) {
 
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     spinBtn.disabled =
       false;
 
-
     let message =
       error?.message ||
       "حدث خطأ.";
-
 
     if (
       message.includes("14")
@@ -2071,11 +1684,7 @@ async function spinWheel() {
 
     }
 
-
-    showToast(
-      message
-    );
-
+    showToast(message);
 
     wheelStatus.textContent =
       "";
@@ -2085,10 +1694,7 @@ async function spinWheel() {
 }
 
 
-
-/* =====================================================
-   ADMIN
-===================================================== */
+/* ================= ADMIN ================= */
 
 async function loadParticipants() {
 
@@ -2102,17 +1708,14 @@ async function loadParticipants() {
         "get_participants"
       );
 
-
     if (error) {
 
       throw error;
 
     }
 
-
     participantsBody.innerHTML =
       "";
-
 
     if (
       !data ||
@@ -2126,7 +1729,6 @@ async function loadParticipants() {
 
     }
 
-
     data.forEach(
       user => {
 
@@ -2135,41 +1737,35 @@ async function loadParticipants() {
             "tr"
           );
 
-
         row.innerHTML = `
 
           <td>
             ${escapeHtml(
-              user.full_name ||
-              "-"
+              user.full_name || "-"
             )}
           </td>
 
           <td>
             ${escapeHtml(
-              user.phone ||
-              "-"
+              user.phone || "-"
             )}
           </td>
 
           <td>
             ${escapeHtml(
-              user.email ||
-              "-"
+              user.email || "-"
             )}
           </td>
 
           <td>
             ${escapeHtml(
-              user.prize ||
-              "-"
+              user.prize || "-"
             )}
           </td>
 
           <td dir="ltr">
             ${escapeHtml(
-              user.coupon_code ||
-              "-"
+              user.coupon_code || "-"
             )}
           </td>
 
@@ -2187,7 +1783,6 @@ async function loadParticipants() {
 
         `;
 
-
         participantsBody.appendChild(
           row
         );
@@ -2195,34 +1790,22 @@ async function loadParticipants() {
       }
     );
 
-
   } catch (error) {
 
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     participantsBody.innerHTML =
       "<tr><td colspan='7'>تعذر تحميل المشاركين.</td></tr>";
 
   }
-
 }
 
 
+/* ================= ESCAPE ================= */
 
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
+function escapeHtml(value) {
 
-function escapeHtml(
-  value
-) {
-
-  return String(
-    value
-  )
+  return String(value)
 
     .replaceAll(
       "&",
@@ -2248,14 +1831,10 @@ function escapeHtml(
       "'",
       "&#039;"
     );
-
 }
 
 
-
-/* =====================================================
-   AUTH STATE
-===================================================== */
+/* ================= AUTH ================= */
 
 db.auth.onAuthStateChange(
   async (
@@ -2264,11 +1843,8 @@ db.auth.onAuthStateChange(
   ) => {
 
     if (
-      event ===
-        "SIGNED_IN" ||
-
-      event ===
-        "INITIAL_SESSION"
+      event === "SIGNED_IN" ||
+      event === "INITIAL_SESSION"
     ) {
 
       await showUser(
@@ -2277,10 +1853,8 @@ db.auth.onAuthStateChange(
 
     }
 
-
     if (
-      event ===
-      "SIGNED_OUT"
+      event === "SIGNED_OUT"
     ) {
 
       loginScreen.style.display =
@@ -2295,10 +1869,7 @@ db.auth.onAuthStateChange(
 );
 
 
-
-/* =====================================================
-   START
-===================================================== */
+/* ================= START ================= */
 
 async function start() {
 
@@ -2309,13 +1880,11 @@ async function start() {
   } =
     await db.auth.getSession();
 
-
   await showUser(
     session
   );
 
 }
-
 
 start();
 
