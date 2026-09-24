@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HUMO | متجر</title>
+<title>HUMO</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,20 +13,26 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   font-family:"Noto Sans Arabic",sans-serif;
-  background:#f8f7f4;
-  color:#171717;
+  background:#f7f6f2;
+  color:#111;
   min-height:100vh;
 }
 
-button,input{
+button,
+input{
   font-family:inherit;
 }
 
@@ -38,45 +44,49 @@ button{
   display:none!important;
 }
 
-/* AUTH */
+
+/* =========================
+   AUTH
+========================= */
+
 #authScreen{
   min-height:100vh;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   padding:25px;
   background:#f7f6f2;
 }
 
 .auth-box{
   width:100%;
-  max-width:430px;
+  max-width:420px;
   background:#fff;
-  padding:38px 28px;
-  border:1px solid #e8e5df;
-  box-shadow:0 15px 50px rgba(0,0,0,.07);
+  padding:40px 28px;
+  border:1px solid #e4e0d9;
+  box-shadow:0 20px 60px rgba(0,0,0,.07);
 }
 
-.logo{
-  font-family:"Cormorant Garamond",serif;
-  font-size:52px;
-  font-weight:700;
-  letter-spacing:6px;
-  text-align:center;
-  direction:ltr;
-  margin-bottom:5px;
+.auth-logo{
+  display:block;
+  width:150px;
+  height:75px;
+  object-fit:contain;
+  margin:0 auto 8px;
 }
 
 .auth-subtitle{
   text-align:center;
-  color:#777;
-  font-size:13px;
+  color:#888;
+  font-size:11px;
+  letter-spacing:3px;
+  direction:ltr;
   margin-bottom:30px;
 }
 
-.auth-box h2{
-  font-size:20px;
+.auth-title{
   text-align:center;
+  font-size:20px;
   margin-bottom:22px;
 }
 
@@ -95,9 +105,9 @@ button{
   width:100%;
   height:48px;
   border:1px solid #ddd9d2;
+  background:#fafafa;
   padding:0 14px;
   outline:none;
-  background:#fafafa;
   font-size:14px;
 }
 
@@ -113,118 +123,118 @@ button{
   background:#111;
   color:#fff;
   font-weight:700;
-  margin-top:8px;
-}
-
-.secondary-btn{
-  width:100%;
-  height:46px;
-  border:1px solid #222;
-  background:#fff;
-  color:#111;
-  font-weight:600;
-  margin-top:10px;
+  margin-top:7px;
 }
 
 .auth-switch{
   text-align:center;
-  font-size:13px;
   color:#777;
+  font-size:13px;
   margin-top:18px;
 }
 
 .auth-switch button{
   border:0;
   background:none;
-  font-weight:700;
   text-decoration:underline;
+  font-weight:700;
 }
 
 .message{
+  display:none;
   margin-top:15px;
   padding:11px;
   font-size:13px;
   text-align:center;
-  display:none;
 }
 
 .message.error{
   display:block;
-  background:#fff1f1;
-  color:#9b2222;
+  color:#9a2222;
+  background:#fff0f0;
 }
 
 .message.success{
   display:block;
-  background:#f0f8f1;
-  color:#28633a;
+  color:#27653b;
+  background:#eff8f0;
 }
 
-/* STORE */
-#storeScreen{
-  min-height:100vh;
-}
+
+/* =========================
+   HEADER
+========================= */
 
 header{
-  height:75px;
+  height:78px;
   background:#fff;
-  border-bottom:1px solid #e7e4df;
+  border-bottom:1px solid #e5e2dc;
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:0 6%;
   position:sticky;
   top:0;
-  z-index:20;
+  z-index:50;
 }
 
-.header-logo{
-  font-family:"Cormorant Garamond",serif;
-  font-size:38px;
-  font-weight:700;
-  letter-spacing:5px;
-  direction:ltr;
+.site-logo{
+  width:115px;
+  height:58px;
+  object-fit:contain;
+  display:block;
 }
 
 .header-actions{
   display:flex;
-  align-items:center;
-  gap:9px;
+  gap:8px;
 }
 
 .header-btn{
-  border:1px solid #ddd;
+  height:40px;
+  padding:0 15px;
   background:#fff;
-  padding:8px 13px;
+  border:1px solid #ddd9d2;
   font-size:12px;
 }
+
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
-  padding:75px 20px 60px;
+  background:#f7f6f2;
   text-align:center;
-  background:#f5f3ef;
+  padding:55px 20px 48px;
 }
 
-.hero-small{
-  font-size:12px;
-  letter-spacing:3px;
-  direction:ltr;
-  color:#777;
-  margin-bottom:12px;
-}
-
-.hero h1{
-  font-family:"Cormorant Garamond",serif;
-  font-size:60px;
-  direction:ltr;
+.hero-label{
+  font-size:10px;
   letter-spacing:4px;
+  color:#888;
+  direction:ltr;
 }
 
-.hero p{
-  color:#777;
-  margin-top:8px;
-  font-size:14px;
+.hero-title{
+  margin-top:12px;
+  font-family:"Cormorant Garamond",serif;
+  font-size:43px;
+  font-weight:600;
+  direction:ltr;
+  letter-spacing:3px;
 }
+
+.hero-text{
+  margin-top:5px;
+  font-size:13px;
+  color:#777;
+}
+
+
+/* =========================
+   COLLECTION
+========================= */
 
 .container{
   max-width:1100px;
@@ -232,32 +242,31 @@ header{
   padding:45px 20px;
 }
 
-/* PRODUCTS */
-.section-title{
+.collection-title{
   text-align:center;
-  margin-bottom:28px;
+  margin-bottom:25px;
 }
 
-.section-title h2{
+.collection-title span{
   font-family:"Cormorant Garamond",serif;
-  font-size:36px;
+  font-size:34px;
+  letter-spacing:3px;
   direction:ltr;
 }
 
 .products{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:22px;
+  gap:20px;
 }
 
 .product{
   background:#fff;
-  border:1px solid #e8e5df;
-  padding-bottom:20px;
+  border:1px solid #e5e2dc;
 }
 
-.product-img{
-  height:310px;
+.product-image{
+  height:320px;
   background:#f1efeb;
   display:flex;
   align-items:center;
@@ -265,7 +274,7 @@ header{
   overflow:hidden;
 }
 
-.product-img img{
+.product-image img{
   width:100%;
   height:100%;
   object-fit:cover;
@@ -273,140 +282,202 @@ header{
 
 .product-placeholder{
   font-family:"Cormorant Garamond",serif;
-  font-size:45px;
-  letter-spacing:5px;
+  font-size:42px;
+  letter-spacing:4px;
 }
 
 .product-info{
-  padding:18px;
+  padding:17px;
 }
 
 .product-name{
   font-family:"Cormorant Garamond",serif;
-  font-size:25px;
+  font-size:24px;
   direction:ltr;
 }
 
 .product-price{
-  margin-top:7px;
+  margin-top:5px;
   font-weight:700;
-}
-
-/* THURSDAY */
-.thursday{
-  margin-top:55px;
-  background:#111;
-  color:#fff;
-  padding:45px 20px 55px;
-  text-align:center;
-}
-
-.thursday-tag{
-  font-size:11px;
-  letter-spacing:3px;
-  direction:ltr;
-  color:#aaa;
-}
-
-.thursday h2{
-  font-family:"Cormorant Garamond",serif;
-  direction:ltr;
-  font-size:48px;
-  margin:5px 0;
-}
-
-.thursday-desc{
-  color:#bbb;
   font-size:13px;
 }
 
-.wheel-wrap{
-  width:310px;
-  height:310px;
-  margin:35px auto 25px;
+
+/* =========================
+   THURSDAY
+========================= */
+
+.thursday{
+  background:#111;
+  color:#fff;
+  padding:65px 15px 75px;
+  text-align:center;
+  overflow:hidden;
+}
+
+.thursday-label{
+  font-size:10px;
+  letter-spacing:5px;
+  color:#aaa;
+  direction:ltr;
+}
+
+.thursday-title{
+  font-family:"Cormorant Garamond",serif;
+  font-size:50px;
+  font-weight:600;
+  letter-spacing:4px;
+  direction:ltr;
+  margin-top:4px;
+}
+
+.thursday-description{
+  margin-top:8px;
+  color:#bdbdbd;
+  font-size:13px;
+}
+
+
+/* =========================
+   WHEEL
+========================= */
+
+.wheel-area{
+  width:350px;
+  height:390px;
+  margin:42px auto 0;
   position:relative;
 }
 
 .wheel{
-  width:100%;
-  height:100%;
+  width:350px;
+  height:350px;
   border-radius:50%;
-  border:8px solid #fff;
-  background:
-    conic-gradient(
-      #e8e2d7 0deg 60deg,
-      #222 60deg 120deg,
-      #d5c7b4 120deg 180deg,
-      #333 180deg 240deg,
-      #eee8de 240deg 300deg,
-      #555 300deg 360deg
-    );
-  box-shadow:0 10px 35px rgba(0,0,0,.35);
+  border:8px solid #f8f7f3;
   position:relative;
-  transition:transform 5s cubic-bezier(.15,.8,.15,1);
+  overflow:hidden;
+  box-shadow:
+    0 15px 45px rgba(0,0,0,.45),
+    inset 0 0 0 1px rgba(0,0,0,.25);
+
+  background:#222;
+
+  transition:
+    transform 6s cubic-bezier(.12,.75,.12,1);
 }
 
-.wheel-label{
+.wheel::after{
+  content:"";
   position:absolute;
-  width:100%;
-  height:100%;
-  inset:0;
+  inset:13px;
   border-radius:50%;
+  border:1px solid rgba(255,255,255,.35);
   pointer-events:none;
 }
 
-.wheel-label span{
+.wheel-pointer{
   position:absolute;
-  left:50%;
-  top:50%;
-  width:85px;
-  margin-left:-42px;
-  margin-top:-10px;
-  text-align:center;
-  font-size:11px;
-  font-weight:700;
-}
-
-.l1{transform:translateY(-112px);}
-.l2{transform:translate(97px,-56px);}
-.l3{transform:translate(97px,52px);}
-.l4{transform:translateY(105px);}
-.l5{transform:translate(-97px,52px);}
-.l6{transform:translate(-97px,-56px);}
-
-.wheel-center{
-  position:absolute;
-  width:70px;
-  height:70px;
-  background:#fff;
-  border-radius:50%;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  z-index:5;
-  box-shadow:0 3px 15px rgba(0,0,0,.25);
-}
-
-.pointer{
-  position:absolute;
-  top:-15px;
+  top:-2px;
   left:50%;
   transform:translateX(-50%);
   width:0;
   height:0;
-  border-left:13px solid transparent;
-  border-right:13px solid transparent;
-  border-top:28px solid #fff;
-  z-index:10;
+  border-left:17px solid transparent;
+  border-right:17px solid transparent;
+  border-top:0;
+  border-bottom:34px solid #fff;
+  filter:drop-shadow(0 3px 5px rgba(0,0,0,.45));
+  z-index:20;
 }
 
+
+/* wheel labels created by JS */
+
+.wheel-label{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform-origin:center center;
+  width:100px;
+  margin-left:-50px;
+  margin-top:-14px;
+  text-align:center;
+  font-weight:800;
+  color:#fff;
+  text-shadow:0 1px 3px rgba(0,0,0,.5);
+  pointer-events:none;
+  z-index:4;
+  white-space:nowrap;
+}
+
+.wheel-label.small{
+  font-size:8px;
+}
+
+.wheel-label.medium{
+  font-size:10px;
+}
+
+.wheel-label.large{
+  font-size:12px;
+}
+
+.wheel-label.tiny{
+  font-size:8px;
+  width:60px;
+  margin-left:-30px;
+}
+
+
+/* center */
+
+.wheel-center{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:76px;
+  height:76px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:#f7f6f2;
+  border:5px solid #fff;
+  box-shadow:
+    0 5px 18px rgba(0,0,0,.35),
+    inset 0 0 0 1px #ddd;
+  z-index:15;
+}
+
+.wheel-center::after{
+  content:"";
+  position:absolute;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#111;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+}
+
+
+/* =========================
+   SPIN BUTTON
+========================= */
+
 .spin-btn{
+  width:250px;
+  height:58px;
+  margin:8px auto 0;
   background:#fff;
   color:#111;
   border:0;
-  padding:14px 35px;
+  font-size:15px;
   font-weight:800;
-  min-width:220px;
+  box-shadow:0 8px 25px rgba(0,0,0,.2);
+}
+
+.spin-btn:hover{
+  background:#eee;
 }
 
 .spin-btn:disabled{
@@ -415,38 +486,64 @@ header{
 }
 
 .countdown{
-  margin-top:16px;
-  color:#bbb;
-  font-size:13px;
+  min-height:25px;
+  margin-top:17px;
+  color:#aaa;
+  font-size:12px;
 }
 
+
+/* =========================
+   RESULT
+========================= */
+
 .result{
-  max-width:400px;
-  margin:20px auto 0;
+  width:100%;
+  max-width:420px;
+  margin:25px auto 0;
+  padding:24px;
   background:#fff;
   color:#111;
-  padding:20px;
   display:none;
+  box-shadow:0 12px 40px rgba(0,0,0,.25);
 }
 
 .result.show{
   display:block;
 }
 
+.result-small{
+  font-size:12px;
+  color:#777;
+}
+
 .result-prize{
-  font-size:25px;
+  font-size:28px;
   font-weight:800;
+  margin-top:4px;
+}
+
+.coupon-title{
+  margin-top:15px;
+  font-size:12px;
+  color:#777;
 }
 
 .coupon{
-  margin-top:10px;
-  padding:12px;
-  background:#f3f1ed;
+  margin-top:7px;
+  padding:13px;
+  background:#f1efeb;
+  direction:ltr;
   font-family:monospace;
   font-size:18px;
-  direction:ltr;
   letter-spacing:2px;
+  font-weight:700;
 }
+
+
+/* =========================
+   ADMIN
+========================= */
 
 .admin{
   max-width:1100px;
@@ -456,23 +553,25 @@ header{
 
 .admin-box{
   background:#fff;
-  border:1px solid #ddd;
+  border:1px solid #ddd9d2;
   padding:25px;
   overflow-x:auto;
 }
 
-.admin h2{
+.admin-title{
+  font-size:20px;
   margin-bottom:20px;
 }
 
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:850px;
+  min-width:900px;
   font-size:12px;
 }
 
-th,td{
+th,
+td{
   padding:11px;
   border-bottom:1px solid #eee;
   text-align:right;
@@ -480,174 +579,326 @@ th,td{
 }
 
 th{
-  background:#f5f3ef;
+  background:#f4f2ee;
 }
 
+
+/* =========================
+   FOOTER
+========================= */
+
 footer{
-  padding:35px;
+  background:#fff;
+  border-top:1px solid #e4e1dc;
   text-align:center;
-  border-top:1px solid #ddd;
+  padding:28px;
   color:#777;
-  font-size:12px;
+  font-size:11px;
   direction:ltr;
 }
 
-@media(max-width:750px){
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
   header{
+    height:72px;
     padding:0 18px;
   }
 
-  .header-logo{
-    font-size:30px;
+  .site-logo{
+    width:105px;
+    height:55px;
   }
 
-  .hero h1{
-    font-size:48px;
+  .header-btn{
+    padding:0 11px;
+    font-size:11px;
+  }
+
+  .hero{
+    padding:40px 20px;
+  }
+
+  .hero-title{
+    font-size:38px;
   }
 
   .products{
     grid-template-columns:1fr;
   }
 
-  .product-img{
+  .product-image{
+    height:340px;
+  }
+
+  .thursday{
+    padding-top:50px;
+  }
+
+  .thursday-title{
+    font-size:43px;
+  }
+
+  .wheel-area{
+    width:320px;
     height:360px;
   }
 
-  .wheel-wrap{
-    width:285px;
-    height:285px;
+  .wheel{
+    width:320px;
+    height:320px;
+  }
+
+  .spin-btn{
+    width:230px;
   }
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- LOGIN / REGISTER -->
+
+<!-- =========================
+     AUTH SCREEN
+========================= -->
+
 <section id="authScreen">
 
   <div class="auth-box">
 
-    <div class="logo">HUMO</div>
-    <div class="auth-subtitle">HUMO — DETAILS WORTH OWNING</div>
+    <img
+      class="auth-logo"
+      src="كيس%20ورقي%20للمتاجر%20بلون%20وردي%20نمط%20زهور.png"
+      alt="HUMO"
+    >
+
+    <div class="auth-subtitle">
+      DETAILS WORTH OWNING
+    </div>
+
+
+    <!-- LOGIN -->
 
     <div id="loginForm">
 
-      <h2>تسجيل الدخول</h2>
+      <div class="auth-title">
+        تسجيل الدخول
+      </div>
 
       <div class="field">
         <label>البريد الإلكتروني</label>
-        <input id="loginEmail" type="email" placeholder="example@email.com">
+        <input
+          id="loginEmail"
+          type="email"
+          autocomplete="email"
+          placeholder="example@email.com"
+        >
       </div>
 
       <div class="field">
         <label>كلمة المرور</label>
-        <input id="loginPassword" type="password" placeholder="••••••••">
+        <input
+          id="loginPassword"
+          type="password"
+          autocomplete="current-password"
+          placeholder="••••••••"
+        >
       </div>
 
-      <button class="main-btn" onclick="login()">دخول</button>
+      <button
+        class="main-btn"
+        onclick="login()"
+      >
+        دخول
+      </button>
 
       <div class="auth-switch">
         ليس لديك حساب؟
-        <button onclick="showRegister()">إنشاء حساب</button>
+        <button onclick="showRegister()">
+          إنشاء حساب
+        </button>
       </div>
 
     </div>
 
 
+    <!-- REGISTER -->
+
     <div id="registerForm" class="hidden">
 
-      <h2>إنشاء حساب</h2>
+      <div class="auth-title">
+        إنشاء حساب
+      </div>
 
       <div class="field">
         <label>الاسم الكامل</label>
-        <input id="registerName" type="text" placeholder="الاسم الكامل">
+        <input
+          id="registerName"
+          type="text"
+          autocomplete="name"
+          placeholder="الاسم الكامل"
+        >
       </div>
 
       <div class="field">
         <label>رقم الهاتف</label>
-        <input id="registerPhone" type="tel" placeholder="07xxxxxxxxx">
+        <input
+          id="registerPhone"
+          type="tel"
+          autocomplete="tel"
+          placeholder="07xxxxxxxxx"
+        >
       </div>
 
       <div class="field">
         <label>البريد الإلكتروني</label>
-        <input id="registerEmail" type="email" placeholder="example@email.com">
+        <input
+          id="registerEmail"
+          type="email"
+          autocomplete="email"
+          placeholder="example@email.com"
+        >
       </div>
 
       <div class="field">
         <label>كلمة المرور</label>
-        <input id="registerPassword" type="password" placeholder="6 أحرف على الأقل">
+        <input
+          id="registerPassword"
+          type="password"
+          autocomplete="new-password"
+          placeholder="6 أحرف على الأقل"
+        >
       </div>
 
-      <button class="main-btn" onclick="register()">إنشاء الحساب</button>
+      <button
+        class="main-btn"
+        onclick="register()"
+      >
+        إنشاء الحساب
+      </button>
 
       <div class="auth-switch">
         لديك حساب؟
-        <button onclick="showLogin()">تسجيل الدخول</button>
+        <button onclick="showLogin()">
+          تسجيل الدخول
+        </button>
       </div>
 
     </div>
 
-    <div id="authMessage" class="message"></div>
+
+    <div
+      id="authMessage"
+      class="message"
+    ></div>
 
   </div>
 
 </section>
 
 
-<!-- STORE -->
-<section id="storeScreen" class="hidden">
+
+<!-- =========================
+     STORE
+========================= -->
+
+<section
+  id="storeScreen"
+  class="hidden"
+>
+
 
 <header>
 
-  <div class="header-logo">HUMO</div>
+  <img
+    class="site-logo"
+    src="كيس%20ورقي%20للمتاجر%20بلون%20وردي%20نمط%20زهور.png"
+    alt="HUMO"
+  >
 
   <div class="header-actions">
-    <button id="adminBtn" class="header-btn hidden" onclick="showAdmin()">
+
+    <button
+      id="adminBtn"
+      class="header-btn hidden"
+      onclick="showAdmin()"
+    >
       المشاركون
     </button>
 
-    <button class="header-btn" onclick="logout()">
+    <button
+      class="header-btn"
+      onclick="logout()"
+    >
       خروج
     </button>
+
   </div>
 
 </header>
 
 
+
+<!-- HERO -->
+
 <section class="hero">
 
-  <div class="hero-small">HUMO SHOP</div>
+  <div class="hero-label">
+    HUMO SHOP
+  </div>
 
-  <h1>HUMO</h1>
+  <div class="hero-title">
+    DETAILS WORTH OWNING
+  </div>
 
-  <p>تفاصيل تستحق أن تُرى.</p>
+  <div class="hero-text">
+    تفاصيل تستحق أن تُرى.
+  </div>
 
 </section>
 
 
+
+<!-- PRODUCTS -->
+
 <div class="container">
 
-  <div class="section-title">
-    <h2>COLLECTION</h2>
+  <div class="collection-title">
+    <span>COLLECTION</span>
   </div>
+
 
   <div class="products">
 
+
     <div class="product">
 
-      <div class="product-img">
+      <div class="product-image">
+
         <img
           src="كيس%20ورقي%20للمتاجر%20بلون%20وردي%20نمط%20زهور.png"
           alt="HUMO"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
         >
-        <div class="product-placeholder" style="display:none;">HUMO</div>
+
       </div>
 
       <div class="product-info">
-        <div class="product-name">HUMO BAG</div>
-        <div class="product-price">75,000 IQD</div>
+
+        <div class="product-name">
+          HUMO BAG
+        </div>
+
+        <div class="product-price">
+          75,000 IQD
+        </div>
+
       </div>
 
     </div>
@@ -655,13 +906,24 @@ footer{
 
     <div class="product">
 
-      <div class="product-img">
-        <div class="product-placeholder">HUMO</div>
+      <div class="product-image">
+
+        <div class="product-placeholder">
+          HUMO
+        </div>
+
       </div>
 
       <div class="product-info">
-        <div class="product-name">HUMO COLLECTION</div>
-        <div class="product-price">COMING SOON</div>
+
+        <div class="product-name">
+          HUMO COLLECTION
+        </div>
+
+        <div class="product-price">
+          COMING SOON
+        </div>
+
       </div>
 
     </div>
@@ -669,48 +931,67 @@ footer{
 
     <div class="product">
 
-      <div class="product-img">
-        <div class="product-placeholder">HUMO</div>
+      <div class="product-image">
+
+        <div class="product-placeholder">
+          NEW DETAILS
+        </div>
+
       </div>
 
       <div class="product-info">
-        <div class="product-name">NEW DETAILS</div>
-        <div class="product-price">COMING SOON</div>
+
+        <div class="product-name">
+          NEW DETAILS
+        </div>
+
+        <div class="product-price">
+          COMING SOON
+        </div>
+
       </div>
 
     </div>
+
 
   </div>
 
 </div>
 
 
-<!-- THURSDAY WHEEL -->
+
+<!-- =========================
+     HUMO THURSDAY
+========================= -->
+
 <section class="thursday">
 
-  <div class="thursday-tag">EVERY THURSDAY</div>
+  <div class="thursday-label">
+    EVERY THURSDAY
+  </div>
 
-  <h2>HUMO THURSDAY</h2>
+  <div class="thursday-title">
+    THURSDAY
+  </div>
 
-  <div class="thursday-desc">
+  <div class="thursday-description">
     فرصة واحدة كل 14 يومًا للفوز بخصم خاص.
   </div>
 
 
-  <div class="wheel-wrap">
+  <div class="wheel-area">
 
-    <div class="pointer"></div>
+    <div class="wheel-pointer"></div>
 
-    <div id="wheel" class="wheel">
+    <div
+      id="wheel"
+      class="wheel"
+    >
 
-      <div class="wheel-label">
-        <span class="l1">10%</span>
-        <span class="l2">15%</span>
-        <span class="l3">20%</span>
-        <span class="l4">25%</span>
-        <span class="l5">30%</span>
-        <span class="l6">حظ أوفر</span>
-      </div>
+      <div
+        id="wheelLabels"
+        class="wheel-labels"
+      ></div>
 
       <div class="wheel-center"></div>
 
@@ -719,34 +1000,62 @@ footer{
   </div>
 
 
-  <button id="spinBtn" class="spin-btn" onclick="spinWheel()">
+  <button
+    id="spinBtn"
+    class="spin-btn"
+    onclick="spinWheel()"
+  >
     أدر العجلة
   </button>
 
-  <div id="countdown" class="countdown"></div>
+
+  <div
+    id="countdown"
+    class="countdown"
+  ></div>
 
 
-  <div id="result" class="result">
+  <div
+    id="result"
+    class="result"
+  >
 
-    <div>مبروك 🎉</div>
+    <div class="result-small">
+      نتيجتك
+    </div>
 
-    <div id="resultPrize" class="result-prize"></div>
+    <div
+      id="resultPrize"
+      class="result-prize"
+    ></div>
 
-    <div>كود الخصم الخاص بك:</div>
+    <div class="coupon-title">
+      كود الخصم الخاص بك
+    </div>
 
-    <div id="coupon" class="coupon"></div>
+    <div
+      id="coupon"
+      class="coupon"
+    ></div>
 
   </div>
 
 </section>
 
 
+
 <!-- ADMIN -->
-<section id="adminSection" class="admin hidden">
+
+<section
+  id="adminSection"
+  class="admin hidden"
+>
 
   <div class="admin-box">
 
-    <h2>قائمة المشاركين</h2>
+    <div class="admin-title">
+      قائمة المشاركين
+    </div>
 
     <div id="adminTable">
       جارِ تحميل البيانات...
@@ -757,14 +1066,22 @@ footer{
 </section>
 
 
+
 <footer>
   HUMO — Hussein & Mohammed
 </footer>
 
+
 </section>
 
 
+
 <script>
+
+
+/* =========================
+   SUPABASE
+========================= */
 
 const SUPABASE_URL =
 "https://vknhrxxkmhrnfbmsllid.supabase.co";
@@ -772,7 +1089,8 @@ const SUPABASE_URL =
 const SUPABASE_PUBLISHABLE_KEY =
 "sb_publishable_QliqBYSeykn4F2Ddrsn8hg_F_N8dR-n";
 
-const db = window.supabase.createClient(
+const db =
+window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_PUBLISHABLE_KEY
 );
@@ -780,89 +1098,316 @@ const db = window.supabase.createClient(
 
 let currentUser = null;
 let currentProfile = null;
+let countdownTimer = null;
+let wheelRotation = 0;
 
 
-/* ---------------- AUTH UI ---------------- */
+/* =========================
+   PRIZES
+========================= */
+
+const PRIZES = [
+
+  {
+    label:"خصم 5%",
+    weight:65
+  },
+
+  {
+    label:"حظ أوفر",
+    weight:25
+  },
+
+  {
+    label:"خصم 10%",
+    weight:5
+  },
+
+  {
+    label:"خصم 15%",
+    weight:2
+  },
+
+  {
+    label:"خصم 20%",
+    weight:1
+  },
+
+  {
+    label:"خصم 25%",
+    weight:1
+  },
+
+  {
+    label:"خصم 30%",
+    weight:1
+  }
+
+];
+
+
+/* =========================
+   WHEEL COLORS
+========================= */
+
+const COLORS = [
+
+  "#e9e5dc",
+  "#343434",
+  "#d8d0c3",
+  "#242424",
+  "#eeeae2",
+  "#4a4a4a",
+  "#c9c0b3"
+
+];
+
+
+/* =========================
+   BUILD WHEEL
+========================= */
+
+function buildWheel(){
+
+  const wheel =
+    document.getElementById("wheel");
+
+  const labels =
+    document.getElementById("wheelLabels");
+
+
+  let gradientParts = [];
+
+  let currentAngle = 0;
+
+
+  labels.innerHTML = "";
+
+
+  PRIZES.forEach((prize,index)=>{
+
+    const angle =
+      prize.weight * 3.6;
+
+    const start =
+      currentAngle;
+
+    const end =
+      currentAngle + angle;
+
+
+    gradientParts.push(
+      `${COLORS[index]} ${start}deg ${end}deg`
+    );
+
+
+    const center =
+      start + angle / 2;
+
+
+    const label =
+      document.createElement("div");
+
+    label.className =
+      "wheel-label";
+
+
+    if(angle <= 4){
+
+      label.classList.add("tiny");
+
+    }else if(angle <= 10){
+
+      label.classList.add("small");
+
+    }else if(angle <= 25){
+
+      label.classList.add("medium");
+
+    }else{
+
+      label.classList.add("large");
+
+    }
+
+
+    label.textContent =
+      prize.label;
+
+
+    /*
+      وضع النص في منتصف القطاع.
+      0° = أعلى العجلة.
+    */
+
+    label.style.transform =
+      `rotate(${center}deg) translateY(-128px) rotate(${-center}deg)`;
+
+
+    labels.appendChild(label);
+
+
+    currentAngle = end;
+
+  });
+
+
+  wheel.style.background =
+    `conic-gradient(from 0deg, ${gradientParts.join(",")})`;
+
+}
+
+
+buildWheel();
+
+
+
+/* =========================
+   AUTH MESSAGE
+========================= */
 
 function showMessage(text,type="error"){
-  const box=document.getElementById("authMessage");
 
-  box.textContent=text;
-  box.className="message "+type;
+  const box =
+    document.getElementById("authMessage");
+
+  box.textContent = text;
+
+  box.className =
+    "message " + type;
+
 }
+
 
 function showRegister(){
 
-  document.getElementById("loginForm").classList.add("hidden");
-  document.getElementById("registerForm").classList.remove("hidden");
+  document
+    .getElementById("loginForm")
+    .classList.add("hidden");
 
-  document.getElementById("authMessage").className="message";
+  document
+    .getElementById("registerForm")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("authMessage")
+    .className="message";
+
 }
+
 
 function showLogin(){
 
-  document.getElementById("registerForm").classList.add("hidden");
-  document.getElementById("loginForm").classList.remove("hidden");
+  document
+    .getElementById("registerForm")
+    .classList.add("hidden");
 
-  document.getElementById("authMessage").className="message";
+  document
+    .getElementById("loginForm")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("authMessage")
+    .className="message";
+
 }
 
 
-/* ---------------- REGISTER ---------------- */
+/* =========================
+   REGISTER
+========================= */
 
 async function register(){
 
-  const name=document.getElementById("registerName").value.trim();
-  const phone=document.getElementById("registerPhone").value.trim();
-  const email=document.getElementById("registerEmail").value.trim();
-  const password=document.getElementById("registerPassword").value;
+  const name =
+    document
+      .getElementById("registerName")
+      .value
+      .trim();
+
+  const phone =
+    document
+      .getElementById("registerPhone")
+      .value
+      .trim();
+
+  const email =
+    document
+      .getElementById("registerEmail")
+      .value
+      .trim();
+
+  const password =
+    document
+      .getElementById("registerPassword")
+      .value;
+
 
   if(!name || !phone || !email || !password){
 
-    showMessage("يرجى ملء جميع الحقول.");
+    showMessage(
+      "يرجى ملء جميع الحقول."
+    );
+
     return;
   }
+
 
   if(password.length < 6){
 
-    showMessage("كلمة المرور يجب أن تكون 6 أحرف على الأقل.");
+    showMessage(
+      "كلمة المرور يجب أن تكون 6 أحرف على الأقل."
+    );
+
     return;
   }
 
-  const {data,error}=await db.auth.signUp({
 
-    email:email,
-    password:password,
+  const {
+    data,
+    error
+  } =
+    await db.auth.signUp({
 
-    options:{
-      data:{
-        full_name:name,
-        phone:phone
+      email,
+      password,
+
+      options:{
+        data:{
+          full_name:name,
+          phone:phone
+        }
       }
-    }
 
-  });
+    });
 
 
   if(error){
 
     showMessage(error.message);
+
     return;
   }
 
 
   if(data.session){
 
-    showMessage("تم إنشاء الحساب بنجاح.","success");
+    showMessage(
+      "تم إنشاء الحساب بنجاح.",
+      "success"
+    );
 
-    setTimeout(()=>{
-      enterStore(data.session.user);
-    },700);
+    setTimeout(
+      ()=>{
+        enterStore(data.user);
+      },
+      700
+    );
 
   }else{
 
     showMessage(
-      "تم إنشاء الحساب. تحقق من بريدك الإلكتروني لتفعيل الحساب ثم سجّل الدخول.",
+      "تم إنشاء الحساب. تحقق من بريدك الإلكتروني ثم سجّل الدخول.",
       "success"
     );
 
@@ -871,41 +1416,62 @@ async function register(){
 }
 
 
-/* ---------------- LOGIN ---------------- */
+/* =========================
+   LOGIN
+========================= */
 
 async function login(){
 
-  const email=document.getElementById("loginEmail").value.trim();
-  const password=document.getElementById("loginPassword").value;
+  const email =
+    document
+      .getElementById("loginEmail")
+      .value
+      .trim();
+
+  const password =
+    document
+      .getElementById("loginPassword")
+      .value;
+
 
   if(!email || !password){
 
-    showMessage("أدخل البريد الإلكتروني وكلمة المرور.");
+    showMessage(
+      "أدخل البريد الإلكتروني وكلمة المرور."
+    );
+
     return;
   }
 
 
-  const {data,error}=await db.auth.signInWithPassword({
+  const {
+    data,
+    error
+  } =
+    await db.auth.signInWithPassword({
 
-    email:email,
-    password:password
+      email,
+      password
 
-  });
+    });
 
 
   if(error){
 
     showMessage(error.message);
+
     return;
   }
 
 
-  enterStore(data.user);
+  await enterStore(data.user);
 
 }
 
 
-/* ---------------- LOGOUT ---------------- */
+/* =========================
+   LOGOUT
+========================= */
 
 async function logout(){
 
@@ -916,67 +1482,95 @@ async function logout(){
 }
 
 
-/* ---------------- ENTER STORE ---------------- */
+/* =========================
+   ENTER STORE
+========================= */
 
 async function enterStore(user){
 
-  currentUser=user;
-
-  const {data:profile}=await db
-    .from("profiles")
-    .select("*")
-    .eq("id",user.id)
-    .single();
-
-  currentProfile=profile;
+  currentUser = user;
 
 
-  document.getElementById("authScreen")
+  const {
+    data:profile
+  } =
+    await db
+      .from("profiles")
+      .select("*")
+      .eq("id",user.id)
+      .single();
+
+
+  currentProfile = profile;
+
+
+  document
+    .getElementById("authScreen")
     .classList.add("hidden");
 
-  document.getElementById("storeScreen")
+
+  document
+    .getElementById("storeScreen")
     .classList.remove("hidden");
 
 
-  if(profile && profile.is_admin){
+  if(
+    profile &&
+    profile.is_admin
+  ){
 
-    document.getElementById("adminBtn")
+    document
+      .getElementById("adminBtn")
       .classList.remove("hidden");
 
   }
+
 
   checkThursday();
 
 }
 
 
-/* ---------------- THURSDAY CHECK ---------------- */
+/* =========================
+   THURSDAY
+========================= */
+
+function isThursdayBaghdad(){
+
+  const formatter =
+    new Intl.DateTimeFormat(
+      "en-US",
+      {
+        timeZone:"Asia/Baghdad",
+        weekday:"short"
+      }
+    );
+
+
+  return formatter
+    .format(new Date())
+    === "Thu";
+
+}
+
 
 function checkThursday(){
 
-  const now=new Date();
-
-  /*
-    JavaScript:
-    Sunday = 0
-    Monday = 1
-    ...
-    Thursday = 4
-  */
-
-  const isThursday=now.getDay()===4;
-
-  const btn=document.getElementById("spinBtn");
+  const btn =
+    document.getElementById("spinBtn");
 
 
-  if(!isThursday){
+  if(!isThursdayBaghdad()){
 
-    btn.disabled=true;
+    btn.disabled = true;
 
-    document.getElementById("countdown").textContent=
+    document
+      .getElementById("countdown")
+      .textContent =
       "العجلة متاحة يوم الخميس فقط.";
 
     return;
+
   }
 
 
@@ -985,321 +1579,504 @@ function checkThursday(){
 }
 
 
-/* ---------------- LAST SPIN ---------------- */
+/* =========================
+   LAST SPIN
+========================= */
 
 async function loadLastSpin(){
 
-  const {data,error}=await db
-    .from("spins")
-    .select("*")
-    .eq("user_id",currentUser.id)
-    .order("spun_at",{ascending:false})
-    .limit(1);
+  const {
+    data,
+    error
+  } =
+    await db
+      .from("spins")
+      .select("*")
+      .eq("user_id",currentUser.id)
+      .order("spun_at",{ascending:false})
+      .limit(1);
 
 
   if(error){
 
     console.error(error);
+
     return;
+
   }
 
 
   if(data && data.length){
 
-    const last=data[0];
+    const last =
+      data[0];
 
-    const next=new Date(last.next_eligible_at);
-    const now=new Date();
 
-    if(next>now){
+    const next =
+      new Date(
+        last.next_eligible_at
+      );
+
+
+    if(next > new Date()){
 
       disableSpin(next);
 
-      if(last.coupon_code){
-
-        showPreviousResult(last);
-
-      }
+      showPreviousResult(last);
 
       return;
+
     }
 
   }
 
 
-  document.getElementById("spinBtn").disabled=false;
+  document
+    .getElementById("spinBtn")
+    .disabled = false;
 
-  document.getElementById("countdown").textContent=
+
+  document
+    .getElementById("countdown")
+    .textContent =
     "أنت مؤهل للمشاركة اليوم 🎉";
 
 }
 
 
-/* ---------------- DISABLE SPIN ---------------- */
+/* =========================
+   DISABLE SPIN
+========================= */
 
 function disableSpin(next){
 
-  const btn=document.getElementById("spinBtn");
+  const btn =
+    document.getElementById("spinBtn");
 
-  btn.disabled=true;
 
-  updateCountdown(next);
+  btn.disabled = true;
 
-  const interval=setInterval(()=>{
 
-    if(new Date()>=next){
+  if(countdownTimer){
 
-      clearInterval(interval);
+    clearInterval(countdownTimer);
 
-      btn.disabled=false;
+  }
 
-      document.getElementById("countdown").textContent=
+
+  function update(){
+
+    const diff =
+      new Date(next) -
+      new Date();
+
+
+    if(diff <= 0){
+
+      clearInterval(countdownTimer);
+
+      btn.disabled = false;
+
+      document
+        .getElementById("countdown")
+        .textContent =
         "أصبحت مؤهلًا للمشاركة 🎉";
 
       return;
+
     }
 
-    updateCountdown(next);
 
-  },1000);
+    const days =
+      Math.floor(
+        diff / 86400000
+      );
 
-}
+    const hours =
+      Math.floor(
+        (diff % 86400000) /
+        3600000
+      );
+
+    const minutes =
+      Math.floor(
+        (diff % 3600000) /
+        60000
+      );
+
+    const seconds =
+      Math.floor(
+        (diff % 60000) /
+        1000
+      );
 
 
-function updateCountdown(next){
+    document
+      .getElementById("countdown")
+      .textContent =
+      `المشاركة القادمة بعد ${days} يوم و ${hours} ساعة و ${minutes} دقيقة و ${seconds} ثانية`;
 
-  const diff=new Date(next)-new Date();
-
-  if(diff<=0){
-    return;
   }
 
-  const days=Math.floor(diff/86400000);
 
-  const hours=Math.floor(
-    (diff%86400000)/3600000
-  );
+  update();
 
-  const minutes=Math.floor(
-    (diff%3600000)/60000
-  );
-
-  const seconds=Math.floor(
-    (diff%60000)/1000
-  );
-
-
-  document.getElementById("countdown").textContent=
-    `المشاركة القادمة بعد ${days} يوم و ${hours} ساعة و ${minutes} دقيقة و ${seconds} ثانية`;
+  countdownTimer =
+    setInterval(
+      update,
+      1000
+    );
 
 }
 
 
-/* ---------------- PREVIOUS RESULT ---------------- */
+/* =========================
+   PREVIOUS RESULT
+========================= */
 
 function showPreviousResult(spin){
 
-  const result=document.getElementById("result");
+  if(!spin) return;
 
-  document.getElementById("resultPrize").textContent=
-    spin.prize;
 
-  document.getElementById("coupon").textContent=
-    spin.coupon_code;
+  document
+    .getElementById("resultPrize")
+    .textContent =
+    spin.prize || "";
 
-  result.classList.add("show");
+
+  document
+    .getElementById("coupon")
+    .textContent =
+    spin.coupon_code || "";
+
+
+  document
+    .getElementById("result")
+    .classList.add("show");
 
 }
 
 
-/* ---------------- SPIN ---------------- */
+/* =========================
+   FIND PRIZE ANGLE
+========================= */
+
+function getPrizeCenter(label){
+
+  let angle = 0;
+
+
+  for(const prize of PRIZES){
+
+    const slice =
+      prize.weight * 3.6;
+
+
+    if(prize.label === label){
+
+      return angle + slice / 2;
+
+    }
+
+
+    angle += slice;
+
+  }
+
+
+  return 0;
+
+}
+
+
+/* =========================
+   SPIN
+========================= */
 
 async function spinWheel(){
 
-  const btn=document.getElementById("spinBtn");
+  const btn =
+    document.getElementById("spinBtn");
 
-  btn.disabled=true;
 
-  document.getElementById("countdown").textContent=
+  if(btn.disabled){
+
+    return;
+
+  }
+
+
+  btn.disabled = true;
+
+
+  document
+    .getElementById("countdown")
+    .textContent =
     "جاري تدوير العجلة...";
 
 
-  const {data,error}=await db.rpc("spin_wheel");
+  document
+    .getElementById("result")
+    .classList.remove("show");
+
+
+  /*
+    السيرفر هو الذي يختار النتيجة.
+  */
+
+  const {
+    data,
+    error
+  } =
+    await db.rpc("spin_wheel");
 
 
   if(error){
 
     console.error(error);
 
-    btn.disabled=false;
+    btn.disabled = false;
 
-    if(error.message.includes("Thursday")){
-
-      document.getElementById("countdown").textContent=
-        "العجلة متاحة يوم الخميس فقط.";
-
-    }else{
-
-      document.getElementById("countdown").textContent=
-        error.message;
-
-    }
+    document
+      .getElementById("countdown")
+      .textContent =
+      error.message;
 
     return;
+
   }
 
 
-  const spin=data[0] || data;
+  /*
+    Supabase قد يعيد صفًا واحدًا
+    كمصفوفة.
+  */
+
+  const spin =
+    Array.isArray(data)
+      ? data[0]
+      : data;
+
+
+  if(!spin){
+
+    btn.disabled = false;
+
+    document
+      .getElementById("countdown")
+      .textContent =
+      "تعذر الحصول على نتيجة.";
+
+    return;
+
+  }
+
+
+  const prize =
+    spin.prize;
+
+
+  const center =
+    getPrizeCenter(prize);
 
 
   /*
-    نحدد مكان الجائزة التي أعادها السيرفر
-    ثم نجعل العجلة تتوقف عندها.
+    المؤشر في الأعلى = 0 درجة.
+    نحرّك القطاع الفائز إلى الأعلى.
   */
 
-  const prize=spin.prize;
-
-  const positions={
-    "خصم 10%":30,
-    "خصم 15%":90,
-    "خصم 20%":150,
-    "خصم 25%":210,
-    "خصم 30%":270,
-    "حظ أوفر":330
-  };
-
-  const target=positions[prize] ?? 30;
-
-  const extra=360*6;
-
-  const rotation=extra+(360-target);
+  const target =
+    360 - center;
 
 
-  const wheel=document.getElementById("wheel");
+  wheelRotation +=
+    360 * 7 + target;
 
-  wheel.style.transform=
-    `rotate(${rotation}deg)`;
+
+  const wheel =
+    document.getElementById("wheel");
+
+
+  wheel.style.transform =
+    `rotate(${wheelRotation}deg)`;
 
 
   setTimeout(()=>{
 
-    document.getElementById("resultPrize").textContent=
+    document
+      .getElementById("resultPrize")
+      .textContent =
       spin.prize;
 
-    document.getElementById("coupon").textContent=
+
+    document
+      .getElementById("coupon")
+      .textContent =
       spin.coupon_code;
 
-    document.getElementById("result").classList.add("show");
 
-    const next=new Date(spin.next_eligible_at);
+    document
+      .getElementById("result")
+      .classList.add("show");
+
+
+    const next =
+      new Date(
+        spin.next_eligible_at
+      );
+
 
     disableSpin(next);
 
-  },5200);
+  },6100);
 
 }
 
 
-/* ---------------- ADMIN ---------------- */
+/* =========================
+   ADMIN
+========================= */
 
 async function showAdmin(){
 
-  document.getElementById("adminSection")
+  const section =
+    document.getElementById("adminSection");
+
+
+  section
     .classList.remove("hidden");
 
-  document.getElementById("adminSection")
-    .scrollIntoView({
-      behavior:"smooth"
-    });
+
+  section.scrollIntoView({
+    behavior:"smooth"
+  });
 
 
-  const {data,error}=await db.rpc("get_participants");
+  const {
+    data,
+    error
+  } =
+    await db.rpc(
+      "get_participants"
+    );
 
 
   if(error){
 
-    document.getElementById("adminTable").textContent=
+    document
+      .getElementById("adminTable")
+      .textContent =
       error.message;
 
     return;
+
   }
 
 
   if(!data || !data.length){
 
-    document.getElementById("adminTable").textContent=
+    document
+      .getElementById("adminTable")
+      .textContent =
       "لا يوجد مشاركون حتى الآن.";
 
     return;
+
   }
 
 
-  let html=`
+  let html = `
 
   <table>
 
-  <thead>
+    <thead>
 
-  <tr>
-    <th>الاسم</th>
-    <th>الهاتف</th>
-    <th>البريد</th>
-    <th>التسجيل</th>
-    <th>آخر مشاركة</th>
-    <th>الجائزة</th>
-    <th>الكوبون</th>
-    <th>المشاركة القادمة</th>
-  </tr>
+      <tr>
 
-  </thead>
+        <th>الاسم</th>
+        <th>الهاتف</th>
+        <th>البريد</th>
+        <th>التسجيل</th>
+        <th>آخر مشاركة</th>
+        <th>الجائزة</th>
+        <th>الكوبون</th>
+        <th>المشاركة القادمة</th>
 
-  <tbody>
+      </tr>
+
+    </thead>
+
+    <tbody>
+
   `;
 
 
   data.forEach(row=>{
 
-    html+=`
+    html += `
 
-    <tr>
+      <tr>
 
-      <td>${escapeHtml(row.full_name || "-")}</td>
+        <td>
+          ${escapeHtml(row.full_name || "-")}
+        </td>
 
-      <td>${escapeHtml(row.phone || "-")}</td>
+        <td>
+          ${escapeHtml(row.phone || "-")}
+        </td>
 
-      <td>${escapeHtml(row.email || "-")}</td>
+        <td>
+          ${escapeHtml(row.email || "-")}
+        </td>
 
-      <td>${formatDate(row.created_at)}</td>
+        <td>
+          ${formatDate(row.created_at)}
+        </td>
 
-      <td>${formatDate(row.last_spin_at)}</td>
+        <td>
+          ${formatDate(row.last_spin_at)}
+        </td>
 
-      <td>${escapeHtml(row.prize || "-")}</td>
+        <td>
+          ${escapeHtml(row.prize || "-")}
+        </td>
 
-      <td>${escapeHtml(row.coupon_code || "-")}</td>
+        <td>
+          ${escapeHtml(row.coupon_code || "-")}
+        </td>
 
-      <td>${formatDate(row.next_eligible_at)}</td>
+        <td>
+          ${formatDate(row.next_eligible_at)}
+        </td>
 
-    </tr>
+      </tr>
 
     `;
 
   });
 
 
-  html+=`
+  html += `
 
-  </tbody>
+    </tbody>
 
   </table>
+
   `;
 
 
-  document.getElementById("adminTable").innerHTML=html;
+  document
+    .getElementById("adminTable")
+    .innerHTML =
+    html;
 
 }
 
 
-/* ---------------- HELPERS ---------------- */
+/* =========================
+   SECURITY HELPERS
+========================= */
 
 function escapeHtml(value){
 
@@ -1315,32 +2092,47 @@ function escapeHtml(value){
 
 function formatDate(value){
 
-  if(!value) return "-";
+  if(!value){
 
-  return new Date(value).toLocaleString(
-    "ar-IQ",
-    {
-      dateStyle:"medium",
-      timeStyle:"short"
-    }
-  );
+    return "-";
+
+  }
+
+
+  return new Date(value)
+    .toLocaleString(
+      "ar-IQ",
+      {
+        dateStyle:"medium",
+        timeStyle:"short"
+      }
+    );
 
 }
 
 
-/* ---------------- START ---------------- */
+/* =========================
+   START
+========================= */
 
 async function start(){
 
-  const {data}=await db.auth.getSession();
+  const {
+    data
+  } =
+    await db.auth.getSession();
+
 
   if(data.session){
 
-    await enterStore(data.session.user);
+    await enterStore(
+      data.session.user
+    );
 
   }else{
 
-    document.getElementById("authScreen")
+    document
+      .getElementById("authScreen")
       .classList.remove("hidden");
 
   }
