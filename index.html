@@ -1,730 +1,917 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>HUMO</title>
+<meta charset="UTF-8">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>HUMO</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
 
-  <style>
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet">
 
-    :root {
-      --black: #111111;
-      --white: #ffffff;
-      --soft: #f7f7f5;
-      --line: #e7e7e4;
-      --gray: #777777;
-    }
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    body {
-      font-family: "Noto Sans Arabic", sans-serif;
-      background: var(--white);
-      color: var(--black);
-      min-height: 100vh;
-    }
 
-    button {
-      font-family: inherit;
-      cursor: pointer;
-    }
+<style>
 
+/* =====================================================
+   GENERAL
+===================================================== */
 
-    /* ================= HEADER ================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    header {
-      height: 78px;
-      border-bottom: 1px solid var(--line);
-      background: rgba(255,255,255,.97);
-      backdrop-filter: blur(12px);
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
 
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+body {
+  font-family: "Noto Sans Arabic", sans-serif;
+  background: #111;
+  color: #fff;
+}
 
-      padding: 0 28px;
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
 
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
 
-    .header-logo {
-      width: 105px;
-      height: 54px;
-      object-fit: contain;
-      object-position: center;
-    }
+/* =====================================================
+   HEADER
+===================================================== */
 
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+header {
+  height: 76px;
 
-    .user-name {
-      font-size: 12px;
-      color: #666;
-    }
+  background: #fff;
+  color: #111;
 
-    .logout-btn {
-      border: 1px solid #111;
-      background: white;
-      color: #111;
+  border-bottom: 1px solid #e5e5e5;
 
-      padding: 9px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-      font-size: 12px;
-    }
+  padding: 0 25px;
 
+  position: sticky;
+  top: 0;
 
-    /* ================= LOGIN ================= */
+  z-index: 1000;
+}
 
-    #loginScreen {
-      min-height: calc(100vh - 78px);
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+/* HUMO logo — top right */
 
-      padding: 30px 20px;
+.header-logo {
+  width: 105px;
+  height: 55px;
 
-      background: #fafaf9;
-    }
+  object-fit: contain;
+}
 
-    .login-box {
-      width: 100%;
-      max-width: 420px;
 
-      background: white;
-      border: 1px solid var(--line);
+/* Left side */
 
-      padding: 42px 30px;
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-      text-align: center;
-    }
+.user-name {
+  font-size: 12px;
+  color: #666;
+}
 
-    .login-logo {
-      width: 150px;
-      height: 80px;
-      object-fit: contain;
+.logout-btn {
+  background: #fff;
 
-      margin: 0 auto 25px;
-      display: block;
-    }
+  color: #111;
 
-    .login-title {
-      font-size: 24px;
-      font-weight: 800;
+  border: 1px solid #111;
 
-      margin-bottom: 9px;
-    }
+  padding: 9px 15px;
 
-    .login-subtitle {
-      color: #777;
-      font-size: 13px;
-      line-height: 1.9;
+  font-size: 12px;
+}
 
-      margin-bottom: 28px;
-    }
 
-    .google-btn {
-      width: 100%;
-      height: 53px;
+/* =====================================================
+   LOGIN
+===================================================== */
 
-      border: 1px solid #111;
-      background: #111;
-      color: white;
+#loginScreen {
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
+  min-height: calc(100vh - 76px);
 
-      font-size: 14px;
-      font-weight: 700;
+  display: flex;
 
-      transition: .2s;
-    }
+  align-items: center;
+  justify-content: center;
 
-    .google-btn:hover {
-      background: white;
-      color: #111;
-    }
+  padding: 25px;
 
-    .google-icon {
-      width: 20px;
-      height: 20px;
+  background: #fafafa;
 
-      border-radius: 50%;
-      background: white;
-      color: #4285f4;
+  color: #111;
+}
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+.login-box {
 
-      font-weight: 800;
-    }
+  width: 100%;
+  max-width: 420px;
 
-    .login-note {
-      color: #999;
-      font-size: 11px;
-      line-height: 1.8;
+  background: #fff;
 
-      margin-top: 18px;
-    }
+  border: 1px solid #e5e5e5;
 
+  padding: 42px 30px;
 
-    /* ================= MAIN ================= */
+  text-align: center;
+}
 
-    #store {
-      display: none;
-    }
+.login-logo {
 
-    .wheel-section {
+  width: 155px;
+  height: 80px;
 
-      min-height: calc(100vh - 78px);
+  object-fit: contain;
 
-      background: #111;
+  margin: 0 auto 25px;
 
-      color: white;
+  display: block;
+}
 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+.login-title {
 
-      text-align: center;
+  font-size: 24px;
 
-      padding:
-        55px 20px
-        70px;
-    }
+  font-weight: 800;
 
-    .wheel-title {
-      font-size: 30px;
-      font-weight: 800;
+  margin-bottom: 10px;
+}
 
-      margin-bottom: 7px;
-    }
+.login-subtitle {
 
-    .wheel-subtitle {
-      color: #aaa;
-      font-size: 13px;
+  font-size: 13px;
 
-      margin-bottom: 38px;
-    }
+  color: #777;
 
+  line-height: 1.9;
 
-    /* ================= WHEEL ================= */
+  margin-bottom: 28px;
+}
 
-    .wheel-wrap {
+.google-btn {
 
-      position: relative;
+  width: 100%;
 
-      width: min(370px, 88vw);
-      height: min(370px, 88vw);
+  height: 53px;
 
-      margin: 0 auto;
-    }
+  background: #111;
 
+  color: #fff;
 
-    .wheel {
+  border: 1px solid #111;
 
-      position: relative;
+  display: flex;
 
-      width: 100%;
-      height: 100%;
+  align-items: center;
+  justify-content: center;
 
-      border-radius: 50%;
+  gap: 12px;
 
-      border: 5px solid white;
+  font-size: 14px;
 
-      overflow: visible;
+  font-weight: 700;
+}
 
-      background:
-        conic-gradient(
+.google-btn:disabled {
+  opacity: .6;
+}
 
-          #111111 0deg 51.428deg,
+.google-icon {
 
-          #ffffff 51.428deg 102.856deg,
+  width: 20px;
+  height: 20px;
 
-          #111111 102.856deg 154.284deg,
+  background: #fff;
 
-          #ffffff 154.284deg 205.712deg,
+  color: #4285f4;
 
-          #111111 205.712deg 257.140deg,
+  border-radius: 50%;
 
-          #ffffff 257.140deg 308.568deg,
+  display: flex;
 
-          #111111 308.568deg 360deg
+  align-items: center;
+  justify-content: center;
 
-        );
+  font-weight: 800;
+}
 
-      transition:
-        transform 5.2s cubic-bezier(.12,.72,.12,1);
+.login-note {
 
-      transform-origin: center center;
+  margin-top: 18px;
 
-      --wheel-rotation: 0deg;
-    }
+  font-size: 11px;
 
+  color: #999;
 
-    /* خطوط القطاعات */
+  line-height: 1.8;
+}
 
-    .wheel-lines {
 
-      position: absolute;
+/* =====================================================
+   STORE
+===================================================== */
 
-      inset: 0;
+#store {
+  display: none;
+}
 
-      border-radius: 50%;
 
-      pointer-events: none;
+/* =====================================================
+   WHEEL SECTION
+===================================================== */
 
-      background:
-        conic-gradient(
+.wheel-section {
 
-          transparent 0deg 50.9deg,
-          rgba(0,0,0,.5) 50.9deg 51.45deg,
+  min-height: calc(100vh - 76px);
 
-          transparent 51.45deg 102.3deg,
-          rgba(0,0,0,.5) 102.3deg 102.86deg,
+  background: #111;
 
-          transparent 102.86deg 153.73deg,
-          rgba(0,0,0,.5) 153.73deg 154.29deg,
+  display: flex;
 
-          transparent 154.29deg 205.16deg,
-          rgba(0,0,0,.5) 205.16deg 205.72deg,
+  flex-direction: column;
 
-          transparent 205.72deg 256.58deg,
-          rgba(0,0,0,.5) 256.58deg 257.14deg,
+  align-items: center;
 
-          transparent 257.14deg 308.01deg,
-          rgba(0,0,0,.5) 308.01deg 308.57deg,
+  text-align: center;
 
-          transparent 308.57deg 359.44deg,
-          rgba(0,0,0,.5) 359.44deg 360deg
-        );
-    }
+  padding: 48px 15px 70px;
+}
 
+.wheel-title {
 
-    /* ================= LABELS ================= */
+  font-size: 30px;
 
-    /*
-      كل كلمة موجودة على القطاع الصحيح،
-      لكن يتم تعويض دورانها تلقائيًا
-      حتى تبقى مستقيمة أثناء دوران العجلة.
-    */
+  font-weight: 800;
 
-    .wheel-label {
+  margin-bottom: 7px;
+}
 
-      position: absolute;
+.wheel-subtitle {
 
-      left: 50%;
-      top: 50%;
+  color: #aaa;
 
-      width: 100px;
+  font-size: 13px;
 
-      text-align: center;
+  margin-bottom: 35px;
+}
 
-      transform-origin: 0 0;
 
-      font-size: 16px;
-      font-weight: 800;
+/* =====================================================
+   WHEEL CONTAINER
+===================================================== */
 
-      z-index: 3;
+.wheel-wrap {
 
-      transform:
-        rotate(var(--angle))
-        translateX(112px);
-    }
+  position: relative;
 
-    .wheel-label span {
+  width: min(380px, 90vw);
 
-      display: block;
+  aspect-ratio: 1 / 1;
 
-      white-space: nowrap;
+  margin: 0 auto;
+}
 
-      transform:
-        translate(-50%, -50%)
-        rotate(
-          calc(
-            -1 * var(--angle)
-            - var(--wheel-rotation)
-          )
-        );
-    }
 
-    .dark-label {
-      color: white;
-    }
+/* =====================================================
+   ROTATING WHEEL
+===================================================== */
 
-    .light-label {
-      color: #111;
-    }
+.wheel {
 
+  position: absolute;
 
-    /* ================= CENTER LOGO ================= */
+  inset: 0;
 
-    .wheel-logo {
+  width: 100%;
+  height: 100%;
 
-      position: absolute;
+  border-radius: 50%;
 
-      width: 82px;
-      height: 82px;
+  border: 5px solid #fff;
 
-      left: 50%;
-      top: 50%;
+  overflow: hidden;
 
-      transform:
-        translate(-50%, -50%);
+  background:
+    conic-gradient(
 
-      border-radius: 50%;
+      #111 0deg 51.428571deg,
 
-      background: white;
+      #fff 51.428571deg 102.857142deg,
 
-      border: 3px solid #111;
+      #111 102.857142deg 154.285714deg,
 
-      object-fit: contain;
+      #fff 154.285714deg 205.714285deg,
 
-      padding: 12px;
+      #111 205.714285deg 257.142857deg,
 
-      z-index: 20;
+      #fff 257.142857deg 308.571428deg,
 
-      /*
-        الشعار منفصل عن عنصر العجلة،
-        لذلك لا يدور معها.
-      */
-    }
+      #111 308.571428deg 360deg
+    );
 
+  transform: rotate(0deg);
 
-    /* ================= POINTER ================= */
+  transition:
+    transform 5.3s cubic-bezier(.12,.72,.12,1);
 
-    .pointer {
+  z-index: 1;
+}
 
-      position: absolute;
 
-      top: -18px;
+/* =====================================================
+   SECTOR LINES
+===================================================== */
 
-      left: 50%;
+.wheel-lines {
 
-      transform:
-        translateX(-50%);
+  position: absolute;
 
-      width: 0;
-      height: 0;
+  inset: 0;
 
-      border-left: 16px solid transparent;
-      border-right: 16px solid transparent;
+  border-radius: 50%;
 
-      border-top: 29px solid white;
+  pointer-events: none;
 
-      z-index: 30;
-    }
+  background:
+    conic-gradient(
 
+      transparent 0deg 51deg,
+      rgba(0,0,0,.55) 51deg 51.7deg,
 
-    /* ================= BUTTON ================= */
+      transparent 51.7deg 102.4deg,
+      rgba(0,0,0,.55) 102.4deg 103.1deg,
 
-    .spin-btn {
+      transparent 103.1deg 153.8deg,
+      rgba(0,0,0,.55) 153.8deg 154.5deg,
 
-      margin-top: 38px;
+      transparent 154.5deg 205.2deg,
+      rgba(0,0,0,.55) 205.2deg 205.9deg,
 
-      width: 220px;
+      transparent 205.9deg 256.6deg,
+      rgba(0,0,0,.55) 256.6deg 257.3deg,
 
-      height: 55px;
+      transparent 257.3deg 308deg,
+      rgba(0,0,0,.55) 308deg 308.7deg,
 
-      background: white;
-      color: #111;
+      transparent 308.7deg 359.4deg,
+      rgba(0,0,0,.55) 359.4deg 360deg
+    );
+}
 
-      border: none;
 
-      font-size: 14px;
-      font-weight: 800;
+/* =====================================================
+   LABEL LAYER
+===================================================== */
 
-      transition: .2s;
-    }
+/*
+  هذه الطبقة تدور مع العجلة.
+  لكن النص نفسه يعاكس الدوران،
+  لذلك يبقى مستقيمًا.
+*/
 
-    .spin-btn:active {
-      transform: scale(.98);
-    }
+.wheel-labels {
 
-    .spin-btn:disabled {
+  position: absolute;
 
-      opacity: .45;
+  inset: 0;
 
-      cursor: not-allowed;
-    }
+  width: 100%;
+  height: 100%;
 
+  border-radius: 50%;
 
-    .wheel-status {
+  z-index: 5;
 
-      min-height: 22px;
+  transform: rotate(0deg);
 
-      margin-top: 18px;
+  transition:
+    transform 5.3s cubic-bezier(.12,.72,.12,1);
+}
 
-      color: #aaa;
 
-      font-size: 12px;
-    }
+/* =====================================================
+   LABEL
+===================================================== */
 
+.wheel-label {
 
-    /* ================= RESULT ================= */
+  position: absolute;
 
-    .result-box {
+  width: 100px;
 
-      display: none;
+  height: 40px;
 
-      width: min(500px, 92vw);
+  display: flex;
 
-      margin-top: 30px;
+  align-items: center;
 
-      background: white;
+  justify-content: center;
 
-      color: #111;
+  text-align: center;
 
-      padding: 28px 22px;
-    }
+  font-size: 17px;
 
-    .result-title {
+  font-weight: 800;
 
-      color: #777;
+  transform: translate(-50%, -50%);
+}
 
-      font-size: 13px;
+.wheel-label span {
 
-      margin-bottom: 8px;
-    }
+  display: block;
 
-    .result-prize {
+  white-space: nowrap;
 
-      font-size: 30px;
+  transform:
+    rotate(calc(-1 * var(--current-rotation)));
 
-      font-weight: 800;
+  transform-origin: center;
+}
 
-      margin-bottom: 20px;
-    }
 
-    .coupon {
+/* =====================================================
+   EXACT POSITIONS
+===================================================== */
 
-      direction: ltr;
+/*
+  كل موضع هو منتصف قطاعه بالضبط.
+*/
 
-      font-family: monospace;
 
-      font-size: 21px;
+/* 5% */
 
-      letter-spacing: 2px;
+.label-5 {
 
-      border: 1px dashed #111;
+  left: 63.884%;
 
-      padding: 14px;
+  top: 21.169%;
+}
 
-      background: #fafafa;
-    }
 
-    .next-date {
+/* حظ أوفر */
 
-      color: #777;
+.label-luck {
 
-      font-size: 11px;
+  left: 81.198%;
 
-      margin-top: 14px;
-    }
+  top: 42.879%;
+}
 
 
-    /* ================= ADMIN ================= */
+/* 10% */
 
-    #adminPanel {
+.label-10 {
 
-      display: none;
+  left: 75.019%;
 
-      background: #f5f5f3;
+  top: 69.951%;
+}
 
-      color: #111;
 
-      width: 100%;
+/* 15% */
 
-      padding: 40px 20px;
-    }
+.label-15 {
 
-    .admin-box {
+  left: 50%;
 
-      width: 100%;
-      max-width: 1200px;
+  top: 82%;
+}
 
-      margin: auto;
 
-      background: white;
+/* 20% */
 
-      padding: 25px;
+.label-20 {
 
-      overflow-x: auto;
-    }
+  left: 24.982%;
 
-    .admin-title {
+  top: 69.953%;
+}
 
-      font-size: 22px;
 
-      font-weight: 800;
+/* 25% */
 
-      margin-bottom: 20px;
-    }
+.label-25 {
 
-    table {
+  left: 18.802%;
 
-      width: 100%;
+  top: 42.881%;
+}
 
-      border-collapse: collapse;
 
-      min-width: 850px;
+/* 30% */
 
-      font-size: 12px;
-    }
+.label-30 {
 
-    th,
-    td {
+  left: 36.114%;
 
-      padding: 12px;
+  top: 21.17%;
+}
 
-      border-bottom: 1px solid #eee;
 
-      text-align: right;
-    }
+/* colors */
 
-    th {
+.dark-label {
+  color: #fff;
+}
 
-      background: #111;
+.light-label {
+  color: #111;
+}
 
-      color: white;
-    }
 
+/* =====================================================
+   CENTER LOGO
+===================================================== */
 
-    /* ================= TOAST ================= */
+.wheel-logo {
 
-    .toast {
+  position: absolute;
 
-      position: fixed;
+  width: 82px;
+  height: 82px;
 
-      bottom: 25px;
-      left: 50%;
+  left: 50%;
+  top: 50%;
 
-      transform:
-        translateX(-50%)
-        translateY(100px);
+  transform:
+    translate(-50%, -50%);
 
-      background: #111;
+  border-radius: 50%;
 
-      color: white;
+  background: #fff;
 
-      padding: 13px 20px;
+  border: 3px solid #111;
 
-      font-size: 12px;
+  object-fit: contain;
 
-      z-index: 999;
+  padding: 12px;
 
-      opacity: 0;
+  z-index: 20;
+}
 
-      transition: .3s;
 
-      max-width: 90%;
+/* =====================================================
+   POINTER
+===================================================== */
 
-      text-align: center;
-    }
+.pointer {
 
-    .toast.show {
+  position: absolute;
 
-      opacity: 1;
+  top: -17px;
 
-      transform:
-        translateX(-50%)
-        translateY(0);
-    }
+  left: 50%;
 
+  transform:
+    translateX(-50%);
 
-    /* ================= MOBILE ================= */
+  width: 0;
+  height: 0;
 
-    @media (max-width: 600px) {
+  border-left: 16px solid transparent;
 
-      header {
+  border-right: 16px solid transparent;
 
-        height: 68px;
+  border-top: 29px solid #fff;
 
-        padding: 0 18px;
-      }
+  z-index: 30;
+}
 
-      .header-logo {
 
-        width: 95px;
-        height: 50px;
-      }
+/* =====================================================
+   BUTTON
+===================================================== */
 
-      .user-name {
+.spin-btn {
 
-        display: none;
-      }
+  width: 220px;
 
-      .wheel-section {
+  height: 55px;
 
-        min-height: calc(100vh - 68px);
+  margin-top: 40px;
 
-        padding-top: 45px;
-      }
+  border: none;
 
-      .wheel-title {
+  background: #fff;
 
-        font-size: 27px;
-      }
+  color: #111;
 
-      .wheel-subtitle {
+  font-size: 15px;
 
-        margin-bottom: 30px;
-      }
+  font-weight: 800;
 
-      .wheel-wrap {
+  transition: .2s;
+}
 
-        width: 315px;
-        height: 315px;
-      }
+.spin-btn:disabled {
 
-      .wheel-label {
+  opacity: .45;
 
-        width: 85px;
+  cursor: not-allowed;
+}
 
-        font-size: 13px;
 
-        transform:
-          rotate(var(--angle))
-          translateX(95px);
-      }
+/* =====================================================
+   STATUS
+===================================================== */
 
-      .wheel-logo {
+.wheel-status {
 
-        width: 70px;
-        height: 70px;
+  min-height: 24px;
 
-        padding: 10px;
-      }
+  margin-top: 18px;
 
-      .spin-btn {
+  color: #aaa;
 
-        width: 205px;
+  font-size: 12px;
+}
 
-        height: 52px;
-      }
-    }
 
-  </style>
+/* =====================================================
+   RESULT
+===================================================== */
+
+.result-box {
+
+  display: none;
+
+  width: min(500px, 92vw);
+
+  margin-top: 28px;
+
+  background: #fff;
+
+  color: #111;
+
+  padding: 28px 22px;
+}
+
+.result-title {
+
+  color: #777;
+
+  font-size: 13px;
+
+  margin-bottom: 8px;
+}
+
+.result-prize {
+
+  font-size: 30px;
+
+  font-weight: 800;
+
+  margin-bottom: 20px;
+}
+
+.coupon {
+
+  direction: ltr;
+
+  font-family: monospace;
+
+  font-size: 21px;
+
+  letter-spacing: 2px;
+
+  border: 1px dashed #111;
+
+  background: #fafafa;
+
+  padding: 14px;
+}
+
+.next-date {
+
+  color: #777;
+
+  font-size: 11px;
+
+  margin-top: 14px;
+}
+
+
+/* =====================================================
+   ADMIN
+===================================================== */
+
+#adminPanel {
+
+  display: none;
+
+  width: 100%;
+
+  background: #f5f5f3;
+
+  color: #111;
+
+  padding: 40px 20px;
+}
+
+.admin-box {
+
+  max-width: 1200px;
+
+  margin: auto;
+
+  background: #fff;
+
+  padding: 25px;
+
+  overflow-x: auto;
+}
+
+.admin-title {
+
+  font-size: 22px;
+
+  font-weight: 800;
+
+  margin-bottom: 20px;
+}
+
+table {
+
+  width: 100%;
+
+  min-width: 850px;
+
+  border-collapse: collapse;
+
+  font-size: 12px;
+}
+
+th,
+td {
+
+  padding: 12px;
+
+  border-bottom: 1px solid #eee;
+
+  text-align: right;
+}
+
+th {
+
+  background: #111;
+
+  color: #fff;
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast {
+
+  position: fixed;
+
+  left: 50%;
+
+  bottom: 25px;
+
+  transform:
+    translateX(-50%)
+    translateY(100px);
+
+  background: #111;
+
+  color: #fff;
+
+  padding: 13px 20px;
+
+  font-size: 12px;
+
+  z-index: 9999;
+
+  opacity: 0;
+
+  transition: .3s;
+
+  max-width: 90%;
+
+  text-align: center;
+}
+
+.toast.show {
+
+  opacity: 1;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  header {
+
+    height: 68px;
+
+    padding: 0 18px;
+  }
+
+  .header-logo {
+
+    width: 95px;
+
+    height: 50px;
+  }
+
+  .user-name {
+
+    display: none;
+  }
+
+  .wheel-section {
+
+    min-height: calc(100vh - 68px);
+
+    padding-top: 42px;
+  }
+
+  .wheel-title {
+
+    font-size: 27px;
+  }
+
+  .wheel-subtitle {
+
+    font-size: 12px;
+
+    margin-bottom: 30px;
+  }
+
+  .wheel-wrap {
+
+    width: min(350px, 91vw);
+  }
+
+  .wheel-label {
+
+    width: 75px;
+
+    height: 34px;
+
+    font-size: 13px;
+  }
+
+  .wheel-logo {
+
+    width: 72px;
+    height: 72px;
+
+    padding: 10px;
+  }
+
+  .spin-btn {
+
+    width: 210px;
+
+    height: 53px;
+  }
+
+}
+
+</style>
+
 </head>
 
 
@@ -737,7 +924,8 @@
 
 <header>
 
-  <!-- اللوغو أعلى اليمين -->
+
+  <!-- HUMO — أعلى اليمين -->
 
   <img
     class="header-logo"
@@ -757,7 +945,9 @@
       class="logout-btn"
       id="logoutBtn"
       style="display:none;">
+
       تسجيل الخروج
+
     </button>
 
   </div>
@@ -774,20 +964,27 @@
 
   <div class="login-box">
 
+
     <img
       class="login-logo"
       src="كيس%20ورقي%20للمتاجر%20بلون%20وردي%20نمط%20زهور.png"
       alt="HUMO"
     >
 
+
     <h1 class="login-title">
       أهلاً بك في HUMO
     </h1>
 
+
     <p class="login-subtitle">
+
       اختيار يليق بك.
+
       <br>
+
       سجّل الدخول للمتابعة.
+
     </p>
 
 
@@ -805,8 +1002,11 @@
 
 
     <p class="login-note">
+
       تسجيل الدخول يتم باستخدام حساب Google الخاص بك.
+
     </p>
+
 
   </div>
 
@@ -815,235 +1015,260 @@
 
 
 <!-- =====================================================
-     STORE — WHEEL ONLY
+     STORE
 ===================================================== -->
 
 <main id="store">
 
 
-  <section class="wheel-section">
+<section class="wheel-section">
 
 
-    <h1 class="wheel-title">
-      عجلة HUMO
-    </h1>
+  <h1 class="wheel-title">
+    عجلة HUMO
+  </h1>
 
 
-    <p class="wheel-subtitle">
-      فرصتك تتجدد كل 14 يومًا.
-    </p>
+  <p class="wheel-subtitle">
+    فرصتك تتجدد كل 14 يومًا.
+  </p>
 
 
-    <!-- WHEEL -->
 
-    <div class="wheel-wrap">
+  <!-- ===================================================
+       WHEEL
+  ==================================================== -->
 
-
-      <div class="pointer"></div>
-
-
-      <div
-        class="wheel"
-        id="wheel"
-      >
+  <div class="wheel-wrap">
 
 
-        <div class="wheel-lines"></div>
+    <!-- pointer -->
+
+    <div class="pointer"></div>
 
 
-        <!-- 5% -->
+    <!-- rotating wheel -->
 
-        <div
-          class="wheel-label dark-label"
-          style="--angle:25.714deg;"
-        >
-          <span>
-            5%
-          </span>
-        </div>
+    <div
+      class="wheel"
+      id="wheel">
 
 
-        <!-- حظ أوفر -->
-
-        <div
-          class="wheel-label light-label"
-          style="--angle:77.142deg;"
-        >
-          <span>
-            حظ أوفر
-          </span>
-        </div>
-
-
-        <!-- 10% -->
-
-        <div
-          class="wheel-label dark-label"
-          style="--angle:128.570deg;"
-        >
-          <span>
-            10%
-          </span>
-        </div>
-
-
-        <!-- 15% -->
-
-        <div
-          class="wheel-label light-label"
-          style="--angle:180deg;"
-        >
-          <span>
-            15%
-          </span>
-        </div>
-
-
-        <!-- 20% -->
-
-        <div
-          class="wheel-label dark-label"
-          style="--angle:231.428deg;"
-        >
-          <span>
-            20%
-          </span>
-        </div>
-
-
-        <!-- 25% -->
-
-        <div
-          class="wheel-label light-label"
-          style="--angle:282.856deg;"
-        >
-          <span>
-            25%
-          </span>
-        </div>
-
-
-        <!-- 30% -->
-
-        <div
-          class="wheel-label dark-label"
-          style="--angle:334.284deg;"
-        >
-          <span>
-            30%
-          </span>
-        </div>
-
-
-      </div>
-
-
-      <!-- اللوغو ثابت في وسط العجلة -->
-
-      <img
-        class="wheel-logo"
-        src="كيس%20ورقي%20للمتاجر%20بلون%20وردي%20نمط%20زهور.png"
-        alt="HUMO"
-      >
+      <div class="wheel-lines"></div>
 
 
     </div>
 
 
-    <!-- BUTTON -->
 
-    <button
-      class="spin-btn"
-      id="spinBtn">
+    <!-- rotating labels -->
 
-      جرّب حظك
+    <div
+      class="wheel-labels"
+      id="wheelLabels">
 
-    </button>
+
+      <div
+        class="wheel-label dark-label label-5">
+
+        <span>
+          5%
+        </span>
+
+      </div>
+
+
+      <div
+        class="wheel-label light-label label-luck">
+
+        <span>
+          حظ أوفر
+        </span>
+
+      </div>
+
+
+      <div
+        class="wheel-label dark-label label-10">
+
+        <span>
+          10%
+        </span>
+
+      </div>
+
+
+      <div
+        class="wheel-label light-label label-15">
+
+        <span>
+          15%
+        </span>
+
+      </div>
+
+
+      <div
+        class="wheel-label dark-label label-20">
+
+        <span>
+          20%
+        </span>
+
+      </div>
+
+
+      <div
+        class="wheel-label light-label label-25">
+
+        <span>
+          25%
+        </span>
+
+      </div>
+
+
+      <div
+        class="wheel-label dark-label label-30">
+
+        <span>
+          30%
+        </span>
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- fixed center logo -->
+
+    <img
+      class="wheel-logo"
+      src="كيس%20ورقي%20للمتاجر%20بلون%20وردي%20نمط%20زهور.png"
+      alt="HUMO"
+    >
+
+
+  </div>
+
+
+
+  <!-- ===================================================
+       SPIN BUTTON
+  ==================================================== -->
+
+  <button
+    class="spin-btn"
+    id="spinBtn">
+
+    جرّب حظك
+
+  </button>
+
+
+  <div
+    class="wheel-status"
+    id="wheelStatus">
+  </div>
+
+
+
+  <!-- ===================================================
+       RESULT
+  ==================================================== -->
+
+  <div
+    class="result-box"
+    id="resultBox">
+
+
+    <div class="result-title">
+      جائزتك
+    </div>
 
 
     <div
-      class="wheel-status"
-      id="wheelStatus">
+      class="result-prize"
+      id="resultPrize">
     </div>
 
 
-    <!-- RESULT -->
+    <div class="result-title">
+      كود الخصم الخاص بك
+    </div>
+
 
     <div
-      class="result-box"
-      id="resultBox">
-
-
-      <div class="result-title">
-        جائزتك
-      </div>
-
-
-      <div
-        class="result-prize"
-        id="resultPrize">
-      </div>
-
-
-      <div class="result-title">
-        كود الخصم الخاص بك
-      </div>
-
-
-      <div
-        class="coupon"
-        id="couponCode">
-      </div>
-
-
-      <div
-        class="next-date"
-        id="nextDate">
-      </div>
-
-
+      class="coupon"
+      id="couponCode">
     </div>
 
 
-  </section>
-
-
-
-  <!-- ADMIN -->
-
-  <section id="adminPanel">
-
-    <div class="admin-box">
-
-      <div class="admin-title">
-        المشاركون
-      </div>
-
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>الاسم</th>
-            <th>الهاتف</th>
-            <th>البريد</th>
-            <th>الجائزة</th>
-            <th>الكود</th>
-            <th>المشاركة</th>
-            <th>القادمة</th>
-
-          </tr>
-
-        </thead>
-
-        <tbody id="participantsBody"></tbody>
-
-      </table>
-
+    <div
+      class="next-date"
+      id="nextDate">
     </div>
 
-  </section>
+
+  </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     ADMIN
+===================================================== -->
+
+<section id="adminPanel">
+
+  <div class="admin-box">
+
+
+    <div class="admin-title">
+      المشاركون
+    </div>
+
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>الاسم</th>
+
+          <th>الهاتف</th>
+
+          <th>البريد</th>
+
+          <th>الجائزة</th>
+
+          <th>الكود</th>
+
+          <th>المشاركة</th>
+
+          <th>القادمة</th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody
+        id="participantsBody">
+      </tbody>
+
+
+    </table>
+
+
+  </div>
+
+</section>
 
 
 </main>
@@ -1100,63 +1325,117 @@ const ADMIN_UID =
 ===================================================== */
 
 const loginScreen =
-  document.getElementById("loginScreen");
-
+  document.getElementById(
+    "loginScreen"
+  );
 
 const store =
-  document.getElementById("store");
-
+  document.getElementById(
+    "store"
+  );
 
 const googleBtn =
-  document.getElementById("googleBtn");
-
+  document.getElementById(
+    "googleBtn"
+  );
 
 const logoutBtn =
-  document.getElementById("logoutBtn");
-
+  document.getElementById(
+    "logoutBtn"
+  );
 
 const userName =
-  document.getElementById("userName");
-
+  document.getElementById(
+    "userName"
+  );
 
 const spinBtn =
-  document.getElementById("spinBtn");
-
+  document.getElementById(
+    "spinBtn"
+  );
 
 const wheel =
-  document.getElementById("wheel");
+  document.getElementById(
+    "wheel"
+  );
 
+const wheelLabels =
+  document.getElementById(
+    "wheelLabels"
+  );
 
 const wheelStatus =
-  document.getElementById("wheelStatus");
-
+  document.getElementById(
+    "wheelStatus"
+  );
 
 const resultBox =
-  document.getElementById("resultBox");
-
+  document.getElementById(
+    "resultBox"
+  );
 
 const resultPrize =
-  document.getElementById("resultPrize");
-
+  document.getElementById(
+    "resultPrize"
+  );
 
 const couponCode =
-  document.getElementById("couponCode");
-
+  document.getElementById(
+    "couponCode"
+  );
 
 const nextDate =
-  document.getElementById("nextDate");
-
+  document.getElementById(
+    "nextDate"
+  );
 
 const adminPanel =
-  document.getElementById("adminPanel");
-
+  document.getElementById(
+    "adminPanel"
+  );
 
 const participantsBody =
-  document.getElementById("participantsBody");
-
+  document.getElementById(
+    "participantsBody"
+  );
 
 const toast =
-  document.getElementById("toast");
+  document.getElementById(
+    "toast"
+  );
+
+
+
+/* =====================================================
+   CURRENT ROTATION
+===================================================== */
+
+let currentRotation = 0;
+
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(message) {
+
+  toast.textContent =
+    message;
+
+  toast.classList.add(
+    "show"
+  );
+
+  setTimeout(() => {
+
+    toast.classList.remove(
+      "show"
+    );
+
+  }, 3500);
+
+}
 
 
 
@@ -1168,7 +1447,8 @@ googleBtn.addEventListener(
   "click",
   async () => {
 
-    googleBtn.disabled = true;
+    googleBtn.disabled =
+      true;
 
     googleBtn.innerHTML =
       "جاري فتح Google...";
@@ -1188,11 +1468,13 @@ googleBtn.addEventListener(
 
           options: {
 
-            redirectTo: redirectUrl,
+            redirectTo:
+              redirectUrl,
 
             queryParams: {
 
-              prompt: "select_account"
+              prompt:
+                "select_account"
 
             }
 
@@ -1202,7 +1484,9 @@ googleBtn.addEventListener(
 
 
       if (error) {
+
         throw error;
+
       }
 
 
@@ -1210,12 +1494,14 @@ googleBtn.addEventListener(
 
       console.error(error);
 
+
       showToast(
         "حدث خطأ أثناء تسجيل الدخول باستخدام Google"
       );
 
 
-      googleBtn.disabled = false;
+      googleBtn.disabled =
+        false;
 
 
       googleBtn.innerHTML =
@@ -1246,46 +1532,29 @@ logoutBtn.addEventListener(
 
 
 /* =====================================================
-   TOAST
+   FORMAT DATE
 ===================================================== */
 
-function showToast(message) {
-
-  toast.textContent =
-    message;
-
-  toast.classList.add("show");
-
-
-  setTimeout(() => {
-
-    toast.classList.remove("show");
-
-  }, 3500);
-
-}
-
-
-
-/* =====================================================
-   DATE
-===================================================== */
-
-function formatDate(dateString) {
+function formatDate(
+  dateString
+) {
 
   if (!dateString) {
+
     return "-";
+
   }
 
 
-  return new Date(dateString)
-    .toLocaleString(
-      "ar-IQ",
-      {
-        dateStyle: "medium",
-        timeStyle: "short"
-      }
-    );
+  return new Date(
+    dateString
+  ).toLocaleString(
+    "ar-IQ",
+    {
+      dateStyle: "medium",
+      timeStyle: "short"
+    }
+  );
 
 }
 
@@ -1295,15 +1564,21 @@ function formatDate(dateString) {
    REMAINING TIME
 ===================================================== */
 
-function formatRemaining(date) {
+function formatRemaining(
+  date
+) {
 
   const difference =
     date.getTime() -
     Date.now();
 
 
-  if (difference <= 0) {
+  if (
+    difference <= 0
+  ) {
+
     return "الآن";
+
   }
 
 
@@ -1324,7 +1599,9 @@ function formatRemaining(date) {
     );
 
 
-  if (days > 0) {
+  if (
+    days > 0
+  ) {
 
     return (
       days +
@@ -1341,8 +1618,10 @@ function formatRemaining(date) {
   }
 
 
-  return hours +
-    " ساعة";
+  return (
+    hours +
+    " ساعة"
+  );
 
 }
 
@@ -1352,7 +1631,9 @@ function formatRemaining(date) {
    SHOW USER
 ===================================================== */
 
-async function showUser(session) {
+async function showUser(
+  session
+) {
 
   if (
     !session ||
@@ -1415,7 +1696,7 @@ async function showUser(session) {
 
 
 /* =====================================================
-   LOAD LAST SPIN
+   LAST SPIN
 ===================================================== */
 
 async function loadLastSpin() {
@@ -1439,7 +1720,9 @@ async function loadLastSpin() {
 
     if (error) {
 
-      console.error(error);
+      console.error(
+        error
+      );
 
       return;
 
@@ -1481,7 +1764,9 @@ async function loadLastSpin() {
 
       wheelStatus.textContent =
         "يمكنك المشاركة مرة أخرى بعد " +
-        formatRemaining(next);
+        formatRemaining(
+          next
+        );
 
     } else {
 
@@ -1496,7 +1781,9 @@ async function loadLastSpin() {
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
 
   }
 
@@ -1505,7 +1792,7 @@ async function loadLastSpin() {
 
 
 /* =====================================================
-   SPIN
+   SPIN WHEEL
 ===================================================== */
 
 spinBtn.addEventListener(
@@ -1514,11 +1801,14 @@ spinBtn.addEventListener(
 );
 
 
-
 async function spinWheel() {
 
-  if (spinBtn.disabled) {
+  if (
+    spinBtn.disabled
+  ) {
+
     return;
+
   }
 
 
@@ -1558,6 +1848,10 @@ async function spinWheel() {
     }
 
 
+    /*
+      النتيجة تأتي من Supabase
+    */
+
     const {
       data,
       error
@@ -1568,7 +1862,9 @@ async function spinWheel() {
 
 
     if (error) {
+
       throw error;
+
     }
 
 
@@ -1588,21 +1884,24 @@ async function spinWheel() {
 
 
     const prize =
-      spin.prize || "";
+      spin.prize ||
+      "";
 
 
     const discount =
       Number(
-        spin.discount_percent || 0
+        spin.discount_percent ||
+        0
       );
 
 
     const coupon =
-      spin.coupon_code || "";
+      spin.coupon_code ||
+      "";
 
 
     /*
-      الترتيب البصري:
+      ترتيب القطاعات البصرية:
 
       0 = 5%
       1 = حظ أوفر
@@ -1652,6 +1951,10 @@ async function spinWheel() {
     }
 
 
+    /*
+      مركز القطاع الفائز
+    */
+
     const segment =
       360 / 7;
 
@@ -1663,35 +1966,57 @@ async function spinWheel() {
 
 
     /*
-      المؤشر في الأعلى.
-      الدوران النهائي يضع
-      القطاع الفائز عند المؤشر.
+      نضيف دورات كاملة.
+      الهدف النهائي عند المؤشر العلوي.
     */
 
+    const extraTurns =
+      7 * 360;
+
+
     const finalRotation =
-      360 * 7 +
-      (360 - targetCenter);
+      currentRotation +
+      extraTurns +
+      (
+        360 -
+        targetCenter -
+        (
+          currentRotation %
+          360
+        )
+      );
+
+
+    currentRotation =
+      finalRotation;
 
 
     /*
-      هذا المتغير يعالج مشكلة
-      النصوص المقلوبة.
-
-      العجلة تدور،
-      لكن النص يبقى مستقيمًا.
+      نخلي طبقة النصوص تدور
+      مع العجلة.
     */
 
-    wheel.style.setProperty(
-      "--wheel-rotation",
-      finalRotation + "deg"
+    wheelLabels.style.setProperty(
+      "--current-rotation",
+      currentRotation + "deg"
     );
 
 
     wheel.style.transform =
       "rotate(" +
-      finalRotation +
+      currentRotation +
       "deg)";
 
+
+    wheelLabels.style.transform =
+      "rotate(" +
+      currentRotation +
+      "deg)";
+
+
+    /*
+      عرض النتيجة
+    */
 
     setTimeout(() => {
 
@@ -1718,12 +2043,14 @@ async function spinWheel() {
         "مبروك 🎉";
 
 
-    }, 5350);
+    }, 5500);
 
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
 
 
     spinBtn.disabled =
@@ -1745,7 +2072,9 @@ async function spinWheel() {
     }
 
 
-    showToast(message);
+    showToast(
+      message
+    );
 
 
     wheelStatus.textContent =
@@ -1775,7 +2104,9 @@ async function loadParticipants() {
 
 
     if (error) {
+
       throw error;
+
     }
 
 
@@ -1809,31 +2140,36 @@ async function loadParticipants() {
 
           <td>
             ${escapeHtml(
-              user.full_name || "-"
+              user.full_name ||
+              "-"
             )}
           </td>
 
           <td>
             ${escapeHtml(
-              user.phone || "-"
+              user.phone ||
+              "-"
             )}
           </td>
 
           <td>
             ${escapeHtml(
-              user.email || "-"
+              user.email ||
+              "-"
             )}
           </td>
 
           <td>
             ${escapeHtml(
-              user.prize || "-"
+              user.prize ||
+              "-"
             )}
           </td>
 
           <td dir="ltr">
             ${escapeHtml(
-              user.coupon_code || "-"
+              user.coupon_code ||
+              "-"
             )}
           </td>
 
@@ -1862,7 +2198,10 @@ async function loadParticipants() {
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
+
 
     participantsBody.innerHTML =
       "<tr><td colspan='7'>تعذر تحميل المشاركين.</td></tr>";
@@ -1874,12 +2213,16 @@ async function loadParticipants() {
 
 
 /* =====================================================
-   ESCAPE
+   ESCAPE HTML
 ===================================================== */
 
-function escapeHtml(value) {
+function escapeHtml(
+  value
+) {
 
-  return String(value)
+  return String(
+    value
+  )
 
     .replaceAll(
       "&",
