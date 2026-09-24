@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>HUMO | اختيار يليق بك</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #ffffff;
+      color: #111111;
+    }
+
+    header {
+      padding: 22px 7%;
+      border-bottom: 1px solid #eeeeee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 4px;
+    }
+
+    nav a {
+      color: #111;
+      text-decoration: none;
+      margin-right: 22px;
+      font-size: 14px;
+    }
+
+    .hero {
+      padding: 75px 7% 65px;
+      text-align: center;
+      background: #fafafa;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      letter-spacing: 7px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      color: #666;
+      font-size: 17px;
+      margin-bottom: 30px;
+    }
+
+    .button {
+      display: inline-block;
+      background: #111;
+      color: white;
+      padding: 14px 30px;
+      border-radius: 2px;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+    }
+
+    .section {
+      padding: 55px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .section-title h2 {
+      font-size: 27px;
+      margin-bottom: 8px;
+    }
+
+    .section-title p {
+      color: #777;
+      font-size: 14px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 22px;
+    }
+
+    .product {
+      border: 1px solid #eeeeee;
+      background: white;
+      padding-bottom: 18px;
+    }
+
+    .product-image {
+      height: 220px;
+      background: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 13px;
+    }
+
+    .product-info {
+      padding: 15px;
+    }
+
+    .product-info h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-weight: bold;
+    }
+
+    .thursday {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .thursday h2 {
+      font-size: 30px;
+      letter-spacing: 3px;
+      margin-bottom: 12px;
+    }
+
+    .thursday p {
+      color: #cccccc;
+      margin-bottom: 25px;
+    }
+
+    .wheel-box {
+      max-width: 430px;
+      margin: 30px auto 0;
+    }
+
+    .wheel {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      margin: auto;
+      position: relative;
+      overflow: hidden;
+      border: 7px solid white;
+      box-shadow: 0 5px 25px rgba(0,0,0,.35);
+      transition: transform 4s cubic-bezier(.15,.7,.15,1);
+      background:
+        conic-gradient(
+          #ffffff 0deg 45deg,
+          #dddddd 45deg 90deg,
+          #ffffff 90deg 135deg,
+          #bbbbbb 135deg 180deg,
+          #ffffff 180deg 225deg,
+          #dddddd 225deg 270deg,
+          #ffffff 270deg 315deg,
+          #bbbbbb 315deg 360deg
+        );
+    }
+
+    .wheel span {
+      position: absolute;
+      font-weight: bold;
+      color: #111;
+      font-size: 14px;
+    }
+
+    .s1 { top: 28px; left: 113px; }
+    .s2 { top: 75px; right: 30px; }
+    .s3 { top: 150px; right: 20px; }
+    .s4 { bottom: 35px; right: 80px; }
+    .s5 { bottom: 35px; left: 75px; }
+    .s6 { top: 150px; left: 20px; }
+    .s7 { top: 75px; left: 30px; }
+    .s8 { top: 28px; right: 105px; }
+
+    .pointer {
+      width: 0;
+      height: 0;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-top: 28px solid #8b0000;
+      margin: -3px auto 0;
+      position: relative;
+      z-index: 5;
+    }
+
+    .spin {
+      margin-top: 28px;
+      background: white;
+      color: #111;
+      font-weight: bold;
+    }
+
+    .result {
+      margin-top: 25px;
+      font-size: 18px;
+      min-height: 30px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid #eeeeee;
+      color: #777;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 18px 5%;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      .wheel {
+        width: 250px;
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">HUMO</div>
+
+  <nav>
+    <a href="#products">المنتجات</a>
+    <a href="#thursday">HUMO THURSDAY</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>HUMO</h1>
+
+  <p>قطع مختارة بعناية، واختيار يليق بك.</p>
+
+  <a href="#products" class="button">تصفح المنتجات</a>
+</section>
+
+<section class="section" id="products">
+
+  <div class="section-title">
+    <h2>اختيارات HUMO</h2>
+    <p>قطع محدودة مختارة بعناية</p>
+  </div>
+
+  <div class="products">
+
+    <div class="product">
+      <div class="product-image">صورة المنتج</div>
+      <div class="product-info">
+        <h3>حذاء HUMO</h3>
+        <div class="price">65,000 د.ع</div>
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="product-image">صورة المنتج</div>
+      <div class="product-info">
+        <h3>حقيبة HUMO</h3>
+        <div class="price">75,000 د.ع</div>
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="product-image">صورة المنتج</div>
+      <div class="product-info">
+        <h3>قطعة مختارة</h3>
+        <div class="price">120,000 د.ع</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="thursday" id="thursday">
+
+  <h2>HUMO THURSDAY</h2>
+
+  <p>
+    كل خميس، فرصة جديدة للفوز بخصمك.
+  </p>
+
+  <div class="wheel-box">
+
+    <div class="pointer"></div>
+
+    <div class="wheel" id="wheel">
+      <span class="s1">5%</span>
+      <span class="s2">10%</span>
+      <span class="s3">15%</span>
+      <span class="s4">20%</span>
+      <span class="s5">5%</span>
+      <span class="s6">10%</span>
+      <span class="s7">15%</span>
+      <span class="s8">حاول</span>
+    </div>
+
+    <button class="button spin" id="spin">
+      أدر العجلة
+    </button>
+
+    <div class="result" id="result"></div>
+
+  </div>
+
+</section>
+
+<footer>
+  HUMO © 2026
+  <br>
+  اختيار يليق بك
+</footer>
+
+<script>
+
+  const wheel = document.getElementById("wheel");
+  const spin = document.getElementById("spin");
+  const result = document.getElementById("result");
+
+  let rotation = 0;
+  let spinning = false;
+
+  const prizes = [
+    "خصم 5%",
+    "خصم 10%",
+    "خصم 15%",
+    "خصم 20%",
+    "خصم 5%",
+    "خصم 10%",
+    "خصم 15%",
+    "حاول مرة أخرى"
+  ];
+
+  spin.addEventListener("click", function () {
+
+    if (spinning) return;
+
+    spinning = true;
+    result.textContent = "";
+
+    const index = Math.floor(Math.random() * prizes.length);
+
+    const segment = 360 / prizes.length;
+
+    rotation += 1440 + (360 - (index * segment) - segment / 2);
+
+    wheel.style.transform = `rotate(${rotation}deg)`;
+
+    setTimeout(function () {
+
+      const prize = prizes[index];
+
+      if (prize === "حاول مرة أخرى") {
+
+        result.textContent = "حاول مرة أخرى في المرة القادمة.";
+
+      } else {
+
+        const code =
+          "HUMO" +
+          Math.floor(1000 + Math.random() * 9000);
+
+        result.innerHTML =
+          "🎉 مبروك! حصلت على " +
+          prize +
+          "<br>كود الخصم: <strong>" +
+          code +
+          "</strong>";
+
+      }
+
+      spinning = false;
+
+    }, 4200);
+
+  });
+
+</script>
+
+</body>
+</html>
