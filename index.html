@@ -1,312 +1,824 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>HUMO | اختيار يليق بك</title>
 
+  <meta name="description" content="HUMO — قطع مختارة بعناية تجمع بين الأناقة والجودة.">
+
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #ffffff;
-      color: #111111;
+    html {
+      scroll-behavior: smooth;
     }
 
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #111;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    /* HEADER */
+
     header {
-      padding: 22px 7%;
-      border-bottom: 1px solid #eeeeee;
+      height: 78px;
+      padding: 0 6%;
+      border-bottom: 1px solid #eee;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,.96);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .logo {
-      font-size: 30px;
+      font-size: 27px;
       font-weight: 800;
-      letter-spacing: 4px;
+      letter-spacing: 5px;
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      font-size: 14px;
     }
 
     nav a {
-      color: #111;
-      text-decoration: none;
-      margin-right: 22px;
-      font-size: 14px;
+      transition: .2s;
     }
 
+    nav a:hover {
+      opacity: .55;
+    }
+
+    .cart {
+      border: 1px solid #111;
+      padding: 8px 15px;
+      font-size: 13px;
+    }
+
+    /* HERO */
+
     .hero {
-      padding: 75px 7% 65px;
+      min-height: 650px;
+      background:
+        linear-gradient(
+          rgba(255,255,255,.94),
+          rgba(255,255,255,.94)
+        ),
+        #f3f3f3;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      background: #fafafa;
+      padding: 70px 20px;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 4px;
+      color: #777;
+      margin-bottom: 20px;
     }
 
     .hero h1 {
-      font-size: 48px;
-      letter-spacing: 7px;
-      margin-bottom: 15px;
+      font-size: clamp(55px, 12vw, 105px);
+      letter-spacing: 15px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .hero h2 {
+      font-size: 24px;
+      font-weight: 400;
+      margin-bottom: 12px;
     }
 
     .hero p {
-      color: #666;
-      font-size: 17px;
-      margin-bottom: 30px;
-    }
-
-    .button {
-      display: inline-block;
-      background: #111;
-      color: white;
-      padding: 14px 30px;
-      border-radius: 2px;
-      text-decoration: none;
-      font-size: 14px;
-      cursor: pointer;
-      border: none;
-    }
-
-    .section {
-      padding: 55px 7%;
-    }
-
-    .section-title {
-      text-align: center;
+      color: #777;
+      font-size: 15px;
       margin-bottom: 35px;
     }
 
-    .section-title h2 {
-      font-size: 27px;
-      margin-bottom: 8px;
+    .primary-btn {
+      display: inline-block;
+      background: #111;
+      color: #fff;
+      border: 1px solid #111;
+      padding: 15px 38px;
+      font-size: 14px;
+      transition: .25s;
     }
 
-    .section-title p {
+    .primary-btn:hover {
+      background: #fff;
+      color: #111;
+    }
+
+    /* SECTION */
+
+    .section {
+      padding: 85px 6%;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-head small {
+      color: #888;
+      letter-spacing: 2px;
+      font-size: 11px;
+    }
+
+    .section-head h2 {
+      font-size: 32px;
+      margin: 8px 0;
+    }
+
+    .section-head p {
       color: #777;
       font-size: 14px;
     }
 
+    /* CATEGORIES */
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .category {
+      min-height: 230px;
+      background: #f4f4f4;
+      display: flex;
+      align-items: flex-end;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .category::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        transparent 40%,
+        rgba(0,0,0,.7)
+      );
+    }
+
+    .category-content {
+      position: relative;
+      color: #fff;
+      z-index: 2;
+    }
+
+    .category h3 {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .category p {
+      font-size: 12px;
+      opacity: .8;
+    }
+
+    .cat-shoes {
+      background: linear-gradient(135deg,#e9e9e9,#999);
+    }
+
+    .cat-bags {
+      background: linear-gradient(135deg,#ddd,#555);
+    }
+
+    .cat-fashion {
+      background: linear-gradient(135deg,#eee,#777);
+    }
+
+    /* PRODUCTS */
+
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 22px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1250px;
+      margin: auto;
     }
 
     .product {
-      border: 1px solid #eeeeee;
-      background: white;
-      padding-bottom: 18px;
+      background: #fff;
+      border: 1px solid #eee;
+      overflow: hidden;
+      transition: .25s;
+    }
+
+    .product:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.07);
     }
 
     .product-image {
-      height: 220px;
-      background: #f4f4f4;
+      height: 300px;
+      background: #f5f5f5;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #999;
+      color: #aaa;
       font-size: 13px;
     }
 
     .product-info {
-      padding: 15px;
+      padding: 18px;
     }
 
     .product-info h3 {
       font-size: 15px;
-      margin-bottom: 8px;
+      margin-bottom: 7px;
+    }
+
+    .product-info p {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 12px;
     }
 
     .price {
       font-weight: bold;
+      font-size: 15px;
     }
+
+    .product-btn {
+      display: block;
+      width: 100%;
+      margin-top: 15px;
+      padding: 10px;
+      background: #111;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    /* THURSDAY */
 
     .thursday {
       background: #111;
-      color: white;
+      color: #fff;
       text-align: center;
-      padding: 60px 20px;
+      padding: 90px 20px;
+    }
+
+    .thursday small {
+      letter-spacing: 4px;
+      color: #aaa;
     }
 
     .thursday h2 {
-      font-size: 30px;
-      letter-spacing: 3px;
-      margin-bottom: 12px;
+      font-size: 38px;
+      letter-spacing: 5px;
+      margin: 8px 0;
     }
 
-    .thursday p {
-      color: #cccccc;
-      margin-bottom: 25px;
-    }
-
-    .wheel-box {
-      max-width: 430px;
-      margin: 30px auto 0;
-    }
-
-    .wheel {
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      margin: auto;
-      position: relative;
-      overflow: hidden;
-      border: 7px solid white;
-      box-shadow: 0 5px 25px rgba(0,0,0,.35);
-      transition: transform 4s cubic-bezier(.15,.7,.15,1);
-      background:
-        conic-gradient(
-          #ffffff 0deg 45deg,
-          #dddddd 45deg 90deg,
-          #ffffff 90deg 135deg,
-          #bbbbbb 135deg 180deg,
-          #ffffff 180deg 225deg,
-          #dddddd 225deg 270deg,
-          #ffffff 270deg 315deg,
-          #bbbbbb 315deg 360deg
-        );
-    }
-
-    .wheel span {
-      position: absolute;
-      font-weight: bold;
-      color: #111;
+    .thursday > p {
+      color: #aaa;
+      margin-bottom: 35px;
       font-size: 14px;
     }
 
-    .s1 { top: 28px; left: 113px; }
-    .s2 { top: 75px; right: 30px; }
-    .s3 { top: 150px; right: 20px; }
-    .s4 { bottom: 35px; right: 80px; }
-    .s5 { bottom: 35px; left: 75px; }
-    .s6 { top: 150px; left: 20px; }
-    .s7 { top: 75px; left: 30px; }
-    .s8 { top: 28px; right: 105px; }
+    .wheel-area {
+      max-width: 430px;
+      margin: auto;
+    }
 
     .pointer {
       width: 0;
       height: 0;
-      border-left: 12px solid transparent;
-      border-right: 12px solid transparent;
-      border-top: 28px solid #8b0000;
-      margin: -3px auto 0;
+      border-left: 13px solid transparent;
+      border-right: 13px solid transparent;
+      border-top: 30px solid #8b0000;
+      margin: auto;
       position: relative;
-      z-index: 5;
+      z-index: 3;
     }
 
-    .spin {
-      margin-top: 28px;
-      background: white;
+    .wheel {
+      width: 285px;
+      height: 285px;
+      border-radius: 50%;
+      margin: -2px auto 0;
+      border: 7px solid #fff;
+      position: relative;
+      overflow: hidden;
+      background:
+        conic-gradient(
+          #fff 0deg 45deg,
+          #cfcfcf 45deg 90deg,
+          #fff 90deg 135deg,
+          #aaa 135deg 180deg,
+          #fff 180deg 225deg,
+          #cfcfcf 225deg 270deg,
+          #fff 270deg 315deg,
+          #aaa 315deg 360deg
+        );
+      box-shadow: 0 10px 35px rgba(0,0,0,.45);
+      transition: transform 4s cubic-bezier(.15,.7,.15,1);
+    }
+
+    .wheel span {
+      position: absolute;
       color: #111;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .s1 { top: 25px; left: 115px; }
+    .s2 { top: 65px; right: 35px; }
+    .s3 { top: 135px; right: 18px; }
+    .s4 { bottom: 35px; right: 70px; }
+    .s5 { bottom: 35px; left: 70px; }
+    .s6 { top: 135px; left: 18px; }
+    .s7 { top: 65px; left: 35px; }
+    .s8 { top: 25px; right: 105px; }
+
+    .spin-btn {
+      margin-top: 30px;
+      background: #fff;
+      color: #111;
+      border: none;
+      padding: 14px 35px;
+      cursor: pointer;
       font-weight: bold;
     }
 
     .result {
       margin-top: 25px;
-      font-size: 18px;
-      min-height: 30px;
+      min-height: 55px;
+      font-size: 16px;
     }
+
+    .code {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 8px 14px;
+      border: 1px dashed #aaa;
+      letter-spacing: 2px;
+      font-weight: bold;
+    }
+
+    /* BRAND STATEMENT */
+
+    .statement {
+      padding: 100px 20px;
+      text-align: center;
+      background: #fafafa;
+    }
+
+    .statement h2 {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+
+    .statement p {
+      max-width: 600px;
+      margin: auto;
+      color: #777;
+      font-size: 14px;
+    }
+
+    /* FOOTER */
 
     footer {
+      background: #111;
+      color: #fff;
+      padding: 55px 7%;
       text-align: center;
-      padding: 30px;
-      border-top: 1px solid #eeeeee;
-      color: #777;
-      font-size: 13px;
     }
 
-    @media (max-width: 600px) {
+    footer .footer-logo {
+      font-size: 25px;
+      font-weight: bold;
+      letter-spacing: 5px;
+      margin-bottom: 12px;
+    }
+
+    footer p {
+      color: #aaa;
+      font-size: 12px;
+      margin-bottom: 25px;
+    }
+
+    footer .links {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      font-size: 12px;
+      color: #ccc;
+    }
+
+    .copyright {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #333;
+      color: #666;
+      font-size: 11px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 800px) {
+
       header {
-        padding: 18px 5%;
+        height: 68px;
+        padding: 0 5%;
       }
 
       nav {
         display: none;
       }
 
+      .cart {
+        padding: 7px 11px;
+      }
+
+      .hero {
+        min-height: 570px;
+      }
+
       .hero h1 {
-        font-size: 38px;
+        letter-spacing: 9px;
+      }
+
+      .hero h2 {
+        font-size: 20px;
+      }
+
+      .categories {
+        grid-template-columns: 1fr;
+      }
+
+      .category {
+        min-height: 190px;
+      }
+
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .product-image {
+        height: 210px;
+      }
+
+      .product-info {
+        padding: 13px;
+      }
+
+      .product-info h3 {
+        font-size: 13px;
+      }
+
+      .price {
+        font-size: 13px;
+      }
+
+      .thursday h2 {
+        font-size: 28px;
       }
 
       .wheel {
         width: 250px;
         height: 250px;
       }
+
+      .statement {
+        padding: 75px 25px;
+      }
     }
+
   </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
+
 <header>
-  <div class="logo">HUMO</div>
+
+  <a href="#" class="logo">HUMO</a>
 
   <nav>
     <a href="#products">المنتجات</a>
+    <a href="#categories">التصنيفات</a>
     <a href="#thursday">HUMO THURSDAY</a>
   </nav>
+
+  <a href="#products" class="cart">
+    المتجر
+  </a>
+
 </header>
 
+
+<!-- HERO -->
+
 <section class="hero">
-  <h1>HUMO</h1>
 
-  <p>قطع مختارة بعناية، واختيار يليق بك.</p>
+  <div class="hero-content">
 
-  <a href="#products" class="button">تصفح المنتجات</a>
+    <div class="eyebrow">
+      HUMO
+    </div>
+
+    <h1>HUMO</h1>
+
+    <h2>
+      اختيار يليق بك.
+    </h2>
+
+    <p>
+      قطع مختارة بعناية تجمع بين الأناقة والجودة.
+    </p>
+
+    <a href="#products" class="primary-btn">
+      اكتشف المجموعة
+    </a>
+
+  </div>
+
 </section>
+
+
+<!-- CATEGORIES -->
+
+<section class="section" id="categories">
+
+  <div class="section-head">
+
+    <small>EXPLORE HUMO</small>
+
+    <h2>
+      اكتشف اختياراتنا
+    </h2>
+
+    <p>
+      قطع مختارة بعناية، بتفاصيل تستحق أن تُرى.
+    </p>
+
+  </div>
+
+
+  <div class="categories">
+
+    <a href="#products" class="category cat-shoes">
+
+      <div class="category-content">
+
+        <h3>الأحذية</h3>
+
+        <p>
+          اختيارات مميزة لكل إطلالة
+        </p>
+
+      </div>
+
+    </a>
+
+
+    <a href="#products" class="category cat-bags">
+
+      <div class="category-content">
+
+        <h3>الحقائب</h3>
+
+        <p>
+          تفاصيل تضيف حضورًا
+        </p>
+
+      </div>
+
+    </a>
+
+
+    <a href="#products" class="category cat-fashion">
+
+      <div class="category-content">
+
+        <h3>مختارات HUMO</h3>
+
+        <p>
+          قطع محدودة بعناية
+        </p>
+
+      </div>
+
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
 
 <section class="section" id="products">
 
-  <div class="section-title">
-    <h2>اختيارات HUMO</h2>
-    <p>قطع محدودة مختارة بعناية</p>
+  <div class="section-head">
+
+    <small>HUMO COLLECTION</small>
+
+    <h2>
+      أحدث القطع
+    </h2>
+
+    <p>
+      قطعة واحدة فقط لبعض الموديلات — سارع بالحجز.
+    </p>
+
   </div>
+
 
   <div class="products">
 
-    <div class="product">
-      <div class="product-image">صورة المنتج</div>
-      <div class="product-info">
-        <h3>حذاء HUMO</h3>
-        <div class="price">65,000 د.ع</div>
-      </div>
-    </div>
 
     <div class="product">
-      <div class="product-image">صورة المنتج</div>
-      <div class="product-info">
-        <h3>حقيبة HUMO</h3>
-        <div class="price">75,000 د.ع</div>
+
+      <div class="product-image">
+        صورة المنتج
       </div>
+
+      <div class="product-info">
+
+        <h3>
+          حذاء مختار
+        </h3>
+
+        <p>
+          قطعة محدودة
+        </p>
+
+        <div class="price">
+          65,000 د.ع
+        </div>
+
+        <button class="product-btn"
+          onclick="alert('سيتم إضافة الطلب والسلة في المرحلة القادمة')">
+          اطلب الآن
+        </button>
+
+      </div>
+
     </div>
 
+
     <div class="product">
-      <div class="product-image">صورة المنتج</div>
-      <div class="product-info">
-        <h3>قطعة مختارة</h3>
-        <div class="price">120,000 د.ع</div>
+
+      <div class="product-image">
+        صورة المنتج
       </div>
+
+      <div class="product-info">
+
+        <h3>
+          حقيبة HUMO
+        </h3>
+
+        <p>
+          تفاصيل تستحق الاقتناء
+        </p>
+
+        <div class="price">
+          75,000 د.ع
+        </div>
+
+        <button class="product-btn"
+          onclick="alert('سيتم إضافة الطلب والسلة في المرحلة القادمة')">
+          اطلب الآن
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="product">
+
+      <div class="product-image">
+        صورة المنتج
+      </div>
+
+      <div class="product-info">
+
+        <h3>
+          قطعة مختارة
+        </h3>
+
+        <p>
+          إصدار محدود
+        </p>
+
+        <div class="price">
+          120,000 د.ع
+        </div>
+
+        <button class="product-btn"
+          onclick="alert('سيتم إضافة الطلب والسلة في المرحلة القادمة')">
+          اطلب الآن
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="product">
+
+      <div class="product-image">
+        صورة المنتج
+      </div>
+
+      <div class="product-info">
+
+        <h3>
+          اختيار HUMO
+        </h3>
+
+        <p>
+          متوفر الآن
+        </p>
+
+        <div class="price">
+          95,000 د.ع
+        </div>
+
+        <button class="product-btn"
+          onclick="alert('سيتم إضافة الطلب والسلة في المرحلة القادمة')">
+          اطلب الآن
+        </button>
+
+      </div>
+
     </div>
 
   </div>
+
 </section>
+
+
+<!-- HUMO THURSDAY -->
 
 <section class="thursday" id="thursday">
 
-  <h2>HUMO THURSDAY</h2>
+  <small>
+    EVERY THURSDAY
+  </small>
+
+  <h2>
+    HUMO THURSDAY
+  </h2>
 
   <p>
     كل خميس، فرصة جديدة للفوز بخصمك.
   </p>
 
-  <div class="wheel-box">
+
+  <div class="wheel-area">
 
     <div class="pointer"></div>
 
+
     <div class="wheel" id="wheel">
+
       <span class="s1">5%</span>
       <span class="s2">10%</span>
       <span class="s3">15%</span>
@@ -315,11 +827,14 @@
       <span class="s6">10%</span>
       <span class="s7">15%</span>
       <span class="s8">حاول</span>
+
     </div>
 
-    <button class="button spin" id="spin">
+
+    <button class="spin-btn" id="spin">
       أدر العجلة
     </button>
+
 
     <div class="result" id="result"></div>
 
@@ -327,13 +842,65 @@
 
 </section>
 
+
+<!-- BRAND -->
+
+<section class="statement">
+
+  <h2>
+    اختيار يليق بك
+  </h2>
+
+  <p>
+    في HUMO لا نبحث عن كثرة القطع،
+    بل عن القطعة التي تستحق أن تكون جزءًا من اختيارك.
+  </p>
+
+</section>
+
+
+<!-- FOOTER -->
+
 <footer>
-  HUMO © 2026
-  <br>
-  اختيار يليق بك
+
+  <div class="footer-logo">
+    HUMO
+  </div>
+
+  <p>
+    قطع مختارة بعناية تجمع بين الأناقة والجودة.
+  </p>
+
+
+  <div class="links">
+
+    <a href="#products">
+      المنتجات
+    </a>
+
+    <a href="#categories">
+      التصنيفات
+    </a>
+
+    <a href="#thursday">
+      HUMO THURSDAY
+    </a>
+
+  </div>
+
+
+  <div class="copyright">
+    HUMO © 2026 — اختيار يليق بك
+  </div>
+
 </footer>
 
+
 <script>
+
+  /* =========================
+     HUMO THURSDAY WHEEL
+  ========================= */
 
   const wheel = document.getElementById("wheel");
   const spin = document.getElementById("spin");
@@ -341,6 +908,7 @@
 
   let rotation = 0;
   let spinning = false;
+
 
   const prizes = [
     "خصم 5%",
@@ -353,43 +921,66 @@
     "حاول مرة أخرى"
   ];
 
+
   spin.addEventListener("click", function () {
 
     if (spinning) return;
 
+
     spinning = true;
-    result.textContent = "";
 
-    const index = Math.floor(Math.random() * prizes.length);
+    result.innerHTML = "";
 
-    const segment = 360 / prizes.length;
 
-    rotation += 1440 + (360 - (index * segment) - segment / 2);
+    const index =
+      Math.floor(Math.random() * prizes.length);
 
-    wheel.style.transform = `rotate(${rotation}deg)`;
+
+    const segment =
+      360 / prizes.length;
+
+
+    rotation +=
+      1440 +
+      (360 - (index * segment) - segment / 2);
+
+
+    wheel.style.transform =
+      `rotate(${rotation}deg)`;
+
 
     setTimeout(function () {
 
       const prize = prizes[index];
 
+
       if (prize === "حاول مرة أخرى") {
 
-        result.textContent = "حاول مرة أخرى في المرة القادمة.";
+        result.innerHTML =
+          "حاول مرة أخرى في المرة القادمة.";
 
-      } else {
+      }
+
+      else {
 
         const code =
           "HUMO" +
-          Math.floor(1000 + Math.random() * 9000);
+          Math.floor(
+            1000 +
+            Math.random() * 9000
+          );
+
 
         result.innerHTML =
           "🎉 مبروك! حصلت على " +
           prize +
-          "<br>كود الخصم: <strong>" +
+          "<br>" +
+          "<span class='code'>" +
           code +
-          "</strong>";
+          "</span>";
 
       }
+
 
       spinning = false;
 
@@ -398,6 +989,7 @@
   });
 
 </script>
+
 
 </body>
 </html>
