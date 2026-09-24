@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>HUMO — اختيار يليق بك.</title>
-
-  <meta name="description" content="HUMO — متجر بتفاصيل مختارة بعناية.">
+  <title>HUMO</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +14,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -26,8 +25,8 @@
       --black: #111111;
       --white: #ffffff;
       --soft: #f7f7f5;
-      --line: #e8e8e5;
-      --gray: #777;
+      --line: #e7e7e4;
+      --gray: #777777;
     }
 
     body {
@@ -42,79 +41,94 @@
       cursor: pointer;
     }
 
+
     /* ================= HEADER ================= */
 
     header {
-      height: 76px;
+      height: 78px;
       border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(12px);
+
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 6%;
+
+      padding: 0 28px;
+
       position: sticky;
       top: 0;
-      background: rgba(255,255,255,.96);
-      backdrop-filter: blur(12px);
       z-index: 100;
     }
 
-    .brand {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 35px;
-      font-weight: 700;
-      letter-spacing: 4px;
-      direction: ltr;
+    .header-logo {
+      width: 105px;
+      height: 54px;
+      object-fit: contain;
+      object-position: center;
     }
 
-    .header-actions {
+    .header-left {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     .user-name {
-      font-size: 13px;
-      color: #555;
+      font-size: 12px;
+      color: #666;
     }
 
-    .small-btn {
+    .logout-btn {
       border: 1px solid #111;
       background: white;
+      color: #111;
+
       padding: 9px 15px;
-      border-radius: 3px;
+
       font-size: 12px;
     }
+
 
     /* ================= LOGIN ================= */
 
     #loginScreen {
-      min-height: calc(100vh - 76px);
+      min-height: calc(100vh - 78px);
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       padding: 30px 20px;
+
       background: #fafaf9;
     }
 
     .login-box {
       width: 100%;
-      max-width: 430px;
+      max-width: 420px;
+
       background: white;
       border: 1px solid var(--line);
-      padding: 45px 30px;
+
+      padding: 42px 30px;
+
       text-align: center;
     }
 
     .login-logo {
-      width: 170px;
-      max-width: 70%;
-      margin: 0 auto 30px;
+      width: 150px;
+      height: 80px;
+      object-fit: contain;
+
+      margin: 0 auto 25px;
       display: block;
     }
 
     .login-title {
-      font-size: 23px;
-      font-weight: 700;
+      font-size: 24px;
+      font-weight: 800;
+
       margin-bottom: 9px;
     }
 
@@ -122,21 +136,26 @@
       color: #777;
       font-size: 13px;
       line-height: 1.9;
-      margin-bottom: 30px;
+
+      margin-bottom: 28px;
     }
 
     .google-btn {
       width: 100%;
-      height: 52px;
+      height: 53px;
+
       border: 1px solid #111;
       background: #111;
       color: white;
+
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 12px;
+
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 700;
+
       transition: .2s;
     }
 
@@ -146,222 +165,208 @@
     }
 
     .google-icon {
-      width: 19px;
-      height: 19px;
-      background: white;
+      width: 20px;
+      height: 20px;
+
       border-radius: 50%;
+      background: white;
+      color: #4285f4;
+
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #4285f4;
-      font-size: 12px;
-      font-weight: bold;
+
+      font-weight: 800;
     }
 
     .login-note {
-      font-size: 11px;
       color: #999;
-      margin-top: 20px;
+      font-size: 11px;
       line-height: 1.8;
+
+      margin-top: 18px;
     }
 
-    /* ================= STORE ================= */
+
+    /* ================= MAIN ================= */
 
     #store {
       display: none;
     }
 
-    .hero {
-      min-height: 430px;
-      background: #fafaf8;
+    .wheel-section {
+
+      min-height: calc(100vh - 78px);
+
+      background: #111;
+
+      color: white;
+
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+
       text-align: center;
-      padding: 70px 20px;
+
+      padding:
+        55px 20px
+        70px;
     }
 
-    .hero-inner {
-      max-width: 800px;
-    }
-
-    .hero h1 {
-      font-size: clamp(38px, 7vw, 72px);
-      line-height: 1.25;
+    .wheel-title {
+      font-size: 30px;
       font-weight: 800;
-      margin-bottom: 12px;
+
+      margin-bottom: 7px;
     }
 
-    .hero p {
-      font-size: 17px;
-      color: #555;
-    }
-
-    /* ================= PRODUCTS ================= */
-
-    .section {
-      padding: 70px 6%;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 45px;
-    }
-
-    .products {
-      max-width: 1100px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .product {
-      border: 1px solid var(--line);
-      background: white;
-      overflow: hidden;
-    }
-
-    .product-image {
-      height: 330px;
-      background: #f5f5f3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .wheel-subtitle {
       color: #aaa;
-      font-size: 12px;
+      font-size: 13px;
+
+      margin-bottom: 38px;
     }
 
-    .product-info {
-      padding: 22px;
-      text-align: right;
-    }
-
-    .product-name-ar {
-      font-weight: 700;
-      font-size: 16px;
-      margin-bottom: 5px;
-    }
-
-    .product-name-en {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 21px;
-      direction: ltr;
-      text-align: left;
-      color: #444;
-    }
-
-    .product-price {
-      margin-top: 13px;
-      font-weight: 700;
-      font-size: 15px;
-    }
 
     /* ================= WHEEL ================= */
 
-    .wheel-section {
-      background: #111;
-      color: white;
-      padding: 80px 20px;
-      text-align: center;
-    }
-
-    .wheel-section h2 {
-      font-size: 29px;
-      margin-bottom: 10px;
-    }
-
-    .wheel-section > p {
-      color: #bbb;
-      font-size: 13px;
-      margin-bottom: 35px;
-    }
-
     .wheel-wrap {
+
       position: relative;
-      width: min(360px, 88vw);
-      height: min(360px, 88vw);
-      margin: auto;
+
+      width: min(370px, 88vw);
+      height: min(370px, 88vw);
+
+      margin: 0 auto;
     }
+
 
     .wheel {
+
+      position: relative;
+
       width: 100%;
       height: 100%;
+
       border-radius: 50%;
-      position: relative;
+
       border: 5px solid white;
-      overflow: hidden;
+
+      overflow: visible;
 
       background:
         conic-gradient(
-          #111 0deg 51.428deg,
-          #fff 51.428deg 102.856deg,
-          #111 102.856deg 154.284deg,
-          #fff 154.284deg 205.712deg,
-          #111 205.712deg 257.14deg,
-          #fff 257.14deg 308.568deg,
-          #111 308.568deg 360deg
+
+          #111111 0deg 51.428deg,
+
+          #ffffff 51.428deg 102.856deg,
+
+          #111111 102.856deg 154.284deg,
+
+          #ffffff 154.284deg 205.712deg,
+
+          #111111 205.712deg 257.140deg,
+
+          #ffffff 257.140deg 308.568deg,
+
+          #111111 308.568deg 360deg
+
         );
 
-      transition: transform 5s cubic-bezier(.12,.7,.12,1);
+      transition:
+        transform 5.2s cubic-bezier(.12,.72,.12,1);
+
+      transform-origin: center center;
+
+      --wheel-rotation: 0deg;
     }
+
+
+    /* خطوط القطاعات */
 
     .wheel-lines {
+
       position: absolute;
+
       inset: 0;
+
       border-radius: 50%;
+
       pointer-events: none;
+
       background:
         conic-gradient(
-          transparent 0deg 50.8deg,
-          rgba(0,0,0,.35) 50.8deg 51.4deg,
-          transparent 51.4deg 102.2deg,
-          rgba(0,0,0,.35) 102.2deg 102.8deg,
-          transparent 102.8deg 153.7deg,
-          rgba(0,0,0,.35) 153.7deg 154.3deg,
-          transparent 154.3deg 205.1deg,
-          rgba(0,0,0,.35) 205.1deg 205.7deg,
-          transparent 205.7deg 256.5deg,
-          rgba(0,0,0,.35) 256.5deg 257.1deg,
-          transparent 257.1deg 308deg,
-          rgba(0,0,0,.35) 308deg 308.6deg,
-          transparent 308.6deg 359.4deg,
-          rgba(0,0,0,.35) 359.4deg 360deg
+
+          transparent 0deg 50.9deg,
+          rgba(0,0,0,.5) 50.9deg 51.45deg,
+
+          transparent 51.45deg 102.3deg,
+          rgba(0,0,0,.5) 102.3deg 102.86deg,
+
+          transparent 102.86deg 153.73deg,
+          rgba(0,0,0,.5) 153.73deg 154.29deg,
+
+          transparent 154.29deg 205.16deg,
+          rgba(0,0,0,.5) 205.16deg 205.72deg,
+
+          transparent 205.72deg 256.58deg,
+          rgba(0,0,0,.5) 256.58deg 257.14deg,
+
+          transparent 257.14deg 308.01deg,
+          rgba(0,0,0,.5) 308.01deg 308.57deg,
+
+          transparent 308.57deg 359.44deg,
+          rgba(0,0,0,.5) 359.44deg 360deg
         );
     }
 
-    .wheel-labels {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
+
+    /* ================= LABELS ================= */
+
+    /*
+      كل كلمة موجودة على القطاع الصحيح،
+      لكن يتم تعويض دورانها تلقائيًا
+      حتى تبقى مستقيمة أثناء دوران العجلة.
+    */
 
     .wheel-label {
+
       position: absolute;
+
       left: 50%;
       top: 50%;
-      width: 42%;
+
+      width: 100px;
+
       text-align: center;
+
       transform-origin: 0 0;
-      font-weight: 700;
+
       font-size: 16px;
+      font-weight: 800;
+
+      z-index: 3;
+
+      transform:
+        rotate(var(--angle))
+        translateX(112px);
     }
 
     .wheel-label span {
-      display: inline-block;
-      transform: translate(-50%, -50%);
-      white-space: nowrap;
-    }
 
-    .label-1 { transform: rotate(25.7deg) translateX(72px); }
-    .label-2 { transform: rotate(77.1deg) translateX(72px); }
-    .label-3 { transform: rotate(128.5deg) translateX(72px); }
-    .label-4 { transform: rotate(179.9deg) translateX(72px); }
-    .label-5 { transform: rotate(231.3deg) translateX(72px); }
-    .label-6 { transform: rotate(282.7deg) translateX(72px); }
-    .label-7 { transform: rotate(334.1deg) translateX(72px); }
+      display: block;
+
+      white-space: nowrap;
+
+      transform:
+        translate(-50%, -50%)
+        rotate(
+          calc(
+            -1 * var(--angle)
+            - var(--wheel-rotation)
+          )
+        );
+    }
 
     .dark-label {
       color: white;
@@ -371,260 +376,399 @@
       color: #111;
     }
 
+
+    /* ================= CENTER LOGO ================= */
+
     .wheel-logo {
+
       position: absolute;
-      width: 78px;
-      height: 78px;
-      background: white;
-      border-radius: 50%;
-      border: 3px solid #111;
+
+      width: 82px;
+      height: 82px;
+
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%);
+
+      transform:
+        translate(-50%, -50%);
+
+      border-radius: 50%;
+
+      background: white;
+
+      border: 3px solid #111;
+
       object-fit: contain;
-      padding: 13px;
-      z-index: 5;
+
+      padding: 12px;
+
+      z-index: 20;
+
+      /*
+        الشعار منفصل عن عنصر العجلة،
+        لذلك لا يدور معها.
+      */
     }
+
+
+    /* ================= POINTER ================= */
 
     .pointer {
+
       position: absolute;
-      top: -17px;
+
+      top: -18px;
+
       left: 50%;
-      transform: translateX(-50%);
+
+      transform:
+        translateX(-50%);
+
       width: 0;
       height: 0;
-      border-left: 15px solid transparent;
-      border-right: 15px solid transparent;
-      border-top: 28px solid white;
-      z-index: 10;
+
+      border-left: 16px solid transparent;
+      border-right: 16px solid transparent;
+
+      border-top: 29px solid white;
+
+      z-index: 30;
     }
 
+
+    /* ================= BUTTON ================= */
+
     .spin-btn {
-      margin-top: 35px;
+
+      margin-top: 38px;
+
+      width: 220px;
+
+      height: 55px;
+
       background: white;
       color: #111;
+
       border: none;
-      padding: 15px 45px;
+
       font-size: 14px;
-      font-weight: 700;
-      min-width: 210px;
+      font-weight: 800;
+
+      transition: .2s;
+    }
+
+    .spin-btn:active {
+      transform: scale(.98);
     }
 
     .spin-btn:disabled {
-      opacity: .4;
+
+      opacity: .45;
+
       cursor: not-allowed;
     }
 
+
     .wheel-status {
-      margin-top: 20px;
+
+      min-height: 22px;
+
+      margin-top: 18px;
+
       color: #aaa;
+
       font-size: 12px;
-      min-height: 20px;
     }
+
 
     /* ================= RESULT ================= */
 
     .result-box {
+
       display: none;
-      max-width: 430px;
-      margin: 30px auto 0;
-      padding: 25px;
+
+      width: min(500px, 92vw);
+
+      margin-top: 30px;
+
       background: white;
+
       color: #111;
+
+      padding: 28px 22px;
     }
 
     .result-title {
-      font-size: 14px;
+
       color: #777;
+
+      font-size: 13px;
+
       margin-bottom: 8px;
     }
 
     .result-prize {
-      font-size: 27px;
+
+      font-size: 30px;
+
       font-weight: 800;
-      margin-bottom: 18px;
+
+      margin-bottom: 20px;
     }
 
     .coupon {
+
       direction: ltr;
+
       font-family: monospace;
-      font-size: 20px;
+
+      font-size: 21px;
+
       letter-spacing: 2px;
+
       border: 1px dashed #111;
-      padding: 13px;
+
+      padding: 14px;
+
       background: #fafafa;
     }
 
     .next-date {
-      font-size: 11px;
+
       color: #777;
-      margin-top: 13px;
+
+      font-size: 11px;
+
+      margin-top: 14px;
     }
+
 
     /* ================= ADMIN ================= */
 
     #adminPanel {
+
       display: none;
-      background: #f6f6f4;
-      padding: 60px 5%;
+
+      background: #f5f5f3;
+
+      color: #111;
+
+      width: 100%;
+
+      padding: 40px 20px;
     }
 
     .admin-box {
+
+      width: 100%;
       max-width: 1200px;
+
       margin: auto;
+
       background: white;
-      border: 1px solid var(--line);
+
       padding: 25px;
+
       overflow-x: auto;
     }
 
     .admin-title {
-      font-size: 24px;
-      margin-bottom: 25px;
+
+      font-size: 22px;
+
       font-weight: 800;
+
+      margin-bottom: 20px;
     }
 
     table {
+
       width: 100%;
+
       border-collapse: collapse;
+
       min-width: 850px;
+
       font-size: 12px;
     }
 
     th,
     td {
-      padding: 12px 10px;
+
+      padding: 12px;
+
       border-bottom: 1px solid #eee;
+
       text-align: right;
-      white-space: nowrap;
     }
 
     th {
+
       background: #111;
+
       color: white;
     }
 
-    /* ================= FOOTER ================= */
-
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 35px 20px;
-      text-align: center;
-      background: white;
-    }
-
-    footer .footer-logo {
-      width: 110px;
-      margin-bottom: 12px;
-    }
-
-    footer p {
-      font-size: 11px;
-      color: #888;
-    }
 
     /* ================= TOAST ================= */
 
     .toast {
+
       position: fixed;
+
       bottom: 25px;
       left: 50%;
-      transform: translateX(-50%) translateY(100px);
+
+      transform:
+        translateX(-50%)
+        translateY(100px);
+
       background: #111;
+
       color: white;
+
       padding: 13px 20px;
+
       font-size: 12px;
+
       z-index: 999;
+
       opacity: 0;
+
       transition: .3s;
+
       max-width: 90%;
+
       text-align: center;
     }
 
     .toast.show {
+
       opacity: 1;
-      transform: translateX(-50%) translateY(0);
+
+      transform:
+        translateX(-50%)
+        translateY(0);
     }
+
 
     /* ================= MOBILE ================= */
 
-    @media (max-width: 700px) {
+    @media (max-width: 600px) {
 
       header {
-        padding: 0 18px;
+
         height: 68px;
+
+        padding: 0 18px;
       }
 
-      .brand {
-        font-size: 30px;
+      .header-logo {
+
+        width: 95px;
+        height: 50px;
       }
 
       .user-name {
+
         display: none;
       }
 
-      .hero {
-        min-height: 350px;
+      .wheel-section {
+
+        min-height: calc(100vh - 68px);
+
+        padding-top: 45px;
       }
 
-      .hero p {
-        font-size: 14px;
+      .wheel-title {
+
+        font-size: 27px;
       }
 
-      .section {
-        padding: 55px 18px;
-      }
+      .wheel-subtitle {
 
-      .products {
-        grid-template-columns: 1fr;
-      }
-
-      .product-image {
-        height: 290px;
+        margin-bottom: 30px;
       }
 
       .wheel-wrap {
-        width: 310px;
-        height: 310px;
+
+        width: 315px;
+        height: 315px;
       }
 
       .wheel-label {
-        font-size: 13px;
-      }
 
-      .label-1 { transform: rotate(25.7deg) translateX(62px); }
-      .label-2 { transform: rotate(77.1deg) translateX(62px); }
-      .label-3 { transform: rotate(128.5deg) translateX(62px); }
-      .label-4 { transform: rotate(179.9deg) translateX(62px); }
-      .label-5 { transform: rotate(231.3deg) translateX(62px); }
-      .label-6 { transform: rotate(282.7deg) translateX(62px); }
-      .label-7 { transform: rotate(334.1deg) translateX(62px); }
+        width: 85px;
+
+        font-size: 13px;
+
+        transform:
+          rotate(var(--angle))
+          translateX(95px);
+      }
 
       .wheel-logo {
-        width: 68px;
-        height: 68px;
+
+        width: 70px;
+        height: 70px;
+
+        padding: 10px;
+      }
+
+      .spin-btn {
+
+        width: 205px;
+
+        height: 52px;
       }
     }
+
   </style>
 </head>
 
+
 <body>
 
-<!-- ================= HEADER ================= -->
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
 <header>
-  <div class="brand">HUMO</div>
 
-  <div class="header-actions">
-    <span class="user-name" id="userName"></span>
-    <button class="small-btn" id="logoutBtn" style="display:none;">
+  <!-- اللوغو أعلى اليمين -->
+
+  <img
+    class="header-logo"
+    src="كيس%20ورقي%20للمتاجر%20بلون%20وردي%20نمط%20زهور.png"
+    alt="HUMO"
+  >
+
+
+  <div class="header-left">
+
+    <span
+      class="user-name"
+      id="userName">
+    </span>
+
+    <button
+      class="logout-btn"
+      id="logoutBtn"
+      style="display:none;">
       تسجيل الخروج
     </button>
+
   </div>
+
 </header>
 
 
-<!-- ================= LOGIN ================= -->
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
 
 <section id="loginScreen">
 
@@ -641,17 +785,27 @@
     </h1>
 
     <p class="login-subtitle">
-      اختيار يليق بك.<br>
-      سجّل الدخول للمتابعة واكتشف مزايا HUMO.
+      اختيار يليق بك.
+      <br>
+      سجّل الدخول للمتابعة.
     </p>
 
-    <button class="google-btn" id="googleBtn">
-      <span class="google-icon">G</span>
+
+    <button
+      class="google-btn"
+      id="googleBtn">
+
+      <span class="google-icon">
+        G
+      </span>
+
       متابعة باستخدام Google
+
     </button>
 
+
     <p class="login-note">
-      سيتم استخدام حساب Google الخاص بك لإنشاء حساب HUMO واحد.
+      تسجيل الدخول يتم باستخدام حساب Google الخاص بك.
     </p>
 
   </div>
@@ -659,153 +813,132 @@
 </section>
 
 
-<!-- ================= STORE ================= -->
+
+<!-- =====================================================
+     STORE — WHEEL ONLY
+===================================================== -->
 
 <main id="store">
 
-  <section class="hero">
-    <div class="hero-inner">
-
-      <h1>اختيار يليق بك.</h1>
-
-      <p>
-        اكتشف قطعًا مختارة بعناية، بتفاصيل تصنع الفرق.
-      </p>
-
-    </div>
-  </section>
-
-
-  <!-- PRODUCTS -->
-
-  <section class="section">
-
-    <h2 class="section-title">
-      مختارات HUMO
-    </h2>
-
-    <div class="products">
-
-      <article class="product">
-        <div class="product-image">
-          قريبًا
-        </div>
-
-        <div class="product-info">
-          <div class="product-name-ar">
-            حقيبة HUMO
-          </div>
-
-          <div class="product-name-en">
-            HUMO BAG
-          </div>
-
-          <div class="product-price">
-            قريبًا
-          </div>
-        </div>
-      </article>
-
-
-      <article class="product">
-        <div class="product-image">
-          قريبًا
-        </div>
-
-        <div class="product-info">
-          <div class="product-name-ar">
-            اختيار نسائي
-          </div>
-
-          <div class="product-name-en">
-            WOMEN'S EDIT
-          </div>
-
-          <div class="product-price">
-            قريبًا
-          </div>
-        </div>
-      </article>
-
-
-      <article class="product">
-        <div class="product-image">
-          قريبًا
-        </div>
-
-        <div class="product-info">
-          <div class="product-name-ar">
-            اختيار رجالي
-          </div>
-
-          <div class="product-name-en">
-            MEN'S EDIT
-          </div>
-
-          <div class="product-price">
-            قريبًا
-          </div>
-        </div>
-      </article>
-
-    </div>
-
-  </section>
-
-
-  <!-- WHEEL -->
 
   <section class="wheel-section">
 
-    <h2>عجلة HUMO</h2>
 
-    <p>
+    <h1 class="wheel-title">
+      عجلة HUMO
+    </h1>
+
+
+    <p class="wheel-subtitle">
       فرصتك تتجدد كل 14 يومًا.
     </p>
 
 
+    <!-- WHEEL -->
+
     <div class="wheel-wrap">
+
 
       <div class="pointer"></div>
 
-      <div class="wheel" id="wheel">
+
+      <div
+        class="wheel"
+        id="wheel"
+      >
+
 
         <div class="wheel-lines"></div>
 
-        <div class="wheel-labels">
 
-          <div class="wheel-label label-1 dark-label">
-            <span>5%</span>
-          </div>
+        <!-- 5% -->
 
-          <div class="wheel-label label-2 light-label">
-            <span>حظ أوفر</span>
-          </div>
-
-          <div class="wheel-label label-3 dark-label">
-            <span>10%</span>
-          </div>
-
-          <div class="wheel-label label-4 light-label">
-            <span>15%</span>
-          </div>
-
-          <div class="wheel-label label-5 dark-label">
-            <span>20%</span>
-          </div>
-
-          <div class="wheel-label label-6 light-label">
-            <span>25%</span>
-          </div>
-
-          <div class="wheel-label label-7 dark-label">
-            <span>30%</span>
-          </div>
-
+        <div
+          class="wheel-label dark-label"
+          style="--angle:25.714deg;"
+        >
+          <span>
+            5%
+          </span>
         </div>
+
+
+        <!-- حظ أوفر -->
+
+        <div
+          class="wheel-label light-label"
+          style="--angle:77.142deg;"
+        >
+          <span>
+            حظ أوفر
+          </span>
+        </div>
+
+
+        <!-- 10% -->
+
+        <div
+          class="wheel-label dark-label"
+          style="--angle:128.570deg;"
+        >
+          <span>
+            10%
+          </span>
+        </div>
+
+
+        <!-- 15% -->
+
+        <div
+          class="wheel-label light-label"
+          style="--angle:180deg;"
+        >
+          <span>
+            15%
+          </span>
+        </div>
+
+
+        <!-- 20% -->
+
+        <div
+          class="wheel-label dark-label"
+          style="--angle:231.428deg;"
+        >
+          <span>
+            20%
+          </span>
+        </div>
+
+
+        <!-- 25% -->
+
+        <div
+          class="wheel-label light-label"
+          style="--angle:282.856deg;"
+        >
+          <span>
+            25%
+          </span>
+        </div>
+
+
+        <!-- 30% -->
+
+        <div
+          class="wheel-label dark-label"
+          style="--angle:334.284deg;"
+        >
+          <span>
+            30%
+          </span>
+        </div>
+
 
       </div>
 
+
+      <!-- اللوغو ثابت في وسط العجلة -->
 
       <img
         class="wheel-logo"
@@ -813,38 +946,67 @@
         alt="HUMO"
       >
 
+
     </div>
 
 
-    <button class="spin-btn" id="spinBtn">
+    <!-- BUTTON -->
+
+    <button
+      class="spin-btn"
+      id="spinBtn">
+
       جرّب حظك
+
     </button>
 
-    <div class="wheel-status" id="wheelStatus"></div>
+
+    <div
+      class="wheel-status"
+      id="wheelStatus">
+    </div>
 
 
-    <div class="result-box" id="resultBox">
+    <!-- RESULT -->
+
+    <div
+      class="result-box"
+      id="resultBox">
+
 
       <div class="result-title">
         جائزتك
       </div>
 
-      <div class="result-prize" id="resultPrize">
+
+      <div
+        class="result-prize"
+        id="resultPrize">
       </div>
+
 
       <div class="result-title">
         كود الخصم الخاص بك
       </div>
 
-      <div class="coupon" id="couponCode">
+
+      <div
+        class="coupon"
+        id="couponCode">
       </div>
 
-      <div class="next-date" id="nextDate">
+
+      <div
+        class="next-date"
+        id="nextDate">
       </div>
+
 
     </div>
 
+
   </section>
+
 
 
   <!-- ADMIN -->
@@ -854,21 +1016,25 @@
     <div class="admin-box">
 
       <div class="admin-title">
-        لوحة المشاركين
+        المشاركون
       </div>
 
       <table>
 
         <thead>
+
           <tr>
+
             <th>الاسم</th>
             <th>الهاتف</th>
             <th>البريد</th>
             <th>الجائزة</th>
             <th>الكود</th>
-            <th>تاريخ المشاركة</th>
-            <th>المشاركة القادمة</th>
+            <th>المشاركة</th>
+            <th>القادمة</th>
+
           </tr>
+
         </thead>
 
         <tbody id="participantsBody"></tbody>
@@ -880,136 +1046,140 @@
   </section>
 
 
-  <footer>
-
-    <img
-      class="footer-logo"
-      src="كيس%20ورقي%20للمتاجر%20بلون%20وردي%20نمط%20زهور.png"
-      alt="HUMO"
-    >
-
-    <p>
-      © HUMO — جميع الحقوق محفوظة
-    </p>
-
-  </footer>
-
 </main>
 
 
-<div class="toast" id="toast"></div>
+
+<!-- TOAST -->
+
+<div
+  class="toast"
+  id="toast">
+</div>
+
 
 
 <script>
 
-  /* =====================================================
-     SUPABASE
-  ===================================================== */
 
-  const SUPABASE_URL =
-    "https://vknhrxxkmhrnfbmsllid.supabase.co";
+/* =====================================================
+   SUPABASE
+===================================================== */
 
-  const SUPABASE_KEY =
-    "sb_publishable_QliqBYSeykn4F2Ddrsn8hg_F_N8dR-n";
+const SUPABASE_URL =
+  "https://vknhrxxkmhrnfbmsllid.supabase.co";
 
-  const { createClient } = supabase;
 
-  const db = createClient(
+const SUPABASE_KEY =
+  "sb_publishable_QliqBYSeykn4F2Ddrsn8hg_F_N8dR-n";
+
+
+const { createClient } =
+  supabase;
+
+
+const db =
+  createClient(
     SUPABASE_URL,
     SUPABASE_KEY
   );
 
 
-  /* =====================================================
-     ADMIN
-  ===================================================== */
 
-  const ADMIN_UID =
-    "2d2313ef-8ae1-40a0-9a56-89abe56d3c37";
+/* =====================================================
+   ADMIN
+===================================================== */
 
-
-  /* =====================================================
-     ELEMENTS
-  ===================================================== */
-
-  const loginScreen =
-    document.getElementById("loginScreen");
-
-  const store =
-    document.getElementById("store");
-
-  const googleBtn =
-    document.getElementById("googleBtn");
-
-  const logoutBtn =
-    document.getElementById("logoutBtn");
-
-  const userName =
-    document.getElementById("userName");
-
-  const spinBtn =
-    document.getElementById("spinBtn");
-
-  const wheel =
-    document.getElementById("wheel");
-
-  const wheelStatus =
-    document.getElementById("wheelStatus");
-
-  const resultBox =
-    document.getElementById("resultBox");
-
-  const resultPrize =
-    document.getElementById("resultPrize");
-
-  const couponCode =
-    document.getElementById("couponCode");
-
-  const nextDate =
-    document.getElementById("nextDate");
-
-  const adminPanel =
-    document.getElementById("adminPanel");
-
-  const participantsBody =
-    document.getElementById("participantsBody");
-
-  const toast =
-    document.getElementById("toast");
+const ADMIN_UID =
+  "2d2313ef-8ae1-40a0-9a56-89abe56d3c37";
 
 
-  /* =====================================================
-     TOAST
-  ===================================================== */
 
-  function showToast(message) {
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
-    toast.textContent = message;
-
-    toast.classList.add("show");
-
-    setTimeout(() => {
-      toast.classList.remove("show");
-    }, 3500);
-  }
+const loginScreen =
+  document.getElementById("loginScreen");
 
 
-  /* =====================================================
-     GOOGLE LOGIN
-  ===================================================== */
+const store =
+  document.getElementById("store");
 
-  googleBtn.addEventListener("click", async () => {
+
+const googleBtn =
+  document.getElementById("googleBtn");
+
+
+const logoutBtn =
+  document.getElementById("logoutBtn");
+
+
+const userName =
+  document.getElementById("userName");
+
+
+const spinBtn =
+  document.getElementById("spinBtn");
+
+
+const wheel =
+  document.getElementById("wheel");
+
+
+const wheelStatus =
+  document.getElementById("wheelStatus");
+
+
+const resultBox =
+  document.getElementById("resultBox");
+
+
+const resultPrize =
+  document.getElementById("resultPrize");
+
+
+const couponCode =
+  document.getElementById("couponCode");
+
+
+const nextDate =
+  document.getElementById("nextDate");
+
+
+const adminPanel =
+  document.getElementById("adminPanel");
+
+
+const participantsBody =
+  document.getElementById("participantsBody");
+
+
+const toast =
+  document.getElementById("toast");
+
+
+
+/* =====================================================
+   GOOGLE LOGIN
+===================================================== */
+
+googleBtn.addEventListener(
+  "click",
+  async () => {
 
     googleBtn.disabled = true;
 
     googleBtn.innerHTML =
       "جاري فتح Google...";
 
+
     try {
 
       const redirectUrl =
         window.location.origin +
         window.location.pathname;
+
 
       const { error } =
         await db.auth.signInWithOAuth({
@@ -1021,17 +1191,20 @@
             redirectTo: redirectUrl,
 
             queryParams: {
-              access_type: "offline",
+
               prompt: "select_account"
+
             }
 
           }
 
         });
 
+
       if (error) {
         throw error;
       }
+
 
     } catch (error) {
 
@@ -1041,583 +1214,327 @@
         "حدث خطأ أثناء تسجيل الدخول باستخدام Google"
       );
 
+
       googleBtn.disabled = false;
+
 
       googleBtn.innerHTML =
         '<span class="google-icon">G</span> متابعة باستخدام Google';
+
     }
 
-  });
+  }
+);
 
 
-  /* =====================================================
-     LOGOUT
-  ===================================================== */
 
-  logoutBtn.addEventListener("click", async () => {
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+logoutBtn.addEventListener(
+  "click",
+  async () => {
 
     await db.auth.signOut();
 
     location.reload();
 
-  });
+  }
+);
 
 
-  /* =====================================================
-     SHOW STORE
-  ===================================================== */
 
-  async function showUser(session) {
+/* =====================================================
+   TOAST
+===================================================== */
 
-    if (!session || !session.user) {
+function showToast(message) {
 
-      loginScreen.style.display = "flex";
-      store.style.display = "none";
+  toast.textContent =
+    message;
 
-      return;
-
-    }
+  toast.classList.add("show");
 
 
-    loginScreen.style.display = "none";
-    store.style.display = "block";
+  setTimeout(() => {
 
-    logoutBtn.style.display = "block";
+    toast.classList.remove("show");
 
+  }, 3500);
 
-    const user =
-      session.user;
-
-
-    const name =
-      user.user_metadata?.full_name ||
-      user.user_metadata?.name ||
-      user.email?.split("@")[0] ||
-      "زائر HUMO";
+}
 
 
-    userName.textContent =
-      name;
 
+/* =====================================================
+   DATE
+===================================================== */
 
-    await loadLastSpin();
+function formatDate(dateString) {
 
-
-    if (user.id === ADMIN_UID) {
-
-      adminPanel.style.display = "block";
-
-      await loadParticipants();
-
-    }
-
+  if (!dateString) {
+    return "-";
   }
 
 
-  /* =====================================================
-     LOAD LAST SPIN
-  ===================================================== */
-
-  async function loadLastSpin() {
-
-    try {
-
-      const {
-        data,
-        error
-      } = await db
-        .from("spins")
-        .select("*")
-        .order("spun_at", {
-          ascending: false
-        })
-        .limit(1);
-
-      if (error) {
-        console.error(error);
-        return;
-      }
-
-
-      if (!data || !data.length) {
-
-        spinBtn.disabled = false;
-
-        wheelStatus.textContent =
-          "لديك فرصة للمشاركة.";
-
-        return;
-
-      }
-
-
-      const last =
-        data[0];
-
-
-      const next =
-        new Date(last.next_eligible_at);
-
-      const now =
-        new Date();
-
-
-      if (next > now) {
-
-        spinBtn.disabled = true;
-
-        wheelStatus.textContent =
-          "يمكنك المشاركة مرة أخرى بعد " +
-          formatRemaining(next);
-
-      } else {
-
-        spinBtn.disabled = false;
-
-        wheelStatus.textContent =
-          "فرصتك متاحة الآن.";
-
-      }
-
-    } catch (error) {
-
-      console.error(error);
-
-    }
-
-  }
-
-
-  /* =====================================================
-     REMAINING TIME
-  ===================================================== */
-
-  function formatRemaining(date) {
-
-    const diff =
-      date.getTime() -
-      Date.now();
-
-    if (diff <= 0) {
-      return "الآن";
-    }
-
-
-    const days =
-      Math.floor(
-        diff / 86400000
-      );
-
-    const hours =
-      Math.floor(
-        (diff % 86400000) / 3600000
-      );
-
-    if (days > 0) {
-
-      return (
-        days +
-        " يوم" +
-        (hours ? " و " + hours + " ساعة" : "")
-      );
-
-    }
-
-    return hours + " ساعة";
-
-  }
-
-
-  /* =====================================================
-     FORMAT DATE
-  ===================================================== */
-
-  function formatDate(dateString) {
-
-    if (!dateString) {
-      return "-";
-    }
-
-    return new Date(dateString)
-      .toLocaleString("ar-IQ", {
+  return new Date(dateString)
+    .toLocaleString(
+      "ar-IQ",
+      {
         dateStyle: "medium",
         timeStyle: "short"
-      });
+      }
+    );
+
+}
+
+
+
+/* =====================================================
+   REMAINING TIME
+===================================================== */
+
+function formatRemaining(date) {
+
+  const difference =
+    date.getTime() -
+    Date.now();
+
+
+  if (difference <= 0) {
+    return "الآن";
+  }
+
+
+  const days =
+    Math.floor(
+      difference /
+      86400000
+    );
+
+
+  const hours =
+    Math.floor(
+      (
+        difference %
+        86400000
+      ) /
+      3600000
+    );
+
+
+  if (days > 0) {
+
+    return (
+      days +
+      " يوم" +
+      (
+        hours
+          ? " و " +
+            hours +
+            " ساعة"
+          : ""
+      )
+    );
 
   }
 
 
-  /* =====================================================
-     NORMALIZE PRIZE
-  ===================================================== */
+  return hours +
+    " ساعة";
 
-  function normalizePrize(prize) {
-
-    if (!prize) {
-      return "";
-    }
-
-    return prize
-      .toString()
-      .replace("خصم", "")
-      .replace("%", "")
-      .trim();
-
-  }
+}
 
 
-  /* =====================================================
-     WHEEL SPIN
-  ===================================================== */
 
-  spinBtn.addEventListener("click", spinWheel);
+/* =====================================================
+   SHOW USER
+===================================================== */
 
+async function showUser(session) {
 
-  async function spinWheel() {
+  if (
+    !session ||
+    !session.user
+  ) {
 
-    if (spinBtn.disabled) {
-      return;
-    }
+    loginScreen.style.display =
+      "flex";
 
-
-    spinBtn.disabled = true;
-
-    wheelStatus.textContent =
-      "جاري اختيار جائزتك...";
-
-
-    resultBox.style.display =
+    store.style.display =
       "none";
 
+    return;
 
-    try {
+  }
 
-      const {
-        data: {
-          session
+
+  loginScreen.style.display =
+    "none";
+
+  store.style.display =
+    "block";
+
+
+  logoutBtn.style.display =
+    "block";
+
+
+  const user =
+    session.user;
+
+
+  const name =
+    user.user_metadata?.full_name ||
+    user.user_metadata?.name ||
+    user.email?.split("@")[0] ||
+    "زائر HUMO";
+
+
+  userName.textContent =
+    name;
+
+
+  await loadLastSpin();
+
+
+  if (
+    user.id === ADMIN_UID
+  ) {
+
+    adminPanel.style.display =
+      "block";
+
+    await loadParticipants();
+
+  }
+
+}
+
+
+
+/* =====================================================
+   LOAD LAST SPIN
+===================================================== */
+
+async function loadLastSpin() {
+
+  try {
+
+    const {
+      data,
+      error
+    } = await db
+      .from("spins")
+      .select("*")
+      .order(
+        "spun_at",
+        {
+          ascending: false
         }
-      } =
-        await db.auth.getSession();
+      )
+      .limit(1);
 
 
-      if (!session) {
-
-        showToast(
-          "يجب تسجيل الدخول أولاً."
-        );
-
-        spinBtn.disabled = false;
-
-        return;
-
-      }
-
-
-      const {
-        data,
-        error
-      } =
-        await db.rpc("spin_wheel");
-
-
-      if (error) {
-        throw error;
-      }
-
-
-      const spin =
-        Array.isArray(data)
-          ? data[0]
-          : data;
-
-
-      if (!spin) {
-
-        throw new Error(
-          "لم يتم استلام نتيجة."
-        );
-
-      }
-
-
-      const prize =
-        spin.prize ||
-        "";
-
-      const discount =
-        spin.discount_percent ||
-        0;
-
-      const coupon =
-        spin.coupon_code ||
-        "";
-
-
-      /*
-        ترتيب القطاعات البصرية:
-        0 = 5%
-        1 = حظ أوفر
-        2 = 10%
-        3 = 15%
-        4 = 20%
-        5 = 25%
-        6 = 30%
-      */
-
-      let targetIndex = 0;
-
-
-      if (
-        prize.includes("حظ") ||
-        discount === 0
-      ) {
-
-        targetIndex = 1;
-
-      } else {
-
-        const map = {
-          5: 0,
-          10: 2,
-          15: 3,
-          20: 4,
-          25: 5,
-          30: 6
-        };
-
-        targetIndex =
-          map[Number(discount)] ?? 0;
-
-      }
-
-
-      const segment =
-        360 / 7;
-
-
-      const targetCenter =
-        targetIndex * segment +
-        segment / 2;
-
-
-      /*
-        المؤشر في الأعلى.
-        نستخدم دورانًا إضافيًا حتى تبدو
-        العجلة طبيعية.
-      */
-
-      const finalRotation =
-        360 * 7 +
-        (360 - targetCenter);
-
-
-      wheel.style.transform =
-        "rotate(" +
-        finalRotation +
-        "deg)";
-
-
-      setTimeout(() => {
-
-        resultPrize.textContent =
-          prize;
-
-        couponCode.textContent =
-          coupon;
-
-        nextDate.textContent =
-          "يمكنك المشاركة مرة أخرى في: " +
-          formatDate(
-            spin.next_eligible_at
-          );
-
-        resultBox.style.display =
-          "block";
-
-        wheelStatus.textContent =
-          "مبروك 🎉";
-
-      }, 5200);
-
-
-    } catch (error) {
+    if (error) {
 
       console.error(error);
 
-      spinBtn.disabled = false;
+      return;
+
+    }
 
 
-      let message =
-        error?.message ||
-        "حدث خطأ.";
+    if (
+      !data ||
+      !data.length
+    ) {
 
-
-      if (
-        message.includes("14")
-      ) {
-
-        message =
-          "لقد شاركت مسبقًا. يمكنك المشاركة مرة أخرى بعد 14 يومًا.";
-
-      }
-
-
-      showToast(message);
+      spinBtn.disabled =
+        false;
 
       wheelStatus.textContent =
-        "";
+        "لديك فرصة للمشاركة.";
+
+      return;
 
     }
 
-  }
+
+    const last =
+      data[0];
 
 
-  /* =====================================================
-     ADMIN PARTICIPANTS
-  ===================================================== */
-
-  async function loadParticipants() {
-
-    try {
-
-      const {
-        data,
-        error
-      } =
-        await db.rpc(
-          "get_participants"
-        );
+    const next =
+      new Date(
+        last.next_eligible_at
+      );
 
 
-      if (error) {
-        throw error;
-      }
+    if (
+      next > new Date()
+    ) {
 
+      spinBtn.disabled =
+        true;
 
-      participantsBody.innerHTML =
-        "";
+      wheelStatus.textContent =
+        "يمكنك المشاركة مرة أخرى بعد " +
+        formatRemaining(next);
 
+    } else {
 
-      if (!data || !data.length) {
+      spinBtn.disabled =
+        false;
 
-        participantsBody.innerHTML =
-          "<tr><td colspan='7'>لا توجد مشاركات بعد.</td></tr>";
-
-        return;
-
-      }
-
-
-      data.forEach(user => {
-
-        const row =
-          document.createElement("tr");
-
-
-        row.innerHTML = `
-
-          <td>
-            ${escapeHtml(user.full_name || "-")}
-          </td>
-
-          <td>
-            ${escapeHtml(user.phone || "-")}
-          </td>
-
-          <td>
-            ${escapeHtml(user.email || "-")}
-          </td>
-
-          <td>
-            ${escapeHtml(user.prize || "-")}
-          </td>
-
-          <td dir="ltr">
-            ${escapeHtml(user.coupon_code || "-")}
-          </td>
-
-          <td>
-            ${formatDate(user.last_spin_at)}
-          </td>
-
-          <td>
-            ${formatDate(user.next_eligible_at)}
-          </td>
-
-        `;
-
-
-        participantsBody.appendChild(row);
-
-      });
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      participantsBody.innerHTML =
-        "<tr><td colspan='7'>تعذر تحميل المشاركين.</td></tr>";
+      wheelStatus.textContent =
+        "فرصتك متاحة الآن.";
 
     }
 
-  }
 
+  } catch (error) {
 
-  /* =====================================================
-     ESCAPE HTML
-  ===================================================== */
-
-  function escapeHtml(value) {
-
-    return String(value)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
+    console.error(error);
 
   }
 
-
-  /* =====================================================
-     AUTH STATE
-  ===================================================== */
-
-  db.auth.onAuthStateChange(
-    async (event, session) => {
-
-      if (
-        event === "SIGNED_IN" ||
-        event === "INITIAL_SESSION"
-      ) {
-
-        await showUser(session);
-
-      }
+}
 
 
-      if (
-        event === "SIGNED_OUT"
-      ) {
 
-        loginScreen.style.display =
-          "flex";
+/* =====================================================
+   SPIN
+===================================================== */
 
-        store.style.display =
-          "none";
-
-      }
-
-    }
-  );
+spinBtn.addEventListener(
+  "click",
+  spinWheel
+);
 
 
-  /* =====================================================
-     START
-  ===================================================== */
 
-  async function start() {
+async function spinWheel() {
+
+  if (spinBtn.disabled) {
+    return;
+  }
+
+
+  spinBtn.disabled =
+    true;
+
+
+  wheelStatus.textContent =
+    "جاري اختيار جائزتك...";
+
+
+  resultBox.style.display =
+    "none";
+
+
+  try {
 
     const {
       data: {
@@ -1627,12 +1544,437 @@
       await db.auth.getSession();
 
 
-    await showUser(session);
+    if (!session) {
+
+      showToast(
+        "يجب تسجيل الدخول أولاً."
+      );
+
+      spinBtn.disabled =
+        false;
+
+      return;
+
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await db.rpc(
+        "spin_wheel"
+      );
+
+
+    if (error) {
+      throw error;
+    }
+
+
+    const spin =
+      Array.isArray(data)
+        ? data[0]
+        : data;
+
+
+    if (!spin) {
+
+      throw new Error(
+        "لم يتم استلام نتيجة."
+      );
+
+    }
+
+
+    const prize =
+      spin.prize || "";
+
+
+    const discount =
+      Number(
+        spin.discount_percent || 0
+      );
+
+
+    const coupon =
+      spin.coupon_code || "";
+
+
+    /*
+      الترتيب البصري:
+
+      0 = 5%
+      1 = حظ أوفر
+      2 = 10%
+      3 = 15%
+      4 = 20%
+      5 = 25%
+      6 = 30%
+    */
+
+
+    let targetIndex =
+      0;
+
+
+    if (
+      discount === 0 ||
+      prize.includes("حظ")
+    ) {
+
+      targetIndex =
+        1;
+
+    } else {
+
+      const map = {
+
+        5: 0,
+
+        10: 2,
+
+        15: 3,
+
+        20: 4,
+
+        25: 5,
+
+        30: 6
+
+      };
+
+
+      targetIndex =
+        map[discount] ??
+        0;
+
+    }
+
+
+    const segment =
+      360 / 7;
+
+
+    const targetCenter =
+      targetIndex *
+      segment +
+      segment / 2;
+
+
+    /*
+      المؤشر في الأعلى.
+      الدوران النهائي يضع
+      القطاع الفائز عند المؤشر.
+    */
+
+    const finalRotation =
+      360 * 7 +
+      (360 - targetCenter);
+
+
+    /*
+      هذا المتغير يعالج مشكلة
+      النصوص المقلوبة.
+
+      العجلة تدور،
+      لكن النص يبقى مستقيمًا.
+    */
+
+    wheel.style.setProperty(
+      "--wheel-rotation",
+      finalRotation + "deg"
+    );
+
+
+    wheel.style.transform =
+      "rotate(" +
+      finalRotation +
+      "deg)";
+
+
+    setTimeout(() => {
+
+      resultPrize.textContent =
+        prize;
+
+
+      couponCode.textContent =
+        coupon;
+
+
+      nextDate.textContent =
+        "يمكنك المشاركة مرة أخرى في: " +
+        formatDate(
+          spin.next_eligible_at
+        );
+
+
+      resultBox.style.display =
+        "block";
+
+
+      wheelStatus.textContent =
+        "مبروك 🎉";
+
+
+    }, 5350);
+
+
+  } catch (error) {
+
+    console.error(error);
+
+
+    spinBtn.disabled =
+      false;
+
+
+    let message =
+      error?.message ||
+      "حدث خطأ.";
+
+
+    if (
+      message.includes("14")
+    ) {
+
+      message =
+        "لقد شاركت مسبقًا. يمكنك المشاركة مرة أخرى بعد 14 يومًا.";
+
+    }
+
+
+    showToast(message);
+
+
+    wheelStatus.textContent =
+      "";
 
   }
 
+}
 
-  start();
+
+
+/* =====================================================
+   ADMIN
+===================================================== */
+
+async function loadParticipants() {
+
+  try {
+
+    const {
+      data,
+      error
+    } =
+      await db.rpc(
+        "get_participants"
+      );
+
+
+    if (error) {
+      throw error;
+    }
+
+
+    participantsBody.innerHTML =
+      "";
+
+
+    if (
+      !data ||
+      !data.length
+    ) {
+
+      participantsBody.innerHTML =
+        "<tr><td colspan='7'>لا توجد مشاركات بعد.</td></tr>";
+
+      return;
+
+    }
+
+
+    data.forEach(
+      user => {
+
+        const row =
+          document.createElement(
+            "tr"
+          );
+
+
+        row.innerHTML = `
+
+          <td>
+            ${escapeHtml(
+              user.full_name || "-"
+            )}
+          </td>
+
+          <td>
+            ${escapeHtml(
+              user.phone || "-"
+            )}
+          </td>
+
+          <td>
+            ${escapeHtml(
+              user.email || "-"
+            )}
+          </td>
+
+          <td>
+            ${escapeHtml(
+              user.prize || "-"
+            )}
+          </td>
+
+          <td dir="ltr">
+            ${escapeHtml(
+              user.coupon_code || "-"
+            )}
+          </td>
+
+          <td>
+            ${formatDate(
+              user.last_spin_at
+            )}
+          </td>
+
+          <td>
+            ${formatDate(
+              user.next_eligible_at
+            )}
+          </td>
+
+        `;
+
+
+        participantsBody.appendChild(
+          row
+        );
+
+      }
+    );
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    participantsBody.innerHTML =
+      "<tr><td colspan='7'>تعذر تحميل المشاركين.</td></tr>";
+
+  }
+
+}
+
+
+
+/* =====================================================
+   ESCAPE
+===================================================== */
+
+function escapeHtml(value) {
+
+  return String(value)
+
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
+}
+
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+db.auth.onAuthStateChange(
+  async (
+    event,
+    session
+  ) => {
+
+    if (
+      event ===
+        "SIGNED_IN" ||
+
+      event ===
+        "INITIAL_SESSION"
+    ) {
+
+      await showUser(
+        session
+      );
+
+    }
+
+
+    if (
+      event ===
+      "SIGNED_OUT"
+    ) {
+
+      loginScreen.style.display =
+        "flex";
+
+      store.style.display =
+        "none";
+
+    }
+
+  }
+);
+
+
+
+/* =====================================================
+   START
+===================================================== */
+
+async function start() {
+
+  const {
+    data: {
+      session
+    }
+  } =
+    await db.auth.getSession();
+
+
+  await showUser(
+    session
+  );
+
+}
+
+
+start();
 
 </script>
 
