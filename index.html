@@ -1,1647 +1,1356 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-  <meta charset="UTF-8">
-
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-  <title>HUMO | اختيار يليق بك</title>
-
-  <meta name="description"
-        content="HUMO — اختيارات مميزة بتفاصيل تستحق أن تُرى.">
-
-  <!-- HUMO FAVICON -->
-  <link rel="icon"
-        type="image/png"
-        href="IMG_3750.png">
-
-  <!-- LUXURY FONTS -->
-  <link rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-  <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-
-
-  <style>
-
-    /* =========================================
-       RESET
-    ========================================= */
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: #ffffff;
-      color: #111111;
-      font-family: "Noto Sans Arabic", sans-serif;
-      line-height: 1.6;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font-family: inherit;
-    }
-
-
-    /* =========================================
-       HEADER
-    ========================================= */
-
-    header {
-      width: 100%;
-      background: rgba(255,255,255,0.96);
-      border-bottom: 1px solid #eeeeee;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(15px);
-    }
-
-    .nav {
-      max-width: 1250px;
-      height: 82px;
-      margin: auto;
-      padding: 0 28px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-    }
-
-    .logo img {
-      width: 105px;
-      height: auto;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 34px;
-      align-items: center;
-
-      font-size: 13px;
-      font-weight: 500;
-    }
-
-    .nav-links a {
-      transition: 0.25s ease;
-    }
-
-    .nav-links a:hover {
-      opacity: 0.45;
-    }
-
-    .menu-btn {
-      display: none;
-
-      border: 0;
-      background: none;
-
-      font-size: 26px;
-      cursor: pointer;
-    }
-
-
-    /* =========================================
-       HERO
-    ========================================= */
-
-    .hero {
-      min-height: 720px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      text-align: center;
-
-      padding: 100px 20px;
-
-      background:
-        radial-gradient(
-          circle at center,
-          #f3f3f3 0%,
-          #ffffff 55%
-        );
-    }
-
-    .hero-content {
-      width: 100%;
-      max-width: 900px;
-    }
-
-    .hero-logo {
-      width: 250px;
-      margin: 0 auto 55px;
-    }
-
-    .hero h1 {
-      font-family: "Noto Sans Arabic", sans-serif;
-
-      font-size: clamp(42px, 6vw, 76px);
-
-      font-weight: 800;
-
-      letter-spacing: -2px;
-
-      line-height: 1.3;
-
-      margin-bottom: 22px;
-    }
-
-    .hero-description {
-      max-width: 650px;
-
-      margin: 0 auto 35px;
-
-      color: #6a6a6a;
-
-      font-size: 17px;
-
-      font-weight: 400;
-    }
-
-    .hero-button {
-      display: inline-block;
-
-      background: #111111;
-
-      color: #ffffff;
-
-      padding: 15px 40px;
-
-      font-size: 14px;
-
-      transition: 0.3s ease;
-    }
-
-    .hero-button:hover {
-      background: #333333;
-
-      transform: translateY(-2px);
-    }
-
-
-    /* =========================================
-       SECTION
-    ========================================= */
-
-    .section {
-      max-width: 1250px;
-
-      margin: auto;
-
-      padding: 100px 28px;
-    }
-
-    .section-heading {
-      text-align: center;
-
-      margin-bottom: 55px;
-    }
-
-    .section-heading h2 {
-      font-size: 34px;
-
-      font-weight: 800;
-
-      margin-bottom: 8px;
-    }
-
-    .section-heading p {
-      color: #888;
-
-      font-size: 14px;
-    }
-
-
-    /* =========================================
-       CATEGORIES
-    ========================================= */
-
-    .categories {
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 16px;
-    }
-
-    .category {
-      height: 210px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      background: #f5f5f5;
-
-      font-size: 23px;
-
-      font-weight: 700;
-
-      transition: 0.35s ease;
-    }
-
-    .category:hover {
-      background: #111;
-
-      color: #fff;
-    }
-
-
-    /* =========================================
-       PRODUCTS
-    ========================================= */
-
-    .products {
-      display: grid;
-
-      grid-template-columns:
-        repeat(4, 1fr);
-
-      gap: 24px;
-    }
-
-    .product {
-      background: #ffffff;
-
-      transition: 0.35s ease;
-    }
-
-    .product:hover {
-      transform: translateY(-5px);
-    }
-
-    .product-image {
-      width: 100%;
-
-      aspect-ratio: 1 / 1.15;
-
-      background:
-        linear-gradient(
-          135deg,
-          #f5f5f5,
-          #eeeeee
-        );
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      color: #999;
-
-      font-size: 13px;
-
-      overflow: hidden;
-    }
-
-    .product-image span {
-      color: #999;
-    }
-
-    .product-info {
-      padding: 18px 2px 5px;
-    }
-
-    .product-name {
-      font-family:
-        "Cormorant Garamond",
-        serif;
-
-      font-size: 27px;
-
-      font-weight: 600;
-
-      direction: ltr;
-
-      text-align: left;
-
-      margin-bottom: 3px;
-    }
-
-    .product-description {
-      color: #777;
-
-      font-size: 12px;
-
-      margin-bottom: 10px;
-    }
-
-    .product-price {
-      font-family:
-        "Cormorant Garamond",
-        serif;
-
-      direction: ltr;
-
-      text-align: left;
-
-      font-size: 27px;
-
-      font-weight: 600;
-
-      margin-bottom: 16px;
-    }
-
-    .order-button {
-      width: 100%;
-
-      border: 1px solid #111;
-
-      background: #111;
-
-      color: #fff;
-
-      padding: 13px;
-
-      cursor: pointer;
-
-      font-size: 13px;
-
-      transition: 0.3s;
-    }
-
-    .order-button:hover {
-      background: #fff;
-
-      color: #111;
-    }
-
-
-    /* =========================================
-       FEATURED STATEMENT
-    ========================================= */
-
-    .statement {
-      background: #f7f7f7;
-
-      text-align: center;
-
-      padding: 110px 25px;
-    }
-
-    .statement h2 {
-      font-size: clamp(32px, 5vw, 58px);
-
-      font-weight: 800;
-
-      margin-bottom: 20px;
-    }
-
-    .statement p {
-      color: #777;
-
-      font-size: 16px;
-    }
-
-
-    /* =========================================
-       HUMO THURSDAY
-    ========================================= */
-
-    .thursday {
-      background: #111;
-
-      color: #fff;
-
-      padding: 110px 25px;
-
-      text-align: center;
-    }
-
-    .thursday-content {
-      max-width: 1000px;
-
-      margin: auto;
-    }
-
-    .thursday-title {
-      font-family:
-        "Cormorant Garamond",
-        serif;
-
-      font-size: 58px;
-
-      letter-spacing: 3px;
-
-      margin-bottom: 5px;
-    }
-
-    .thursday-subtitle {
-      color: #aaa;
-
-      font-size: 14px;
-
-      margin-bottom: 55px;
-    }
-
-    .wheel-wrapper {
-      width: 320px;
-      height: 320px;
-
-      margin: 0 auto 35px;
-
-      position: relative;
-    }
-
-    .wheel {
-      width: 320px;
-      height: 320px;
-
-      border-radius: 50%;
-
-      border: 7px solid #fff;
-
-      background:
-        conic-gradient(
-          #222 0deg 45deg,
-          #eeeeee 45deg 90deg,
-          #222 90deg 135deg,
-          #eeeeee 135deg 180deg,
-          #222 180deg 225deg,
-          #eeeeee 225deg 270deg,
-          #222 270deg 315deg,
-          #eeeeee 315deg 360deg
-        );
-
-      position: relative;
-
-      transition:
-        transform 4s
-        cubic-bezier(.17,.67,.12,.99);
-
-      box-shadow:
-        0 25px 70px
-        rgba(0,0,0,0.45);
-    }
-
-    .pointer {
-      position: absolute;
-
-      top: -17px;
-
-      left: 50%;
-
-      transform:
-        translateX(-50%);
-
-      width: 0;
-      height: 0;
-
-      border-left:
-        14px solid transparent;
-
-      border-right:
-        14px solid transparent;
-
-      border-top:
-        28px solid #fff;
-
-      z-index: 5;
-    }
-
-    .wheel-labels {
-      position: absolute;
-
-      inset: 0;
-    }
-
-    .wheel-labels span {
-      position: absolute;
-
-      left: 50%;
-      top: 50%;
-
-      font-size: 14px;
-
-      font-weight: 700;
-
-      transform-origin:
-        center -125px;
-    }
-
-    .wheel-labels span:nth-child(1) {
-      transform:
-        translate(-50%, -50%)
-        rotate(22deg)
-        translateY(-125px);
-    }
-
-    .wheel-labels span:nth-child(2) {
-      color: #111;
-
-      transform:
-        translate(-50%, -50%)
-        rotate(67deg)
-        translateY(-125px);
-    }
-
-    .wheel-labels span:nth-child(3) {
-      transform:
-        translate(-50%, -50%)
-        rotate(112deg)
-        translateY(-125px);
-    }
-
-    .wheel-labels span:nth-child(4) {
-      color: #111;
-
-      transform:
-        translate(-50%, -50%)
-        rotate(157deg)
-        translateY(-125px);
-    }
-
-    .wheel-labels span:nth-child(5) {
-      transform:
-        translate(-50%, -50%)
-        rotate(202deg)
-        translateY(-125px);
-    }
-
-    .wheel-labels span:nth-child(6) {
-      color: #111;
-
-      transform:
-        translate(-50%, -50%)
-        rotate(247deg)
-        translateY(-125px);
-    }
-
-    .wheel-labels span:nth-child(7) {
-      transform:
-        translate(-50%, -50%)
-        rotate(292deg)
-        translateY(-125px);
-    }
-
-    .wheel-labels span:nth-child(8) {
-      color: #111;
-
-      transform:
-        translate(-50%, -50%)
-        rotate(337deg)
-        translateY(-125px);
-    }
-
-    .wheel-center {
-      position: absolute;
-
-      width: 66px;
-      height: 66px;
-
-      left: 50%;
-      top: 50%;
-
-      transform:
-        translate(-50%, -50%);
-
-      border-radius: 50%;
-
-      background: #fff;
-
-      color: #111;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      font-family:
-        "Cormorant Garamond",
-        serif;
-
-      font-size: 19px;
-
-      font-weight: 700;
-
-      z-index: 4;
-    }
-
-    .spin-button {
-      border: 0;
-
-      background: #fff;
-
-      color: #111;
-
-      padding: 15px 45px;
-
-      font-size: 14px;
-
-      font-weight: 700;
-
-      cursor: pointer;
-
-      transition: 0.3s;
-    }
-
-    .spin-button:hover {
-      transform: scale(1.04);
-    }
-
-    .spin-button:disabled {
-      opacity: 0.5;
-
-      cursor: not-allowed;
-    }
-
-    .wheel-result {
-      min-height: 55px;
-
-      margin-top: 25px;
-
-      font-size: 15px;
-
-      line-height: 2;
-    }
-
-
-    /* =========================================
-       ABOUT
-    ========================================= */
-
-    .about {
-      max-width: 800px;
-
-      margin: auto;
-
-      text-align: center;
-    }
-
-    .about-logo {
-      width: 160px;
-
-      margin:
-        0 auto 35px;
-    }
-
-    .about h2 {
-      font-size: 35px;
-
-      margin-bottom: 20px;
-    }
-
-    .about p {
-      color: #777;
-
-      font-size: 16px;
-
-      line-height: 2.2;
-    }
-
-
-    /* =========================================
-       FOOTER
-    ========================================= */
-
-    footer {
-      background: #111;
-
-      color: #fff;
-
-      padding: 70px 25px 30px;
-
-      text-align: center;
-    }
-
-    .footer-logo {
-      width: 125px;
-
-      margin: 0 auto 20px;
-    }
-
-    .footer-text {
-      color: #aaa;
-
-      font-size: 13px;
-
-      margin-bottom: 35px;
-    }
-
-    .footer-bottom {
-      border-top:
-        1px solid #333;
-
-      padding-top: 22px;
-
-      color: #666;
-
-      font-size: 11px;
-    }
-
-
-    /* =========================================
-       MOBILE
-    ========================================= */
-
-    @media (max-width: 900px) {
-
-      .nav-links {
-        display: none;
-      }
-
-      .menu-btn {
-        display: block;
-      }
-
-      .products {
-        grid-template-columns:
-          repeat(2, 1fr);
-
-        gap: 25px 15px;
-      }
-
-      .categories {
-        grid-template-columns: 1fr;
-      }
-
-    }
-
-
-    @media (max-width: 600px) {
-
-      .nav {
-        height: 70px;
-
-        padding:
-          0 18px;
-      }
-
-      .logo img {
-        width: 90px;
-      }
-
-      .hero {
-        min-height: 620px;
-
-        padding:
-          80px 20px;
-      }
-
-      .hero-logo {
-        width: 190px;
-
-        margin-bottom: 45px;
-      }
-
-      .hero h1 {
-        font-size: 43px;
-
-        letter-spacing:
-          -1.5px;
-      }
-
-      .hero-description {
-        font-size: 14px;
-      }
-
-      .section {
-        padding:
-          75px 18px;
-      }
-
-      .section-heading h2 {
-        font-size: 28px;
-      }
-
-      .products {
-        grid-template-columns:
-          repeat(2, 1fr);
-
-        gap:
-          35px 13px;
-      }
-
-      .product-name {
-        font-size: 22px;
-      }
-
-      .product-price {
-        font-size: 23px;
-      }
-
-      .product-description {
-        font-size: 11px;
-      }
-
-      .order-button {
-        font-size: 12px;
-
-        padding: 11px 5px;
-      }
-
-      .statement {
-        padding:
-          85px 20px;
-      }
-
-      .statement h2 {
-        font-size: 35px;
-      }
-
-      .thursday {
-        padding:
-          80px 18px;
-      }
-
-      .thursday-title {
-        font-size: 43px;
-      }
-
-      .wheel-wrapper,
-      .wheel {
-        width: 285px;
-        height: 285px;
-      }
-
-    }
-
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HUMO | متجر</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:"Noto Sans Arabic",sans-serif;
+  background:#f8f7f4;
+  color:#171717;
+  min-height:100vh;
+}
+
+button,input{
+  font-family:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* AUTH */
+#authScreen{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:25px;
+  background:#f7f6f2;
+}
+
+.auth-box{
+  width:100%;
+  max-width:430px;
+  background:#fff;
+  padding:38px 28px;
+  border:1px solid #e8e5df;
+  box-shadow:0 15px 50px rgba(0,0,0,.07);
+}
+
+.logo{
+  font-family:"Cormorant Garamond",serif;
+  font-size:52px;
+  font-weight:700;
+  letter-spacing:6px;
+  text-align:center;
+  direction:ltr;
+  margin-bottom:5px;
+}
+
+.auth-subtitle{
+  text-align:center;
+  color:#777;
+  font-size:13px;
+  margin-bottom:30px;
+}
+
+.auth-box h2{
+  font-size:20px;
+  text-align:center;
+  margin-bottom:22px;
+}
+
+.field{
+  margin-bottom:14px;
+}
+
+.field label{
+  display:block;
+  font-size:13px;
+  margin-bottom:6px;
+  color:#555;
+}
+
+.field input{
+  width:100%;
+  height:48px;
+  border:1px solid #ddd9d2;
+  padding:0 14px;
+  outline:none;
+  background:#fafafa;
+  font-size:14px;
+}
+
+.field input:focus{
+  border-color:#222;
+  background:#fff;
+}
+
+.main-btn{
+  width:100%;
+  height:50px;
+  border:0;
+  background:#111;
+  color:#fff;
+  font-weight:700;
+  margin-top:8px;
+}
+
+.secondary-btn{
+  width:100%;
+  height:46px;
+  border:1px solid #222;
+  background:#fff;
+  color:#111;
+  font-weight:600;
+  margin-top:10px;
+}
+
+.auth-switch{
+  text-align:center;
+  font-size:13px;
+  color:#777;
+  margin-top:18px;
+}
+
+.auth-switch button{
+  border:0;
+  background:none;
+  font-weight:700;
+  text-decoration:underline;
+}
+
+.message{
+  margin-top:15px;
+  padding:11px;
+  font-size:13px;
+  text-align:center;
+  display:none;
+}
+
+.message.error{
+  display:block;
+  background:#fff1f1;
+  color:#9b2222;
+}
+
+.message.success{
+  display:block;
+  background:#f0f8f1;
+  color:#28633a;
+}
+
+/* STORE */
+#storeScreen{
+  min-height:100vh;
+}
+
+header{
+  height:75px;
+  background:#fff;
+  border-bottom:1px solid #e7e4df;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 6%;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+
+.header-logo{
+  font-family:"Cormorant Garamond",serif;
+  font-size:38px;
+  font-weight:700;
+  letter-spacing:5px;
+  direction:ltr;
+}
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.header-btn{
+  border:1px solid #ddd;
+  background:#fff;
+  padding:8px 13px;
+  font-size:12px;
+}
+
+.hero{
+  padding:75px 20px 60px;
+  text-align:center;
+  background:#f5f3ef;
+}
+
+.hero-small{
+  font-size:12px;
+  letter-spacing:3px;
+  direction:ltr;
+  color:#777;
+  margin-bottom:12px;
+}
+
+.hero h1{
+  font-family:"Cormorant Garamond",serif;
+  font-size:60px;
+  direction:ltr;
+  letter-spacing:4px;
+}
+
+.hero p{
+  color:#777;
+  margin-top:8px;
+  font-size:14px;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:45px 20px;
+}
+
+/* PRODUCTS */
+.section-title{
+  text-align:center;
+  margin-bottom:28px;
+}
+
+.section-title h2{
+  font-family:"Cormorant Garamond",serif;
+  font-size:36px;
+  direction:ltr;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+
+.product{
+  background:#fff;
+  border:1px solid #e8e5df;
+  padding-bottom:20px;
+}
+
+.product-img{
+  height:310px;
+  background:#f1efeb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.product-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.product-placeholder{
+  font-family:"Cormorant Garamond",serif;
+  font-size:45px;
+  letter-spacing:5px;
+}
+
+.product-info{
+  padding:18px;
+}
+
+.product-name{
+  font-family:"Cormorant Garamond",serif;
+  font-size:25px;
+  direction:ltr;
+}
+
+.product-price{
+  margin-top:7px;
+  font-weight:700;
+}
+
+/* THURSDAY */
+.thursday{
+  margin-top:55px;
+  background:#111;
+  color:#fff;
+  padding:45px 20px 55px;
+  text-align:center;
+}
+
+.thursday-tag{
+  font-size:11px;
+  letter-spacing:3px;
+  direction:ltr;
+  color:#aaa;
+}
+
+.thursday h2{
+  font-family:"Cormorant Garamond",serif;
+  direction:ltr;
+  font-size:48px;
+  margin:5px 0;
+}
+
+.thursday-desc{
+  color:#bbb;
+  font-size:13px;
+}
+
+.wheel-wrap{
+  width:310px;
+  height:310px;
+  margin:35px auto 25px;
+  position:relative;
+}
+
+.wheel{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  border:8px solid #fff;
+  background:
+    conic-gradient(
+      #e8e2d7 0deg 60deg,
+      #222 60deg 120deg,
+      #d5c7b4 120deg 180deg,
+      #333 180deg 240deg,
+      #eee8de 240deg 300deg,
+      #555 300deg 360deg
+    );
+  box-shadow:0 10px 35px rgba(0,0,0,.35);
+  position:relative;
+  transition:transform 5s cubic-bezier(.15,.8,.15,1);
+}
+
+.wheel-label{
+  position:absolute;
+  width:100%;
+  height:100%;
+  inset:0;
+  border-radius:50%;
+  pointer-events:none;
+}
+
+.wheel-label span{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:85px;
+  margin-left:-42px;
+  margin-top:-10px;
+  text-align:center;
+  font-size:11px;
+  font-weight:700;
+}
+
+.l1{transform:translateY(-112px);}
+.l2{transform:translate(97px,-56px);}
+.l3{transform:translate(97px,52px);}
+.l4{transform:translateY(105px);}
+.l5{transform:translate(-97px,52px);}
+.l6{transform:translate(-97px,-56px);}
+
+.wheel-center{
+  position:absolute;
+  width:70px;
+  height:70px;
+  background:#fff;
+  border-radius:50%;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  z-index:5;
+  box-shadow:0 3px 15px rgba(0,0,0,.25);
+}
+
+.pointer{
+  position:absolute;
+  top:-15px;
+  left:50%;
+  transform:translateX(-50%);
+  width:0;
+  height:0;
+  border-left:13px solid transparent;
+  border-right:13px solid transparent;
+  border-top:28px solid #fff;
+  z-index:10;
+}
+
+.spin-btn{
+  background:#fff;
+  color:#111;
+  border:0;
+  padding:14px 35px;
+  font-weight:800;
+  min-width:220px;
+}
+
+.spin-btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.countdown{
+  margin-top:16px;
+  color:#bbb;
+  font-size:13px;
+}
+
+.result{
+  max-width:400px;
+  margin:20px auto 0;
+  background:#fff;
+  color:#111;
+  padding:20px;
+  display:none;
+}
+
+.result.show{
+  display:block;
+}
+
+.result-prize{
+  font-size:25px;
+  font-weight:800;
+}
+
+.coupon{
+  margin-top:10px;
+  padding:12px;
+  background:#f3f1ed;
+  font-family:monospace;
+  font-size:18px;
+  direction:ltr;
+  letter-spacing:2px;
+}
+
+.admin{
+  max-width:1100px;
+  margin:50px auto;
+  padding:0 20px 60px;
+}
+
+.admin-box{
+  background:#fff;
+  border:1px solid #ddd;
+  padding:25px;
+  overflow-x:auto;
+}
+
+.admin h2{
+  margin-bottom:20px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:850px;
+  font-size:12px;
+}
+
+th,td{
+  padding:11px;
+  border-bottom:1px solid #eee;
+  text-align:right;
+  white-space:nowrap;
+}
+
+th{
+  background:#f5f3ef;
+}
+
+footer{
+  padding:35px;
+  text-align:center;
+  border-top:1px solid #ddd;
+  color:#777;
+  font-size:12px;
+  direction:ltr;
+}
+
+@media(max-width:750px){
+  header{
+    padding:0 18px;
+  }
+
+  .header-logo{
+    font-size:30px;
+  }
+
+  .hero h1{
+    font-size:48px;
+  }
+
+  .products{
+    grid-template-columns:1fr;
+  }
+
+  .product-img{
+    height:360px;
+  }
+
+  .wheel-wrap{
+    width:285px;
+    height:285px;
+  }
+}
+</style>
 </head>
-
 
 <body>
 
+<!-- LOGIN / REGISTER -->
+<section id="authScreen">
 
-  <!-- =====================================
-       HEADER
-  ====================================== -->
+  <div class="auth-box">
 
-  <header>
+    <div class="logo">HUMO</div>
+    <div class="auth-subtitle">HUMO — DETAILS WORTH OWNING</div>
 
-    <nav class="nav">
+    <div id="loginForm">
 
-      <a href="#top"
-         class="logo">
+      <h2>تسجيل الدخول</h2>
 
-        <img
-          src="IMG_3748.png"
-          alt="HUMO">
-
-      </a>
-
-
-      <div class="nav-links">
-
-        <a href="#products">
-          المنتجات
-        </a>
-
-        <a href="#categories">
-          التصنيفات
-        </a>
-
-        <a href="#thursday">
-          HUMO THURSDAY
-        </a>
-
-        <a href="#about">
-          عن HUMO
-        </a>
-
+      <div class="field">
+        <label>البريد الإلكتروني</label>
+        <input id="loginEmail" type="email" placeholder="example@email.com">
       </div>
 
-
-      <button
-        class="menu-btn"
-        onclick="goToProducts()">
-
-        ☰
-
-      </button>
-
-    </nav>
-
-  </header>
-
-
-
-  <!-- =====================================
-       HERO
-  ====================================== -->
-
-  <main id="top">
-
-    <section class="hero">
-
-      <div class="hero-content">
-
-
-        <img
-          src="IMG_3748.png"
-          alt="HUMO"
-          class="hero-logo">
-
-
-        <h1>
-          اختيار يليق بك
-        </h1>
-
-
-        <p class="hero-description">
-
-          تفاصيل مختارة بعناية لمن يبحث
-          عن القطعة التي تصنع الفرق.
-
-        </p>
-
-
-        <a
-          href="#products"
-          class="hero-button">
-
-          اكتشف المجموعة
-
-        </a>
-
-
+      <div class="field">
+        <label>كلمة المرور</label>
+        <input id="loginPassword" type="password" placeholder="••••••••">
       </div>
 
-    </section>
+      <button class="main-btn" onclick="login()">دخول</button>
 
-
-
-    <!-- =====================================
-         CATEGORIES
-    ====================================== -->
-
-    <section
-      class="section"
-      id="categories">
-
-
-      <div class="section-heading">
-
-        <h2>
-          تسوق حسب التصنيف
-        </h2>
-
-        <p>
-          اكتشف اختيارات HUMO
-        </p>
-
+      <div class="auth-switch">
+        ليس لديك حساب؟
+        <button onclick="showRegister()">إنشاء حساب</button>
       </div>
-
-
-      <div class="categories">
-
-
-        <a
-          href="#products"
-          class="category">
-
-          الأحذية
-
-        </a>
-
-
-        <a
-          href="#products"
-          class="category">
-
-          الحقائب
-
-        </a>
-
-
-        <a
-          href="#products"
-          class="category">
-
-          مختارات HUMO
-
-        </a>
-
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =====================================
-         PRODUCTS
-    ====================================== -->
-
-    <section
-      class="section"
-      id="products">
-
-
-      <div class="section-heading">
-
-        <h2>
-          مختارات HUMO
-        </h2>
-
-        <p>
-          تفاصيل تستحق أن تُرى
-        </p>
-
-      </div>
-
-
-      <div class="products">
-
-
-        <!-- PRODUCT 1 -->
-
-        <article class="product">
-
-
-          <div class="product-image">
-
-            <span>
-              صورة المنتج
-            </span>
-
-          </div>
-
-
-          <div class="product-info">
-
-            <h3 class="product-name">
-              HUMO Sneaker
-            </h3>
-
-            <p class="product-description">
-              تصميم مختار بعناية لإطلالة مختلفة.
-            </p>
-
-            <div class="product-price">
-              65,000 IQD
-            </div>
-
-
-            <button
-              class="order-button"
-              onclick="orderProduct('HUMO Sneaker')">
-
-              اطلب الآن
-
-            </button>
-
-          </div>
-
-        </article>
-
-
-
-        <!-- PRODUCT 2 -->
-
-        <article class="product">
-
-
-          <div class="product-image">
-
-            <span>
-              صورة المنتج
-            </span>
-
-          </div>
-
-
-          <div class="product-info">
-
-            <h3 class="product-name">
-              HUMO Bag
-            </h3>
-
-            <p class="product-description">
-              تفاصيل متداخلة تستحق الاقتناء.
-            </p>
-
-            <div class="product-price">
-              75,000 IQD
-            </div>
-
-
-            <button
-              class="order-button"
-              onclick="orderProduct('HUMO Bag')">
-
-              اطلب الآن
-
-            </button>
-
-          </div>
-
-        </article>
-
-
-
-        <!-- PRODUCT 3 -->
-
-        <article class="product">
-
-
-          <div class="product-image">
-
-            <span>
-              صورة المنتج
-            </span>
-
-          </div>
-
-
-          <div class="product-info">
-
-            <h3 class="product-name">
-              HUMO Selection
-            </h3>
-
-            <p class="product-description">
-              اختيار يضيف حضورًا مختلفًا.
-            </p>
-
-            <div class="product-price">
-              55,000 IQD
-            </div>
-
-
-            <button
-              class="order-button"
-              onclick="orderProduct('HUMO Selection')">
-
-              اطلب الآن
-
-            </button>
-
-          </div>
-
-        </article>
-
-
-
-        <!-- PRODUCT 4 -->
-
-        <article class="product">
-
-
-          <div class="product-image">
-
-            <span>
-              صورة المنتج
-            </span>
-
-          </div>
-
-
-          <div class="product-info">
-
-            <h3 class="product-name">
-              HUMO Edition
-            </h3>
-
-            <p class="product-description">
-              قطعة مختارة بعناية.
-            </p>
-
-            <div class="product-price">
-              70,000 IQD
-            </div>
-
-
-            <button
-              class="order-button"
-              onclick="orderProduct('HUMO Edition')">
-
-              اطلب الآن
-
-            </button>
-
-          </div>
-
-        </article>
-
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =====================================
-         STATEMENT
-    ====================================== -->
-
-    <section class="statement">
-
-      <h2>
-        تفاصيل تستحق أن تُرى
-      </h2>
-
-      <p>
-        HUMO — اختيار يليق بك.
-      </p>
-
-    </section>
-
-
-
-    <!-- =====================================
-         HUMO THURSDAY
-    ====================================== -->
-
-    <section
-      class="thursday"
-      id="thursday">
-
-
-      <div class="thursday-content">
-
-
-        <h2 class="thursday-title">
-          HUMO THURSDAY
-        </h2>
-
-
-        <p class="thursday-subtitle">
-
-          كل خميس،
-          فرصة جديدة للحصول على خصمك.
-
-        </p>
-
-
-        <div class="wheel-wrapper">
-
-
-          <div class="pointer"></div>
-
-
-          <div
-            class="wheel"
-            id="wheel">
-
-
-            <div class="wheel-labels">
-
-              <span>5%</span>
-
-              <span>10%</span>
-
-              <span>15%</span>
-
-              <span>20%</span>
-
-              <span>5%</span>
-
-              <span>10%</span>
-
-              <span>15%</span>
-
-              <span>حاول</span>
-
-            </div>
-
-
-            <div class="wheel-center">
-              HUMO
-            </div>
-
-
-          </div>
-
-        </div>
-
-
-        <button
-          class="spin-button"
-          id="spinButton"
-          onclick="spinWheel()">
-
-          أدر العجلة
-
-        </button>
-
-
-        <div
-          class="wheel-result"
-          id="wheelResult">
-
-          اضغط على الزر وجرب حظك.
-
-        </div>
-
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =====================================
-         ABOUT
-    ====================================== -->
-
-    <section
-      class="section"
-      id="about">
-
-
-      <div class="about">
-
-
-        <img
-          src="IMG_3748.png"
-          alt="HUMO"
-          class="about-logo">
-
-
-        <h2>
-          HUMO
-        </h2>
-
-
-        <p>
-
-          لا نبحث عن الكثير،
-          بل عن القطعة التي تستحق أن تكون لك.
-
-          في HUMO نختار التفاصيل بعناية،
-          لأن الاختيار الجيد لا يحتاج إلى مبالغة.
-
-        </p>
-
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-
-  <!-- =====================================
-       FOOTER
-  ====================================== -->
-
-  <footer>
-
-
-    <img
-      src="IMG_3749.png"
-      alt="HUMO"
-      class="footer-logo">
-
-
-    <p class="footer-text">
-      اختيار يليق بك.
-    </p>
-
-
-    <div class="footer-bottom">
-
-      © 2026 HUMO
-      — جميع الحقوق محفوظة
 
     </div>
 
 
-  </footer>
+    <div id="registerForm" class="hidden">
+
+      <h2>إنشاء حساب</h2>
+
+      <div class="field">
+        <label>الاسم الكامل</label>
+        <input id="registerName" type="text" placeholder="الاسم الكامل">
+      </div>
+
+      <div class="field">
+        <label>رقم الهاتف</label>
+        <input id="registerPhone" type="tel" placeholder="07xxxxxxxxx">
+      </div>
+
+      <div class="field">
+        <label>البريد الإلكتروني</label>
+        <input id="registerEmail" type="email" placeholder="example@email.com">
+      </div>
+
+      <div class="field">
+        <label>كلمة المرور</label>
+        <input id="registerPassword" type="password" placeholder="6 أحرف على الأقل">
+      </div>
+
+      <button class="main-btn" onclick="register()">إنشاء الحساب</button>
+
+      <div class="auth-switch">
+        لديك حساب؟
+        <button onclick="showLogin()">تسجيل الدخول</button>
+      </div>
+
+    </div>
+
+    <div id="authMessage" class="message"></div>
+
+  </div>
+
+</section>
 
 
+<!-- STORE -->
+<section id="storeScreen" class="hidden">
 
-  <!-- =====================================
-       JAVASCRIPT
-  ====================================== -->
+<header>
 
-  <script>
+  <div class="header-logo">HUMO</div>
+
+  <div class="header-actions">
+    <button id="adminBtn" class="header-btn hidden" onclick="showAdmin()">
+      المشاركون
+    </button>
+
+    <button class="header-btn" onclick="logout()">
+      خروج
+    </button>
+  </div>
+
+</header>
 
 
-    /* ORDER */
+<section class="hero">
 
-    function orderProduct(productName) {
+  <div class="hero-small">HUMO SHOP</div>
 
-      alert(
-        "تم اختيار " +
-        productName +
-        "\n\nسيتم إضافة نظام الطلب الإلكتروني قريبًا."
-      );
+  <h1>HUMO</h1>
 
+  <p>تفاصيل تستحق أن تُرى.</p>
+
+</section>
+
+
+<div class="container">
+
+  <div class="section-title">
+    <h2>COLLECTION</h2>
+  </div>
+
+  <div class="products">
+
+    <div class="product">
+
+      <div class="product-img">
+        <img
+          src="كيس%20ورقي%20للمتاجر%20بلون%20وردي%20نمط%20زهور.png"
+          alt="HUMO"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
+        >
+        <div class="product-placeholder" style="display:none;">HUMO</div>
+      </div>
+
+      <div class="product-info">
+        <div class="product-name">HUMO BAG</div>
+        <div class="product-price">75,000 IQD</div>
+      </div>
+
+    </div>
+
+
+    <div class="product">
+
+      <div class="product-img">
+        <div class="product-placeholder">HUMO</div>
+      </div>
+
+      <div class="product-info">
+        <div class="product-name">HUMO COLLECTION</div>
+        <div class="product-price">COMING SOON</div>
+      </div>
+
+    </div>
+
+
+    <div class="product">
+
+      <div class="product-img">
+        <div class="product-placeholder">HUMO</div>
+      </div>
+
+      <div class="product-info">
+        <div class="product-name">NEW DETAILS</div>
+        <div class="product-price">COMING SOON</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- THURSDAY WHEEL -->
+<section class="thursday">
+
+  <div class="thursday-tag">EVERY THURSDAY</div>
+
+  <h2>HUMO THURSDAY</h2>
+
+  <div class="thursday-desc">
+    فرصة واحدة كل 14 يومًا للفوز بخصم خاص.
+  </div>
+
+
+  <div class="wheel-wrap">
+
+    <div class="pointer"></div>
+
+    <div id="wheel" class="wheel">
+
+      <div class="wheel-label">
+        <span class="l1">10%</span>
+        <span class="l2">15%</span>
+        <span class="l3">20%</span>
+        <span class="l4">25%</span>
+        <span class="l5">30%</span>
+        <span class="l6">حظ أوفر</span>
+      </div>
+
+      <div class="wheel-center"></div>
+
+    </div>
+
+  </div>
+
+
+  <button id="spinBtn" class="spin-btn" onclick="spinWheel()">
+    أدر العجلة
+  </button>
+
+  <div id="countdown" class="countdown"></div>
+
+
+  <div id="result" class="result">
+
+    <div>مبروك 🎉</div>
+
+    <div id="resultPrize" class="result-prize"></div>
+
+    <div>كود الخصم الخاص بك:</div>
+
+    <div id="coupon" class="coupon"></div>
+
+  </div>
+
+</section>
+
+
+<!-- ADMIN -->
+<section id="adminSection" class="admin hidden">
+
+  <div class="admin-box">
+
+    <h2>قائمة المشاركين</h2>
+
+    <div id="adminTable">
+      جارِ تحميل البيانات...
+    </div>
+
+  </div>
+
+</section>
+
+
+<footer>
+  HUMO — Hussein & Mohammed
+</footer>
+
+</section>
+
+
+<script>
+
+const SUPABASE_URL =
+"https://vknhrxxkmhrnfbmsllid.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+"sb_publishable_QliqBYSeykn4F2Ddrsn8hg_F_N8dR-n";
+
+const db = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+
+let currentUser = null;
+let currentProfile = null;
+
+
+/* ---------------- AUTH UI ---------------- */
+
+function showMessage(text,type="error"){
+  const box=document.getElementById("authMessage");
+
+  box.textContent=text;
+  box.className="message "+type;
+}
+
+function showRegister(){
+
+  document.getElementById("loginForm").classList.add("hidden");
+  document.getElementById("registerForm").classList.remove("hidden");
+
+  document.getElementById("authMessage").className="message";
+}
+
+function showLogin(){
+
+  document.getElementById("registerForm").classList.add("hidden");
+  document.getElementById("loginForm").classList.remove("hidden");
+
+  document.getElementById("authMessage").className="message";
+}
+
+
+/* ---------------- REGISTER ---------------- */
+
+async function register(){
+
+  const name=document.getElementById("registerName").value.trim();
+  const phone=document.getElementById("registerPhone").value.trim();
+  const email=document.getElementById("registerEmail").value.trim();
+  const password=document.getElementById("registerPassword").value;
+
+  if(!name || !phone || !email || !password){
+
+    showMessage("يرجى ملء جميع الحقول.");
+    return;
+  }
+
+  if(password.length < 6){
+
+    showMessage("كلمة المرور يجب أن تكون 6 أحرف على الأقل.");
+    return;
+  }
+
+  const {data,error}=await db.auth.signUp({
+
+    email:email,
+    password:password,
+
+    options:{
+      data:{
+        full_name:name,
+        phone:phone
+      }
     }
 
+  });
 
 
-    /* MOBILE MENU */
+  if(error){
 
-    function goToProducts() {
-
-      document
-        .getElementById("products")
-        .scrollIntoView({
-          behavior: "smooth"
-        });
-
-    }
+    showMessage(error.message);
+    return;
+  }
 
 
+  if(data.session){
 
-    /* HUMO THURSDAY */
+    showMessage("تم إنشاء الحساب بنجاح.","success");
 
-    const wheel =
-      document.getElementById("wheel");
+    setTimeout(()=>{
+      enterStore(data.session.user);
+    },700);
 
-    const spinButton =
-      document.getElementById("spinButton");
+  }else{
 
-    const wheelResult =
-      document.getElementById("wheelResult");
+    showMessage(
+      "تم إنشاء الحساب. تحقق من بريدك الإلكتروني لتفعيل الحساب ثم سجّل الدخول.",
+      "success"
+    );
 
+  }
 
-    let spinning = false;
-
-    let currentRotation = 0;
-
-
-
-    function isThursday() {
-
-      const today = new Date();
-
-      return today.getDay() === 4;
-
-    }
+}
 
 
+/* ---------------- LOGIN ---------------- */
 
-    function generateCoupon() {
+async function login(){
 
-      const number =
-        Math.floor(
-          1000 +
-          Math.random() * 9000
-        );
+  const email=document.getElementById("loginEmail").value.trim();
+  const password=document.getElementById("loginPassword").value;
 
-      return "HUMO" + number;
+  if(!email || !password){
 
-    }
-
-
-
-    function spinWheel() {
+    showMessage("أدخل البريد الإلكتروني وكلمة المرور.");
+    return;
+  }
 
 
-      if (spinning) {
-        return;
+  const {data,error}=await db.auth.signInWithPassword({
+
+    email:email,
+    password:password
+
+  });
+
+
+  if(error){
+
+    showMessage(error.message);
+    return;
+  }
+
+
+  enterStore(data.user);
+
+}
+
+
+/* ---------------- LOGOUT ---------------- */
+
+async function logout(){
+
+  await db.auth.signOut();
+
+  location.reload();
+
+}
+
+
+/* ---------------- ENTER STORE ---------------- */
+
+async function enterStore(user){
+
+  currentUser=user;
+
+  const {data:profile}=await db
+    .from("profiles")
+    .select("*")
+    .eq("id",user.id)
+    .single();
+
+  currentProfile=profile;
+
+
+  document.getElementById("authScreen")
+    .classList.add("hidden");
+
+  document.getElementById("storeScreen")
+    .classList.remove("hidden");
+
+
+  if(profile && profile.is_admin){
+
+    document.getElementById("adminBtn")
+      .classList.remove("hidden");
+
+  }
+
+  checkThursday();
+
+}
+
+
+/* ---------------- THURSDAY CHECK ---------------- */
+
+function checkThursday(){
+
+  const now=new Date();
+
+  /*
+    JavaScript:
+    Sunday = 0
+    Monday = 1
+    ...
+    Thursday = 4
+  */
+
+  const isThursday=now.getDay()===4;
+
+  const btn=document.getElementById("spinBtn");
+
+
+  if(!isThursday){
+
+    btn.disabled=true;
+
+    document.getElementById("countdown").textContent=
+      "العجلة متاحة يوم الخميس فقط.";
+
+    return;
+  }
+
+
+  loadLastSpin();
+
+}
+
+
+/* ---------------- LAST SPIN ---------------- */
+
+async function loadLastSpin(){
+
+  const {data,error}=await db
+    .from("spins")
+    .select("*")
+    .eq("user_id",currentUser.id)
+    .order("spun_at",{ascending:false})
+    .limit(1);
+
+
+  if(error){
+
+    console.error(error);
+    return;
+  }
+
+
+  if(data && data.length){
+
+    const last=data[0];
+
+    const next=new Date(last.next_eligible_at);
+    const now=new Date();
+
+    if(next>now){
+
+      disableSpin(next);
+
+      if(last.coupon_code){
+
+        showPreviousResult(last);
+
       }
 
+      return;
+    }
 
-      if (!isThursday()) {
-
-        wheelResult.innerHTML =
-          "HUMO THURSDAY متاح كل خميس فقط.";
-
-        return;
-
-      }
+  }
 
 
-      spinning = true;
+  document.getElementById("spinBtn").disabled=false;
 
-      spinButton.disabled = true;
+  document.getElementById("countdown").textContent=
+    "أنت مؤهل للمشاركة اليوم 🎉";
 
-
-      wheelResult.innerHTML =
-        "جاري اختيار خصمك...";
-
-
-      const prizes = [
-
-        "5%",
-        "10%",
-        "15%",
-        "20%",
-        "5%",
-        "10%",
-        "15%",
-        "حاول مرة أخرى"
-
-      ];
+}
 
 
-      const randomIndex =
-        Math.floor(
-          Math.random() *
-          prizes.length
-        );
+/* ---------------- DISABLE SPIN ---------------- */
+
+function disableSpin(next){
+
+  const btn=document.getElementById("spinBtn");
+
+  btn.disabled=true;
+
+  updateCountdown(next);
+
+  const interval=setInterval(()=>{
+
+    if(new Date()>=next){
+
+      clearInterval(interval);
+
+      btn.disabled=false;
+
+      document.getElementById("countdown").textContent=
+        "أصبحت مؤهلًا للمشاركة 🎉";
+
+      return;
+    }
+
+    updateCountdown(next);
+
+  },1000);
+
+}
 
 
-      const prize =
-        prizes[randomIndex];
+function updateCountdown(next){
+
+  const diff=new Date(next)-new Date();
+
+  if(diff<=0){
+    return;
+  }
+
+  const days=Math.floor(diff/86400000);
+
+  const hours=Math.floor(
+    (diff%86400000)/3600000
+  );
+
+  const minutes=Math.floor(
+    (diff%3600000)/60000
+  );
+
+  const seconds=Math.floor(
+    (diff%60000)/1000
+  );
 
 
-      const segment =
-        45;
+  document.getElementById("countdown").textContent=
+    `المشاركة القادمة بعد ${days} يوم و ${hours} ساعة و ${minutes} دقيقة و ${seconds} ثانية`;
+
+}
 
 
-      const target =
-        360 -
-        (
-          randomIndex *
-          segment +
-          segment / 2
-        );
+/* ---------------- PREVIOUS RESULT ---------------- */
+
+function showPreviousResult(spin){
+
+  const result=document.getElementById("result");
+
+  document.getElementById("resultPrize").textContent=
+    spin.prize;
+
+  document.getElementById("coupon").textContent=
+    spin.coupon_code;
+
+  result.classList.add("show");
+
+}
 
 
-      currentRotation +=
-        360 * 6 +
-        target;
+/* ---------------- SPIN ---------------- */
+
+async function spinWheel(){
+
+  const btn=document.getElementById("spinBtn");
+
+  btn.disabled=true;
+
+  document.getElementById("countdown").textContent=
+    "جاري تدوير العجلة...";
 
 
-      wheel.style.transform =
-        "rotate(" +
-        currentRotation +
-        "deg)";
+  const {data,error}=await db.rpc("spin_wheel");
 
 
-      setTimeout(function() {
+  if(error){
 
+    console.error(error);
 
-        if (
-          prize ===
-          "حاول مرة أخرى"
-        ) {
+    btn.disabled=false;
 
-          wheelResult.innerHTML =
-            "حاول مرة أخرى في الجولة القادمة.";
+    if(error.message.includes("Thursday")){
 
-        }
+      document.getElementById("countdown").textContent=
+        "العجلة متاحة يوم الخميس فقط.";
 
-        else {
+    }else{
 
-          const coupon =
-            generateCoupon();
-
-
-          wheelResult.innerHTML =
-
-            "مبروك! حصلت على خصم " +
-
-            "<strong>" +
-            prize +
-            "</strong>" +
-
-            "<br>" +
-
-            "رمز الخصم: " +
-
-            "<strong>" +
-            coupon +
-            "</strong>";
-
-        }
-
-
-        spinning = false;
-
-        spinButton.disabled = false;
-
-
-      }, 4200);
+      document.getElementById("countdown").textContent=
+        error.message;
 
     }
 
+    return;
+  }
 
-  </script>
+
+  const spin=data[0] || data;
+
+
+  /*
+    نحدد مكان الجائزة التي أعادها السيرفر
+    ثم نجعل العجلة تتوقف عندها.
+  */
+
+  const prize=spin.prize;
+
+  const positions={
+    "خصم 10%":30,
+    "خصم 15%":90,
+    "خصم 20%":150,
+    "خصم 25%":210,
+    "خصم 30%":270,
+    "حظ أوفر":330
+  };
+
+  const target=positions[prize] ?? 30;
+
+  const extra=360*6;
+
+  const rotation=extra+(360-target);
+
+
+  const wheel=document.getElementById("wheel");
+
+  wheel.style.transform=
+    `rotate(${rotation}deg)`;
+
+
+  setTimeout(()=>{
+
+    document.getElementById("resultPrize").textContent=
+      spin.prize;
+
+    document.getElementById("coupon").textContent=
+      spin.coupon_code;
+
+    document.getElementById("result").classList.add("show");
+
+    const next=new Date(spin.next_eligible_at);
+
+    disableSpin(next);
+
+  },5200);
+
+}
+
+
+/* ---------------- ADMIN ---------------- */
+
+async function showAdmin(){
+
+  document.getElementById("adminSection")
+    .classList.remove("hidden");
+
+  document.getElementById("adminSection")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+
+  const {data,error}=await db.rpc("get_participants");
+
+
+  if(error){
+
+    document.getElementById("adminTable").textContent=
+      error.message;
+
+    return;
+  }
+
+
+  if(!data || !data.length){
+
+    document.getElementById("adminTable").textContent=
+      "لا يوجد مشاركون حتى الآن.";
+
+    return;
+  }
+
+
+  let html=`
+
+  <table>
+
+  <thead>
+
+  <tr>
+    <th>الاسم</th>
+    <th>الهاتف</th>
+    <th>البريد</th>
+    <th>التسجيل</th>
+    <th>آخر مشاركة</th>
+    <th>الجائزة</th>
+    <th>الكوبون</th>
+    <th>المشاركة القادمة</th>
+  </tr>
+
+  </thead>
+
+  <tbody>
+  `;
+
+
+  data.forEach(row=>{
+
+    html+=`
+
+    <tr>
+
+      <td>${escapeHtml(row.full_name || "-")}</td>
+
+      <td>${escapeHtml(row.phone || "-")}</td>
+
+      <td>${escapeHtml(row.email || "-")}</td>
+
+      <td>${formatDate(row.created_at)}</td>
+
+      <td>${formatDate(row.last_spin_at)}</td>
+
+      <td>${escapeHtml(row.prize || "-")}</td>
+
+      <td>${escapeHtml(row.coupon_code || "-")}</td>
+
+      <td>${formatDate(row.next_eligible_at)}</td>
+
+    </tr>
+
+    `;
+
+  });
+
+
+  html+=`
+
+  </tbody>
+
+  </table>
+  `;
+
+
+  document.getElementById("adminTable").innerHTML=html;
+
+}
+
+
+/* ---------------- HELPERS ---------------- */
+
+function escapeHtml(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+function formatDate(value){
+
+  if(!value) return "-";
+
+  return new Date(value).toLocaleString(
+    "ar-IQ",
+    {
+      dateStyle:"medium",
+      timeStyle:"short"
+    }
+  );
+
+}
+
+
+/* ---------------- START ---------------- */
+
+async function start(){
+
+  const {data}=await db.auth.getSession();
+
+  if(data.session){
+
+    await enterStore(data.session.user);
+
+  }else{
+
+    document.getElementById("authScreen")
+      .classList.remove("hidden");
+
+  }
+
+}
+
+
+start();
+
+</script>
 
 </body>
-
 </html>
