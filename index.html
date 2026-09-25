@@ -1,1219 +1,1006 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>HUMO — خصومات الخميس</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet">
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<style>
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html,
-body {
-  width: 100%;
-  min-height: 100%;
-}
-
-body {
-  font-family: "Noto Sans Arabic", sans-serif;
-  background: #111;
-  color: #fff;
-}
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-}
-
-
-/* ================= HEADER ================= */
-
-header {
-  height: 76px;
-
-  background: #fff;
-  color: #111;
-
-  border-bottom: 1px solid #e5e5e5;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 0 25px;
-
-  position: sticky;
-  top: 0;
-
-  z-index: 1000;
-}
-
-.header-logo {
-  width: 105px;
-  height: 55px;
-  object-fit: contain;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.user-name {
-  font-size: 12px;
-  color: #666;
-}
-
-.logout-btn {
-  background: #fff;
-  color: #111;
-  border: 1px solid #111;
-  padding: 9px 15px;
-  font-size: 12px;
-}
-
-
-/* ================= LOGIN ================= */
-
-#loginScreen {
-  min-height: calc(100vh - 76px);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 25px;
-
-  background: #fafafa;
-  color: #111;
-}
-
-.login-box {
-  width: 100%;
-  max-width: 420px;
-
-  background: #fff;
-  border: 1px solid #e5e5e5;
-
-  padding: 42px 30px;
-
-  text-align: center;
-}
-
-.login-logo {
-  width: 155px;
-  height: 80px;
-
-  object-fit: contain;
-
-  margin: 0 auto 25px;
-
-  display: block;
-}
-
-.login-title {
-  font-size: 24px;
-  font-weight: 800;
-  margin-bottom: 10px;
-}
-
-.login-subtitle {
-  font-size: 13px;
-  color: #777;
-  line-height: 1.9;
-  margin-bottom: 28px;
-}
-
-.google-btn {
-  width: 100%;
-  height: 53px;
-
-  background: #111;
-  color: #fff;
-
-  border: 1px solid #111;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 12px;
-
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.google-btn:disabled {
-  opacity: .6;
-}
-
-.google-icon {
-  width: 20px;
-  height: 20px;
-
-  background: #fff;
-  color: #4285f4;
-
-  border-radius: 50%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-weight: 800;
-}
-
-.login-note {
-  margin-top: 18px;
-
-  font-size: 11px;
-
-  color: #999;
-
-  line-height: 1.8;
-}
-
-
-/* ================= STORE ================= */
-
-#store {
-  display: none;
-}
-
-
-/* ================= WHEEL SECTION ================= */
-
-.wheel-section {
-
-  min-height: calc(100vh - 76px);
-
-  background: #111;
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
-  text-align: center;
-
-  padding: 48px 15px 70px;
-}
-
-
-/* هوية HUMO العربية */
-
-.wheel-title {
-
-  font-size: 30px;
-
-  font-weight: 700;
-
-  letter-spacing: 0;
-
-  line-height: 1.5;
-
-  color: #fff;
-
-  margin-bottom: 7px;
-}
-
-.wheel-subtitle {
-
-  color: #aaa;
-
-  font-size: 13px;
-
-  margin-bottom: 35px;
-}
-
-
-/* ================= WHEEL ================= */
-
-.wheel-wrap {
-
-  position: relative;
-
-  width: min(380px, 90vw);
-
-  aspect-ratio: 1 / 1;
-
-  margin: 0 auto;
-}
-
-.wheel {
-
-  position: absolute;
-
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  border-radius: 50%;
-
-  border: 5px solid #fff;
-
-  overflow: hidden;
-
-  background:
-    conic-gradient(
-
-      #111 0deg 51.428571deg,
-
-      #fff 51.428571deg 102.857142deg,
-
-      #111 102.857142deg 154.285714deg,
-
-      #fff 154.285714deg 205.714285deg,
-
-      #111 205.714285deg 257.142857deg,
-
-      #fff 257.142857deg 308.571428deg,
-
-      #111 308.571428deg 360deg
-    );
-
-  transform: rotate(0deg);
-
-  transition:
-    transform 5.3s cubic-bezier(.12,.72,.12,1);
-
-  z-index: 1;
-}
-
-
-/* ================= LINES ================= */
-
-.wheel-lines {
-
-  position: absolute;
-
-  inset: 0;
-
-  border-radius: 50%;
-
-  pointer-events: none;
-
-  background:
-    conic-gradient(
-
-      transparent 0deg 51deg,
-      rgba(0,0,0,.55) 51deg 51.7deg,
-
-      transparent 51.7deg 102.4deg,
-      rgba(0,0,0,.55) 102.4deg 103.1deg,
-
-      transparent 103.1deg 153.8deg,
-      rgba(0,0,0,.55) 153.8deg 154.5deg,
-
-      transparent 154.5deg 205.2deg,
-      rgba(0,0,0,.55) 205.2deg 205.9deg,
-
-      transparent 205.9deg 256.6deg,
-      rgba(0,0,0,.55) 256.6deg 257.3deg,
-
-      transparent 257.3deg 308deg,
-      rgba(0,0,0,.55) 308deg 308.7deg,
-
-      transparent 308.7deg 359.4deg,
-      rgba(0,0,0,.55) 359.4deg 360deg
-    );
-}
-
-
-/* ================= LABELS ================= */
-
-.wheel-labels {
-
-  position: absolute;
-
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  border-radius: 50%;
-
-  z-index: 5;
-
-  transform: rotate(0deg);
-
-  transition:
-    transform 5.3s cubic-bezier(.12,.72,.12,1);
-}
-
-.wheel-label {
-
-  position: absolute;
-
-  width: 100px;
-  height: 40px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-
-  font-size: 17px;
-
-  font-weight: 800;
-
-  transform: translate(-50%, -50%);
-}
-
-.wheel-label span {
-
-  display: block;
-
-  white-space: nowrap;
-
-  transform:
-    rotate(calc(-1 * var(--current-rotation)));
-
-  transform-origin: center;
-}
-
-
-/* ================= LABEL POSITIONS ================= */
-
-.label-5 {
-  left: 63.884%;
-  top: 21.169%;
-}
-
-.label-luck {
-  left: 81.198%;
-  top: 42.879%;
-}
-
-.label-10 {
-  left: 75.019%;
-  top: 69.951%;
-}
-
-.label-15 {
-  left: 50%;
-  top: 82%;
-}
-
-.label-20 {
-  left: 24.982%;
-  top: 69.953%;
-}
-
-.label-25 {
-  left: 18.802%;
-  top: 42.881%;
-}
-
-.label-30 {
-  left: 36.114%;
-  top: 21.17%;
-}
-
-.dark-label {
-  color: #fff;
-}
-
-.light-label {
-  color: #111;
-}
-
-
-/* ================= CENTER LOGO ================= */
-
-.wheel-logo {
-
-  position: absolute;
-
-  width: 82px;
-  height: 82px;
-
-  left: 50%;
-  top: 50%;
-
-  transform:
-    translate(-50%, -50%);
-
-  border-radius: 50%;
-
-  background: #fff;
-
-  border: 3px solid #111;
-
-  object-fit: contain;
-
-  padding: 12px;
-
-  z-index: 20;
-}
-
-
-/* ================= POINTER ================= */
-
-.pointer {
-
-  position: absolute;
-
-  top: -17px;
-
-  left: 50%;
-
-  transform:
-    translateX(-50%);
-
-  width: 0;
-  height: 0;
-
-  border-left: 16px solid transparent;
-
-  border-right: 16px solid transparent;
-
-  border-top: 29px solid #fff;
-
-  z-index: 30;
-}
-
-
-/* ================= BUTTON ================= */
-
-.spin-btn {
-
-  width: 220px;
-
-  height: 55px;
-
-  margin-top: 40px;
-
-  border: none;
-
-  background: #fff;
-
-  color: #111;
-
-  font-size: 15px;
-
-  font-weight: 800;
-
-  transition: .2s;
-}
-
-.spin-btn:disabled {
-
-  opacity: .45;
-
-  cursor: not-allowed;
-}
-
-
-/* ================= STATUS ================= */
-
-.wheel-status {
-
-  min-height: 24px;
-
-  margin-top: 18px;
-
-  color: #aaa;
-
-  font-size: 12px;
-}
-
-
-/* ================= RESULT ================= */
-
-.result-box {
-
-  display: none;
-
-  width: min(500px, 92vw);
-
-  margin-top: 28px;
-
-  background: #fff;
-
-  color: #111;
-
-  padding: 28px 22px;
-}
-
-.result-title {
-
-  color: #777;
-
-  font-size: 13px;
-
-  margin-bottom: 8px;
-}
-
-.result-prize {
-
-  font-size: 30px;
-
-  font-weight: 800;
-
-  margin-bottom: 20px;
-}
-
-.coupon {
-
-  direction: ltr;
-
-  font-family: monospace;
-
-  font-size: 21px;
-
-  letter-spacing: 2px;
-
-  border: 1px dashed #111;
-
-  background: #fafafa;
-
-  padding: 14px;
-}
-
-.next-date {
-
-  color: #777;
-
-  font-size: 11px;
-
-  margin-top: 14px;
-}
-
-
-/* ================= ADMIN ================= */
-
-#adminPanel {
-
-  display: none;
-
-  width: 100%;
-
-  background: #f5f5f3;
-
-  color: #111;
-
-  padding: 40px 20px;
-}
-
-.admin-box {
-
-  max-width: 1200px;
-
-  margin: auto;
-
-  background: #fff;
-
-  padding: 25px;
-
-  overflow-x: auto;
-}
-
-.admin-title {
-
-  font-size: 22px;
-
-  font-weight: 800;
-
-  margin-bottom: 20px;
-}
-
-table {
-
-  width: 100%;
-
-  min-width: 850px;
-
-  border-collapse: collapse;
-
-  font-size: 12px;
-}
-
-th,
-td {
-
-  padding: 12px;
-
-  border-bottom: 1px solid #eee;
-
-  text-align: right;
-}
-
-th {
-
-  background: #111;
-
-  color: #fff;
-}
-
-
-/* ================= TOAST ================= */
-
-.toast {
-
-  position: fixed;
-
-  left: 50%;
-
-  bottom: 25px;
-
-  transform:
-    translateX(-50%)
-    translateY(100px);
-
-  background: #111;
-
-  color: #fff;
-
-  padding: 13px 20px;
-
-  font-size: 12px;
-
-  z-index: 9999;
-
-  opacity: 0;
-
-  transition: .3s;
-
-  max-width: 90%;
-
-  text-align: center;
-}
-
-.toast.show {
-
-  opacity: 1;
-
-  transform:
-    translateX(-50%)
-    translateY(0);
-}
-
-
-/* ================= MOBILE ================= */
-
-@media (max-width: 600px) {
-
-  header {
-
-    height: 68px;
-
-    padding: 0 18px;
-  }
-
-  .header-logo {
-
-    width: 95px;
-
-    height: 50px;
-  }
-
-  .user-name {
-
-    display: none;
-  }
-
-  .wheel-section {
-
-    min-height: calc(100vh - 68px);
-
-    padding-top: 42px;
-  }
-
-  .wheel-title {
-
-    font-size: 27px;
-
-    font-weight: 700;
-
-    line-height: 1.5;
-  }
-
-  .wheel-subtitle {
-
-    font-size: 12px;
-
-    margin-bottom: 30px;
-  }
-
-  .wheel-wrap {
-
-    width: min(350px, 91vw);
-  }
-
-  .wheel-label {
-
-    width: 75px;
-
-    height: 34px;
-
-    font-size: 13px;
-  }
-
-  .wheel-logo {
-
-    width: 72px;
-
-    height: 72px;
-
-    padding: 10px;
-  }
-
-  .spin-btn {
-
-    width: 210px;
-
-    height: 53px;
-  }
-
-}
-
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>HUMO — خصومات الخميس</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #fff;
+      color: #111;
+      font-family: "Noto Sans Arabic", sans-serif;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      height: 76px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      background: #fff;
+    }
+
+    .header-logo {
+      width: 105px;
+      height: 52px;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .header-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .logout-btn {
+      border: 1px solid #111;
+      background: #fff;
+      color: #111;
+      padding: 7px 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .logout-btn:hover {
+      background: #111;
+      color: #fff;
+    }
+
+    /* =========================
+       LOGIN
+    ========================= */
+
+    .login-page {
+      min-height: calc(100vh - 76px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 18px;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 390px;
+      text-align: center;
+    }
+
+    .login-logo {
+      width: 190px;
+      max-width: 80%;
+      height: auto;
+      margin-bottom: 18px;
+    }
+
+    .login-title {
+      font-size: 25px;
+      font-weight: 700;
+      margin: 0 0 7px;
+    }
+
+    .login-subtitle {
+      font-size: 13px;
+      color: #777;
+      margin: 0 0 25px;
+    }
+
+    .google-btn {
+      width: 100%;
+      height: 48px;
+      background: #111;
+      color: #fff;
+      border: 1px solid #111;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .google-btn:hover {
+      background: #333;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 22px 0;
+      color: #999;
+      font-size: 12px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #e5e5e5;
+    }
+
+    .auth-form {
+      text-align: right;
+    }
+
+    .input-label {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 7px;
+      font-weight: 600;
+    }
+
+    .auth-input {
+      width: 100%;
+      height: 47px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 0 13px;
+      outline: none;
+      background: #fff;
+      font-size: 14px;
+      direction: ltr;
+      text-align: left;
+      margin-bottom: 14px;
+    }
+
+    .auth-input:focus {
+      border-color: #111;
+    }
+
+    .primary-btn {
+      width: 100%;
+      height: 47px;
+      background: #111;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: 3px;
+    }
+
+    .primary-btn:hover {
+      background: #333;
+    }
+
+    .secondary-btn {
+      width: 100%;
+      height: 45px;
+      background: #fff;
+      color: #111;
+      border: 1px solid #111;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    .forgot-btn {
+      border: none;
+      background: none;
+      color: #666;
+      font-size: 12px;
+      cursor: pointer;
+      padding: 7px 0;
+      margin-top: 3px;
+    }
+
+    .forgot-btn:hover {
+      color: #111;
+    }
+
+    .auth-message {
+      margin-top: 15px;
+      font-size: 13px;
+      line-height: 1.7;
+      min-height: 20px;
+    }
+
+    .auth-message.success {
+      color: #188038;
+    }
+
+    .auth-message.error {
+      color: #c62828;
+    }
+
+    /* =========================
+       WHEEL PAGE
+    ========================= */
+
+    .wheel-page {
+      min-height: calc(100vh - 76px);
+      display: flex;
+      justify-content: center;
+      padding: 35px 18px 60px;
+    }
+
+    .wheel-container {
+      width: 100%;
+      max-width: 650px;
+      text-align: center;
+    }
+
+    .wheel-title {
+      font-size: 31px;
+      line-height: 1.5;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .wheel-subtitle {
+      color: #777;
+      font-size: 13px;
+      margin: 4px 0 28px;
+    }
+
+    .wheel-wrap {
+      position: relative;
+      width: min(90vw, 500px);
+      aspect-ratio: 1;
+      margin: 0 auto;
+    }
+
+    .wheel {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 7px solid #111;
+      overflow: hidden;
+
+      background:
+        conic-gradient(
+          from -25.714285deg,
+
+          #111 0deg 25.714285deg,
+          #fff 25.714285deg 51.42857deg,
+
+          #111 51.42857deg 77.142855deg,
+          #fff 77.142855deg 102.85714deg,
+
+          #111 102.85714deg 128.571425deg,
+          #fff 128.571425deg 154.28571deg,
+
+          #111 154.28571deg 180deg,
+          #fff 180deg 205.714285deg,
+
+          #111 205.714285deg 231.42857deg,
+          #fff 231.42857deg 257.142855deg,
+
+          #111 257.142855deg 282.85714deg,
+          #fff 282.85714deg 308.571425deg,
+
+          #111 308.571425deg 334.28571deg,
+          #fff 334.28571deg 360deg
+        );
+
+      transform: rotate(0deg);
+      transition: transform 5.5s cubic-bezier(.12,.72,.12,1);
+    }
+
+    .wheel-labels {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: rotate(0deg);
+      transition: transform 5.5s cubic-bezier(.12,.72,.12,1);
+    }
+
+    .wheel-label {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      font-weight: 800;
+      font-size: clamp(15px, 3.7vw, 23px);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .label-5 {
+      left: 63.884%;
+      top: 21.169%;
+      color: #fff;
+    }
+
+    .label-luck {
+      left: 81.198%;
+      top: 42.879%;
+      color: #111;
+      font-size: clamp(12px, 3vw, 18px);
+    }
+
+    .label-10 {
+      left: 75.019%;
+      top: 69.951%;
+      color: #fff;
+    }
+
+    .label-15 {
+      left: 50%;
+      top: 82%;
+      color: #111;
+    }
+
+    .label-20 {
+      left: 24.982%;
+      top: 69.953%;
+      color: #fff;
+    }
+
+    .label-25 {
+      left: 18.802%;
+      top: 42.881%;
+      color: #111;
+    }
+
+    .label-30 {
+      left: 36.114%;
+      top: 21.17%;
+      color: #fff;
+    }
+
+    .wheel-center {
+      position: absolute;
+      width: 108px;
+      height: 108px;
+      border-radius: 50%;
+      background: #fff;
+      border: 5px solid #111;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .wheel-center img {
+      width: 82px;
+      height: 82px;
+      object-fit: contain;
+    }
+
+    .pointer {
+      position: absolute;
+      z-index: 10;
+      top: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 17px solid transparent;
+      border-right: 17px solid transparent;
+      border-top: 30px solid #111;
+      filter: drop-shadow(0 2px 1px rgba(0,0,0,.15));
+    }
+
+    .spin-btn {
+      margin-top: 30px;
+      width: 210px;
+      height: 52px;
+      border-radius: 7px;
+      border: none;
+      background: #111;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .spin-btn:hover {
+      background: #333;
+    }
+
+    .spin-btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    /* =========================
+       RESULT
+    ========================= */
+
+    .result-box {
+      margin: 25px auto 0;
+      width: min(100%, 420px);
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .result-title {
+      font-size: 13px;
+      color: #777;
+      margin-bottom: 5px;
+    }
+
+    .result-prize {
+      font-size: 27px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .coupon {
+      display: inline-block;
+      background: #111;
+      color: #fff;
+      padding: 9px 14px;
+      border-radius: 5px;
+      font-family: monospace;
+      font-size: 15px;
+      letter-spacing: 1px;
+      direction: ltr;
+    }
+
+    .next-date {
+      font-size: 12px;
+      color: #777;
+      margin-top: 13px;
+    }
+
+    /* =========================
+       ADMIN
+    ========================= */
+
+    .admin-panel {
+      margin: 50px auto 0;
+      width: min(100%, 950px);
+      text-align: right;
+    }
+
+    .admin-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 15px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid #ddd;
+      border-radius: 7px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 750px;
+      background: #fff;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid #eee;
+      padding: 11px 10px;
+      font-size: 12px;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th {
+      background: #111;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .loading {
+      color: #777;
+      font-size: 13px;
+      padding: 15px 0;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        height: 68px;
+        padding: 0 14px;
+      }
+
+      .header-logo {
+        width: 90px;
+      }
+
+      .header-user {
+        font-size: 11px;
+      }
+
+      .logout-btn {
+        padding: 6px 9px;
+        font-size: 11px;
+      }
+
+      .login-page {
+        min-height: calc(100vh - 68px);
+      }
+
+      .wheel-page {
+        min-height: calc(100vh - 68px);
+        padding-top: 25px;
+      }
+
+      .wheel-title {
+        font-size: 26px;
+      }
+
+      .wheel-center {
+        width: 86px;
+        height: 86px;
+        border-width: 4px;
+      }
+
+      .wheel-center img {
+        width: 66px;
+        height: 66px;
+      }
+
+      .pointer {
+        border-left-width: 13px;
+        border-right-width: 13px;
+        border-top-width: 24px;
+      }
+
+      .spin-btn {
+        width: 190px;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
+  <!-- =========================
+       HEADER
+  ========================== -->
 
-<!-- ================= HEADER ================= -->
-
-<header>
-
-  <img
-    class="header-logo"
-    src="كيس%20ورقي%20للمتاجر%20بلون%20وردي%20نمط%20زهور.png"
-    alt="HUMO"
-  >
-
-  <div class="header-left">
-
-    <span
-      class="user-name"
-      id="userName">
-    </span>
-
-    <button
-      class="logout-btn"
-      id="logoutBtn"
-      style="display:none;">
-
-      تسجيل الخروج
-
-    </button>
-
-  </div>
-
-</header>
-
-
-<!-- ================= LOGIN ================= -->
-
-<section id="loginScreen">
-
-  <div class="login-box">
+  <header id="mainHeader" class="hidden">
 
     <img
-      class="login-logo"
+      class="header-logo"
       src="كيس%20ورقي%20للمتاجر%20بلون%20وردي%20نمط%20زهور.png"
       alt="HUMO"
     >
 
-    <h1 class="login-title">
-      أهلاً بك في HUMO
-    </h1>
-
-    <p class="login-subtitle">
-
-      اختيار يليق بك.
-
-      <br>
-
-      سجّل الدخول للمتابعة.
-
-    </p>
-
-    <button
-      class="google-btn"
-      id="googleBtn">
-
-      <span class="google-icon">
-        G
-      </span>
-
-      متابعة باستخدام Google
-
-    </button>
-
-    <p class="login-note">
-
-      تسجيل الدخول يتم باستخدام حساب Google الخاص بك.
-
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- ================= STORE ================= -->
-
-<main id="store">
-
-<section class="wheel-section">
-
-
-  <!-- الاسم الجديد -->
-
-  <h1 class="wheel-title">
-    خصومات الخميس
-  </h1>
-
-
-  <p class="wheel-subtitle">
-    فرصتك تتجدد كل 14 يومًا.
-  </p>
-
-
-  <!-- ================= WHEEL ================= -->
-
-  <div class="wheel-wrap">
-
-    <div class="pointer"></div>
-
-
-    <div
-      class="wheel"
-      id="wheel">
-
-      <div class="wheel-lines"></div>
-
+    <div class="header-user">
+      <span id="userEmail"></span>
+      <button id="logoutBtn" class="logout-btn">
+        تسجيل الخروج
+      </button>
     </div>
 
+  </header>
 
-    <div
-      class="wheel-labels"
-      id="wheelLabels">
+
+  <!-- =========================
+       LOGIN
+  ========================== -->
+
+  <section id="loginPage" class="login-page">
+
+    <div class="login-box">
+
+      <img
+        class="login-logo"
+        src="كيس%20ورقي%20للمتاجر%20بلون%20وردي%20نمط%20زهور.png"
+        alt="HUMO"
+      >
+
+      <h1 class="login-title">
+        أهلاً بك في HUMO
+      </h1>
+
+      <p class="login-subtitle">
+        اختيار يليق بك.
+      </p>
+
+
+      <!-- GOOGLE -->
+
+      <button id="googleBtn" class="google-btn">
+        متابعة باستخدام Google
+      </button>
+
+
+      <div class="divider">
+        أو
+      </div>
+
+
+      <!-- EMAIL FORM -->
+
+      <form id="emailForm" class="auth-form">
+
+        <label class="input-label">
+          البريد الإلكتروني
+        </label>
+
+        <input
+          id="emailInput"
+          class="auth-input"
+          type="email"
+          placeholder="example@email.com"
+          autocomplete="email"
+          required
+        >
+
+
+        <label class="input-label">
+          كلمة المرور
+        </label>
+
+        <input
+          id="passwordInput"
+          class="auth-input"
+          type="password"
+          placeholder="كلمة المرور"
+          autocomplete="current-password"
+          minlength="6"
+          required
+        >
+
+
+        <button
+          id="loginEmailBtn"
+          class="primary-btn"
+          type="submit"
+        >
+          تسجيل الدخول
+        </button>
+
+        <button
+          id="signupBtn"
+          class="secondary-btn"
+          type="button"
+        >
+          إنشاء حساب جديد
+        </button>
+
+        <button
+          id="forgotBtn"
+          class="forgot-btn"
+          type="button"
+        >
+          نسيت كلمة المرور؟
+        </button>
+
+      </form>
 
 
       <div
-        class="wheel-label dark-label label-5">
+        id="authMessage"
+        class="auth-message"
+      ></div>
 
-        <span>
-          5%
-        </span>
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       WHEEL
+  ========================== -->
+
+  <main id="wheelPage" class="wheel-page hidden">
+
+    <div class="wheel-container">
+
+      <h1 class="wheel-title">
+        خصومات الخميس
+      </h1>
+
+      <p class="wheel-subtitle">
+        فرصتك تتجدد كل 14 يومًا.
+      </p>
+
+
+      <div class="wheel-wrap">
+
+        <div class="pointer"></div>
+
+        <div
+          id="wheel"
+          class="wheel"
+        ></div>
+
+
+        <div
+          id="wheelLabels"
+          class="wheel-labels"
+        >
+
+          <div class="wheel-label label-5">
+            5%
+          </div>
+
+          <div class="wheel-label label-luck">
+            حظ أوفر
+          </div>
+
+          <div class="wheel-label label-10">
+            10%
+          </div>
+
+          <div class="wheel-label label-15">
+            15%
+          </div>
+
+          <div class="wheel-label label-20">
+            20%
+          </div>
+
+          <div class="wheel-label label-25">
+            25%
+          </div>
+
+          <div class="wheel-label label-30">
+            30%
+          </div>
+
+        </div>
+
+
+        <div class="wheel-center">
+
+          <img
+            src="كيس%20ورقي%20للمتاجر%20بلون%20وردي%20نمط%20زهور.png"
+            alt="HUMO"
+          >
+
+        </div>
 
       </div>
 
 
-      <div
-        class="wheel-label light-label label-luck">
+      <button
+        id="spinBtn"
+        class="spin-btn"
+      >
+        جرّب حظك
+      </button>
 
-        <span>
-          حظ أوفر
-        </span>
+
+      <div
+        id="resultBox"
+        class="result-box hidden"
+      >
+
+        <div class="result-title">
+          نتيجتك
+        </div>
+
+        <div
+          id="resultPrize"
+          class="result-prize"
+        ></div>
+
+        <div>
+          كود الخصم:
+          <br><br>
+
+          <span
+            id="couponCode"
+            class="coupon"
+          ></span>
+        </div>
+
+        <div
+          id="nextDate"
+          class="next-date"
+        ></div>
 
       </div>
 
 
-      <div
-        class="wheel-label dark-label label-10">
+      <!-- ADMIN -->
 
-        <span>
-          10%
-        </span>
+      <section
+        id="adminPanel"
+        class="admin-panel hidden"
+      >
 
-      </div>
+        <div class="admin-title">
+          المشاركون
+        </div>
 
+        <div
+          id="adminLoading"
+          class="loading"
+        >
+          جاري تحميل المشاركين...
+        </div>
 
-      <div
-        class="wheel-label light-label label-15">
+        <div class="table-wrap">
 
-        <span>
-          15%
-        </span>
+          <table>
 
-      </div>
+            <thead>
 
+              <tr>
+                <th>الاسم</th>
+                <th>البريد</th>
+                <th>الهاتف</th>
+                <th>الجائزة</th>
+                <th>الكود</th>
+                <th>تاريخ المشاركة</th>
+                <th>المشاركة القادمة</th>
+              </tr>
 
-      <div
-        class="wheel-label dark-label label-20">
+            </thead>
 
-        <span>
-          20%
-        </span>
+            <tbody id="participantsBody"></tbody>
 
-      </div>
+          </table>
 
+        </div>
 
-      <div
-        class="wheel-label light-label label-25">
-
-        <span>
-          25%
-        </span>
-
-      </div>
-
-
-      <div
-        class="wheel-label dark-label label-30">
-
-        <span>
-          30%
-        </span>
-
-      </div>
-
+      </section>
 
     </div>
 
+  </main>
 
-    <!-- اللوغو ثابت في الوسط -->
 
-    <img
-      class="wheel-logo"
-      src="كيس%20ورقي%20للمتاجر%20بلون%20وردي%20نمط%20زهور.png"
-      alt="HUMO"
-    >
+  <script>
 
-  </div>
+    /* =========================================
+       SUPABASE
+    ========================================= */
 
+    const SUPABASE_URL =
+      "https://vknhrxxkmhrnfbmsllid.supabase.co";
 
-  <!-- ================= BUTTON ================= -->
+    const SUPABASE_KEY =
+      "sb_publishable_QliqBYSeykn4F2Ddrsn8hg_F_N8dR-n";
 
-  <button
-    class="spin-btn"
-    id="spinBtn">
+    const db = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
 
-    جرّب حظك
 
-  </button>
+    /* =========================================
+       ELEMENTS
+    ========================================= */
 
+    const loginPage =
+      document.getElementById("loginPage");
 
-  <div
-    class="wheel-status"
-    id="wheelStatus">
-  </div>
+    const wheelPage =
+      document.getElementById("wheelPage");
 
+    const mainHeader =
+      document.getElementById("mainHeader");
 
-  <!-- ================= RESULT ================= -->
+    const userEmail =
+      document.getElementById("userEmail");
 
-  <div
-    class="result-box"
-    id="resultBox">
+    const logoutBtn =
+      document.getElementById("logoutBtn");
 
-    <div class="result-title">
-      جائزتك
-    </div>
+    const googleBtn =
+      document.getElementById("googleBtn");
 
-    <div
-      class="result-prize"
-      id="resultPrize">
-    </div>
+    const emailForm =
+      document.getElementById("emailForm");
 
-    <div class="result-title">
-      كود الخصم الخاص بك
-    </div>
+    const emailInput =
+      document.getElementById("emailInput");
 
-    <div
-      class="coupon"
-      id="couponCode">
-    </div>
+    const passwordInput =
+      document.getElementById("passwordInput");
 
-    <div
-      class="next-date"
-      id="nextDate">
-    </div>
+    const signupBtn =
+      document.getElementById("signupBtn");
 
-  </div>
+    const forgotBtn =
+      document.getElementById("forgotBtn");
 
+    const authMessage =
+      document.getElementById("authMessage");
 
-</section>
+    const spinBtn =
+      document.getElementById("spinBtn");
 
+    const wheel =
+      document.getElementById("wheel");
 
-<!-- ================= ADMIN ================= -->
+    const wheelLabels =
+      document.getElementById("wheelLabels");
 
-<section id="adminPanel">
+    const resultBox =
+      document.getElementById("resultBox");
 
-  <div class="admin-box">
+    const resultPrize =
+      document.getElementById("resultPrize");
 
-    <div class="admin-title">
-      المشاركون
-    </div>
+    const couponCode =
+      document.getElementById("couponCode");
 
-    <table>
+    const nextDate =
+      document.getElementById("nextDate");
 
-      <thead>
+    const adminPanel =
+      document.getElementById("adminPanel");
 
-        <tr>
+    const adminLoading =
+      document.getElementById("adminLoading");
 
-          <th>الاسم</th>
-          <th>الهاتف</th>
-          <th>البريد</th>
-          <th>الجائزة</th>
-          <th>الكود</th>
-          <th>المشاركة</th>
-          <th>القادمة</th>
+    const participantsBody =
+      document.getElementById("participantsBody");
 
-        </tr>
 
-      </thead>
+    /* =========================================
+       ADMIN UID
+    ========================================= */
 
-      <tbody
-        id="participantsBody">
-      </tbody>
+    const ADMIN_UID =
+      "2d2313ef-8ae1-40a0-9a56-89abe56d3c37";
 
-    </table>
 
-  </div>
+    /* =========================================
+       WHEEL STATE
+    ========================================= */
 
-</section>
+    let currentRotation = 0;
+    let spinning = false;
 
-</main>
 
+    /* =========================================
+       MESSAGE
+    ========================================= */
 
-<div
-  class="toast"
-  id="toast">
-</div>
+    function showMessage(message, type = "") {
 
+      authMessage.textContent = message;
 
-<script>
+      authMessage.className =
+        "auth-message " + type;
 
+    }
 
-/* ================= SUPABASE ================= */
 
-const SUPABASE_URL =
-  "https://vknhrxxkmhrnfbmsllid.supabase.co";
+    /* =========================================
+       GOOGLE LOGIN
+    ========================================= */
 
-const SUPABASE_KEY =
-  "sb_publishable_QliqBYSeykn4F2Ddrsn8hg_F_N8dR-n";
+    googleBtn.addEventListener("click", async () => {
 
-const { createClient } = supabase;
-
-const db =
-  createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
-
-
-/* ================= ADMIN ================= */
-
-const ADMIN_UID =
-  "2d2313ef-8ae1-40a0-9a56-89abe56d3c37";
-
-
-/* ================= ELEMENTS ================= */
-
-const loginScreen =
-  document.getElementById("loginScreen");
-
-const store =
-  document.getElementById("store");
-
-const googleBtn =
-  document.getElementById("googleBtn");
-
-const logoutBtn =
-  document.getElementById("logoutBtn");
-
-const userName =
-  document.getElementById("userName");
-
-const spinBtn =
-  document.getElementById("spinBtn");
-
-const wheel =
-  document.getElementById("wheel");
-
-const wheelLabels =
-  document.getElementById("wheelLabels");
-
-const wheelStatus =
-  document.getElementById("wheelStatus");
-
-const resultBox =
-  document.getElementById("resultBox");
-
-const resultPrize =
-  document.getElementById("resultPrize");
-
-const couponCode =
-  document.getElementById("couponCode");
-
-const nextDate =
-  document.getElementById("nextDate");
-
-const adminPanel =
-  document.getElementById("adminPanel");
-
-const participantsBody =
-  document.getElementById("participantsBody");
-
-const toast =
-  document.getElementById("toast");
-
-
-let currentRotation = 0;
-
-
-/* ================= TOAST ================= */
-
-function showToast(message) {
-
-  toast.textContent =
-    message;
-
-  toast.classList.add("show");
-
-  setTimeout(() => {
-
-    toast.classList.remove("show");
-
-  }, 3500);
-}
-
-
-/* ================= GOOGLE ================= */
-
-googleBtn.addEventListener(
-  "click",
-  async () => {
-
-    googleBtn.disabled = true;
-
-    googleBtn.innerHTML =
-      "جاري فتح Google...";
-
-    try {
-
-      const redirectUrl =
-        window.location.origin +
-        window.location.pathname;
+      showMessage("");
 
       const { error } =
         await db.auth.signInWithOAuth({
@@ -1223,672 +1010,819 @@ googleBtn.addEventListener(
           options: {
 
             redirectTo:
-              redirectUrl,
+              window.location.origin +
+              window.location.pathname,
 
             queryParams: {
-
-              prompt:
-                "select_account"
-
+              prompt: "select_account"
             }
 
           }
 
         });
 
+
       if (error) {
 
-        throw error;
-
-      }
-
-    } catch (error) {
-
-      console.error(error);
-
-      showToast(
-        "حدث خطأ أثناء تسجيل الدخول باستخدام Google"
-      );
-
-      googleBtn.disabled =
-        false;
-
-      googleBtn.innerHTML =
-        '<span class="google-icon">G</span> متابعة باستخدام Google';
-
-    }
-
-  }
-);
-
-
-/* ================= LOGOUT ================= */
-
-logoutBtn.addEventListener(
-  "click",
-  async () => {
-
-    await db.auth.signOut();
-
-    location.reload();
-
-  }
-);
-
-
-/* ================= DATE ================= */
-
-function formatDate(dateString) {
-
-  if (!dateString) {
-    return "-";
-  }
-
-  return new Date(
-    dateString
-  ).toLocaleString(
-    "ar-IQ",
-    {
-      dateStyle: "medium",
-      timeStyle: "short"
-    }
-  );
-}
-
-
-/* ================= REMAINING ================= */
-
-function formatRemaining(date) {
-
-  const difference =
-    date.getTime() -
-    Date.now();
-
-  if (difference <= 0) {
-    return "الآن";
-  }
-
-  const days =
-    Math.floor(
-      difference /
-      86400000
-    );
-
-  const hours =
-    Math.floor(
-      (
-        difference %
-        86400000
-      ) /
-      3600000
-    );
-
-  if (days > 0) {
-
-    return (
-      days +
-      " يوم" +
-      (
-        hours
-          ? " و " +
-            hours +
-            " ساعة"
-          : ""
-      )
-    );
-
-  }
-
-  return hours + " ساعة";
-}
-
-
-/* ================= SHOW USER ================= */
-
-async function showUser(session) {
-
-  if (
-    !session ||
-    !session.user
-  ) {
-
-    loginScreen.style.display =
-      "flex";
-
-    store.style.display =
-      "none";
-
-    return;
-  }
-
-  loginScreen.style.display =
-    "none";
-
-  store.style.display =
-    "block";
-
-  logoutBtn.style.display =
-    "block";
-
-  const user =
-    session.user;
-
-  const name =
-    user.user_metadata?.full_name ||
-    user.user_metadata?.name ||
-    user.email?.split("@")[0] ||
-    "زائر HUMO";
-
-  userName.textContent =
-    name;
-
-  await loadLastSpin();
-
-  if (
-    user.id === ADMIN_UID
-  ) {
-
-    adminPanel.style.display =
-      "block";
-
-    await loadParticipants();
-
-  }
-}
-
-
-/* ================= LAST SPIN ================= */
-
-async function loadLastSpin() {
-
-  try {
-
-    const {
-      data,
-      error
-    } = await db
-      .from("spins")
-      .select("*")
-      .order(
-        "spun_at",
-        {
-          ascending: false
-        }
-      )
-      .limit(1);
-
-    if (error) {
-
-      console.error(error);
-
-      return;
-
-    }
-
-    if (
-      !data ||
-      !data.length
-    ) {
-
-      spinBtn.disabled =
-        false;
-
-      wheelStatus.textContent =
-        "لديك فرصة للمشاركة.";
-
-      return;
-
-    }
-
-    const last =
-      data[0];
-
-    const next =
-      new Date(
-        last.next_eligible_at
-      );
-
-    if (
-      next > new Date()
-    ) {
-
-      spinBtn.disabled =
-        true;
-
-      wheelStatus.textContent =
-        "يمكنك المشاركة مرة أخرى بعد " +
-        formatRemaining(next);
-
-    } else {
-
-      spinBtn.disabled =
-        false;
-
-      wheelStatus.textContent =
-        "فرصتك متاحة الآن.";
-
-    }
-
-  } catch (error) {
-
-    console.error(error);
-
-  }
-}
-
-
-/* ================= SPIN ================= */
-
-spinBtn.addEventListener(
-  "click",
-  spinWheel
-);
-
-
-async function spinWheel() {
-
-  if (
-    spinBtn.disabled
-  ) {
-
-    return;
-
-  }
-
-  spinBtn.disabled =
-    true;
-
-  wheelStatus.textContent =
-    "جاري اختيار جائزتك...";
-
-  resultBox.style.display =
-    "none";
-
-  try {
-
-    const {
-      data: {
-        session
-      }
-    } =
-      await db.auth.getSession();
-
-    if (!session) {
-
-      showToast(
-        "يجب تسجيل الدخول أولاً."
-      );
-
-      spinBtn.disabled =
-        false;
-
-      return;
-
-    }
-
-    const {
-      data,
-      error
-    } =
-      await db.rpc(
-        "spin_wheel"
-      );
-
-    if (error) {
-
-      throw error;
-
-    }
-
-    const spin =
-      Array.isArray(data)
-        ? data[0]
-        : data;
-
-    if (!spin) {
-
-      throw new Error(
-        "لم يتم استلام نتيجة."
-      );
-
-    }
-
-    const prize =
-      spin.prize || "";
-
-    const discount =
-      Number(
-        spin.discount_percent || 0
-      );
-
-    const coupon =
-      spin.coupon_code || "";
-
-
-    let targetIndex =
-      0;
-
-
-    if (
-      discount === 0 ||
-      prize.includes("حظ")
-    ) {
-
-      targetIndex =
-        1;
-
-    } else {
-
-      const map = {
-
-        5: 0,
-        10: 2,
-        15: 3,
-        20: 4,
-        25: 5,
-        30: 6
-
-      };
-
-      targetIndex =
-        map[discount] ?? 0;
-
-    }
-
-
-    const segment =
-      360 / 7;
-
-    const targetCenter =
-      targetIndex *
-      segment +
-      segment / 2;
-
-    const extraTurns =
-      7 * 360;
-
-    const finalRotation =
-      currentRotation +
-      extraTurns +
-      (
-        360 -
-        targetCenter -
-        (
-          currentRotation %
-          360
-        )
-      );
-
-    currentRotation =
-      finalRotation;
-
-
-    wheelLabels.style.setProperty(
-      "--current-rotation",
-      currentRotation + "deg"
-    );
-
-
-    wheel.style.transform =
-      "rotate(" +
-      currentRotation +
-      "deg)";
-
-
-    wheelLabels.style.transform =
-      "rotate(" +
-      currentRotation +
-      "deg)";
-
-
-    setTimeout(() => {
-
-      resultPrize.textContent =
-        prize;
-
-      couponCode.textContent =
-        coupon;
-
-      nextDate.textContent =
-        "يمكنك المشاركة مرة أخرى في: " +
-        formatDate(
-          spin.next_eligible_at
+        showMessage(
+          "حدث خطأ أثناء تسجيل الدخول بواسطة Google.",
+          "error"
         );
 
-      resultBox.style.display =
-        "block";
+        console.error(error);
 
-      wheelStatus.textContent =
-        "مبروك 🎉";
+      }
 
-    }, 5500);
+    });
 
 
-  } catch (error) {
+    /* =========================================
+       EMAIL LOGIN
+    ========================================= */
 
-    console.error(error);
+    emailForm.addEventListener(
+      "submit",
+      async (event) => {
 
-    spinBtn.disabled =
-      false;
+        event.preventDefault();
 
-    let message =
-      error?.message ||
-      "حدث خطأ.";
+        const email =
+          emailInput.value.trim();
 
-    if (
-      message.includes("14")
-    ) {
+        const password =
+          passwordInput.value;
 
-      message =
-        "لقد شاركت مسبقًا. يمكنك المشاركة مرة أخرى بعد 14 يومًا.";
+
+        if (!email || !password) {
+
+          showMessage(
+            "يرجى إدخال البريد الإلكتروني وكلمة المرور.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        showMessage("جاري تسجيل الدخول...");
+
+
+        const { data, error } =
+          await db.auth.signInWithPassword({
+
+            email,
+            password
+
+          });
+
+
+        if (error) {
+
+          console.error(error);
+
+          showMessage(
+            translateAuthError(error.message),
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        if (data.session) {
+
+          showMessage(
+            "تم تسجيل الدخول بنجاح.",
+            "success"
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =========================================
+       CREATE ACCOUNT
+    ========================================= */
+
+    signupBtn.addEventListener(
+      "click",
+      async () => {
+
+        const email =
+          emailInput.value.trim();
+
+        const password =
+          passwordInput.value;
+
+
+        if (!email || !password) {
+
+          showMessage(
+            "أدخل البريد الإلكتروني وكلمة المرور أولاً.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        if (password.length < 6) {
+
+          showMessage(
+            "كلمة المرور يجب أن تكون 6 أحرف أو أكثر.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        showMessage("جاري إنشاء الحساب...");
+
+
+        const { data, error } =
+          await db.auth.signUp({
+
+            email,
+            password,
+
+            options: {
+
+              emailRedirectTo:
+                window.location.origin +
+                window.location.pathname
+
+            }
+
+          });
+
+
+        if (error) {
+
+          console.error(error);
+
+          showMessage(
+            translateAuthError(error.message),
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        if (data.session) {
+
+          showMessage(
+            "تم إنشاء الحساب وتسجيل الدخول.",
+            "success"
+          );
+
+        } else {
+
+          showMessage(
+            "تم إنشاء الحساب. تحقق من بريدك الإلكتروني لتفعيل الحساب.",
+            "success"
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =========================================
+       FORGOT PASSWORD
+    ========================================= */
+
+    forgotBtn.addEventListener(
+      "click",
+      async () => {
+
+        const email =
+          emailInput.value.trim();
+
+
+        if (!email) {
+
+          showMessage(
+            "اكتب بريدك الإلكتروني أولاً.",
+            "error"
+          );
+
+          emailInput.focus();
+
+          return;
+
+        }
+
+
+        showMessage(
+          "جاري إرسال رابط استعادة كلمة المرور..."
+        );
+
+
+        const { error } =
+          await db.auth.resetPasswordForEmail(
+            email,
+            {
+
+              redirectTo:
+                window.location.origin +
+                window.location.pathname
+
+            }
+          );
+
+
+        if (error) {
+
+          console.error(error);
+
+          showMessage(
+            translateAuthError(error.message),
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        showMessage(
+          "تم إرسال رابط استعادة كلمة المرور إلى بريدك.",
+          "success"
+        );
+
+      }
+    );
+
+
+    /* =========================================
+       LOGOUT
+    ========================================= */
+
+    logoutBtn.addEventListener(
+      "click",
+      async () => {
+
+        await db.auth.signOut();
+
+      }
+    );
+
+
+    /* =========================================
+       AUTH STATE
+    ========================================= */
+
+    db.auth.onAuthStateChange(
+      async (event, session) => {
+
+        if (session && session.user) {
+
+          await showLoggedIn(session.user);
+
+        } else {
+
+          showLoggedOut();
+
+        }
+
+      }
+    );
+
+
+    /* =========================================
+       SHOW LOGGED IN
+    ========================================= */
+
+    async function showLoggedIn(user) {
+
+      loginPage.classList.add("hidden");
+
+      wheelPage.classList.remove("hidden");
+
+      mainHeader.classList.remove("hidden");
+
+      userEmail.textContent =
+        user.email || "";
+
+
+      resultBox.classList.add("hidden");
+
+      spinBtn.disabled = false;
+
+
+      if (user.id === ADMIN_UID) {
+
+        adminPanel.classList.remove("hidden");
+
+        loadParticipants();
+
+      } else {
+
+        adminPanel.classList.add("hidden");
+
+      }
 
     }
 
-    showToast(message);
 
-    wheelStatus.textContent =
-      "";
+    /* =========================================
+       SHOW LOGGED OUT
+    ========================================= */
 
-  }
+    function showLoggedOut() {
 
-}
+      loginPage.classList.remove("hidden");
+
+      wheelPage.classList.add("hidden");
+
+      mainHeader.classList.add("hidden");
+
+      adminPanel.classList.add("hidden");
+
+      userEmail.textContent = "";
+
+      emailInput.value = "";
+
+      passwordInput.value = "";
+
+      showMessage("");
+
+    }
 
 
-/* ================= ADMIN ================= */
+    /* =========================================
+       SPIN
+    ========================================= */
 
-async function loadParticipants() {
+    spinBtn.addEventListener(
+      "click",
+      async () => {
 
-  try {
+        if (spinning) return;
 
-    const {
-      data,
-      error
-    } =
-      await db.rpc(
-        "get_participants"
+
+        spinning = true;
+
+        spinBtn.disabled = true;
+
+        resultBox.classList.add("hidden");
+
+
+        const { data, error } =
+          await db.rpc("spin_wheel");
+
+
+        if (error) {
+
+          console.error(error);
+
+          spinning = false;
+
+          spinBtn.disabled = false;
+
+
+          alert(
+            translateSpinError(error.message)
+          );
+
+          return;
+
+        }
+
+
+        const result =
+          Array.isArray(data)
+            ? data[0]
+            : data;
+
+
+        /*
+          We do not visually represent the real
+          probabilities. All wheel sectors remain equal.
+        */
+
+        const prize =
+          result.prize;
+
+
+        const sectorIndex =
+          getSectorIndex(prize);
+
+
+        const sectorAngle =
+          360 / 7;
+
+
+        /*
+          Pointer is at the top.
+          Put selected sector center under pointer.
+        */
+
+        const targetAngle =
+          sectorIndex * sectorAngle +
+          sectorAngle / 2;
+
+
+        const desiredRotation =
+          360 -
+          targetAngle;
+
+
+        const extraSpins =
+          360 * 7;
+
+
+        currentRotation +=
+          extraSpins +
+          normalizeAngle(
+            desiredRotation -
+            normalizeAngle(currentRotation)
+          );
+
+
+        wheel.style.transform =
+          `rotate(${currentRotation}deg)`;
+
+        wheelLabels.style.transform =
+          `rotate(${currentRotation}deg)`;
+
+
+        setTimeout(() => {
+
+          resultPrize.textContent =
+            result.prize;
+
+
+          couponCode.textContent =
+            result.coupon_code;
+
+
+          nextDate.textContent =
+            "يمكنك المشاركة مرة أخرى بعد: " +
+            formatDate(result.next_eligible_at);
+
+
+          resultBox.classList.remove(
+            "hidden"
+          );
+
+
+          spinning = false;
+
+          spinBtn.disabled = true;
+
+
+          if (
+            userEmail &&
+            adminPanel.classList.contains("hidden") === false
+          ) {
+
+            loadParticipants();
+
+          }
+
+        }, 5700);
+
+      }
+    );
+
+
+    /* =========================================
+       PRIZE → SECTOR
+    ========================================= */
+
+    function getSectorIndex(prize) {
+
+      if (!prize) return 0;
+
+
+      const value =
+        String(prize).trim();
+
+
+      if (value.includes("5%"))
+        return 0;
+
+
+      if (
+        value.includes("حظ") ||
+        value.includes("أوفر")
+      )
+        return 1;
+
+
+      if (value.includes("10%"))
+        return 2;
+
+
+      if (value.includes("15%"))
+        return 3;
+
+
+      if (value.includes("20%"))
+        return 4;
+
+
+      if (value.includes("25%"))
+        return 5;
+
+
+      if (value.includes("30%"))
+        return 6;
+
+
+      return 0;
+
+    }
+
+
+    function normalizeAngle(angle) {
+
+      return (
+        (angle % 360) + 360
+      ) % 360;
+
+    }
+
+
+    /* =========================================
+       DATE
+    ========================================= */
+
+    function formatDate(dateString) {
+
+      if (!dateString) return "-";
+
+
+      const date =
+        new Date(dateString);
+
+
+      return date.toLocaleString(
+        "ar-IQ",
+        {
+
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+
+          hour: "numeric",
+          minute: "2-digit"
+
+        }
       );
 
-    if (error) {
-
-      throw error;
-
     }
 
-    participantsBody.innerHTML =
-      "";
 
-    if (
-      !data ||
-      !data.length
-    ) {
+    /* =========================================
+       ADMIN PARTICIPANTS
+    ========================================= */
 
-      participantsBody.innerHTML =
-        "<tr><td colspan='7'>لا توجد مشاركات بعد.</td></tr>";
+    async function loadParticipants() {
 
-      return;
+      adminLoading.classList.remove(
+        "hidden"
+      );
 
-    }
 
-    data.forEach(
-      user => {
+      participantsBody.innerHTML = "";
+
+
+      const { data, error } =
+        await db.rpc("get_participants");
+
+
+      adminLoading.classList.add(
+        "hidden"
+      );
+
+
+      if (error) {
+
+        console.error(error);
+
+        participantsBody.innerHTML = `
+          <tr>
+            <td colspan="7">
+              تعذر تحميل المشاركين.
+            </td>
+          </tr>
+        `;
+
+        return;
+
+      }
+
+
+      if (!data || data.length === 0) {
+
+        participantsBody.innerHTML = `
+          <tr>
+            <td colspan="7">
+              لا يوجد مشاركون حتى الآن.
+            </td>
+          </tr>
+        `;
+
+        return;
+
+      }
+
+
+      data.forEach(participant => {
 
         const row =
-          document.createElement(
-            "tr"
-          );
+          document.createElement("tr");
+
 
         row.innerHTML = `
 
           <td>
             ${escapeHtml(
-              user.full_name || "-"
-            )}
-          </td>
-
-          <td>
-            ${escapeHtml(
-              user.phone || "-"
-            )}
-          </td>
-
-          <td>
-            ${escapeHtml(
-              user.email || "-"
-            )}
-          </td>
-
-          <td>
-            ${escapeHtml(
-              user.prize || "-"
+              participant.full_name || "-"
             )}
           </td>
 
           <td dir="ltr">
             ${escapeHtml(
-              user.coupon_code || "-"
+              participant.email || "-"
+            )}
+          </td>
+
+          <td dir="ltr">
+            ${escapeHtml(
+              participant.phone || "-"
             )}
           </td>
 
           <td>
-            ${formatDate(
-              user.last_spin_at
+            ${escapeHtml(
+              participant.prize || "-"
+            )}
+          </td>
+
+          <td dir="ltr">
+            ${escapeHtml(
+              participant.coupon_code || "-"
             )}
           </td>
 
           <td>
-            ${formatDate(
-              user.next_eligible_at
-            )}
+            ${
+              participant.last_spin_at
+                ? formatDate(
+                    participant.last_spin_at
+                  )
+                : "-"
+            }
+          </td>
+
+          <td>
+            ${
+              participant.next_eligible_at
+                ? formatDate(
+                    participant.next_eligible_at
+                  )
+                : "-"
+            }
           </td>
 
         `;
 
-        participantsBody.appendChild(
-          row
-        );
+
+        participantsBody.appendChild(row);
+
+      });
+
+    }
+
+
+    /* =========================================
+       SECURITY
+    ========================================= */
+
+    function escapeHtml(value) {
+
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+    }
+
+
+    /* =========================================
+       AUTH ERROR TRANSLATION
+    ========================================= */
+
+    function translateAuthError(message) {
+
+      const text =
+        String(message || "").toLowerCase();
+
+
+      if (
+        text.includes("invalid login credentials")
+      ) {
+
+        return "البريد الإلكتروني أو كلمة المرور غير صحيحة.";
 
       }
-    );
-
-  } catch (error) {
-
-    console.error(error);
-
-    participantsBody.innerHTML =
-      "<tr><td colspan='7'>تعذر تحميل المشاركين.</td></tr>";
-
-  }
-}
 
 
-/* ================= ESCAPE ================= */
+      if (
+        text.includes("email not confirmed")
+      ) {
 
-function escapeHtml(value) {
+        return "يرجى تأكيد بريدك الإلكتروني أولاً.";
 
-  return String(value)
-
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
-}
+      }
 
 
-/* ================= AUTH ================= */
+      if (
+        text.includes("user already registered")
+      ) {
 
-db.auth.onAuthStateChange(
-  async (
-    event,
-    session
-  ) => {
+        return "هذا البريد مسجل مسبقاً. حاول تسجيل الدخول.";
 
-    if (
-      event === "SIGNED_IN" ||
-      event === "INITIAL_SESSION"
-    ) {
+      }
 
-      await showUser(
-        session
+
+      if (
+        text.includes("password")
+        &&
+        text.includes("6")
+      ) {
+
+        return "كلمة المرور يجب أن تكون 6 أحرف أو أكثر.";
+
+      }
+
+
+      if (
+        text.includes("rate limit")
+      ) {
+
+        return "تم إرسال عدد كبير من الطلبات. حاول لاحقاً.";
+
+      }
+
+
+      return (
+        "حدث خطأ. يرجى التأكد من البيانات والمحاولة مرة أخرى."
       );
 
     }
 
-    if (
-      event === "SIGNED_OUT"
-    ) {
 
-      loginScreen.style.display =
-        "flex";
+    /* =========================================
+       SPIN ERROR
+    ========================================= */
 
-      store.style.display =
-        "none";
+    function translateSpinError(message) {
+
+      const text =
+        String(message || "");
+
+
+      if (
+        text.includes("14 يوماً")
+      ) {
+
+        return text;
+
+      }
+
+
+      if (
+        text.includes("تسجيل الدخول")
+      ) {
+
+        return text;
+
+      }
+
+
+      return (
+        "تعذر تنفيذ المشاركة. حاول مرة أخرى."
+      );
 
     }
 
-  }
-);
-
-
-/* ================= START ================= */
-
-async function start() {
-
-  const {
-    data: {
-      session
-    }
-  } =
-    await db.auth.getSession();
-
-  await showUser(
-    session
-  );
-
-}
-
-start();
-
-</script>
+  </script>
 
 </body>
 </html>
