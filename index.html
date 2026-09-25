@@ -14,6 +14,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -33,6 +34,7 @@
     .hidden {
       display: none !important;
     }
+
 
     /* =========================
        HEADER
@@ -76,6 +78,7 @@
       background: #111;
       color: #fff;
     }
+
 
     /* =========================
        LOGIN
@@ -235,6 +238,7 @@
       color: #c62828;
     }
 
+
     /* =========================
        WHEEL PAGE
     ========================= */
@@ -267,7 +271,7 @@
 
 
     /* =========================
-       NEW PERFECT SVG WHEEL
+       PROFESSIONAL WHEEL
     ========================= */
 
     .wheel-wrap {
@@ -275,6 +279,12 @@
       width: min(90vw, 500px);
       aspect-ratio: 1;
       margin: 0 auto;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .wheel-wrap.disabled {
+      cursor: not-allowed;
     }
 
     .wheel-svg {
@@ -287,21 +297,13 @@
 
     #wheelGraphic {
       transform-origin: 250px 250px;
-      transition: transform 5.5s cubic-bezier(.12,.72,.12,1);
+      transition:
+        transform 5.6s cubic-bezier(.12,.72,.12,1);
     }
 
-    .wheel-text {
-      font-family: "Noto Sans Arabic", sans-serif;
-      font-weight: 800;
-      font-size: 25px;
-      text-anchor: middle;
-      dominant-baseline: middle;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    .wheel-text.small {
-      font-size: 19px;
+    .wheel-sector {
+      stroke: #111;
+      stroke-width: 2;
     }
 
     .wheel-outline {
@@ -310,26 +312,47 @@
       stroke-width: 7;
     }
 
-    .wheel-divider {
-      stroke: #111;
-      stroke-width: 2;
+    .wheel-text {
+      font-family: "Noto Sans Arabic", sans-serif;
+      font-weight: 800;
+      text-anchor: middle;
+      dominant-baseline: middle;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .wheel-text.percent {
+      font-size: 25px;
+    }
+
+    .wheel-text.luck {
+      font-size: 19px;
     }
 
     .wheel-center {
       position: absolute;
       width: 108px;
       height: 108px;
+
       border-radius: 50%;
       background: #fff;
+
       border: 5px solid #111;
+
       left: 50%;
       top: 50%;
+
       transform: translate(-50%, -50%);
+
       z-index: 20;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       overflow: hidden;
+
+      pointer-events: none;
     }
 
     .wheel-center img {
@@ -340,39 +363,131 @@
 
     .pointer {
       position: absolute;
+
       z-index: 30;
+
       top: -4px;
       left: 50%;
+
       transform: translateX(-50%);
+
       width: 0;
       height: 0;
+
       border-left: 17px solid transparent;
       border-right: 17px solid transparent;
       border-top: 30px solid #111;
-      filter: drop-shadow(0 2px 1px rgba(0,0,0,.15));
+
+      filter:
+        drop-shadow(
+          0 2px 1px rgba(0,0,0,.15)
+        );
+
+      pointer-events: none;
     }
 
+
+    /* =========================
+       COUNTDOWN
+    ========================= */
+
+    .countdown-box {
+      margin: 23px auto 0;
+      text-align: center;
+    }
+
+    .countdown-label {
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 7px;
+      letter-spacing: .2px;
+    }
+
+    .countdown {
+      direction: ltr;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      min-width: 180px;
+
+      padding: 9px 17px;
+
+      border: 1px solid #dedede;
+      border-radius: 6px;
+
+      background: #fff;
+
+      color: #111;
+
+      font-family:
+        "Cormorant Garamond",
+        serif;
+
+      font-size: 27px;
+      font-weight: 700;
+
+      letter-spacing: 2px;
+
+      line-height: 1;
+    }
+
+    .countdown.available {
+      direction: rtl;
+
+      font-family:
+        "Noto Sans Arabic",
+        sans-serif;
+
+      font-size: 14px;
+      letter-spacing: 0;
+      font-weight: 700;
+
+      border-color: #111;
+    }
+
+
+    /* =========================
+       SPIN BUTTON
+    ========================= */
+
     .spin-btn {
-      margin-top: 30px;
+      margin-top: 27px;
+
       width: 210px;
       height: 52px;
+
       border-radius: 7px;
       border: none;
+
       background: #111;
       color: #fff;
+
       font-size: 15px;
       font-weight: 800;
+
       cursor: pointer;
+
+      transition:
+        transform .15s ease,
+        background .15s ease;
     }
 
     .spin-btn:hover {
       background: #333;
     }
 
+    .spin-btn:active {
+      transform: scale(.98);
+    }
+
     .spin-btn:disabled {
       opacity: .5;
       cursor: not-allowed;
+      transform: none;
     }
+
 
     /* =========================
        RESULT
@@ -380,10 +495,15 @@
 
     .result-box {
       margin: 25px auto 0;
+
       width: min(100%, 420px);
+
       border: 1px solid #ddd;
+
       padding: 20px;
+
       border-radius: 8px;
+
       background: #fff;
     }
 
@@ -401,13 +521,20 @@
 
     .coupon {
       display: inline-block;
+
       background: #111;
       color: #fff;
+
       padding: 9px 14px;
+
       border-radius: 5px;
+
       font-family: monospace;
+
       font-size: 15px;
+
       letter-spacing: 1px;
+
       direction: ltr;
     }
 
@@ -417,13 +544,16 @@
       margin-top: 13px;
     }
 
+
     /* =========================
        ADMIN
     ========================= */
 
     .admin-panel {
       margin: 50px auto 0;
+
       width: min(100%, 950px);
+
       text-align: right;
     }
 
@@ -435,23 +565,32 @@
 
     .table-wrap {
       overflow-x: auto;
+
       border: 1px solid #ddd;
+
       border-radius: 7px;
     }
 
     table {
       width: 100%;
+
       border-collapse: collapse;
+
       min-width: 750px;
+
       background: #fff;
     }
 
     th,
     td {
       border-bottom: 1px solid #eee;
+
       padding: 11px 10px;
+
       font-size: 12px;
+
       text-align: right;
+
       white-space: nowrap;
     }
 
@@ -470,6 +609,11 @@
       font-size: 13px;
       padding: 15px 0;
     }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
 
     @media (max-width: 600px) {
 
@@ -521,20 +665,27 @@
         border-top-width: 24px;
       }
 
-      .wheel-text {
+      .wheel-text.percent {
         font-size: 23px;
       }
 
-      .wheel-text.small {
+      .wheel-text.luck {
         font-size: 17px;
       }
 
       .spin-btn {
         width: 190px;
       }
+
+      .countdown {
+        min-width: 165px;
+        font-size: 25px;
+      }
     }
+
   </style>
 </head>
+
 
 <body>
 
@@ -555,7 +706,10 @@
 
       <span id="userEmail"></span>
 
-      <button id="logoutBtn" class="logout-btn">
+      <button
+        id="logoutBtn"
+        class="logout-btn"
+      >
         تسجيل الخروج
       </button>
 
@@ -564,12 +718,14 @@
   </header>
 
 
-
   <!-- =========================
        LOGIN
   ========================= -->
 
-  <section id="loginPage" class="login-page">
+  <section
+    id="loginPage"
+    class="login-page"
+  >
 
     <div class="login-box">
 
@@ -588,7 +744,10 @@
       </p>
 
 
-      <button id="googleBtn" class="google-btn">
+      <button
+        id="googleBtn"
+        class="google-btn"
+      >
         متابعة باستخدام Google
       </button>
 
@@ -598,7 +757,10 @@
       </div>
 
 
-      <form id="emailForm" class="auth-form">
+      <form
+        id="emailForm"
+        class="auth-form"
+      >
 
         <label class="input-label">
           البريد الإلكتروني
@@ -668,12 +830,14 @@
   </section>
 
 
-
   <!-- =========================
        WHEEL
   ========================= -->
 
-  <main id="wheelPage" class="wheel-page hidden">
+  <main
+    id="wheelPage"
+    class="wheel-page hidden"
+  >
 
     <div class="wheel-container">
 
@@ -688,11 +852,10 @@
       </p>
 
 
-      <!-- =========================
-           PERFECT SVG WHEEL
-      ========================= -->
-
-      <div class="wheel-wrap">
+      <div
+        id="wheelWrap"
+        class="wheel-wrap"
+      >
 
         <div class="pointer"></div>
 
@@ -704,210 +867,10 @@
         >
 
           <g id="wheelGraphic">
-
-            <!-- القطاع 1 -->
-            <path
-              d="M 250 250 L 140.56 25.71 A 250 250 0 0 1 359.44 25.71 Z"
-              fill="#111"
-            />
-
-            <!-- القطاع 2 -->
-            <path
-              d="M 250 250 L 359.44 25.71 A 250 250 0 0 1 445.49 170.98 Z"
-              fill="#fff"
-            />
-
-            <!-- القطاع 3 -->
-            <path
-              d="M 250 250 L 445.49 170.98 A 250 250 0 0 1 445.49 329.02 Z"
-              fill="#111"
-            />
-
-            <!-- القطاع 4 -->
-            <path
-              d="M 250 250 L 445.49 329.02 A 250 250 0 0 1 359.44 474.29 Z"
-              fill="#fff"
-            />
-
-            <!-- القطاع 5 -->
-            <path
-              d="M 250 250 L 359.44 474.29 A 250 250 0 0 1 140.56 474.29 Z"
-              fill="#111"
-            />
-
-            <!-- القطاع 6 -->
-            <path
-              d="M 250 250 L 140.56 474.29 A 250 250 0 0 1 54.51 329.02 Z"
-              fill="#fff"
-            />
-
-            <!-- القطاع 7 -->
-            <path
-              d="M 250 250 L 54.51 329.02 A 250 250 0 0 1 54.51 170.98 Z"
-              fill="#111"
-            />
-
-            <!-- الخطوط الفاصلة -->
-            <line
-              x1="250"
-              y1="250"
-              x2="140.56"
-              y2="25.71"
-              class="wheel-divider"
-            />
-
-            <line
-              x1="250"
-              y1="250"
-              x2="359.44"
-              y2="25.71"
-              class="wheel-divider"
-            />
-
-            <line
-              x1="250"
-              y1="250"
-              x2="445.49"
-              y2="170.98"
-              class="wheel-divider"
-            />
-
-            <line
-              x1="250"
-              y1="250"
-              x2="445.49"
-              y2="329.02"
-              class="wheel-divider"
-            />
-
-            <line
-              x1="250"
-              y1="250"
-              x2="359.44"
-              y2="474.29"
-              class="wheel-divider"
-            />
-
-            <line
-              x1="250"
-              y1="250"
-              x2="140.56"
-              y2="474.29"
-              class="wheel-divider"
-            />
-
-            <line
-              x1="250"
-              y1="250"
-              x2="54.51"
-              y2="329.02"
-              class="wheel-divider"
-            />
-
-            <line
-              x1="250"
-              y1="250"
-              x2="54.51"
-              y2="170.98"
-              class="wheel-divider"
-            />
-
-
-            <!-- =========================
-                 الكتابات
-            ========================= -->
-
-            <!-- 5% -->
-            <text
-              x="250"
-              y="105"
-              class="wheel-text"
-              fill="#fff"
-            >
-              5%
-            </text>
-
-
-            <!-- حظ أوفر -->
-            <text
-              x="380"
-              y="143"
-              class="wheel-text small"
-              fill="#111"
-            >
-              حظ أوفر
-            </text>
-
-
-            <!-- 10% -->
-            <text
-              x="395"
-              y="250"
-              class="wheel-text"
-              fill="#fff"
-            >
-              10%
-            </text>
-
-
-            <!-- 15% -->
-            <text
-              x="380"
-              y="357"
-              class="wheel-text"
-              fill="#111"
-            >
-              15%
-            </text>
-
-
-            <!-- 20% -->
-            <text
-              x="250"
-              y="395"
-              class="wheel-text"
-              fill="#fff"
-            >
-              20%
-            </text>
-
-
-            <!-- 25% -->
-            <text
-              x="120"
-              y="357"
-              class="wheel-text"
-              fill="#111"
-            >
-              25%
-            </text>
-
-
-            <!-- 30% -->
-            <text
-              x="105"
-              y="250"
-              class="wheel-text"
-              fill="#fff"
-            >
-              30%
-            </text>
-
-
-            <!-- الإطار الخارجي -->
-            <circle
-              cx="250"
-              cy="250"
-              r="246"
-              class="wheel-outline"
-            />
-
           </g>
 
         </svg>
 
-
-        <!-- المركز -->
 
         <div class="wheel-center">
 
@@ -916,6 +879,27 @@
             alt="HUMO"
           >
 
+        </div>
+
+      </div>
+
+
+      <!-- COUNTDOWN -->
+
+      <div class="countdown-box">
+
+        <div
+          id="countdownLabel"
+          class="countdown-label"
+        >
+          الوقت المتبقي لإعادة التجربة
+        </div>
+
+        <div
+          id="countdown"
+          class="countdown available"
+        >
+          متاح الآن
         </div>
 
       </div>
@@ -946,13 +930,16 @@
         ></div>
 
         <div>
+
           كود الخصم:
+
           <br><br>
 
           <span
             id="couponCode"
             class="coupon"
           ></span>
+
         </div>
 
         <div
@@ -963,10 +950,7 @@
       </div>
 
 
-
-      <!-- =========================
-           ADMIN
-      ========================= -->
+      <!-- ADMIN -->
 
       <section
         id="adminPanel"
@@ -993,17 +977,11 @@
               <tr>
 
                 <th>الاسم</th>
-
                 <th>البريد</th>
-
                 <th>الهاتف</th>
-
                 <th>الجائزة</th>
-
                 <th>الكود</th>
-
                 <th>تاريخ المشاركة</th>
-
                 <th>المشاركة القادمة</th>
 
               </tr>
@@ -1023,7 +1001,6 @@
     </div>
 
   </main>
-
 
 
   <script>
@@ -1088,6 +1065,9 @@
     const spinBtn =
       document.getElementById("spinBtn");
 
+    const wheelWrap =
+      document.getElementById("wheelWrap");
+
     const wheelGraphic =
       document.getElementById("wheelGraphic");
 
@@ -1103,6 +1083,12 @@
     const nextDate =
       document.getElementById("nextDate");
 
+    const countdown =
+      document.getElementById("countdown");
+
+    const countdownLabel =
+      document.getElementById("countdownLabel");
+
     const adminPanel =
       document.getElementById("adminPanel");
 
@@ -1114,7 +1100,7 @@
 
 
     /* =========================================
-       ADMIN UID
+       ADMIN
     ========================================= */
 
     const ADMIN_UID =
@@ -1122,12 +1108,295 @@
 
 
     /* =========================================
-       WHEEL STATE
+       WHEEL
     ========================================= */
+
+    const WHEEL_CENTER = 250;
+
+    const WHEEL_RADIUS = 246;
+
+    const SECTOR_COUNT = 7;
+
+    const SECTOR_ANGLE =
+      360 / SECTOR_COUNT;
 
     let currentRotation = 0;
 
     let spinning = false;
+
+    let nextEligibleAt = null;
+
+    let countdownTimer = null;
+
+
+    /* =========================================
+       PRIZES
+    ========================================= */
+
+    const prizes = [
+      {
+        label: "5%",
+        color: "#111",
+        textColor: "#fff"
+      },
+      {
+        label: "حظ أوفر",
+        color: "#fff",
+        textColor: "#111"
+      },
+      {
+        label: "10%",
+        color: "#111",
+        textColor: "#fff"
+      },
+      {
+        label: "15%",
+        color: "#fff",
+        textColor: "#111"
+      },
+      {
+        label: "20%",
+        color: "#111",
+        textColor: "#fff"
+      },
+      {
+        label: "25%",
+        color: "#fff",
+        textColor: "#111"
+      },
+      {
+        label: "30%",
+        color: "#111",
+        textColor: "#fff"
+      }
+    ];
+
+
+    /* =========================================
+       CREATE PERFECT WHEEL
+    ========================================= */
+
+    function polarToCartesian(
+      cx,
+      cy,
+      radius,
+      angle
+    ) {
+
+      const radians =
+        (angle - 90) *
+        Math.PI / 180;
+
+      return {
+
+        x:
+          cx +
+          radius *
+          Math.cos(radians),
+
+        y:
+          cy +
+          radius *
+          Math.sin(radians)
+
+      };
+
+    }
+
+
+    function createSectorPath(
+      startAngle,
+      endAngle
+    ) {
+
+      const start =
+        polarToCartesian(
+          WHEEL_CENTER,
+          WHEEL_CENTER,
+          WHEEL_RADIUS,
+          endAngle
+        );
+
+      const end =
+        polarToCartesian(
+          WHEEL_CENTER,
+          WHEEL_CENTER,
+          WHEEL_RADIUS,
+          startAngle
+        );
+
+
+      return `
+        M ${WHEEL_CENTER} ${WHEEL_CENTER}
+        L ${start.x} ${start.y}
+        A ${WHEEL_RADIUS}
+          ${WHEEL_RADIUS}
+          0 0 0
+          ${end.x}
+          ${end.y}
+        Z
+      `;
+
+    }
+
+
+    function createWheel() {
+
+      wheelGraphic.innerHTML = "";
+
+
+      prizes.forEach(
+        (prize, index) => {
+
+          const startAngle =
+            index *
+            SECTOR_ANGLE -
+            SECTOR_ANGLE / 2;
+
+
+          const endAngle =
+            startAngle +
+            SECTOR_ANGLE;
+
+
+          /* القطاع */
+
+          const path =
+            document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "path"
+            );
+
+
+          path.setAttribute(
+            "d",
+            createSectorPath(
+              startAngle,
+              endAngle
+            )
+          );
+
+
+          path.setAttribute(
+            "fill",
+            prize.color
+          );
+
+
+          path.setAttribute(
+            "class",
+            "wheel-sector"
+          );
+
+
+          wheelGraphic.appendChild(
+            path
+          );
+
+
+          /* النص */
+
+          const text =
+            document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "text"
+            );
+
+
+          const labelRadius =
+            index === 1
+              ? 165
+              : 157;
+
+
+          const point =
+            polarToCartesian(
+              WHEEL_CENTER,
+              WHEEL_CENTER,
+              labelRadius,
+              index * SECTOR_ANGLE
+            );
+
+
+          text.setAttribute(
+            "x",
+            point.x
+          );
+
+
+          text.setAttribute(
+            "y",
+            point.y
+          );
+
+
+          text.setAttribute(
+            "fill",
+            prize.textColor
+          );
+
+
+          text.setAttribute(
+            "class",
+            index === 1
+              ? "wheel-text luck"
+              : "wheel-text percent"
+          );
+
+
+          text.textContent =
+            prize.label;
+
+
+          wheelGraphic.appendChild(
+            text
+          );
+
+        }
+      );
+
+
+      /* الإطار الخارجي */
+
+      const outline =
+        document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "circle"
+        );
+
+
+      outline.setAttribute(
+        "cx",
+        WHEEL_CENTER
+      );
+
+
+      outline.setAttribute(
+        "cy",
+        WHEEL_CENTER
+      );
+
+
+      outline.setAttribute(
+        "r",
+        WHEEL_RADIUS
+      );
+
+
+      outline.setAttribute(
+        "class",
+        "wheel-outline"
+      );
+
+
+      wheelGraphic.appendChild(
+        outline
+      );
+
+    }
+
+
+    createWheel();
 
 
     /* =========================================
@@ -1149,7 +1418,7 @@
 
 
     /* =========================================
-       GOOGLE LOGIN
+       GOOGLE
     ========================================= */
 
     googleBtn.addEventListener(
@@ -1171,7 +1440,8 @@
                 window.location.pathname,
 
               queryParams: {
-                prompt: "select_account"
+                prompt:
+                  "select_account"
               }
 
             }
@@ -1181,12 +1451,12 @@
 
         if (error) {
 
+          console.error(error);
+
           showMessage(
             "حدث خطأ أثناء تسجيل الدخول بواسطة Google.",
             "error"
           );
-
-          console.error(error);
 
         }
 
@@ -1200,7 +1470,7 @@
 
     emailForm.addEventListener(
       "submit",
-      async (event) => {
+      async event => {
 
         event.preventDefault();
 
@@ -1212,7 +1482,10 @@
           passwordInput.value;
 
 
-        if (!email || !password) {
+        if (
+          !email ||
+          !password
+        ) {
 
           showMessage(
             "يرجى إدخال البريد الإلكتروني وكلمة المرور.",
@@ -1229,7 +1502,10 @@
         );
 
 
-        const { data, error } =
+        const {
+          data,
+          error
+        } =
           await db.auth.signInWithPassword({
 
             email,
@@ -1268,7 +1544,7 @@
 
 
     /* =========================================
-       CREATE ACCOUNT
+       SIGN UP
     ========================================= */
 
     signupBtn.addEventListener(
@@ -1282,7 +1558,10 @@
           passwordInput.value;
 
 
-        if (!email || !password) {
+        if (
+          !email ||
+          !password
+        ) {
 
           showMessage(
             "أدخل البريد الإلكتروني وكلمة المرور أولاً.",
@@ -1294,7 +1573,9 @@
         }
 
 
-        if (password.length < 6) {
+        if (
+          password.length < 6
+        ) {
 
           showMessage(
             "كلمة المرور يجب أن تكون 6 أحرف أو أكثر.",
@@ -1311,7 +1592,10 @@
         );
 
 
-        const { data, error } =
+        const {
+          data,
+          error
+        } =
           await db.auth.signUp({
 
             email,
@@ -1504,7 +1788,10 @@
         "hidden"
       );
 
-      spinBtn.disabled = false;
+
+      /* جلب آخر مشاركة */
+
+      await loadLatestSpin();
 
 
       if (
@@ -1559,173 +1846,511 @@
       passwordInput.value =
         "";
 
+      stopCountdown();
+
       showMessage("");
 
     }
 
 
     /* =========================================
-       SPIN
+       LOAD LATEST SPIN
+    ========================================= */
+
+    async function loadLatestSpin() {
+
+      const {
+        data,
+        error
+      } =
+        await db
+          .from("spins")
+          .select(
+            "spun_at, prize, coupon_code, next_eligible_at"
+          )
+          .order(
+            "spun_at",
+            {
+              ascending: false
+            }
+          )
+          .limit(1);
+
+
+      if (error) {
+
+        console.error(error);
+
+        setAvailable();
+
+        return;
+
+      }
+
+
+      if (
+        !data ||
+        data.length === 0
+      ) {
+
+        setAvailable();
+
+        return;
+
+      }
+
+
+      const latest =
+        data[0];
+
+
+      nextEligibleAt =
+        latest.next_eligible_at;
+
+
+      const remaining =
+        new Date(
+          nextEligibleAt
+        ).getTime() -
+        Date.now();
+
+
+      if (
+        remaining <= 0
+      ) {
+
+        setAvailable();
+
+      } else {
+
+        setCooldown(
+          nextEligibleAt
+        );
+
+      }
+
+    }
+
+
+    /* =========================================
+       COUNTDOWN
+    ========================================= */
+
+    function setAvailable() {
+
+      nextEligibleAt =
+        null;
+
+
+      stopCountdown();
+
+
+      countdown.classList.add(
+        "available"
+      );
+
+
+      countdown.textContent =
+        "متاح الآن";
+
+
+      countdownLabel.textContent =
+        "يمكنك تجربة العجلة الآن";
+
+
+      spinBtn.disabled =
+        false;
+
+
+      wheelWrap.classList.remove(
+        "disabled"
+      );
+
+    }
+
+
+    function setCooldown(
+      targetDate
+    ) {
+
+      nextEligibleAt =
+        targetDate;
+
+
+      countdown.classList.remove(
+        "available"
+      );
+
+
+      spinBtn.disabled =
+        true;
+
+
+      wheelWrap.classList.add(
+        "disabled"
+      );
+
+
+      updateCountdown();
+
+
+      stopCountdown();
+
+
+      countdownTimer =
+        setInterval(
+          updateCountdown,
+          1000
+        );
+
+    }
+
+
+    function updateCountdown() {
+
+      if (!nextEligibleAt)
+        return;
+
+
+      const difference =
+        new Date(
+          nextEligibleAt
+        ).getTime() -
+        Date.now();
+
+
+      if (
+        difference <= 0
+      ) {
+
+        setAvailable();
+
+        return;
+
+      }
+
+
+      const totalSeconds =
+        Math.floor(
+          difference / 1000
+        );
+
+
+      const days =
+        Math.floor(
+          totalSeconds / 86400
+        );
+
+
+      const hours =
+        Math.floor(
+          (totalSeconds % 86400) /
+          3600
+        );
+
+
+      const minutes =
+        Math.floor(
+          (totalSeconds % 3600) /
+          60
+        );
+
+
+      const seconds =
+        totalSeconds % 60;
+
+
+      if (
+        days > 0
+      ) {
+
+        countdown.textContent =
+          `${days} يوم  ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+
+      } else {
+
+        countdown.textContent =
+          `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+
+      }
+
+
+      countdownLabel.textContent =
+        "الوقت المتبقي لإعادة التجربة";
+
+    }
+
+
+    function pad(
+      number
+    ) {
+
+      return String(
+        number
+      ).padStart(
+        2,
+        "0"
+      );
+
+    }
+
+
+    function stopCountdown() {
+
+      if (
+        countdownTimer
+      ) {
+
+        clearInterval(
+          countdownTimer
+        );
+
+        countdownTimer =
+          null;
+
+      }
+
+    }
+
+
+    /* =========================================
+       WHEEL CLICK
+    ========================================= */
+
+    wheelWrap.addEventListener(
+      "click",
+      () => {
+
+        spinWheel();
+
+      }
+    );
+
+
+    /* =========================================
+       BUTTON CLICK
     ========================================= */
 
     spinBtn.addEventListener(
       "click",
-      async () => {
+      event => {
 
-        if (spinning) return;
+        event.stopPropagation();
 
+        spinWheel();
 
-        spinning = true;
-
-        spinBtn.disabled = true;
-
-        resultBox.classList.add(
-          "hidden"
-        );
+      }
+    );
 
 
-        const { data, error } =
-          await db.rpc(
-            "spin_wheel"
-          );
+    /* =========================================
+       SPIN WHEEL
+    ========================================= */
+
+    async function spinWheel() {
+
+      if (spinning)
+        return;
 
 
-        if (error) {
+      if (nextEligibleAt) {
 
-          console.error(error);
+        const remaining =
+          new Date(
+            nextEligibleAt
+          ).getTime() -
+          Date.now();
 
-          spinning = false;
 
-          spinBtn.disabled = false;
+        if (
+          remaining > 0
+        ) {
 
-
-          alert(
-            translateSpinError(
-              error.message
-            )
-          );
+          updateCountdown();
 
           return;
 
         }
 
-
-        const result =
-          Array.isArray(data)
-            ? data[0]
-            : data;
+      }
 
 
-        const prize =
-          result.prize;
+      spinning =
+        true;
 
 
-        const sectorIndex =
-          getSectorIndex(
-            prize
-          );
+      spinBtn.disabled =
+        true;
 
 
-        /*
-          7 قطاعات متساوية
-          كل قطاع = 51.428571°
-        */
-
-        const sectorAngle =
-          360 / 7;
+      wheelWrap.classList.add(
+        "disabled"
+      );
 
 
-        /*
-          القطاع الأول 5% مركزه عند الأعلى.
-          القطاع الثاني حظ أوفر...
-        */
-
-        const targetAngle =
-          sectorIndex *
-          sectorAngle;
+      resultBox.classList.add(
+        "hidden"
+      );
 
 
-        const extraSpins =
-          360 * 7;
-
-
-        /*
-          نحرك العجلة بحيث مركز
-          القطاع الفائز يصبح تحت السهم.
-        */
-
-        const normalizedCurrent =
-          normalizeAngle(
-            currentRotation
-          );
-
-
-        const desiredRotation =
-          -targetAngle;
-
-
-        let difference =
-          normalizeAngle(
-            desiredRotation -
-            normalizedCurrent
-          );
-
-
-        currentRotation +=
-          extraSpins +
-          difference;
-
-
-        wheelGraphic.setAttribute(
-          "transform",
-          `rotate(${currentRotation} 250 250)`
+      const {
+        data,
+        error
+      } =
+        await db.rpc(
+          "spin_wheel"
         );
 
 
-        setTimeout(
-          () => {
+      if (error) {
 
-            resultPrize.textContent =
-              result.prize;
+        console.error(error);
 
 
-            couponCode.textContent =
-              result.coupon_code;
+        spinning =
+          false;
 
 
-            nextDate.textContent =
-              "يمكنك المشاركة مرة أخرى بعد: " +
-              formatDate(
-                result.next_eligible_at
-              );
+        spinBtn.disabled =
+          false;
 
 
-            resultBox.classList.remove(
-              "hidden"
+        wheelWrap.classList.remove(
+          "disabled"
+        );
+
+
+        alert(
+          translateSpinError(
+            error.message
+          )
+        );
+
+
+        return;
+
+      }
+
+
+      const result =
+        Array.isArray(data)
+          ? data[0]
+          : data;
+
+
+      const sectorIndex =
+        getSectorIndex(
+          result.prize
+        );
+
+
+      /*
+        كل قطاع 51.428571°
+        ومركز القطاع الأول بالأعلى.
+      */
+
+      const targetRotation =
+        -(
+          sectorIndex *
+          SECTOR_ANGLE
+        );
+
+
+      const normalizedCurrent =
+        normalizeAngle(
+          currentRotation
+        );
+
+
+      const normalizedTarget =
+        normalizeAngle(
+          targetRotation
+        );
+
+
+      let difference =
+        normalizedTarget -
+        normalizedCurrent;
+
+
+      if (
+        difference < 0
+      ) {
+
+        difference +=
+          360;
+
+      }
+
+
+      /*
+        7 لفات كاملة قبل النتيجة
+      */
+
+      const extraSpins =
+        360 * 7;
+
+
+      currentRotation +=
+        extraSpins +
+        difference;
+
+
+      wheelGraphic.style.transform =
+        `rotate(${currentRotation}deg)`;
+
+
+      setTimeout(
+        () => {
+
+          resultPrize.textContent =
+            result.prize;
+
+
+          couponCode.textContent =
+            result.coupon_code;
+
+
+          nextDate.textContent =
+            "يمكنك المشاركة مرة أخرى بعد: " +
+            formatDate(
+              result.next_eligible_at
             );
 
 
-            spinning = false;
+          resultBox.classList.remove(
+            "hidden"
+          );
 
-            spinBtn.disabled = true;
+
+          nextEligibleAt =
+            result.next_eligible_at;
 
 
-            if (
-              !adminPanel.classList.contains(
-                "hidden"
-              )
-            ) {
+          setCooldown(
+            result.next_eligible_at
+          );
 
-              loadParticipants();
 
-            }
+          spinning =
+            false;
 
-          },
-          5700
-        );
 
-      }
-    );
+          if (
+            !adminPanel.classList.contains(
+              "hidden"
+            )
+          ) {
+
+            loadParticipants();
+
+          }
+
+        },
+        5700
+      );
+
+    }
 
 
     /* =========================================
@@ -1741,7 +2366,9 @@
 
 
       const value =
-        String(prize).trim();
+        String(
+          prize
+        ).trim();
 
 
       if (
@@ -1797,7 +2424,9 @@
     ) {
 
       return (
-        (angle % 360) +
+        (
+          angle % 360
+        ) +
         360
       ) % 360;
 
@@ -1826,15 +2455,20 @@
         "ar-IQ",
         {
 
-          year: "numeric",
+          year:
+            "numeric",
 
-          month: "long",
+          month:
+            "long",
 
-          day: "numeric",
+          day:
+            "numeric",
 
-          hour: "numeric",
+          hour:
+            "numeric",
 
-          minute: "2-digit"
+          minute:
+            "2-digit"
 
         }
       );
@@ -1843,7 +2477,7 @@
 
 
     /* =========================================
-       ADMIN PARTICIPANTS
+       ADMIN
     ========================================= */
 
     async function loadParticipants() {
@@ -1857,7 +2491,10 @@
         "";
 
 
-      const { data, error } =
+      const {
+        data,
+        error
+      } =
         await db.rpc(
           "get_participants"
         );
@@ -1978,14 +2615,16 @@
 
 
     /* =========================================
-       SECURITY
+       ESCAPE HTML
     ========================================= */
 
     function escapeHtml(
       value
     ) {
 
-      return String(value)
+      return String(
+        value
+      )
 
         .replaceAll(
           "&",
@@ -2016,7 +2655,7 @@
 
 
     /* =========================================
-       AUTH ERROR TRANSLATION
+       AUTH ERRORS
     ========================================= */
 
     function translateAuthError(
@@ -2073,7 +2712,9 @@
 
 
       if (
-        text.includes("rate limit")
+        text.includes(
+          "rate limit"
+        )
       ) {
 
         return "تم إرسال عدد كبير من الطلبات. حاول لاحقاً.";
@@ -2087,7 +2728,7 @@
 
 
     /* =========================================
-       SPIN ERROR
+       SPIN ERRORS
     ========================================= */
 
     function translateSpinError(
@@ -2101,7 +2742,9 @@
 
 
       if (
-        text.includes("14 يوماً")
+        text.includes(
+          "14 يوماً"
+        )
       ) {
 
         return text;
@@ -2110,7 +2753,9 @@
 
 
       if (
-        text.includes("تسجيل الدخول")
+        text.includes(
+          "تسجيل الدخول"
+        )
       ) {
 
         return text;
