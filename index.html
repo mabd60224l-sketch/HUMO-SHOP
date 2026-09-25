@@ -265,6 +265,11 @@
       margin: 4px 0 28px;
     }
 
+
+    /* =========================
+       NEW PERFECT SVG WHEEL
+    ========================= */
+
     .wheel-wrap {
       position: relative;
       width: min(90vw, 500px);
@@ -272,102 +277,42 @@
       margin: 0 auto;
     }
 
-    .wheel {
+    .wheel-svg {
       position: absolute;
       inset: 0;
-      border-radius: 50%;
-      border: 7px solid #111;
-      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
 
-      background:
-        conic-gradient(
-          from -25.714285deg,
-
-          #111 0deg 25.714285deg,
-          #fff 25.714285deg 51.42857deg,
-
-          #111 51.42857deg 77.142855deg,
-          #fff 77.142855deg 102.85714deg,
-
-          #111 102.85714deg 128.571425deg,
-          #fff 128.571425deg 154.28571deg,
-
-          #111 154.28571deg 180deg,
-          #fff 180deg 205.714285deg,
-
-          #111 205.714285deg 231.42857deg,
-          #fff 231.42857deg 257.142855deg,
-
-          #111 257.142855deg 282.85714deg,
-          #fff 282.85714deg 308.571425deg,
-
-          #111 308.571425deg 334.28571deg,
-          #fff 334.28571deg 360deg
-        );
-
-      transform: rotate(0deg);
+    #wheelGraphic {
+      transform-origin: 250px 250px;
       transition: transform 5.5s cubic-bezier(.12,.72,.12,1);
     }
 
-    .wheel-labels {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      pointer-events: none;
-      transform: rotate(0deg);
-      transition: transform 5.5s cubic-bezier(.12,.72,.12,1);
-    }
-
-    .wheel-label {
-      position: absolute;
-      transform: translate(-50%, -50%);
+    .wheel-text {
+      font-family: "Noto Sans Arabic", sans-serif;
       font-weight: 800;
-      font-size: clamp(15px, 3.7vw, 23px);
-      white-space: nowrap;
+      font-size: 25px;
+      text-anchor: middle;
+      dominant-baseline: middle;
       pointer-events: none;
+      user-select: none;
     }
 
-    .label-5 {
-      left: 63.884%;
-      top: 21.169%;
-      color: #fff;
+    .wheel-text.small {
+      font-size: 19px;
     }
 
-    .label-luck {
-      left: 81.198%;
-      top: 42.879%;
-      color: #111;
-      font-size: clamp(12px, 3vw, 18px);
+    .wheel-outline {
+      fill: none;
+      stroke: #111;
+      stroke-width: 7;
     }
 
-    .label-10 {
-      left: 75.019%;
-      top: 69.951%;
-      color: #fff;
-    }
-
-    .label-15 {
-      left: 50%;
-      top: 82%;
-      color: #111;
-    }
-
-    .label-20 {
-      left: 24.982%;
-      top: 69.953%;
-      color: #fff;
-    }
-
-    .label-25 {
-      left: 18.802%;
-      top: 42.881%;
-      color: #111;
-    }
-
-    .label-30 {
-      left: 36.114%;
-      top: 21.17%;
-      color: #fff;
+    .wheel-divider {
+      stroke: #111;
+      stroke-width: 2;
     }
 
     .wheel-center {
@@ -380,7 +325,7 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      z-index: 5;
+      z-index: 20;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -395,7 +340,7 @@
 
     .pointer {
       position: absolute;
-      z-index: 10;
+      z-index: 30;
       top: -4px;
       left: 50%;
       transform: translateX(-50%);
@@ -527,6 +472,7 @@
     }
 
     @media (max-width: 600px) {
+
       header {
         height: 68px;
         padding: 0 14px;
@@ -575,6 +521,14 @@
         border-top-width: 24px;
       }
 
+      .wheel-text {
+        font-size: 23px;
+      }
+
+      .wheel-text.small {
+        font-size: 17px;
+      }
+
       .spin-btn {
         width: 190px;
       }
@@ -584,9 +538,10 @@
 
 <body>
 
+
   <!-- =========================
        HEADER
-  ========================== -->
+  ========================= -->
 
   <header id="mainHeader" class="hidden">
 
@@ -597,18 +552,22 @@
     >
 
     <div class="header-user">
+
       <span id="userEmail"></span>
+
       <button id="logoutBtn" class="logout-btn">
         تسجيل الخروج
       </button>
+
     </div>
 
   </header>
 
 
+
   <!-- =========================
        LOGIN
-  ========================== -->
+  ========================= -->
 
   <section id="loginPage" class="login-page">
 
@@ -629,8 +588,6 @@
       </p>
 
 
-      <!-- GOOGLE -->
-
       <button id="googleBtn" class="google-btn">
         متابعة باستخدام Google
       </button>
@@ -640,8 +597,6 @@
         أو
       </div>
 
-
-      <!-- EMAIL FORM -->
 
       <form id="emailForm" class="auth-form">
 
@@ -682,6 +637,7 @@
           تسجيل الدخول
         </button>
 
+
         <button
           id="signupBtn"
           class="secondary-btn"
@@ -689,6 +645,7 @@
         >
           إنشاء حساب جديد
         </button>
+
 
         <button
           id="forgotBtn"
@@ -711,68 +668,246 @@
   </section>
 
 
+
   <!-- =========================
        WHEEL
-  ========================== -->
+  ========================= -->
 
   <main id="wheelPage" class="wheel-page hidden">
 
     <div class="wheel-container">
 
+
       <h1 class="wheel-title">
         خصومات الخميس
       </h1>
+
 
       <p class="wheel-subtitle">
         فرصتك تتجدد كل 14 يومًا.
       </p>
 
 
+      <!-- =========================
+           PERFECT SVG WHEEL
+      ========================= -->
+
       <div class="wheel-wrap">
 
         <div class="pointer"></div>
 
-        <div
-          id="wheel"
-          class="wheel"
-        ></div>
 
-
-        <div
-          id="wheelLabels"
-          class="wheel-labels"
+        <svg
+          class="wheel-svg"
+          viewBox="0 0 500 500"
+          xmlns="http://www.w3.org/2000/svg"
         >
 
-          <div class="wheel-label label-5">
-            5%
-          </div>
+          <g id="wheelGraphic">
 
-          <div class="wheel-label label-luck">
-            حظ أوفر
-          </div>
+            <!-- القطاع 1 -->
+            <path
+              d="M 250 250 L 140.56 25.71 A 250 250 0 0 1 359.44 25.71 Z"
+              fill="#111"
+            />
 
-          <div class="wheel-label label-10">
-            10%
-          </div>
+            <!-- القطاع 2 -->
+            <path
+              d="M 250 250 L 359.44 25.71 A 250 250 0 0 1 445.49 170.98 Z"
+              fill="#fff"
+            />
 
-          <div class="wheel-label label-15">
-            15%
-          </div>
+            <!-- القطاع 3 -->
+            <path
+              d="M 250 250 L 445.49 170.98 A 250 250 0 0 1 445.49 329.02 Z"
+              fill="#111"
+            />
 
-          <div class="wheel-label label-20">
-            20%
-          </div>
+            <!-- القطاع 4 -->
+            <path
+              d="M 250 250 L 445.49 329.02 A 250 250 0 0 1 359.44 474.29 Z"
+              fill="#fff"
+            />
 
-          <div class="wheel-label label-25">
-            25%
-          </div>
+            <!-- القطاع 5 -->
+            <path
+              d="M 250 250 L 359.44 474.29 A 250 250 0 0 1 140.56 474.29 Z"
+              fill="#111"
+            />
 
-          <div class="wheel-label label-30">
-            30%
-          </div>
+            <!-- القطاع 6 -->
+            <path
+              d="M 250 250 L 140.56 474.29 A 250 250 0 0 1 54.51 329.02 Z"
+              fill="#fff"
+            />
 
-        </div>
+            <!-- القطاع 7 -->
+            <path
+              d="M 250 250 L 54.51 329.02 A 250 250 0 0 1 54.51 170.98 Z"
+              fill="#111"
+            />
 
+            <!-- الخطوط الفاصلة -->
+            <line
+              x1="250"
+              y1="250"
+              x2="140.56"
+              y2="25.71"
+              class="wheel-divider"
+            />
+
+            <line
+              x1="250"
+              y1="250"
+              x2="359.44"
+              y2="25.71"
+              class="wheel-divider"
+            />
+
+            <line
+              x1="250"
+              y1="250"
+              x2="445.49"
+              y2="170.98"
+              class="wheel-divider"
+            />
+
+            <line
+              x1="250"
+              y1="250"
+              x2="445.49"
+              y2="329.02"
+              class="wheel-divider"
+            />
+
+            <line
+              x1="250"
+              y1="250"
+              x2="359.44"
+              y2="474.29"
+              class="wheel-divider"
+            />
+
+            <line
+              x1="250"
+              y1="250"
+              x2="140.56"
+              y2="474.29"
+              class="wheel-divider"
+            />
+
+            <line
+              x1="250"
+              y1="250"
+              x2="54.51"
+              y2="329.02"
+              class="wheel-divider"
+            />
+
+            <line
+              x1="250"
+              y1="250"
+              x2="54.51"
+              y2="170.98"
+              class="wheel-divider"
+            />
+
+
+            <!-- =========================
+                 الكتابات
+            ========================= -->
+
+            <!-- 5% -->
+            <text
+              x="250"
+              y="105"
+              class="wheel-text"
+              fill="#fff"
+            >
+              5%
+            </text>
+
+
+            <!-- حظ أوفر -->
+            <text
+              x="380"
+              y="143"
+              class="wheel-text small"
+              fill="#111"
+            >
+              حظ أوفر
+            </text>
+
+
+            <!-- 10% -->
+            <text
+              x="395"
+              y="250"
+              class="wheel-text"
+              fill="#fff"
+            >
+              10%
+            </text>
+
+
+            <!-- 15% -->
+            <text
+              x="380"
+              y="357"
+              class="wheel-text"
+              fill="#111"
+            >
+              15%
+            </text>
+
+
+            <!-- 20% -->
+            <text
+              x="250"
+              y="395"
+              class="wheel-text"
+              fill="#fff"
+            >
+              20%
+            </text>
+
+
+            <!-- 25% -->
+            <text
+              x="120"
+              y="357"
+              class="wheel-text"
+              fill="#111"
+            >
+              25%
+            </text>
+
+
+            <!-- 30% -->
+            <text
+              x="105"
+              y="250"
+              class="wheel-text"
+              fill="#fff"
+            >
+              30%
+            </text>
+
+
+            <!-- الإطار الخارجي -->
+            <circle
+              cx="250"
+              cy="250"
+              r="246"
+              class="wheel-outline"
+            />
+
+          </g>
+
+        </svg>
+
+
+        <!-- المركز -->
 
         <div class="wheel-center">
 
@@ -793,6 +928,8 @@
         جرّب حظك
       </button>
 
+
+      <!-- RESULT -->
 
       <div
         id="resultBox"
@@ -826,7 +963,10 @@
       </div>
 
 
-      <!-- ADMIN -->
+
+      <!-- =========================
+           ADMIN
+      ========================= -->
 
       <section
         id="adminPanel"
@@ -851,18 +991,28 @@
             <thead>
 
               <tr>
+
                 <th>الاسم</th>
+
                 <th>البريد</th>
+
                 <th>الهاتف</th>
+
                 <th>الجائزة</th>
+
                 <th>الكود</th>
+
                 <th>تاريخ المشاركة</th>
+
                 <th>المشاركة القادمة</th>
+
               </tr>
 
             </thead>
 
-            <tbody id="participantsBody"></tbody>
+            <tbody
+              id="participantsBody"
+            ></tbody>
 
           </table>
 
@@ -873,6 +1023,7 @@
     </div>
 
   </main>
+
 
 
   <script>
@@ -887,10 +1038,11 @@
     const SUPABASE_KEY =
       "sb_publishable_QliqBYSeykn4F2Ddrsn8hg_F_N8dR-n";
 
-    const db = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+    const db =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
 
 
     /* =========================================
@@ -936,11 +1088,8 @@
     const spinBtn =
       document.getElementById("spinBtn");
 
-    const wheel =
-      document.getElementById("wheel");
-
-    const wheelLabels =
-      document.getElementById("wheelLabels");
+    const wheelGraphic =
+      document.getElementById("wheelGraphic");
 
     const resultBox =
       document.getElementById("resultBox");
@@ -977,6 +1126,7 @@
     ========================================= */
 
     let currentRotation = 0;
+
     let spinning = false;
 
 
@@ -984,9 +1134,13 @@
        MESSAGE
     ========================================= */
 
-    function showMessage(message, type = "") {
+    function showMessage(
+      message,
+      type = ""
+    ) {
 
-      authMessage.textContent = message;
+      authMessage.textContent =
+        message;
 
       authMessage.className =
         "auth-message " + type;
@@ -998,42 +1152,46 @@
        GOOGLE LOGIN
     ========================================= */
 
-    googleBtn.addEventListener("click", async () => {
+    googleBtn.addEventListener(
+      "click",
+      async () => {
 
-      showMessage("");
+        showMessage("");
 
-      const { error } =
-        await db.auth.signInWithOAuth({
 
-          provider: "google",
+        const { error } =
+          await db.auth.signInWithOAuth({
 
-          options: {
+            provider: "google",
 
-            redirectTo:
-              window.location.origin +
-              window.location.pathname,
+            options: {
 
-            queryParams: {
-              prompt: "select_account"
+              redirectTo:
+                window.location.origin +
+                window.location.pathname,
+
+              queryParams: {
+                prompt: "select_account"
+              }
+
             }
 
-          }
-
-        });
+          });
 
 
-      if (error) {
+        if (error) {
 
-        showMessage(
-          "حدث خطأ أثناء تسجيل الدخول بواسطة Google.",
-          "error"
-        );
+          showMessage(
+            "حدث خطأ أثناء تسجيل الدخول بواسطة Google.",
+            "error"
+          );
 
-        console.error(error);
+          console.error(error);
+
+        }
 
       }
-
-    });
+    );
 
 
     /* =========================================
@@ -1045,6 +1203,7 @@
       async (event) => {
 
         event.preventDefault();
+
 
         const email =
           emailInput.value.trim();
@@ -1065,7 +1224,9 @@
         }
 
 
-        showMessage("جاري تسجيل الدخول...");
+        showMessage(
+          "جاري تسجيل الدخول..."
+        );
 
 
         const { data, error } =
@@ -1082,7 +1243,9 @@
           console.error(error);
 
           showMessage(
-            translateAuthError(error.message),
+            translateAuthError(
+              error.message
+            ),
             "error"
           );
 
@@ -1143,7 +1306,9 @@
         }
 
 
-        showMessage("جاري إنشاء الحساب...");
+        showMessage(
+          "جاري إنشاء الحساب..."
+        );
 
 
         const { data, error } =
@@ -1168,7 +1333,9 @@
           console.error(error);
 
           showMessage(
-            translateAuthError(error.message),
+            translateAuthError(
+              error.message
+            ),
             "error"
           );
 
@@ -1246,7 +1413,9 @@
           console.error(error);
 
           showMessage(
-            translateAuthError(error.message),
+            translateAuthError(
+              error.message
+            ),
             "error"
           );
 
@@ -1283,11 +1452,19 @@
     ========================================= */
 
     db.auth.onAuthStateChange(
-      async (event, session) => {
+      async (
+        event,
+        session
+      ) => {
 
-        if (session && session.user) {
+        if (
+          session &&
+          session.user
+        ) {
 
-          await showLoggedIn(session.user);
+          await showLoggedIn(
+            session.user
+          );
 
         } else {
 
@@ -1303,32 +1480,48 @@
        SHOW LOGGED IN
     ========================================= */
 
-    async function showLoggedIn(user) {
+    async function showLoggedIn(
+      user
+    ) {
 
-      loginPage.classList.add("hidden");
+      loginPage.classList.add(
+        "hidden"
+      );
 
-      wheelPage.classList.remove("hidden");
+      wheelPage.classList.remove(
+        "hidden"
+      );
 
-      mainHeader.classList.remove("hidden");
+      mainHeader.classList.remove(
+        "hidden"
+      );
 
       userEmail.textContent =
         user.email || "";
 
 
-      resultBox.classList.add("hidden");
+      resultBox.classList.add(
+        "hidden"
+      );
 
       spinBtn.disabled = false;
 
 
-      if (user.id === ADMIN_UID) {
+      if (
+        user.id === ADMIN_UID
+      ) {
 
-        adminPanel.classList.remove("hidden");
+        adminPanel.classList.remove(
+          "hidden"
+        );
 
         loadParticipants();
 
       } else {
 
-        adminPanel.classList.add("hidden");
+        adminPanel.classList.add(
+          "hidden"
+        );
 
       }
 
@@ -1341,19 +1534,30 @@
 
     function showLoggedOut() {
 
-      loginPage.classList.remove("hidden");
+      loginPage.classList.remove(
+        "hidden"
+      );
 
-      wheelPage.classList.add("hidden");
+      wheelPage.classList.add(
+        "hidden"
+      );
 
-      mainHeader.classList.add("hidden");
+      mainHeader.classList.add(
+        "hidden"
+      );
 
-      adminPanel.classList.add("hidden");
+      adminPanel.classList.add(
+        "hidden"
+      );
 
-      userEmail.textContent = "";
+      userEmail.textContent =
+        "";
 
-      emailInput.value = "";
+      emailInput.value =
+        "";
 
-      passwordInput.value = "";
+      passwordInput.value =
+        "";
 
       showMessage("");
 
@@ -1375,11 +1579,15 @@
 
         spinBtn.disabled = true;
 
-        resultBox.classList.add("hidden");
+        resultBox.classList.add(
+          "hidden"
+        );
 
 
         const { data, error } =
-          await db.rpc("spin_wheel");
+          await db.rpc(
+            "spin_wheel"
+          );
 
 
         if (error) {
@@ -1392,7 +1600,9 @@
 
 
           alert(
-            translateSpinError(error.message)
+            translateSpinError(
+              error.message
+            )
           );
 
           return;
@@ -1406,92 +1616,113 @@
             : data;
 
 
-        /*
-          We do not visually represent the real
-          probabilities. All wheel sectors remain equal.
-        */
-
         const prize =
           result.prize;
 
 
         const sectorIndex =
-          getSectorIndex(prize);
+          getSectorIndex(
+            prize
+          );
 
+
+        /*
+          7 قطاعات متساوية
+          كل قطاع = 51.428571°
+        */
 
         const sectorAngle =
           360 / 7;
 
 
         /*
-          Pointer is at the top.
-          Put selected sector center under pointer.
+          القطاع الأول 5% مركزه عند الأعلى.
+          القطاع الثاني حظ أوفر...
         */
 
         const targetAngle =
-          sectorIndex * sectorAngle +
-          sectorAngle / 2;
-
-
-        const desiredRotation =
-          360 -
-          targetAngle;
+          sectorIndex *
+          sectorAngle;
 
 
         const extraSpins =
           360 * 7;
 
 
-        currentRotation +=
-          extraSpins +
+        /*
+          نحرك العجلة بحيث مركز
+          القطاع الفائز يصبح تحت السهم.
+        */
+
+        const normalizedCurrent =
+          normalizeAngle(
+            currentRotation
+          );
+
+
+        const desiredRotation =
+          -targetAngle;
+
+
+        let difference =
           normalizeAngle(
             desiredRotation -
-            normalizeAngle(currentRotation)
+            normalizedCurrent
           );
 
 
-        wheel.style.transform =
-          `rotate(${currentRotation}deg)`;
-
-        wheelLabels.style.transform =
-          `rotate(${currentRotation}deg)`;
+        currentRotation +=
+          extraSpins +
+          difference;
 
 
-        setTimeout(() => {
-
-          resultPrize.textContent =
-            result.prize;
-
-
-          couponCode.textContent =
-            result.coupon_code;
+        wheelGraphic.setAttribute(
+          "transform",
+          `rotate(${currentRotation} 250 250)`
+        );
 
 
-          nextDate.textContent =
-            "يمكنك المشاركة مرة أخرى بعد: " +
-            formatDate(result.next_eligible_at);
+        setTimeout(
+          () => {
+
+            resultPrize.textContent =
+              result.prize;
 
 
-          resultBox.classList.remove(
-            "hidden"
-          );
+            couponCode.textContent =
+              result.coupon_code;
 
 
-          spinning = false;
+            nextDate.textContent =
+              "يمكنك المشاركة مرة أخرى بعد: " +
+              formatDate(
+                result.next_eligible_at
+              );
 
-          spinBtn.disabled = true;
+
+            resultBox.classList.remove(
+              "hidden"
+            );
 
 
-          if (
-            userEmail &&
-            adminPanel.classList.contains("hidden") === false
-          ) {
+            spinning = false;
 
-            loadParticipants();
+            spinBtn.disabled = true;
 
-          }
 
-        }, 5700);
+            if (
+              !adminPanel.classList.contains(
+                "hidden"
+              )
+            ) {
+
+              loadParticipants();
+
+            }
+
+          },
+          5700
+        );
 
       }
     );
@@ -1501,16 +1732,21 @@
        PRIZE → SECTOR
     ========================================= */
 
-    function getSectorIndex(prize) {
+    function getSectorIndex(
+      prize
+    ) {
 
-      if (!prize) return 0;
+      if (!prize)
+        return 0;
 
 
       const value =
         String(prize).trim();
 
 
-      if (value.includes("5%"))
+      if (
+        value.includes("5%")
+      )
         return 0;
 
 
@@ -1521,23 +1757,33 @@
         return 1;
 
 
-      if (value.includes("10%"))
+      if (
+        value.includes("10%")
+      )
         return 2;
 
 
-      if (value.includes("15%"))
+      if (
+        value.includes("15%")
+      )
         return 3;
 
 
-      if (value.includes("20%"))
+      if (
+        value.includes("20%")
+      )
         return 4;
 
 
-      if (value.includes("25%"))
+      if (
+        value.includes("25%")
+      )
         return 5;
 
 
-      if (value.includes("30%"))
+      if (
+        value.includes("30%")
+      )
         return 6;
 
 
@@ -1546,10 +1792,13 @@
     }
 
 
-    function normalizeAngle(angle) {
+    function normalizeAngle(
+      angle
+    ) {
 
       return (
-        (angle % 360) + 360
+        (angle % 360) +
+        360
       ) % 360;
 
     }
@@ -1559,13 +1808,18 @@
        DATE
     ========================================= */
 
-    function formatDate(dateString) {
+    function formatDate(
+      dateString
+    ) {
 
-      if (!dateString) return "-";
+      if (!dateString)
+        return "-";
 
 
       const date =
-        new Date(dateString);
+        new Date(
+          dateString
+        );
 
 
       return date.toLocaleString(
@@ -1573,10 +1827,13 @@
         {
 
           year: "numeric",
+
           month: "long",
+
           day: "numeric",
 
           hour: "numeric",
+
           minute: "2-digit"
 
         }
@@ -1596,11 +1853,14 @@
       );
 
 
-      participantsBody.innerHTML = "";
+      participantsBody.innerHTML =
+        "";
 
 
       const { data, error } =
-        await db.rpc("get_participants");
+        await db.rpc(
+          "get_participants"
+        );
 
 
       adminLoading.classList.add(
@@ -1625,7 +1885,10 @@
       }
 
 
-      if (!data || data.length === 0) {
+      if (
+        !data ||
+        data.length === 0
+      ) {
 
         participantsBody.innerHTML = `
           <tr>
@@ -1640,70 +1903,76 @@
       }
 
 
-      data.forEach(participant => {
+      data.forEach(
+        participant => {
 
-        const row =
-          document.createElement("tr");
-
-
-        row.innerHTML = `
-
-          <td>
-            ${escapeHtml(
-              participant.full_name || "-"
-            )}
-          </td>
-
-          <td dir="ltr">
-            ${escapeHtml(
-              participant.email || "-"
-            )}
-          </td>
-
-          <td dir="ltr">
-            ${escapeHtml(
-              participant.phone || "-"
-            )}
-          </td>
-
-          <td>
-            ${escapeHtml(
-              participant.prize || "-"
-            )}
-          </td>
-
-          <td dir="ltr">
-            ${escapeHtml(
-              participant.coupon_code || "-"
-            )}
-          </td>
-
-          <td>
-            ${
-              participant.last_spin_at
-                ? formatDate(
-                    participant.last_spin_at
-                  )
-                : "-"
-            }
-          </td>
-
-          <td>
-            ${
-              participant.next_eligible_at
-                ? formatDate(
-                    participant.next_eligible_at
-                  )
-                : "-"
-            }
-          </td>
-
-        `;
+          const row =
+            document.createElement(
+              "tr"
+            );
 
 
-        participantsBody.appendChild(row);
+          row.innerHTML = `
 
-      });
+            <td>
+              ${escapeHtml(
+                participant.full_name || "-"
+              )}
+            </td>
+
+            <td dir="ltr">
+              ${escapeHtml(
+                participant.email || "-"
+              )}
+            </td>
+
+            <td dir="ltr">
+              ${escapeHtml(
+                participant.phone || "-"
+              )}
+            </td>
+
+            <td>
+              ${escapeHtml(
+                participant.prize || "-"
+              )}
+            </td>
+
+            <td dir="ltr">
+              ${escapeHtml(
+                participant.coupon_code || "-"
+              )}
+            </td>
+
+            <td>
+              ${
+                participant.last_spin_at
+                  ? formatDate(
+                      participant.last_spin_at
+                    )
+                  : "-"
+              }
+            </td>
+
+            <td>
+              ${
+                participant.next_eligible_at
+                  ? formatDate(
+                      participant.next_eligible_at
+                    )
+                  : "-"
+              }
+            </td>
+
+          `;
+
+
+          participantsBody.appendChild(
+            row
+          );
+
+        }
+      );
 
     }
 
@@ -1712,14 +1981,36 @@
        SECURITY
     ========================================= */
 
-    function escapeHtml(value) {
+    function escapeHtml(
+      value
+    ) {
 
       return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+
+        .replaceAll(
+          "&",
+          "&amp;"
+        )
+
+        .replaceAll(
+          "<",
+          "&lt;"
+        )
+
+        .replaceAll(
+          ">",
+          "&gt;"
+        )
+
+        .replaceAll(
+          '"',
+          "&quot;"
+        )
+
+        .replaceAll(
+          "'",
+          "&#039;"
+        );
 
     }
 
@@ -1728,14 +2019,20 @@
        AUTH ERROR TRANSLATION
     ========================================= */
 
-    function translateAuthError(message) {
+    function translateAuthError(
+      message
+    ) {
 
       const text =
-        String(message || "").toLowerCase();
+        String(
+          message || ""
+        ).toLowerCase();
 
 
       if (
-        text.includes("invalid login credentials")
+        text.includes(
+          "invalid login credentials"
+        )
       ) {
 
         return "البريد الإلكتروني أو كلمة المرور غير صحيحة.";
@@ -1744,7 +2041,9 @@
 
 
       if (
-        text.includes("email not confirmed")
+        text.includes(
+          "email not confirmed"
+        )
       ) {
 
         return "يرجى تأكيد بريدك الإلكتروني أولاً.";
@@ -1753,7 +2052,9 @@
 
 
       if (
-        text.includes("user already registered")
+        text.includes(
+          "user already registered"
+        )
       ) {
 
         return "هذا البريد مسجل مسبقاً. حاول تسجيل الدخول.";
@@ -1762,8 +2063,7 @@
 
 
       if (
-        text.includes("password")
-        &&
+        text.includes("password") &&
         text.includes("6")
       ) {
 
@@ -1781,9 +2081,7 @@
       }
 
 
-      return (
-        "حدث خطأ. يرجى التأكد من البيانات والمحاولة مرة أخرى."
-      );
+      return "حدث خطأ. يرجى التأكد من البيانات والمحاولة مرة أخرى.";
 
     }
 
@@ -1792,10 +2090,14 @@
        SPIN ERROR
     ========================================= */
 
-    function translateSpinError(message) {
+    function translateSpinError(
+      message
+    ) {
 
       const text =
-        String(message || "");
+        String(
+          message || ""
+        );
 
 
       if (
@@ -1816,9 +2118,7 @@
       }
 
 
-      return (
-        "تعذر تنفيذ المشاركة. حاول مرة أخرى."
-      );
+      return "تعذر تنفيذ المشاركة. حاول مرة أخرى.";
 
     }
 
