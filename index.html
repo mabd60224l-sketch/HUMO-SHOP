@@ -392,15 +392,16 @@
     ========================= */
 
     .countdown-box {
-      margin: 23px auto 0;
+      margin: 18px auto 0;
       text-align: center;
     }
 
     .countdown-label {
-      font-size: 11px;
-      color: #888;
-      margin-bottom: 7px;
-      letter-spacing: .2px;
+      font-size: 10px;
+      color: #8a8a8a;
+      margin-bottom: 5px;
+      letter-spacing: .1px;
+      font-weight: 500;
     }
 
     .countdown {
@@ -410,25 +411,27 @@
       align-items: center;
       justify-content: center;
 
-      min-width: 180px;
+      min-width: 128px;
 
-      padding: 9px 17px;
+      height: 31px;
 
-      border: 1px solid #dedede;
-      border-radius: 6px;
+      padding: 4px 11px;
 
-      background: #fff;
+      border: 1px solid #e2e2e2;
+      border-radius: 5px;
 
-      color: #111;
+      background: #fafafa;
+
+      color: #222;
 
       font-family:
         "Cormorant Garamond",
         serif;
 
-      font-size: 27px;
+      font-size: 19px;
       font-weight: 700;
 
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
 
       line-height: 1;
     }
@@ -436,15 +439,23 @@
     .countdown.available {
       direction: rtl;
 
+      min-width: 105px;
+
       font-family:
         "Noto Sans Arabic",
         sans-serif;
 
-      font-size: 14px;
-      letter-spacing: 0;
-      font-weight: 700;
+      font-size: 11px;
 
-      border-color: #111;
+      letter-spacing: 0;
+
+      font-weight: 600;
+
+      color: #555;
+
+      border-color: #e2e2e2;
+
+      background: #fafafa;
     }
 
 
@@ -678,8 +689,8 @@
       }
 
       .countdown {
-        min-width: 165px;
-        font-size: 25px;
+        min-width: 128px;
+        font-size: 19px;
       }
     }
 
@@ -892,7 +903,7 @@
           id="countdownLabel"
           class="countdown-label"
         >
-          الوقت المتبقي لإعادة التجربة
+          الوقت المتبقي للمحاولة
         </div>
 
         <div
@@ -1131,49 +1142,58 @@
 
     /* =========================================
        PRIZES
+       الأسود + الأبيض + الرصاصي الغامق
     ========================================= */
 
     const prizes = [
+
       {
         label: "5%",
         color: "#111",
         textColor: "#fff"
       },
+
       {
         label: "حظ أوفر",
         color: "#fff",
         textColor: "#111"
       },
+
       {
         label: "10%",
-        color: "#111",
+        color: "#3A3A3A",
         textColor: "#fff"
       },
+
       {
         label: "15%",
         color: "#fff",
         textColor: "#111"
       },
+
       {
         label: "20%",
         color: "#111",
         textColor: "#fff"
       },
+
       {
         label: "25%",
-        color: "#fff",
-        textColor: "#111"
+        color: "#3A3A3A",
+        textColor: "#fff"
       },
+
       {
         label: "30%",
-        color: "#111",
-        textColor: "#fff"
+        color: "#fff",
+        textColor: "#111"
       }
+
     ];
 
 
     /* =========================================
-       CREATE PERFECT WHEEL
+       CREATE WHEEL
     ========================================= */
 
     function polarToCartesian(
@@ -1259,8 +1279,6 @@
             SECTOR_ANGLE;
 
 
-          /* القطاع */
-
           const path =
             document.createElementNS(
               "http://www.w3.org/2000/svg",
@@ -1293,8 +1311,6 @@
             path
           );
 
-
-          /* النص */
 
           const text =
             document.createElementNS(
@@ -1356,8 +1372,6 @@
       );
 
 
-      /* الإطار الخارجي */
-
       const outline =
         document.createElementNS(
           "http://www.w3.org/2000/svg",
@@ -1418,7 +1432,7 @@
 
 
     /* =========================================
-       GOOGLE
+       GOOGLE LOGIN
     ========================================= */
 
     googleBtn.addEventListener(
@@ -1544,7 +1558,7 @@
 
 
     /* =========================================
-       SIGN UP
+       CREATE ACCOUNT
     ========================================= */
 
     signupBtn.addEventListener(
@@ -1789,8 +1803,6 @@
       );
 
 
-      /* جلب آخر مشاركة */
-
       await loadLatestSpin();
 
 
@@ -1955,7 +1967,7 @@
 
 
       countdownLabel.textContent =
-        "يمكنك تجربة العجلة الآن";
+        "الوقت المتبقي للمحاولة";
 
 
       spinBtn.disabled =
@@ -2076,7 +2088,7 @@
 
 
       countdownLabel.textContent =
-        "الوقت المتبقي لإعادة التجربة";
+        "الوقت المتبقي للمحاولة";
 
     }
 
@@ -2246,7 +2258,6 @@
 
       /*
         كل قطاع 51.428571°
-        ومركز القطاع الأول بالأعلى.
       */
 
       const targetRotation =
@@ -2282,10 +2293,6 @@
 
       }
 
-
-      /*
-        7 لفات كاملة قبل النتيجة
-      */
 
       const extraSpins =
         360 * 7;
@@ -2477,7 +2484,7 @@
 
 
     /* =========================================
-       ADMIN
+       ADMIN PARTICIPANTS
     ========================================= */
 
     async function loadParticipants() {
@@ -2615,7 +2622,7 @@
 
 
     /* =========================================
-       ESCAPE HTML
+       SECURITY
     ========================================= */
 
     function escapeHtml(
@@ -2655,7 +2662,7 @@
 
 
     /* =========================================
-       AUTH ERRORS
+       AUTH ERROR
     ========================================= */
 
     function translateAuthError(
@@ -2712,9 +2719,7 @@
 
 
       if (
-        text.includes(
-          "rate limit"
-        )
+        text.includes("rate limit")
       ) {
 
         return "تم إرسال عدد كبير من الطلبات. حاول لاحقاً.";
@@ -2728,7 +2733,7 @@
 
 
     /* =========================================
-       SPIN ERRORS
+       SPIN ERROR
     ========================================= */
 
     function translateSpinError(
@@ -2742,9 +2747,7 @@
 
 
       if (
-        text.includes(
-          "14 يوماً"
-        )
+        text.includes("14 يوماً")
       ) {
 
         return text;
@@ -2753,9 +2756,7 @@
 
 
       if (
-        text.includes(
-          "تسجيل الدخول"
-        )
+        text.includes("تسجيل الدخول")
       ) {
 
         return text;
