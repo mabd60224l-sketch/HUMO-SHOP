@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>HUMO — خصومات الخميس</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
-
     * {
       box-sizing: border-box;
     }
 
+    html,
     body {
       margin: 0;
-      background: #fff;
+      padding: 0;
+      min-height: 100%;
+      font-family: Arial, "Noto Sans Arabic", sans-serif;
+      background: #f7f7f7;
       color: #111;
-      font-family: "Noto Sans Arabic", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
     }
 
     button,
@@ -31,115 +32,139 @@
       font-family: inherit;
     }
 
-    .hidden {
-      display: none !important;
+    button {
+      cursor: pointer;
     }
-
 
     /* =========================
        HEADER
     ========================= */
 
     header {
-      height: 76px;
-      border-bottom: 1px solid #eee;
+      width: 100%;
+      height: 72px;
+      background: #fff;
+      border-bottom: 1px solid #e8e8e8;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 24px;
-      background: #fff;
+      position: relative;
+      z-index: 10;
     }
 
     .header-logo {
       width: 105px;
-      height: 52px;
+      height: 48px;
       object-fit: contain;
       object-position: center;
     }
 
-    .header-user {
+    .header-left {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-size: 13px;
+      direction: ltr;
+    }
+
+    .user-email {
+      font-size: 12px;
+      color: #666;
+      max-width: 220px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .logout-btn {
-      border: 1px solid #111;
+      border: 1px solid #ddd;
       background: #fff;
       color: #111;
-      padding: 7px 14px;
-      border-radius: 5px;
-      cursor: pointer;
+      padding: 8px 13px;
+      border-radius: 8px;
       font-size: 12px;
     }
 
     .logout-btn:hover {
       background: #111;
       color: #fff;
+      border-color: #111;
     }
-
 
     /* =========================
        LOGIN
     ========================= */
 
-    .login-page {
-      min-height: calc(100vh - 76px);
+    #loginView {
+      min-height: calc(100vh - 72px);
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       padding: 30px 18px;
     }
 
-    .login-box {
+    .login-card {
       width: 100%;
       max-width: 390px;
+      background: #fff;
+      border: 1px solid #e9e9e9;
+      border-radius: 18px;
+      padding: 32px 25px;
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.06);
       text-align: center;
     }
 
     .login-logo {
-      width: 190px;
-      max-width: 80%;
-      height: auto;
-      margin-bottom: 18px;
+      width: 150px;
+      height: 75px;
+      object-fit: contain;
+      margin-bottom: 10px;
     }
 
-    .login-title {
+    .login-card h1 {
+      margin: 0;
       font-size: 25px;
       font-weight: 700;
-      margin: 0 0 7px;
     }
 
     .login-subtitle {
-      font-size: 13px;
+      margin: 9px 0 25px;
       color: #777;
-      margin: 0 0 25px;
+      font-size: 14px;
     }
 
     .google-btn {
       width: 100%;
-      height: 48px;
-      background: #111;
-      color: #fff;
-      border: 1px solid #111;
-      border-radius: 6px;
-      cursor: pointer;
+      height: 46px;
+      border: 1px solid #ddd;
+      background: #fff;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
       font-size: 14px;
       font-weight: 600;
+      color: #222;
+      margin-bottom: 17px;
     }
 
     .google-btn:hover {
-      background: #333;
+      background: #fafafa;
+    }
+
+    .google-icon {
+      font-weight: bold;
+      font-size: 18px;
     }
 
     .divider {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin: 22px 0;
-      color: #999;
+      gap: 10px;
+      color: #aaa;
       font-size: 12px;
+      margin: 17px 0;
     }
 
     .divider::before,
@@ -147,878 +172,761 @@
       content: "";
       flex: 1;
       height: 1px;
-      background: #e5e5e5;
+      background: #e7e7e7;
     }
 
-    .auth-form {
-      text-align: right;
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    .input-label {
-      display: block;
-      font-size: 12px;
-      margin-bottom: 7px;
-      font-weight: 600;
-    }
-
-    .auth-input {
+    .login-form input {
       width: 100%;
-      height: 47px;
+      height: 46px;
       border: 1px solid #ddd;
-      border-radius: 6px;
+      border-radius: 10px;
       padding: 0 13px;
-      outline: none;
-      background: #fff;
       font-size: 14px;
-      direction: ltr;
-      text-align: left;
-      margin-bottom: 14px;
+      outline: none;
+      direction: rtl;
     }
 
-    .auth-input:focus {
+    .login-form input:focus {
       border-color: #111;
     }
 
-    .primary-btn {
+    .main-login-btn {
       width: 100%;
-      height: 47px;
+      height: 46px;
+      border: none;
+      border-radius: 10px;
       background: #111;
       color: #fff;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
       font-size: 14px;
       font-weight: 700;
       margin-top: 3px;
     }
 
-    .primary-btn:hover {
-      background: #333;
+    .main-login-btn:hover {
+      background: #292929;
     }
 
-    .secondary-btn {
-      width: 100%;
-      height: 45px;
-      background: #fff;
-      color: #111;
-      border: 1px solid #111;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 600;
-      margin-top: 10px;
-    }
-
-    .forgot-btn {
-      border: none;
-      background: none;
-      color: #666;
-      font-size: 12px;
-      cursor: pointer;
-      padding: 7px 0;
-      margin-top: 3px;
-    }
-
-    .forgot-btn:hover {
-      color: #111;
-    }
-
-    .auth-message {
-      margin-top: 15px;
-      font-size: 13px;
-      line-height: 1.7;
-      min-height: 20px;
-    }
-
-    .auth-message.success {
-      color: #188038;
-    }
-
-    .auth-message.error {
-      color: #c62828;
-    }
-
-
-    /* =========================
-       WHEEL PAGE
-    ========================= */
-
-    .wheel-page {
-      min-height: calc(100vh - 76px);
+    .login-links {
+      margin-top: 17px;
       display: flex;
       justify-content: center;
-      padding: 35px 18px 60px;
+      gap: 15px;
+      flex-wrap: wrap;
     }
 
-    .wheel-container {
+    .text-btn {
+      border: none;
+      background: transparent;
+      color: #555;
+      font-size: 12px;
+      padding: 0;
+      text-decoration: underline;
+    }
+
+    .text-btn:hover {
+      color: #000;
+    }
+
+    #loginMessage {
+      min-height: 20px;
+      margin-top: 13px;
+      font-size: 12px;
+      color: #777;
+      line-height: 1.6;
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    #appView {
+      display: none;
+      min-height: calc(100vh - 72px);
+      padding: 30px 15px 55px;
+    }
+
+    .wheel-section {
       width: 100%;
-      max-width: 650px;
+      max-width: 520px;
+      margin: 0 auto;
       text-align: center;
     }
 
     .wheel-title {
+      margin: 2px 0 7px;
       font-size: 31px;
-      line-height: 1.5;
       font-weight: 800;
-      margin: 0;
+      letter-spacing: -0.5px;
     }
 
     .wheel-subtitle {
+      margin: 0 0 20px;
       color: #777;
       font-size: 13px;
-      margin: 4px 0 28px;
     }
 
-
     /* =========================
-       PROFESSIONAL WHEEL
+       WHEEL
     ========================= */
 
     .wheel-wrap {
-      position: relative;
-      width: min(90vw, 500px);
+      width: min(92vw, 470px);
       aspect-ratio: 1;
       margin: 0 auto;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .wheel-wrap.disabled {
-      cursor: not-allowed;
-    }
-
-    .wheel-svg {
+    .wheel-pointer {
       position: absolute;
-      inset: 0;
+      top: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 8;
+      width: 0;
+      height: 0;
+      border-left: 13px solid transparent;
+      border-right: 13px solid transparent;
+      border-top: 25px solid #111;
+      filter: drop-shadow(0 3px 2px rgba(0,0,0,.18));
+    }
+
+    #wheel {
       width: 100%;
       height: 100%;
-      overflow: visible;
+      display: block;
+      transition: transform 5.2s cubic-bezier(.13,.72,.16,1);
+      transform-origin: 50% 50%;
+      cursor: pointer;
+      filter: drop-shadow(0 10px 22px rgba(0,0,0,.13));
     }
 
-    #wheelGraphic {
-      transform-origin: 250px 250px;
-      transition:
-        transform 5.6s cubic-bezier(.12,.72,.12,1);
-    }
-
-    .wheel-sector {
-      stroke: #111;
-      stroke-width: 2;
-    }
-
-    .wheel-outline {
-      fill: none;
-      stroke: #111;
-      stroke-width: 7;
-    }
-
-    .wheel-text {
-      font-family: "Noto Sans Arabic", sans-serif;
-      font-weight: 800;
-      text-anchor: middle;
-      dominant-baseline: middle;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    .wheel-text.percent {
-      font-size: 25px;
-    }
-
-    .wheel-text.luck {
-      font-size: 19px;
+    #wheel.disabled {
+      cursor: not-allowed;
+      opacity: .76;
     }
 
     .wheel-center {
       position: absolute;
-      width: 108px;
-      height: 108px;
-
-      border-radius: 50%;
+      width: 90px;
+      height: 90px;
       background: #fff;
-
-      border: 5px solid #111;
-
-      left: 50%;
-      top: 50%;
-
-      transform: translate(-50%, -50%);
-
-      z-index: 20;
-
+      border: 4px solid #111;
+      border-radius: 50%;
+      z-index: 6;
       display: flex;
       align-items: center;
       justify-content: center;
-
-      overflow: hidden;
-
+      box-shadow: 0 4px 12px rgba(0,0,0,.15);
       pointer-events: none;
     }
 
     .wheel-center img {
-      width: 82px;
-      height: 82px;
+      width: 68px;
+      height: 58px;
       object-fit: contain;
     }
-
-    .pointer {
-      position: absolute;
-
-      z-index: 30;
-
-      top: -4px;
-      left: 50%;
-
-      transform: translateX(-50%);
-
-      width: 0;
-      height: 0;
-
-      border-left: 17px solid transparent;
-      border-right: 17px solid transparent;
-      border-top: 30px solid #111;
-
-      filter:
-        drop-shadow(
-          0 2px 1px rgba(0,0,0,.15)
-        );
-
-      pointer-events: none;
-    }
-
 
     /* =========================
        COUNTDOWN
     ========================= */
 
+    .countdown-title {
+      margin-top: 17px;
+      margin-bottom: 8px;
+      font-size: 12px;
+      color: #777;
+      font-weight: 600;
+    }
+
     .countdown-box {
-      margin: 18px auto 0;
-      text-align: center;
-    }
-
-    .countdown-label {
-      font-size: 10px;
-      color: #8a8a8a;
-      margin-bottom: 5px;
-      letter-spacing: .1px;
-      font-weight: 500;
-    }
-
-    .countdown {
+      width: fit-content;
+      max-width: 100%;
+      margin: 0 auto;
+      background: linear-gradient(#343434, #1c1c1c);
+      border-radius: 13px;
+      padding: 10px 13px 9px;
+      box-shadow:
+        0 6px 15px rgba(0,0,0,.12),
+        inset 0 1px 0 rgba(255,255,255,.08);
       direction: ltr;
+    }
 
-      display: inline-flex;
+    .countdown-row {
+      display: flex;
       align-items: center;
       justify-content: center;
+      gap: 5px;
+    }
 
-      min-width: 128px;
+    .time-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 45px;
+    }
 
-      height: 31px;
+    .digits {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
 
-      padding: 4px 11px;
-
-      border: 1px solid #e2e2e2;
-      border-radius: 5px;
-
-      background: #fafafa;
-
-      color: #222;
-
-      font-family:
-        "Cormorant Garamond",
-        serif;
-
-      font-size: 19px;
+    .digit {
+      width: 21px;
+      height: 30px;
+      border-radius: 4px;
+      border: 1px solid #080808;
+      background:
+        linear-gradient(
+          to bottom,
+          #505050 0%,
+          #2b2b2b 46%,
+          #151515 50%,
+          #303030 54%,
+          #4a4a4a 100%
+        );
+      color: #f5f5f5;
+      font-size: 22px;
+      line-height: 28px;
       font-weight: 700;
-
-      letter-spacing: 1.5px;
-
-      line-height: 1;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      box-shadow:
+        inset 0 1px 2px rgba(255,255,255,.16),
+        0 1px 2px rgba(0,0,0,.35);
+      position: relative;
+      overflow: hidden;
     }
 
-    .countdown.available {
-      direction: rtl;
+    .digit::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      background: rgba(255,255,255,.32);
+      box-shadow: 0 -1px 0 rgba(0,0,0,.45);
+    }
 
-      min-width: 105px;
+    .time-label {
+      color: #f3f3f3;
+      font-size: 8px;
+      font-weight: 800;
+      margin-top: 4px;
+      letter-spacing: .4px;
+    }
 
-      font-family:
-        "Noto Sans Arabic",
-        sans-serif;
+    .colon {
+      color: #f1f1f1;
+      font-size: 20px;
+      font-weight: 700;
+      margin-top: -14px;
+    }
 
+    .countdown-status {
+      margin-top: 8px;
+      color: #777;
       font-size: 11px;
-
-      letter-spacing: 0;
-
-      font-weight: 600;
-
-      color: #555;
-
-      border-color: #e2e2e2;
-
-      background: #fafafa;
+      min-height: 16px;
     }
-
 
     /* =========================
        SPIN BUTTON
     ========================= */
 
     .spin-btn {
-      margin-top: 27px;
-
-      width: 210px;
-      height: 52px;
-
-      border-radius: 7px;
+      margin-top: 17px;
+      width: min(260px, 88vw);
+      height: 48px;
       border: none;
-
+      border-radius: 11px;
       background: #111;
       color: #fff;
-
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 800;
-
-      cursor: pointer;
-
-      transition:
-        transform .15s ease,
-        background .15s ease;
+      transition: .2s;
     }
 
-    .spin-btn:hover {
-      background: #333;
-    }
-
-    .spin-btn:active {
-      transform: scale(.98);
+    .spin-btn:hover:not(:disabled) {
+      background: #292929;
+      transform: translateY(-1px);
     }
 
     .spin-btn:disabled {
-      opacity: .5;
+      background: #bdbdbd;
       cursor: not-allowed;
-      transform: none;
     }
-
 
     /* =========================
        RESULT
     ========================= */
 
     .result-box {
-      margin: 25px auto 0;
-
-      width: min(100%, 420px);
-
-      border: 1px solid #ddd;
-
-      padding: 20px;
-
-      border-radius: 8px;
-
+      margin: 18px auto 0;
+      max-width: 380px;
+      min-height: 0;
+      display: none;
       background: #fff;
-    }
-
-    .result-title {
-      font-size: 13px;
-      color: #777;
-      margin-bottom: 5px;
+      border: 1px solid #e4e4e4;
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 8px 25px rgba(0,0,0,.05);
     }
 
     .result-prize {
-      font-size: 27px;
+      font-size: 22px;
       font-weight: 800;
-      margin-bottom: 12px;
+      margin-bottom: 6px;
     }
 
-    .coupon {
-      display: inline-block;
+    .result-code {
+      font-size: 13px;
+      color: #555;
+    }
 
-      background: #111;
-      color: #fff;
-
-      padding: 9px 14px;
-
-      border-radius: 5px;
-
-      font-family: monospace;
-
-      font-size: 15px;
-
+    .result-code strong {
+      color: #111;
       letter-spacing: 1px;
-
-      direction: ltr;
     }
 
-    .next-date {
-      font-size: 12px;
-      color: #777;
-      margin-top: 13px;
+    .result-note {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #888;
     }
-
 
     /* =========================
        ADMIN
     ========================= */
 
-    .admin-panel {
-      margin: 50px auto 0;
-
-      width: min(100%, 950px);
-
-      text-align: right;
+    #adminPanel {
+      display: none;
+      width: 100%;
+      max-width: 1050px;
+      margin: 45px auto 0;
+      background: #fff;
+      border: 1px solid #e6e6e6;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,.05);
     }
 
-    .admin-title {
-      font-size: 20px;
-      font-weight: 800;
-      margin-bottom: 15px;
+    .admin-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
     }
 
-    .table-wrap {
-      overflow-x: auto;
+    .admin-header h2 {
+      margin: 0;
+      font-size: 18px;
+    }
 
+    .refresh-admin {
       border: 1px solid #ddd;
+      background: #fff;
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 12px;
+    }
 
-      border-radius: 7px;
+    .admin-table-wrap {
+      overflow-x: auto;
     }
 
     table {
       width: 100%;
-
       border-collapse: collapse;
-
-      min-width: 750px;
-
-      background: #fff;
+      min-width: 780px;
+      direction: rtl;
     }
 
     th,
     td {
+      padding: 12px 10px;
       border-bottom: 1px solid #eee;
-
-      padding: 11px 10px;
-
-      font-size: 12px;
-
       text-align: right;
-
+      font-size: 12px;
       white-space: nowrap;
     }
 
     th {
-      background: #111;
-      color: #fff;
-      font-weight: 700;
+      background: #fafafa;
+      font-weight: 800;
     }
 
-    tr:last-child td {
-      border-bottom: none;
+    td {
+      color: #555;
     }
-
-    .loading {
-      color: #777;
-      font-size: 13px;
-      padding: 15px 0;
-    }
-
 
     /* =========================
        MOBILE
     ========================= */
 
     @media (max-width: 600px) {
-
       header {
-        height: 68px;
-        padding: 0 14px;
+        height: 62px;
+        padding: 0 15px;
       }
 
       .header-logo {
         width: 90px;
+        height: 42px;
       }
 
-      .header-user {
-        font-size: 11px;
+      .user-email {
+        max-width: 120px;
+        font-size: 10px;
       }
 
       .logout-btn {
-        padding: 6px 9px;
-        font-size: 11px;
+        padding: 7px 10px;
+        font-size: 10px;
       }
 
-      .login-page {
-        min-height: calc(100vh - 68px);
-      }
-
-      .wheel-page {
-        min-height: calc(100vh - 68px);
-        padding-top: 25px;
+      #appView {
+        min-height: calc(100vh - 62px);
+        padding-top: 24px;
       }
 
       .wheel-title {
-        font-size: 26px;
+        font-size: 27px;
+      }
+
+      .wheel-subtitle {
+        margin-bottom: 17px;
+      }
+
+      .wheel-wrap {
+        width: min(92vw, 410px);
       }
 
       .wheel-center {
-        width: 86px;
-        height: 86px;
-        border-width: 4px;
+        width: 78px;
+        height: 78px;
       }
 
       .wheel-center img {
-        width: 66px;
-        height: 66px;
+        width: 59px;
+        height: 51px;
       }
 
-      .pointer {
-        border-left-width: 13px;
-        border-right-width: 13px;
-        border-top-width: 24px;
+      .countdown-box {
+        padding: 9px 10px 8px;
       }
 
-      .wheel-text.percent {
-        font-size: 23px;
+      .time-group {
+        min-width: 40px;
       }
 
-      .wheel-text.luck {
-        font-size: 17px;
+      .digit {
+        width: 19px;
+        height: 28px;
+        font-size: 20px;
+        line-height: 26px;
       }
 
-      .spin-btn {
-        width: 190px;
-      }
-
-      .countdown {
-        min-width: 128px;
-        font-size: 19px;
+      .colon {
+        font-size: 18px;
       }
     }
-
   </style>
 </head>
 
-
 <body>
-
 
   <!-- =========================
        HEADER
   ========================= -->
 
-  <header id="mainHeader" class="hidden">
-
+  <header id="siteHeader" style="display:none;">
     <img
       class="header-logo"
-      src="كيس%20ورقي%20للمتاجر%20بلون%20وردي%20نمط%20زهور.png"
+      id="headerLogo"
       alt="HUMO"
-    >
+    />
 
-    <div class="header-user">
-
-      <span id="userEmail"></span>
-
-      <button
-        id="logoutBtn"
-        class="logout-btn"
-      >
-        تسجيل الخروج
-      </button>
-
+    <div class="header-left">
+      <span class="user-email" id="userEmail"></span>
+      <button class="logout-btn" id="logoutBtn">تسجيل الخروج</button>
     </div>
-
   </header>
 
-
   <!-- =========================
-       LOGIN
+       LOGIN VIEW
   ========================= -->
 
-  <section
-    id="loginPage"
-    class="login-page"
-  >
+  <section id="loginView">
 
-    <div class="login-box">
+    <div class="login-card">
 
       <img
         class="login-logo"
-        src="كيس%20ورقي%20للمتاجر%20بلون%20وردي%20نمط%20زهور.png"
+        id="loginLogo"
         alt="HUMO"
-      >
+      />
 
-      <h1 class="login-title">
-        أهلاً بك في HUMO
-      </h1>
+      <h1>أهلاً بك في HUMO</h1>
 
       <p class="login-subtitle">
         اختيار يليق بك.
       </p>
 
-
-      <button
-        id="googleBtn"
-        class="google-btn"
-      >
-        متابعة باستخدام Google
+      <button class="google-btn" id="googleBtn">
+        <span class="google-icon">G</span>
+        <span>المتابعة باستخدام Google</span>
       </button>
-
 
       <div class="divider">
         أو
       </div>
 
-
-      <form
-        id="emailForm"
-        class="auth-form"
-      >
-
-        <label class="input-label">
-          البريد الإلكتروني
-        </label>
+      <form class="login-form" id="emailForm">
 
         <input
-          id="emailInput"
-          class="auth-input"
           type="email"
-          placeholder="example@email.com"
+          id="emailInput"
+          placeholder="البريد الإلكتروني"
           autocomplete="email"
           required
-        >
-
-
-        <label class="input-label">
-          كلمة المرور
-        </label>
+        />
 
         <input
-          id="passwordInput"
-          class="auth-input"
           type="password"
+          id="passwordInput"
           placeholder="كلمة المرور"
           autocomplete="current-password"
-          minlength="6"
           required
-        >
-
+        />
 
         <button
-          id="loginEmailBtn"
-          class="primary-btn"
+          class="main-login-btn"
           type="submit"
+          id="loginBtn"
         >
           تسجيل الدخول
         </button>
 
+      </form>
+
+      <div class="login-links">
 
         <button
+          class="text-btn"
           id="signupBtn"
-          class="secondary-btn"
           type="button"
         >
-          إنشاء حساب جديد
+          إنشاء حساب
         </button>
 
-
         <button
+          class="text-btn"
           id="forgotBtn"
-          class="forgot-btn"
           type="button"
         >
           نسيت كلمة المرور؟
         </button>
 
-      </form>
+      </div>
 
-
-      <div
-        id="authMessage"
-        class="auth-message"
-      ></div>
+      <div id="loginMessage"></div>
 
     </div>
 
   </section>
 
-
   <!-- =========================
-       WHEEL
+       APP VIEW
   ========================= -->
 
-  <main
-    id="wheelPage"
-    class="wheel-page hidden"
-  >
+  <main id="appView">
 
-    <div class="wheel-container">
-
+    <section class="wheel-section">
 
       <h1 class="wheel-title">
         خصومات الخميس
       </h1>
 
-
       <p class="wheel-subtitle">
         فرصتك تتجدد كل 14 يومًا.
       </p>
 
+      <!-- WHEEL -->
 
-      <div
-        id="wheelWrap"
-        class="wheel-wrap"
-      >
+      <div class="wheel-wrap">
 
-        <div class="pointer"></div>
-
+        <div class="wheel-pointer"></div>
 
         <svg
-          class="wheel-svg"
+          id="wheel"
           viewBox="0 0 500 500"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-
-          <g id="wheelGraphic">
-          </g>
-
-        </svg>
-
+          aria-label="عجلة الخصومات"
+        ></svg>
 
         <div class="wheel-center">
-
-          <img
-            src="كيس%20ورقي%20للمتاجر%20بلون%20وردي%20نمط%20زهور.png"
-            alt="HUMO"
-          >
-
+          <img id="wheelLogo" alt="HUMO" />
         </div>
 
       </div>
 
-
       <!-- COUNTDOWN -->
+
+      <div class="countdown-title">
+        الوقت المتبقي للمحاولة
+      </div>
 
       <div class="countdown-box">
 
-        <div
-          id="countdownLabel"
-          class="countdown-label"
-        >
-          الوقت المتبقي للمحاولة
+        <div class="countdown-row">
+
+          <div class="time-group">
+            <div class="digits">
+              <span class="digit" id="days1">0</span>
+              <span class="digit" id="days2">0</span>
+            </div>
+            <div class="time-label">DAYS</div>
+          </div>
+
+          <div class="colon">:</div>
+
+          <div class="time-group">
+            <div class="digits">
+              <span class="digit" id="hours1">0</span>
+              <span class="digit" id="hours2">0</span>
+            </div>
+            <div class="time-label">HRS</div>
+          </div>
+
+          <div class="colon">:</div>
+
+          <div class="time-group">
+            <div class="digits">
+              <span class="digit" id="mins1">0</span>
+              <span class="digit" id="mins2">0</span>
+            </div>
+            <div class="time-label">MINS</div>
+          </div>
+
+          <div class="colon">:</div>
+
+          <div class="time-group">
+            <div class="digits">
+              <span class="digit" id="secs1">0</span>
+              <span class="digit" id="secs2">0</span>
+            </div>
+            <div class="time-label">SECS</div>
+          </div>
+
         </div>
 
         <div
-          id="countdown"
-          class="countdown available"
+          class="countdown-status"
+          id="countdownStatus"
         >
           متاح الآن
         </div>
 
       </div>
 
+      <!-- BUTTON -->
 
       <button
-        id="spinBtn"
         class="spin-btn"
+        id="spinBtn"
       >
         جرّب حظك
       </button>
 
-
       <!-- RESULT -->
 
       <div
+        class="result-box"
         id="resultBox"
-        class="result-box hidden"
       >
 
-        <div class="result-title">
-          نتيجتك
-        </div>
-
         <div
-          id="resultPrize"
           class="result-prize"
+          id="resultPrize"
         ></div>
 
-        <div>
-
+        <div class="result-code">
           كود الخصم:
-
-          <br><br>
-
-          <span
-            id="couponCode"
-            class="coupon"
-          ></span>
-
+          <strong id="resultCode"></strong>
         </div>
 
-        <div
-          id="nextDate"
-          class="next-date"
-        ></div>
+        <div class="result-note">
+          احتفظ بالكود واستخدمه عند الطلب.
+        </div>
 
       </div>
 
+    </section>
 
-      <!-- ADMIN -->
+    <!-- =========================
+         ADMIN PANEL
+    ========================= -->
 
-      <section
-        id="adminPanel"
-        class="admin-panel hidden"
-      >
+    <section id="adminPanel">
 
-        <div class="admin-title">
+      <div class="admin-header">
+
+        <h2>
           المشاركون
-        </div>
+        </h2>
 
-        <div
-          id="adminLoading"
-          class="loading"
+        <button
+          class="refresh-admin"
+          id="refreshAdminBtn"
         >
-          جاري تحميل المشاركين...
-        </div>
+          تحديث
+        </button>
 
-        <div class="table-wrap">
+      </div>
 
-          <table>
+      <div class="admin-table-wrap">
 
-            <thead>
+        <table>
 
-              <tr>
+          <thead>
+            <tr>
+              <th>البريد</th>
+              <th>الاسم</th>
+              <th>الهاتف</th>
+              <th>آخر مشاركة</th>
+              <th>الجائزة</th>
+              <th>الكود</th>
+              <th>المحاولة القادمة</th>
+            </tr>
+          </thead>
 
-                <th>الاسم</th>
-                <th>البريد</th>
-                <th>الهاتف</th>
-                <th>الجائزة</th>
-                <th>الكود</th>
-                <th>تاريخ المشاركة</th>
-                <th>المشاركة القادمة</th>
+          <tbody id="adminTableBody"></tbody>
 
-              </tr>
+        </table>
 
-            </thead>
+      </div>
 
-            <tbody
-              id="participantsBody"
-            ></tbody>
-
-          </table>
-
-        </div>
-
-      </section>
-
-    </div>
+    </section>
 
   </main>
 
-
   <script>
 
-    /* =========================================
+    /* =========================================================
        SUPABASE
-    ========================================= */
+    ========================================================= */
 
     const SUPABASE_URL =
       "https://vknhrxxkmhrnfbmsllid.supabase.co";
@@ -1026,31 +934,42 @@
     const SUPABASE_KEY =
       "sb_publishable_QliqBYSeykn4F2Ddrsn8hg_F_N8dR-n";
 
-    const db =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-      );
+    const db = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
 
 
-    /* =========================================
+    /* =========================================================
+       LOGO
+    ========================================================= */
+
+    const logoFile =
+      "./كيس%20ورقي%20للمتاجر%20بلون%20وردي%20نمط%20زهور.png";
+
+    document.getElementById("headerLogo").src = logoFile;
+    document.getElementById("loginLogo").src = logoFile;
+    document.getElementById("wheelLogo").src = logoFile;
+
+
+    /* =========================================================
        ELEMENTS
-    ========================================= */
+    ========================================================= */
 
-    const loginPage =
-      document.getElementById("loginPage");
+    const loginView =
+      document.getElementById("loginView");
 
-    const wheelPage =
-      document.getElementById("wheelPage");
+    const appView =
+      document.getElementById("appView");
 
-    const mainHeader =
-      document.getElementById("mainHeader");
+    const siteHeader =
+      document.getElementById("siteHeader");
 
     const userEmail =
       document.getElementById("userEmail");
 
-    const logoutBtn =
-      document.getElementById("logoutBtn");
+    const loginMessage =
+      document.getElementById("loginMessage");
 
     const googleBtn =
       document.getElementById("googleBtn");
@@ -1064,23 +983,23 @@
     const passwordInput =
       document.getElementById("passwordInput");
 
+    const loginBtn =
+      document.getElementById("loginBtn");
+
     const signupBtn =
       document.getElementById("signupBtn");
 
     const forgotBtn =
       document.getElementById("forgotBtn");
 
-    const authMessage =
-      document.getElementById("authMessage");
+    const logoutBtn =
+      document.getElementById("logoutBtn");
+
+    const wheel =
+      document.getElementById("wheel");
 
     const spinBtn =
       document.getElementById("spinBtn");
-
-    const wheelWrap =
-      document.getElementById("wheelWrap");
-
-    const wheelGraphic =
-      document.getElementById("wheelGraphic");
 
     const resultBox =
       document.getElementById("resultBox");
@@ -1088,113 +1007,70 @@
     const resultPrize =
       document.getElementById("resultPrize");
 
-    const couponCode =
-      document.getElementById("couponCode");
+    const resultCode =
+      document.getElementById("resultCode");
 
-    const nextDate =
-      document.getElementById("nextDate");
-
-    const countdown =
-      document.getElementById("countdown");
-
-    const countdownLabel =
-      document.getElementById("countdownLabel");
+    const countdownStatus =
+      document.getElementById("countdownStatus");
 
     const adminPanel =
       document.getElementById("adminPanel");
 
-    const adminLoading =
-      document.getElementById("adminLoading");
+    const adminTableBody =
+      document.getElementById("adminTableBody");
 
-    const participantsBody =
-      document.getElementById("participantsBody");
-
-
-    /* =========================================
-       ADMIN
-    ========================================= */
-
-    const ADMIN_UID =
-      "2d2313ef-8ae1-40a0-9a56-89abe56d3c37";
+    const refreshAdminBtn =
+      document.getElementById("refreshAdminBtn");
 
 
-    /* =========================================
-       WHEEL
-    ========================================= */
-
-    const WHEEL_CENTER = 250;
-
-    const WHEEL_RADIUS = 246;
-
-    const SECTOR_COUNT = 7;
-
-    const SECTOR_ANGLE =
-      360 / SECTOR_COUNT;
-
-    let currentRotation = 0;
-
-    let spinning = false;
-
-    let nextEligibleAt = null;
-
-    let countdownTimer = null;
-
-
-    /* =========================================
+    /* =========================================================
        PRIZES
-       الأسود + الأبيض + الرصاصي الغامق
-    ========================================= */
+       VISUAL WHEEL ONLY
+       REAL PROBABILITIES ARE SERVER-SIDE
+    ========================================================= */
 
     const prizes = [
-
       {
-        label: "5%",
-        color: "#111",
-        textColor: "#fff"
+        label: "خصم 5%",
+        color: "#111111",
+        text: "#ffffff"
       },
-
       {
         label: "حظ أوفر",
-        color: "#fff",
-        textColor: "#111"
+        color: "#ffffff",
+        text: "#111111"
       },
-
       {
-        label: "10%",
+        label: "خصم 10%",
         color: "#3A3A3A",
-        textColor: "#fff"
+        text: "#ffffff"
       },
-
       {
-        label: "15%",
-        color: "#fff",
-        textColor: "#111"
+        label: "خصم 15%",
+        color: "#ffffff",
+        text: "#111111"
       },
-
       {
-        label: "20%",
-        color: "#111",
-        textColor: "#fff"
+        label: "خصم 20%",
+        color: "#111111",
+        text: "#ffffff"
       },
-
       {
-        label: "25%",
+        label: "خصم 25%",
         color: "#3A3A3A",
-        textColor: "#fff"
+        text: "#ffffff"
       },
-
       {
-        label: "30%",
-        color: "#fff",
-        textColor: "#111"
+        label: "خصم 30%",
+        color: "#ffffff",
+        text: "#111111"
       }
-
     ];
 
 
-    /* =========================================
-       CREATE WHEEL
-    ========================================= */
+    /* =========================================================
+       SVG WHEEL
+    ========================================================= */
 
     function polarToCartesian(
       cx,
@@ -1202,275 +1078,482 @@
       radius,
       angle
     ) {
-
       const radians =
-        (angle - 90) *
-        Math.PI / 180;
+        (angle - 90) * Math.PI / 180;
 
       return {
-
-        x:
-          cx +
-          radius *
-          Math.cos(radians),
-
-        y:
-          cy +
-          radius *
-          Math.sin(radians)
-
+        x: cx + radius * Math.cos(radians),
+        y: cy + radius * Math.sin(radians)
       };
-
     }
 
 
-    function createSectorPath(
+    function describeArc(
+      cx,
+      cy,
+      radius,
       startAngle,
       endAngle
     ) {
 
       const start =
         polarToCartesian(
-          WHEEL_CENTER,
-          WHEEL_CENTER,
-          WHEEL_RADIUS,
+          cx,
+          cy,
+          radius,
           endAngle
         );
 
       const end =
         polarToCartesian(
-          WHEEL_CENTER,
-          WHEEL_CENTER,
-          WHEEL_RADIUS,
+          cx,
+          cy,
+          radius,
           startAngle
         );
 
+      const largeArcFlag =
+        endAngle - startAngle <= 180
+          ? "0"
+          : "1";
 
-      return `
-        M ${WHEEL_CENTER} ${WHEEL_CENTER}
-        L ${start.x} ${start.y}
-        A ${WHEEL_RADIUS}
-          ${WHEEL_RADIUS}
-          0 0 0
-          ${end.x}
-          ${end.y}
-        Z
-      `;
-
+      return [
+        "M",
+        cx,
+        cy,
+        "L",
+        start.x,
+        start.y,
+        "A",
+        radius,
+        radius,
+        0,
+        largeArcFlag,
+        0,
+        end.x,
+        end.y,
+        "Z"
+      ].join(" ");
     }
 
 
     function createWheel() {
 
-      wheelGraphic.innerHTML = "";
+      wheel.innerHTML = "";
 
+      const cx = 250;
+      const cy = 250;
+      const radius = 238;
 
-      prizes.forEach(
-        (prize, index) => {
+      const sectorAngle =
+        360 / prizes.length;
 
-          const startAngle =
-            index *
-            SECTOR_ANGLE -
-            SECTOR_ANGLE / 2;
+      prizes.forEach((prize, index) => {
 
+        const startAngle =
+          index * sectorAngle;
 
-          const endAngle =
-            startAngle +
-            SECTOR_ANGLE;
+        const endAngle =
+          (index + 1) * sectorAngle;
 
+        /* Sector */
 
-          const path =
-            document.createElementNS(
-              "http://www.w3.org/2000/svg",
-              "path"
-            );
-
-
-          path.setAttribute(
-            "d",
-            createSectorPath(
-              startAngle,
-              endAngle
-            )
+        const path =
+          document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "path"
           );
 
+        path.setAttribute(
+          "d",
+          describeArc(
+            cx,
+            cy,
+            radius,
+            startAngle,
+            endAngle
+          )
+        );
 
-          path.setAttribute(
-            "fill",
-            prize.color
+        path.setAttribute(
+          "fill",
+          prize.color
+        );
+
+        path.setAttribute(
+          "stroke",
+          "#ffffff"
+        );
+
+        path.setAttribute(
+          "stroke-width",
+          "3"
+        );
+
+        wheel.appendChild(path);
+
+
+        /* Text */
+
+        const textAngle =
+          startAngle + sectorAngle / 2;
+
+        const textRadius = 158;
+
+        const textPosition =
+          polarToCartesian(
+            cx,
+            cy,
+            textRadius,
+            textAngle
           );
 
-
-          path.setAttribute(
-            "class",
-            "wheel-sector"
+        const text =
+          document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "text"
           );
 
+        text.setAttribute(
+          "x",
+          textPosition.x
+        );
 
-          wheelGraphic.appendChild(
-            path
-          );
+        text.setAttribute(
+          "y",
+          textPosition.y
+        );
 
+        text.setAttribute(
+          "fill",
+          prize.text
+        );
 
-          const text =
-            document.createElementNS(
-              "http://www.w3.org/2000/svg",
-              "text"
-            );
+        text.setAttribute(
+          "font-size",
+          "19"
+        );
 
+        text.setAttribute(
+          "font-weight",
+          "700"
+        );
 
-          const labelRadius =
-            index === 1
-              ? 165
-              : 157;
+        text.setAttribute(
+          "text-anchor",
+          "middle"
+        );
 
+        text.setAttribute(
+          "dominant-baseline",
+          "middle"
+        );
 
-          const point =
-            polarToCartesian(
-              WHEEL_CENTER,
-              WHEEL_CENTER,
-              labelRadius,
-              index * SECTOR_ANGLE
-            );
+        text.setAttribute(
+          "font-family",
+          "Arial, Noto Sans Arabic, sans-serif"
+        );
 
+        text.setAttribute(
+          "transform",
+          `rotate(${textAngle}, ${textPosition.x}, ${textPosition.y})`
+        );
 
-          text.setAttribute(
-            "x",
-            point.x
-          );
+        text.textContent =
+          prize.label;
 
+        wheel.appendChild(text);
 
-          text.setAttribute(
-            "y",
-            point.y
-          );
-
-
-          text.setAttribute(
-            "fill",
-            prize.textColor
-          );
-
-
-          text.setAttribute(
-            "class",
-            index === 1
-              ? "wheel-text luck"
-              : "wheel-text percent"
-          );
-
-
-          text.textContent =
-            prize.label;
+      });
 
 
-          wheelGraphic.appendChild(
-            text
-          );
+      /* Outer circle */
 
-        }
-      );
-
-
-      const outline =
+      const outer =
         document.createElementNS(
           "http://www.w3.org/2000/svg",
           "circle"
         );
 
+      outer.setAttribute("cx", cx);
+      outer.setAttribute("cy", cy);
+      outer.setAttribute("r", radius);
+      outer.setAttribute("fill", "none");
+      outer.setAttribute("stroke", "#111");
+      outer.setAttribute("stroke-width", "5");
 
-      outline.setAttribute(
-        "cx",
-        WHEEL_CENTER
-      );
-
-
-      outline.setAttribute(
-        "cy",
-        WHEEL_CENTER
-      );
+      wheel.appendChild(outer);
 
 
-      outline.setAttribute(
-        "r",
-        WHEEL_RADIUS
-      );
+      /* Inner circle */
 
+      const inner =
+        document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "circle"
+        );
 
-      outline.setAttribute(
-        "class",
-        "wheel-outline"
-      );
+      inner.setAttribute("cx", cx);
+      inner.setAttribute("cy", cy);
+      inner.setAttribute("r", "46");
+      inner.setAttribute("fill", "#fff");
+      inner.setAttribute("stroke", "#111");
+      inner.setAttribute("stroke-width", "3");
 
-
-      wheelGraphic.appendChild(
-        outline
-      );
+      wheel.appendChild(inner);
 
     }
-
 
     createWheel();
 
 
-    /* =========================================
-       MESSAGE
-    ========================================= */
+    /* =========================================================
+       COUNTDOWN
+    ========================================================= */
 
-    function showMessage(
-      message,
-      type = ""
+    let countdownInterval = null;
+    let nextEligibleAt = null;
+    let currentlySpinning = false;
+
+
+    function setCountdownDigits(
+      days,
+      hours,
+      minutes,
+      seconds
     ) {
 
-      authMessage.textContent =
-        message;
+      const values = [
+        [days, "days1", "days2"],
+        [hours, "hours1", "hours2"],
+        [minutes, "mins1", "mins2"],
+        [seconds, "secs1", "secs2"]
+      ];
 
-      authMessage.className =
-        "auth-message " + type;
+      values.forEach(
+        ([value, firstId, secondId]) => {
+
+          const text =
+            String(value).padStart(2, "0");
+
+          document.getElementById(firstId)
+            .textContent = text[0];
+
+          document.getElementById(secondId)
+            .textContent = text[1];
+
+        }
+      );
+    }
+
+
+    function showAvailableCountdown() {
+
+      setCountdownDigits(
+        0,
+        0,
+        0,
+        0
+      );
+
+      countdownStatus.textContent =
+        "متاح الآن";
+
+      spinBtn.disabled =
+        currentlySpinning;
+
+      wheel.classList.toggle(
+        "disabled",
+        currentlySpinning
+      );
+    }
+
+
+    function updateCountdown() {
+
+      /*
+        هذا الجزء مهم:
+        العداد ظاهر دائمًا للمستخدم الجديد والقديم.
+      */
+
+      if (!nextEligibleAt) {
+
+        showAvailableCountdown();
+
+        return;
+      }
+
+
+      const target =
+        new Date(nextEligibleAt).getTime();
+
+      const now =
+        Date.now();
+
+      let difference =
+        target - now;
+
+
+      if (difference <= 0) {
+
+        nextEligibleAt = null;
+
+        showAvailableCountdown();
+
+        return;
+      }
+
+
+      const totalSeconds =
+        Math.floor(
+          difference / 1000
+        );
+
+      const days =
+        Math.floor(
+          totalSeconds / 86400
+        );
+
+      const hours =
+        Math.floor(
+          (totalSeconds % 86400) / 3600
+        );
+
+      const minutes =
+        Math.floor(
+          (totalSeconds % 3600) / 60
+        );
+
+      const seconds =
+        totalSeconds % 60;
+
+
+      setCountdownDigits(
+        days,
+        hours,
+        minutes,
+        seconds
+      );
+
+
+      countdownStatus.textContent =
+        "المحاولة القادمة متاحة بعد انتهاء العداد";
+
+
+      spinBtn.disabled =
+        true;
+
+      wheel.classList.add(
+        "disabled"
+      );
 
     }
 
 
-    /* =========================================
+    function startCountdown() {
+
+      if (countdownInterval) {
+        clearInterval(countdownInterval);
+      }
+
+      updateCountdown();
+
+      countdownInterval =
+        setInterval(
+          updateCountdown,
+          1000
+        );
+    }
+
+
+    /* =========================================================
+       LOAD USER'S LATEST SPIN
+    ========================================================= */
+
+    async function loadLatestSpin() {
+
+      nextEligibleAt = null;
+
+      /*
+        في البداية يظهر العداد للجميع
+        حتى لو كان المستخدم جديدًا.
+      */
+
+      showAvailableCountdown();
+
+      const {
+        data,
+        error
+      } = await db
+        .from("spins")
+        .select(
+          "spun_at, prize, discount_percent, coupon_code, next_eligible_at"
+        )
+        .order(
+          "spun_at",
+          {
+            ascending: false
+          }
+        )
+        .limit(1);
+
+      if (error) {
+
+        console.error(
+          "loadLatestSpin:",
+          error
+        );
+
+        startCountdown();
+
+        return;
+      }
+
+
+      if (data && data.length > 0) {
+
+        const latest =
+          data[0];
+
+        nextEligibleAt =
+          latest.next_eligible_at;
+
+      }
+
+      startCountdown();
+    }
+
+
+    /* =========================================================
        GOOGLE LOGIN
-    ========================================= */
+    ========================================================= */
 
     googleBtn.addEventListener(
       "click",
       async () => {
 
-        showMessage("");
+        loginMessage.textContent =
+          "جاري فتح Google...";
 
+        const {
+          error
+        } = await db.auth.signInWithOAuth({
+          provider: "google",
+          options: {
+            redirectTo:
+              window.location.origin +
+              window.location.pathname,
 
-        const { error } =
-          await db.auth.signInWithOAuth({
-
-            provider: "google",
-
-            options: {
-
-              redirectTo:
-                window.location.origin +
-                window.location.pathname,
-
-              queryParams: {
-                prompt:
-                  "select_account"
-              }
-
+            queryParams: {
+              prompt: "select_account"
             }
-
-          });
-
+          }
+        });
 
         if (error) {
 
-          console.error(error);
-
-          showMessage(
-            "حدث خطأ أثناء تسجيل الدخول بواسطة Google.",
-            "error"
-          );
+          loginMessage.textContent =
+            error.message;
 
         }
 
@@ -1478,16 +1561,15 @@
     );
 
 
-    /* =========================================
+    /* =========================================================
        EMAIL LOGIN
-    ========================================= */
+    ========================================================= */
 
     emailForm.addEventListener(
       "submit",
-      async event => {
+      async (event) => {
 
         event.preventDefault();
-
 
         const email =
           emailInput.value.trim();
@@ -1495,71 +1577,53 @@
         const password =
           passwordInput.value;
 
-
-        if (
-          !email ||
-          !password
-        ) {
-
-          showMessage(
-            "يرجى إدخال البريد الإلكتروني وكلمة المرور.",
-            "error"
-          );
-
+        if (!email || !password) {
           return;
-
         }
 
 
-        showMessage(
-          "جاري تسجيل الدخول..."
-        );
+        loginBtn.disabled = true;
+
+        loginBtn.textContent =
+          "جاري الدخول...";
+
+        loginMessage.textContent =
+          "";
 
 
         const {
-          data,
           error
-        } =
-          await db.auth.signInWithPassword({
+        } = await db.auth.signInWithPassword({
+          email,
+          password
+        });
 
-            email,
-            password
 
-          });
+        loginBtn.disabled = false;
+
+        loginBtn.textContent =
+          "تسجيل الدخول";
 
 
         if (error) {
 
-          console.error(error);
-
-          showMessage(
-            translateAuthError(
-              error.message
-            ),
-            "error"
-          );
+          loginMessage.textContent =
+            "تعذر تسجيل الدخول: " +
+            error.message;
 
           return;
-
         }
 
-
-        if (data.session) {
-
-          showMessage(
-            "تم تسجيل الدخول بنجاح.",
-            "success"
-          );
-
-        }
+        loginMessage.textContent =
+          "";
 
       }
     );
 
 
-    /* =========================================
-       CREATE ACCOUNT
-    ========================================= */
+    /* =========================================================
+       SIGN UP
+    ========================================================= */
 
     signupBtn.addEventListener(
       "click",
@@ -1572,89 +1636,64 @@
           passwordInput.value;
 
 
-        if (
-          !email ||
-          !password
-        ) {
+        if (!email || !password) {
 
-          showMessage(
-            "أدخل البريد الإلكتروني وكلمة المرور أولاً.",
-            "error"
-          );
+          loginMessage.textContent =
+            "اكتب البريد الإلكتروني وكلمة المرور أولاً.";
 
           return;
-
         }
 
 
-        if (
-          password.length < 6
-        ) {
+        if (password.length < 6) {
 
-          showMessage(
-            "كلمة المرور يجب أن تكون 6 أحرف أو أكثر.",
-            "error"
-          );
+          loginMessage.textContent =
+            "كلمة المرور يجب أن تكون 6 أحرف على الأقل.";
 
           return;
-
         }
 
 
-        showMessage(
-          "جاري إنشاء الحساب..."
-        );
+        signupBtn.disabled = true;
+
+        loginMessage.textContent =
+          "جاري إنشاء الحساب...";
 
 
         const {
           data,
           error
-        } =
-          await db.auth.signUp({
+        } = await db.auth.signUp({
+          email,
+          password
+        });
 
-            email,
-            password,
 
-            options: {
-
-              emailRedirectTo:
-                window.location.origin +
-                window.location.pathname
-
-            }
-
-          });
+        signupBtn.disabled = false;
 
 
         if (error) {
 
-          console.error(error);
-
-          showMessage(
-            translateAuthError(
-              error.message
-            ),
-            "error"
-          );
+          loginMessage.textContent =
+            "تعذر إنشاء الحساب: " +
+            error.message;
 
           return;
-
         }
 
 
-        if (data.session) {
+        if (
+          data.user &&
+          !data.session
+        ) {
 
-          showMessage(
-            "تم إنشاء الحساب وتسجيل الدخول.",
-            "success"
-          );
+          loginMessage.textContent =
+            "تم إنشاء الحساب. تحقق من بريدك الإلكتروني لتأكيد الحساب.";
 
         } else {
 
-          showMessage(
-            "تم إنشاء الحساب. تحقق من بريدك الإلكتروني لتفعيل الحساب.",
-            "success"
-          );
+          loginMessage.textContent =
+            "تم إنشاء الحساب بنجاح.";
 
         }
 
@@ -1662,9 +1701,9 @@
     );
 
 
-    /* =========================================
+    /* =========================================================
        FORGOT PASSWORD
-    ========================================= */
+    ========================================================= */
 
     forgotBtn.addEventListener(
       "click",
@@ -1676,64 +1715,52 @@
 
         if (!email) {
 
-          showMessage(
-            "اكتب بريدك الإلكتروني أولاً.",
-            "error"
-          );
-
-          emailInput.focus();
+          loginMessage.textContent =
+            "اكتب بريدك الإلكتروني أولاً.";
 
           return;
-
         }
 
 
-        showMessage(
-          "جاري إرسال رابط استعادة كلمة المرور..."
+        forgotBtn.disabled = true;
+
+        loginMessage.textContent =
+          "جاري إرسال رابط الاستعادة...";
+
+
+        const {
+          error
+        } = await db.auth.resetPasswordForEmail(
+          email,
+          {
+            redirectTo:
+              window.location.origin +
+              window.location.pathname
+          }
         );
 
 
-        const { error } =
-          await db.auth.resetPasswordForEmail(
-            email,
-            {
-
-              redirectTo:
-                window.location.origin +
-                window.location.pathname
-
-            }
-          );
+        forgotBtn.disabled = false;
 
 
         if (error) {
 
-          console.error(error);
-
-          showMessage(
-            translateAuthError(
-              error.message
-            ),
-            "error"
-          );
+          loginMessage.textContent =
+            error.message;
 
           return;
-
         }
 
 
-        showMessage(
-          "تم إرسال رابط استعادة كلمة المرور إلى بريدك.",
-          "success"
-        );
-
+        loginMessage.textContent =
+          "تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك.";
       }
     );
 
 
-    /* =========================================
+    /* =========================================================
        LOGOUT
-    ========================================= */
+    ========================================================= */
 
     logoutBtn.addEventListener(
       "click",
@@ -1745,502 +1772,76 @@
     );
 
 
-    /* =========================================
-       AUTH STATE
-    ========================================= */
-
-    db.auth.onAuthStateChange(
-      async (
-        event,
-        session
-      ) => {
-
-        if (
-          session &&
-          session.user
-        ) {
-
-          await showLoggedIn(
-            session.user
-          );
-
-        } else {
-
-          showLoggedOut();
-
-        }
-
-      }
-    );
-
-
-    /* =========================================
-       SHOW LOGGED IN
-    ========================================= */
-
-    async function showLoggedIn(
-      user
-    ) {
-
-      loginPage.classList.add(
-        "hidden"
-      );
-
-      wheelPage.classList.remove(
-        "hidden"
-      );
-
-      mainHeader.classList.remove(
-        "hidden"
-      );
-
-      userEmail.textContent =
-        user.email || "";
-
-
-      resultBox.classList.add(
-        "hidden"
-      );
-
-
-      await loadLatestSpin();
-
-
-      if (
-        user.id === ADMIN_UID
-      ) {
-
-        adminPanel.classList.remove(
-          "hidden"
-        );
-
-        loadParticipants();
-
-      } else {
-
-        adminPanel.classList.add(
-          "hidden"
-        );
-
-      }
-
-    }
-
-
-    /* =========================================
-       SHOW LOGGED OUT
-    ========================================= */
-
-    function showLoggedOut() {
-
-      loginPage.classList.remove(
-        "hidden"
-      );
-
-      wheelPage.classList.add(
-        "hidden"
-      );
-
-      mainHeader.classList.add(
-        "hidden"
-      );
-
-      adminPanel.classList.add(
-        "hidden"
-      );
-
-      userEmail.textContent =
-        "";
-
-      emailInput.value =
-        "";
-
-      passwordInput.value =
-        "";
-
-      stopCountdown();
-
-      showMessage("");
-
-    }
-
-
-    /* =========================================
-       LOAD LATEST SPIN
-    ========================================= */
-
-    async function loadLatestSpin() {
-
-      const {
-        data,
-        error
-      } =
-        await db
-          .from("spins")
-          .select(
-            "spun_at, prize, coupon_code, next_eligible_at"
-          )
-          .order(
-            "spun_at",
-            {
-              ascending: false
-            }
-          )
-          .limit(1);
-
-
-      if (error) {
-
-        console.error(error);
-
-        setAvailable();
-
-        return;
-
-      }
-
-
-      if (
-        !data ||
-        data.length === 0
-      ) {
-
-        setAvailable();
-
-        return;
-
-      }
-
-
-      const latest =
-        data[0];
-
-
-      nextEligibleAt =
-        latest.next_eligible_at;
-
-
-      const remaining =
-        new Date(
-          nextEligibleAt
-        ).getTime() -
-        Date.now();
-
-
-      if (
-        remaining <= 0
-      ) {
-
-        setAvailable();
-
-      } else {
-
-        setCooldown(
-          nextEligibleAt
-        );
-
-      }
-
-    }
-
-
-    /* =========================================
-       COUNTDOWN
-    ========================================= */
-
-    function setAvailable() {
-
-      nextEligibleAt =
-        null;
-
-
-      stopCountdown();
-
-
-      countdown.classList.add(
-        "available"
-      );
-
-
-      countdown.textContent =
-        "متاح الآن";
-
-
-      countdownLabel.textContent =
-        "الوقت المتبقي للمحاولة";
-
-
-      spinBtn.disabled =
-        false;
-
-
-      wheelWrap.classList.remove(
-        "disabled"
-      );
-
-    }
-
-
-    function setCooldown(
-      targetDate
-    ) {
-
-      nextEligibleAt =
-        targetDate;
-
-
-      countdown.classList.remove(
-        "available"
-      );
-
-
-      spinBtn.disabled =
-        true;
-
-
-      wheelWrap.classList.add(
-        "disabled"
-      );
-
-
-      updateCountdown();
-
-
-      stopCountdown();
-
-
-      countdownTimer =
-        setInterval(
-          updateCountdown,
-          1000
-        );
-
-    }
-
-
-    function updateCountdown() {
-
-      if (!nextEligibleAt)
-        return;
-
-
-      const difference =
-        new Date(
-          nextEligibleAt
-        ).getTime() -
-        Date.now();
-
-
-      if (
-        difference <= 0
-      ) {
-
-        setAvailable();
-
-        return;
-
-      }
-
-
-      const totalSeconds =
-        Math.floor(
-          difference / 1000
-        );
-
-
-      const days =
-        Math.floor(
-          totalSeconds / 86400
-        );
-
-
-      const hours =
-        Math.floor(
-          (totalSeconds % 86400) /
-          3600
-        );
-
-
-      const minutes =
-        Math.floor(
-          (totalSeconds % 3600) /
-          60
-        );
-
-
-      const seconds =
-        totalSeconds % 60;
-
-
-      if (
-        days > 0
-      ) {
-
-        countdown.textContent =
-          `${days} يوم  ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-
-      } else {
-
-        countdown.textContent =
-          `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-
-      }
-
-
-      countdownLabel.textContent =
-        "الوقت المتبقي للمحاولة";
-
-    }
-
-
-    function pad(
-      number
-    ) {
-
-      return String(
-        number
-      ).padStart(
-        2,
-        "0"
-      );
-
-    }
-
-
-    function stopCountdown() {
-
-      if (
-        countdownTimer
-      ) {
-
-        clearInterval(
-          countdownTimer
-        );
-
-        countdownTimer =
-          null;
-
-      }
-
-    }
-
-
-    /* =========================================
-       WHEEL CLICK
-    ========================================= */
-
-    wheelWrap.addEventListener(
-      "click",
-      () => {
-
-        spinWheel();
-
-      }
-    );
-
-
-    /* =========================================
-       BUTTON CLICK
-    ========================================= */
-
-    spinBtn.addEventListener(
-      "click",
-      event => {
-
-        event.stopPropagation();
-
-        spinWheel();
-
-      }
-    );
-
-
-    /* =========================================
+    /* =========================================================
        SPIN WHEEL
-    ========================================= */
+    ========================================================= */
 
     async function spinWheel() {
 
-      if (spinning)
+      if (currentlySpinning) {
         return;
+      }
 
 
       if (nextEligibleAt) {
 
         const remaining =
-          new Date(
-            nextEligibleAt
-          ).getTime() -
+          new Date(nextEligibleAt).getTime() -
           Date.now();
 
-
-        if (
-          remaining > 0
-        ) {
+        if (remaining > 0) {
 
           updateCountdown();
 
           return;
-
         }
 
       }
 
 
-      spinning =
-        true;
+      currentlySpinning = true;
 
+      spinBtn.disabled = true;
 
-      spinBtn.disabled =
-        true;
-
-
-      wheelWrap.classList.add(
+      wheel.classList.add(
         "disabled"
       );
 
+      spinBtn.textContent =
+        "جاري الدوران...";
 
-      resultBox.classList.add(
-        "hidden"
-      );
+      resultBox.style.display =
+        "none";
 
+
+      /*
+        نطلب النتيجة الحقيقية من Supabase.
+        الاحتمالات لا تعتمد على شكل العجلة.
+      */
 
       const {
         data,
         error
-      } =
-        await db.rpc(
-          "spin_wheel"
-        );
+      } = await db.rpc(
+        "spin_wheel"
+      );
 
 
       if (error) {
 
-        console.error(error);
+        currentlySpinning = false;
 
+        spinBtn.textContent =
+          "جرّب حظك";
 
-        spinning =
-          false;
-
-
-        spinBtn.disabled =
-          false;
-
-
-        wheelWrap.classList.remove(
-          "disabled"
-        );
-
+        await loadLatestSpin();
 
         alert(
-          translateSpinError(
-            error.message
-          )
+          error.message ||
+          "حدث خطأ، حاول مرة أخرى."
         );
 
-
         return;
-
       }
 
 
@@ -2250,61 +1851,60 @@
           : data;
 
 
-      const sectorIndex =
-        getSectorIndex(
-          result.prize
-        );
+      if (!result) {
 
+        currentlySpinning = false;
 
-      /*
-        كل قطاع 51.428571°
-      */
+        spinBtn.textContent =
+          "جرّب حظك";
 
-      const targetRotation =
-        -(
-          sectorIndex *
-          SECTOR_ANGLE
-        );
+        await loadLatestSpin();
 
-
-      const normalizedCurrent =
-        normalizeAngle(
-          currentRotation
-        );
-
-
-      const normalizedTarget =
-        normalizeAngle(
-          targetRotation
-        );
-
-
-      let difference =
-        normalizedTarget -
-        normalizedCurrent;
-
-
-      if (
-        difference < 0
-      ) {
-
-        difference +=
-          360;
-
+        return;
       }
 
 
-      const extraSpins =
-        360 * 7;
+      /*
+        تحديد القطاع الفائز
+      */
+
+      const winningIndex =
+        prizes.findIndex(
+          prize =>
+            prize.label === result.prize
+        );
 
 
-      currentRotation +=
-        extraSpins +
-        difference;
+      let index =
+        winningIndex >= 0
+          ? winningIndex
+          : 0;
 
 
-      wheelGraphic.style.transform =
-        `rotate(${currentRotation}deg)`;
+      const sectorAngle =
+        360 / prizes.length;
+
+
+      /*
+        مركز القطاع الفائز
+        نريد وضعه تحت المؤشر الموجود بالأعلى.
+      */
+
+      const sectorCenter =
+        index * sectorAngle +
+        sectorAngle / 2;
+
+
+      const targetRotation =
+        360 * 7 +
+        (360 - sectorCenter);
+
+
+      wheel.style.transition =
+        "transform 5.2s cubic-bezier(.13,.72,.16,1)";
+
+      wheel.style.transform =
+        `rotate(${targetRotation}deg)`;
 
 
       setTimeout(
@@ -2313,305 +1913,144 @@
           resultPrize.textContent =
             result.prize;
 
-
-          couponCode.textContent =
+          resultCode.textContent =
             result.coupon_code;
 
-
-          nextDate.textContent =
-            "يمكنك المشاركة مرة أخرى بعد: " +
-            formatDate(
-              result.next_eligible_at
-            );
-
-
-          resultBox.classList.remove(
-            "hidden"
-          );
+          resultBox.style.display =
+            "block";
 
 
           nextEligibleAt =
             result.next_eligible_at;
 
 
-          setCooldown(
-            result.next_eligible_at
-          );
-
-
-          spinning =
+          currentlySpinning =
             false;
 
+          spinBtn.textContent =
+            "جرّب حظك";
 
-          if (
-            !adminPanel.classList.contains(
-              "hidden"
-            )
-          ) {
 
-            loadParticipants();
-
-          }
+          startCountdown();
 
         },
-        5700
+        5400
       );
 
     }
 
 
-    /* =========================================
-       PRIZE → SECTOR
-    ========================================= */
+    /* =========================================================
+       CLICK WHEEL + BUTTON
+    ========================================================= */
 
-    function getSectorIndex(
-      prize
-    ) {
-
-      if (!prize)
-        return 0;
+    spinBtn.addEventListener(
+      "click",
+      spinWheel
+    );
 
 
-      const value =
-        String(
-          prize
-        ).trim();
+    wheel.addEventListener(
+      "click",
+      spinWheel
+    );
 
 
-      if (
-        value.includes("5%")
-      )
-        return 0;
+    /* =========================================================
+       ADMIN
+    ========================================================= */
 
-
-      if (
-        value.includes("حظ") ||
-        value.includes("أوفر")
-      )
-        return 1;
-
-
-      if (
-        value.includes("10%")
-      )
-        return 2;
-
-
-      if (
-        value.includes("15%")
-      )
-        return 3;
-
-
-      if (
-        value.includes("20%")
-      )
-        return 4;
-
-
-      if (
-        value.includes("25%")
-      )
-        return 5;
-
-
-      if (
-        value.includes("30%")
-      )
-        return 6;
-
-
-      return 0;
-
-    }
-
-
-    function normalizeAngle(
-      angle
-    ) {
-
-      return (
-        (
-          angle % 360
-        ) +
-        360
-      ) % 360;
-
-    }
-
-
-    /* =========================================
-       DATE
-    ========================================= */
-
-    function formatDate(
-      dateString
-    ) {
-
-      if (!dateString)
-        return "-";
-
-
-      const date =
-        new Date(
-          dateString
-        );
-
-
-      return date.toLocaleString(
-        "ar-IQ",
-        {
-
-          year:
-            "numeric",
-
-          month:
-            "long",
-
-          day:
-            "numeric",
-
-          hour:
-            "numeric",
-
-          minute:
-            "2-digit"
-
-        }
-      );
-
-    }
-
-
-    /* =========================================
-       ADMIN PARTICIPANTS
-    ========================================= */
-
-    async function loadParticipants() {
-
-      adminLoading.classList.remove(
-        "hidden"
-      );
-
-
-      participantsBody.innerHTML =
-        "";
-
+    async function checkAdmin() {
 
       const {
         data,
         error
-      } =
-        await db.rpc(
-          "get_participants"
+      } = await db
+        .from("profiles")
+        .select("is_admin")
+        .single();
+
+
+      if (error) {
+
+        console.log(
+          "Admin check:",
+          error.message
         );
 
+        return false;
+      }
 
-      adminLoading.classList.add(
-        "hidden"
+
+      return data &&
+        data.is_admin === true;
+    }
+
+
+    async function loadAdminParticipants() {
+
+      const {
+        data,
+        error
+      } = await db.rpc(
+        "get_participants"
       );
 
 
       if (error) {
 
-        console.error(error);
-
-        participantsBody.innerHTML = `
-          <tr>
-            <td colspan="7">
-              تعذر تحميل المشاركين.
-            </td>
-          </tr>
-        `;
+        console.error(
+          "get_participants:",
+          error
+        );
 
         return;
-
       }
 
 
-      if (
-        !data ||
-        data.length === 0
-      ) {
-
-        participantsBody.innerHTML = `
-          <tr>
-            <td colspan="7">
-              لا يوجد مشاركون حتى الآن.
-            </td>
-          </tr>
-        `;
-
-        return;
-
-      }
+      adminTableBody.innerHTML =
+        "";
 
 
-      data.forEach(
+      (data || []).forEach(
         participant => {
 
           const row =
-            document.createElement(
-              "tr"
-            );
+            document.createElement("tr");
 
 
           row.innerHTML = `
+            <td>${escapeHtml(
+              participant.email || "-"
+            )}</td>
 
-            <td>
-              ${escapeHtml(
-                participant.full_name || "-"
-              )}
-            </td>
+            <td>${escapeHtml(
+              participant.full_name || "-"
+            )}</td>
 
-            <td dir="ltr">
-              ${escapeHtml(
-                participant.email || "-"
-              )}
-            </td>
+            <td>${escapeHtml(
+              participant.phone || "-"
+            )}</td>
 
-            <td dir="ltr">
-              ${escapeHtml(
-                participant.phone || "-"
-              )}
-            </td>
+            <td>${formatDate(
+              participant.last_spin_at
+            )}</td>
 
-            <td>
-              ${escapeHtml(
-                participant.prize || "-"
-              )}
-            </td>
+            <td>${escapeHtml(
+              participant.prize || "-"
+            )}</td>
 
-            <td dir="ltr">
-              ${escapeHtml(
-                participant.coupon_code || "-"
-              )}
-            </td>
+            <td>${escapeHtml(
+              participant.coupon_code || "-"
+            )}</td>
 
-            <td>
-              ${
-                participant.last_spin_at
-                  ? formatDate(
-                      participant.last_spin_at
-                    )
-                  : "-"
-              }
-            </td>
-
-            <td>
-              ${
-                participant.next_eligible_at
-                  ? formatDate(
-                      participant.next_eligible_at
-                    )
-                  : "-"
-              }
-            </td>
-
+            <td>${formatDate(
+              participant.next_eligible_at
+            )}</td>
           `;
 
 
-          participantsBody.appendChild(
+          adminTableBody.appendChild(
             row
           );
 
@@ -2621,152 +2060,171 @@
     }
 
 
-    /* =========================================
-       SECURITY
-    ========================================= */
+    refreshAdminBtn.addEventListener(
+      "click",
+      loadAdminParticipants
+    );
 
-    function escapeHtml(
-      value
-    ) {
 
-      return String(
-        value
-      )
+    /* =========================================================
+       SECURITY HELPERS
+    ========================================================= */
 
-        .replaceAll(
-          "&",
-          "&amp;"
+    function escapeHtml(value) {
+
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+
+    function formatDate(value) {
+
+      if (!value) {
+        return "-";
+      }
+
+
+      const date =
+        new Date(value);
+
+
+      if (
+        Number.isNaN(
+          date.getTime()
         )
+      ) {
+        return "-";
+      }
 
-        .replaceAll(
-          "<",
-          "&lt;"
-        )
 
-        .replaceAll(
-          ">",
-          "&gt;"
-        )
+      return date.toLocaleString(
+        "ar-IQ",
+        {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit"
+        }
+      );
 
-        .replaceAll(
-          '"',
-          "&quot;"
-        )
+    }
 
-        .replaceAll(
-          "'",
-          "&#039;"
+
+    /* =========================================================
+       AUTH STATE
+    ========================================================= */
+
+    async function showApp(session) {
+
+      if (!session) {
+
+        siteHeader.style.display =
+          "none";
+
+        loginView.style.display =
+          "flex";
+
+        appView.style.display =
+          "none";
+
+        return;
+      }
+
+
+      siteHeader.style.display =
+        "flex";
+
+      loginView.style.display =
+        "none";
+
+      appView.style.display =
+        "block";
+
+
+      userEmail.textContent =
+        session.user.email || "";
+
+
+      /*
+        مهم جدًا:
+        عند كل دخول، سواء المستخدم جديد أو قديم،
+        يتم تحميل العداد.
+      */
+
+      await loadLatestSpin();
+
+
+      /*
+        فحص الأدمن
+      */
+
+      const isAdmin =
+        await checkAdmin();
+
+
+      if (isAdmin) {
+
+        adminPanel.style.display =
+          "block";
+
+        await loadAdminParticipants();
+
+      } else {
+
+        adminPanel.style.display =
+          "none";
+
+      }
+
+    }
+
+
+    /* =========================================================
+       INITIAL SESSION
+    ========================================================= */
+
+    async function initialize() {
+
+      const {
+        data
+      } = await db.auth.getSession();
+
+
+      await showApp(
+        data.session
+      );
+
+    }
+
+
+    db.auth.onAuthStateChange(
+      async (
+        event,
+        session
+      ) => {
+
+        /*
+          تأخير بسيط حتى يتم تحديث
+          جلسة Supabase بالكامل.
+        */
+
+        setTimeout(
+          () => {
+            showApp(session);
+          },
+          50
         );
 
-    }
-
-
-    /* =========================================
-       AUTH ERROR
-    ========================================= */
-
-    function translateAuthError(
-      message
-    ) {
-
-      const text =
-        String(
-          message || ""
-        ).toLowerCase();
-
-
-      if (
-        text.includes(
-          "invalid login credentials"
-        )
-      ) {
-
-        return "البريد الإلكتروني أو كلمة المرور غير صحيحة.";
-
       }
+    );
 
 
-      if (
-        text.includes(
-          "email not confirmed"
-        )
-      ) {
-
-        return "يرجى تأكيد بريدك الإلكتروني أولاً.";
-
-      }
-
-
-      if (
-        text.includes(
-          "user already registered"
-        )
-      ) {
-
-        return "هذا البريد مسجل مسبقاً. حاول تسجيل الدخول.";
-
-      }
-
-
-      if (
-        text.includes("password") &&
-        text.includes("6")
-      ) {
-
-        return "كلمة المرور يجب أن تكون 6 أحرف أو أكثر.";
-
-      }
-
-
-      if (
-        text.includes("rate limit")
-      ) {
-
-        return "تم إرسال عدد كبير من الطلبات. حاول لاحقاً.";
-
-      }
-
-
-      return "حدث خطأ. يرجى التأكد من البيانات والمحاولة مرة أخرى.";
-
-    }
-
-
-    /* =========================================
-       SPIN ERROR
-    ========================================= */
-
-    function translateSpinError(
-      message
-    ) {
-
-      const text =
-        String(
-          message || ""
-        );
-
-
-      if (
-        text.includes("14 يوماً")
-      ) {
-
-        return text;
-
-      }
-
-
-      if (
-        text.includes("تسجيل الدخول")
-      ) {
-
-        return text;
-
-      }
-
-
-      return "تعذر تنفيذ المشاركة. حاول مرة أخرى.";
-
-    }
+    initialize();
 
   </script>
 
